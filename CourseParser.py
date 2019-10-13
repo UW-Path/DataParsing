@@ -37,12 +37,13 @@ class CourseParser:
         info = self.data.find_all("center")
         for i in info:
             self.courses.append(Course(i))
-        
+
 
 if __name__ == "__main__":
     file = "CoursesCS1920.html"
 
     parser = CourseParser()
     parser.load_file(file)
-
     parser.get_course_info()
+
+    print("HI")

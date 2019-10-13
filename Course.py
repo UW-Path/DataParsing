@@ -6,8 +6,9 @@ October 11th, 2019
 
 Contributors:
 Calder Lund
+Hao Wei Huang
 """
-
+import re
 
 class Course:
     def __init__(self, html):
@@ -20,6 +21,7 @@ class Course:
         self.id = self.__id()
         self.credit = self.__credit()
         self.online = self.__online()
+        self.offering = self.__offering()
 
     def __code(self):
         """
@@ -101,6 +103,33 @@ class Course:
         # The online indicator will only ever appear as the last occurrence of a
         indicator = self.html.find_all("a")[-1]
         return isinstance(indicator.string, str) and indicator.string.endswith("Online")
+
+    def __offering(self):
+        """
+        Returns the course offering for the given year in "F,W,S" format
+
+        :return: string
+        """
+        # First occurrence always has course code
+        filtered = re.search("(?<=Offered: ).*]", self.info)
+        if (filtered):
+            #Should parse in F, W, S] string, ending in ]
+            filtered = filtered.group()
+            return filtered[:-1].split(",")
+        else:
+            #sometime it is in another line
+            all_i = self.html.find_all("i")
+            for i in all_i:
+                if i and i.string and i.string.strip().startswith("[Note:"):
+                    note = i.string.strip().replace("\n", " ")
+                    filtered = re.search("(?<=Offered: ).*]", note)
+                    if (filtered):
+                        # Should parse in F, W, S] string, ending in ]
+                        filtered = filtered.group()
+                        return filtered[:-1].split(",")
+                    else:
+                        return []
+        return []
 
     def __str__(self):
         output = self.code + ": " + self.name
