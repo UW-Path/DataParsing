@@ -1,6 +1,6 @@
 Note: list is sorted by highest priority
 
-TODO: *Start from Faculty of Math then expand
+TODO: *Start from Faculty of Math then expand (IGNORE SOFTWARE ENGINEERING)
 - add parsing functionality for rest regex strings in CS
 - remove inefficiencies in Requirements.py with calling same loop multiple times
 - add Antireq class
