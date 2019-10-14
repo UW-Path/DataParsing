@@ -4,6 +4,8 @@ TODO:
 - add parsing functionality for rest regex strings in CS
 - remove inefficiencies in Requirements.py with calling same loop multiple times
 - add Antireq class
+- create database for prereqs and antireqs
+- parse majors, minors, options, etc. from urls like http://ugradcalendar.uwaterloo.ca/page/printable/11685
 - document CourseParser.py
 - document Database.py
 - add parsing functionality for additional subjects
