@@ -8,7 +8,10 @@ Contributors:
 Calder Lund
 Hao Wei Huang
 """
+
 import re
+from Requirements import Prereqs
+
 
 class Course:
     def __init__(self, html):
@@ -42,6 +45,8 @@ class Course:
         for i in all_i:
             if i and i.string and i.string.strip().startswith("Prereq:"):
                 # TODO - Parse the prereqs string to return list of courses
+                prereqs = Prereqs()
+                prereqs.load_prereqs(i.string.strip().replace("\n", " "))
                 return i.string.strip().replace("\n", " ")
 
     def __antireqs(self):

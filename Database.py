@@ -1,10 +1,23 @@
+"""
+Database.py receives information about UW courses and sends that information
+to an SQL database for later use.
+
+Date:
+October 13th, 2019
+
+Contributors:
+Calder Lund
+Hao Wei Huang
+"""
+
 import psycopg2
 
 connectionString = psycopg2.connect(user="postgres",
-                                  password="1234",
-                                  host="localhost",
-                                  port="8888",
-                                  database="UWPath")
+                                    password="1234",
+                                    host="localhost",
+                                    port="8888",
+                                    database="UWPath")
+
 
 def insert_courses(courses):
     row = 0
@@ -19,6 +32,7 @@ def insert_courses(courses):
 
     print("Successfuly inserted: %d rows", row)
     print("Failed to insert: %d rows", failed)
+
 
 def insert_row_course_info(course):
     isError = False;

@@ -1,0 +1,9 @@
+Note: list is sorted by highest priority
+
+TODO:
+- add parsing functionality for rest regex strings in CS
+- remove inefficiencies in Requirements.py with calling same loop multiple times
+- add Antireq class
+- document CourseParser.py
+- document Database.py
+- add parsing functionality for additional subjects
