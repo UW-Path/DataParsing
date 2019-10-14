@@ -1,0 +1,12 @@
+CREATE TABLE Course_Info (
+    id SERIAL PRIMARY KEY,
+    course_code varchar(255),
+    course_id varchar(255),
+    course_name varchar(255),
+    credit varchar(255),
+    info varchar(1000),
+    prereq varchar(500),
+    antireq varchar(500),
+    offering varchar (255),
+    online boolean
+    );

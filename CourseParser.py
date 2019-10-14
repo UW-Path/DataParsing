@@ -12,7 +12,7 @@ Calder Lund
 import urllib3
 from bs4 import BeautifulSoup
 from Course import Course
-
+from Database import *
 
 class CourseParser:
     '''
@@ -45,5 +45,7 @@ if __name__ == "__main__":
     parser = CourseParser()
     parser.load_file(file)
     parser.get_course_info()
+
+    insert_courses(parser.courses)
 
     print("HI")
