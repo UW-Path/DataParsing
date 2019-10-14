@@ -1,12 +1,16 @@
 Note: list is sorted by highest priority
 
-TODO:
+TODO: *Start from Faculty of Math then expand
 - add parsing functionality for rest regex strings in CS
 - remove inefficiencies in Requirements.py with calling same loop multiple times
 - add Antireq class
 - create database for prereqs and antireqs
 - parse majors, minors, options, etc. from urls like http://ugradcalendar.uwaterloo.ca/page/printable/11685
+    - Then expand to automate parsing of all other pages (potentially using selenium)
+- parse list of all acdemic plans for math (Plans Table)
 - document CourseParser.py
 - document Database.py
 - add parsing functionality for additional subjects
 - make nicer README
+- In the future add different course calender years for academic plans (up to 5 years in history)
+
