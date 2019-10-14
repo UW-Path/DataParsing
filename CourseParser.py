@@ -47,5 +47,3 @@ if __name__ == "__main__":
     parser.get_course_info()
 
     insert_courses(parser.courses)
-
-    print("HI")
