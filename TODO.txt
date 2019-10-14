@@ -9,3 +9,4 @@ TODO:
 - document CourseParser.py
 - document Database.py
 - add parsing functionality for additional subjects
+- make nicer README
