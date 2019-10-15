@@ -13,3 +13,4 @@ TODO: *Start from Faculty of Math then expand (IGNORE SOFTWARE ENGINEERING)
 - add parsing functionality for additional subjects
 - make nicer README
 - In the future add different course calender years for academic plans (up to 5 years in history)
+- Add enrollment difficulty to each course (potential to evaluate a schedule for feasibility)
