@@ -212,3 +212,37 @@ class Prereqs:
         if flag == "pretty":
             output = self.prettyprint(printer=False)
         return output
+
+
+class Antireqs:
+    def __init__(self):
+        self.antireqs = []
+
+    def load_antireqs(self, antireqs):
+        if isinstance(antireqs, str):
+            antireqs = antireqs.replace("Antireq: ", "")
+
+            self.antireqs = re.findall("(?:[A-Z]+ )?[1-9][0-9][0-9]", antireqs)
+            self.__fix_antireqs()
+
+            return True
+        return False
+
+    def __fix_antireqs(self):
+        code = ""
+        for i in range(len(self.antireqs)):
+            antireq = self.antireqs[i]
+            code_num = antireq.split()
+            if len(code_num) == 2:
+                code = code_num[0]
+            else:
+                antireq = code + " " + antireq
+            self.antireqs[i] = antireq
+
+    def str(self):
+        output = ""
+        for i, antireq in enumerate(self.antireqs):
+            output += antireq
+            if i != len(self.antireqs) - 1:
+                output += ", "
+        return output

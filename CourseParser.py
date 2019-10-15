@@ -32,9 +32,9 @@ class CourseParser:
     def load_file(self, file):
         html = open(file)
         self.data = BeautifulSoup(html, 'html.parser')
-        info = self.data.find_all("center")
-        for i in info:
-            self.courses.append(Course(i))
+        information = self.data.find_all("center")
+        for info in information:
+            self.courses.append(Course(info))
 
     def __str__(self):
         output = ""
@@ -43,7 +43,7 @@ class CourseParser:
         return output
 
 if __name__ == "__main__":
-    file = "CoursesCS1920.html"
+    file = "CoursesMATH1920.html"
 
     parser = CourseParser()
     parser.load_file(file)
