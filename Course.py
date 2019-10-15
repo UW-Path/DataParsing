@@ -47,7 +47,7 @@ class Course:
                 # TODO - Parse the prereqs string to return list of courses
                 prereqs = Prereqs()
                 prereqs.load_prereqs(i.string.strip().replace("\n", " "))
-                return i.string.strip().replace("\n", " ")
+                return prereqs.str()
 
     def __antireqs(self):
         """
@@ -144,7 +144,7 @@ class Course:
         output += "\tCourse ID: " + self.id + "\tCourse credit: " + str(self.credit) + "\n"
         output += "\t" + self.info + "\n"
         if self.prereqs:
-            output += self.prereqs + "\n"
+            output += "Prereqs: " + self.prereqs + "\n"
         if self.antireqs:
             output += self.antireqs + "\n"
         return output
