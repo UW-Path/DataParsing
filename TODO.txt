@@ -8,6 +8,7 @@ TODO: *Start from Faculty of Math then expand (IGNORE SOFTWARE ENGINEERING)
 - parse majors, minors, options, etc. from urls like http://ugradcalendar.uwaterloo.ca/page/printable/11685
     - Then expand to automate parsing of all other pages (potentially using selenium)
 - parse list of all acdemic plans for math (Plans Table)
+- Organize documents into relevant directories before project becomes too large
 - document CourseParser.py
 - document Database.py
 - add parsing functionality for additional subjects
