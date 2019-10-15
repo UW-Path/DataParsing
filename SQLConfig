@@ -1,3 +1,5 @@
+//Table for course info
+
 CREATE TABLE Course_Info (
     id SERIAL PRIMARY KEY,
     course_code varchar(255),
