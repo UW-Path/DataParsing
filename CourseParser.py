@@ -32,18 +32,21 @@ class CourseParser:
     def load_file(self, file):
         html = open(file)
         self.data = BeautifulSoup(html, 'html.parser')
-
-    def get_course_info(self):
         info = self.data.find_all("center")
         for i in info:
             self.courses.append(Course(i))
 
+    def __str__(self):
+        output = ""
+        for course in self.courses:
+            output += str(course) + "\n"
+        return output
 
 if __name__ == "__main__":
     file = "CoursesCS1920.html"
 
     parser = CourseParser()
     parser.load_file(file)
-    parser.get_course_info()
+    print(parser)
 
     insert_courses(parser.courses)

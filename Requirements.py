@@ -183,7 +183,7 @@ class Prereqs:
     def __print_level(self):
         return self.min_level
 
-    def print(self, flag="prereqs"):
+    def str(self, flag="prereqs"):
         """
         Returns a string form of data.
 
@@ -195,7 +195,7 @@ class Prereqs:
         5. level    - ex. "3A"
         6. pretty   - prettyprint()
 
-        :param flag: string
+        :param flag: string (default="prereqs")
         :return: string
         """
         output = ""
@@ -211,4 +211,4 @@ class Prereqs:
             output = self.__print_level()
         if flag == "pretty":
             output = self.prettyprint(printer=False)
-        print(output)
+        return output
