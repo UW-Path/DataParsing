@@ -10,7 +10,6 @@ TODO: *Start from Faculty of Math then expand (IGNORE SOFTWARE ENGINEERING)
 - parse list of all acdemic plans for math (Plans Table)
 - Organize documents into relevant directories before project becomes too large
 - document CourseParser.py
-- document Database.py
 - add parsing functionality for additional subjects
 - make nicer README
 - In the future add different course calender years for academic plans (up to 5 years in history)

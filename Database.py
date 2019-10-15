@@ -12,47 +12,66 @@ Hao Wei Huang
 
 import psycopg2
 
-connectionString = psycopg2.connect(user="postgres",
-                                    password="1234",
-                                    host="localhost",
-                                    port="8888",
-                                    database="UWPath")
 
+def insert_courses(courses, user="postgre", password="1234", host="localhost", port="8888", database="UWPath"):
+    """
+    Inserts information from Course objects into an SQL database given the following variables
+    for the database connection string.
 
-def insert_courses(courses):
+    :param courses: list(Course)
+    :param user: string
+    :param password: string
+    :param host: string
+    :param port: string
+    :param database: string
+    :return:
+    """
     row = 0
     failed = 0
-    for course in courses:
-        if (insert_row_course_info(course)):
-            row += 1
-        else: failed +=1
 
-    connection = connectionString
+    try:
+        connection = psycopg2.connect(user=user, password=password, host=host, port=port, database=database)
+    except psycopg2.Error as error:
+        raise error
+
+    for course in courses:
+        if insert_row_course_info(course, connection):
+            row += 1
+        else:
+            failed += 1
+
     connection.close()
 
-    print("Successfuly inserted: %d rows", row)
+    print("Successfully inserted: %d rows", row)
     print("Failed to insert: %d rows", failed)
 
 
-def insert_row_course_info(course):
-    isError = False;
+def insert_row_course_info(course, connection):
+    """
+    Inserts individual course into a row of the database given the connection to the database.
+
+    :param course: Course
+    :param connection: connection
+    :return: boolean
+    """
     try:
-        connection = connectionString
         cursor = connection.cursor()
 
         # Print PostgreSQL version
-        command = "INSERT INTO Course_Info (course_code, course_id, course_name, credit, info, prereq, antireq, offering, online) VALUES('" + course.code + "', "
-        command += "'" + course.id + "', " + "'" + course.name + "', " + "'" + str(course.credit) + "', " + "'" +course.info.replace("'", "''")
-        command += "', " + "'" + str(course.prereqs) + "', " + "'" + str(course.antireqs) +"', " + "'" + ",".join(course.offering) + "', " + str(course.online) + ")"
+        command = "INSERT INTO Course_Info (course_code, course_id, course_name, credit, info, prereq, " + \
+                  "antireq, offering, online) "
+        command += "VALUES('" + course.code + "', '" + course.id + "', '" + course.name + "', '" + \
+                   str(course.credit) + "', '" + course.info.replace("'", "''") + "', '" + course.prereqs.str() + \
+                   "', '" + str(course.antireqs) + "', '" + ",".join(course.offering) + "', " + str(course.online) + ")"
 
         cursor.execute(command)
 
-    except (Exception, psycopg2.Error) as error :
-        print("Error while connecting to PostgreSQL", error)
-        isError = True
-    finally:
-        #closing database connection.
-            if(connection):
-                connection.commit()
-                cursor.close()
-            return not isError
+        # committing database connection.
+        if connection:
+            connection.commit()
+
+        return True
+
+    except (Exception, psycopg2.Error) as error:
+        print(error)
+        return False
