@@ -31,7 +31,7 @@ def insert_courses(courses, user="postgre", password="1234", host="localhost", p
 
     try:
         connection = psycopg2.connect(user=user, password=password, host=host, port=port, database=database)
-    except psycopg2.Error as error:
+    except (Exception, psycopg2.Error) as error:
         raise error
 
     for course in courses:
@@ -61,8 +61,8 @@ def insert_row_course_info(course, connection):
         command = "INSERT INTO Course_Info (course_code, course_id, course_name, credit, info, prereq, " + \
                   "antireq, offering, online) "
         command += "VALUES('" + course.code + "', '" + course.id + "', '" + course.name + "', '" + \
-                   str(course.credit) + "', '" + course.info.replace("'", "''") + "', '" + course.prereqs.str() + \
-                   "', '" + str(course.antireqs) + "', '" + ",".join(course.offering) + "', " + str(course.online) + ")"
+                   str(course.credit) + "', '" + course.info.replace("'", "''") + "', '" + course.prereqs + \
+                   "', '" + course.antireqs + "', '" + ",".join(course.offering) + "', " + str(course.online) + ")"
 
         cursor.execute(command)
 

@@ -10,7 +10,7 @@ Hao Wei Huang
 """
 
 import re
-from Requirements import Prereqs
+from Requirements import Prereqs, Antireqs
 
 
 class Course:
@@ -44,7 +44,6 @@ class Course:
         all_i = self.html.find_all("i")
         for i in all_i:
             if i and i.string and i.string.strip().startswith("Prereq:"):
-                # TODO - Parse the prereqs string to return list of courses
                 prereqs = Prereqs()
                 prereqs.load_prereqs(i.string.strip().replace("\n", " "))
                 return prereqs.str()
@@ -58,8 +57,9 @@ class Course:
         all_i = self.html.find_all("i")
         for i in all_i:
             if i and i.string and i.string.strip().startswith("Antireq:"):
-                # TODO - Parse the antireqs string to return list of courses
-                return i.string.strip().replace("\n", " ")
+                antireqs = Antireqs()
+                antireqs.load_antireqs(i.string.strip().replace("\n", " "))
+                return antireqs.str()
 
 
     def __info(self):
@@ -144,7 +144,7 @@ class Course:
         output += "\tCourse ID: " + self.id + "\tCourse credit: " + str(self.credit) + "\n"
         output += "\t" + self.info + "\n"
         if self.prereqs:
-            output += "Prereqs: " + self.prereqs + "\n"
+            output += "Prereqs:  " + self.prereqs + "\n"
         if self.antireqs:
-            output += self.antireqs + "\n"
+            output += "Antireqs: " + self.antireqs + "\n"
         return output
