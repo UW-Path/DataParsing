@@ -1,17 +1,24 @@
 Note: list is sorted by highest priority
 
 TODO: *Start from Faculty of Math then expand (IGNORE SOFTWARE ENGINEERING)
-- Functionality incorrect: CS 146 or a grade of 60% or higher in CS 136 or 138 (lack of "one of")
-- remove inefficiencies in Requirements.py with calling same loop multiple times
 - parse majors, minors, options, etc. from urls like http://ugradcalendar.uwaterloo.ca/page/printable/11685
     - Then expand to automate parsing of all other pages (potentially using selenium)
-- parse list of all acdemic plans for math (Plans Table)
+- parse list of all academic plans for math (Plans Table)
 - Organize documents into relevant directories before project becomes too large
 - document CourseParser.py
 - add parsing functionality for additional subjects
 - make nicer README
 - In the future add different course calender years for academic plans (up to 5 years in history)
-- Add enrollment difficulty to each course (potential to evaluate a schedule for feasibility)
 - Design frontend
 - Add contact us section for customer input
 - Parse UWFlow for Course difficulty, usefulness and availability
+
+Deficiencies:
+- "(MATH 106 or 114 or 115 with a grade of at least 70%)" should all be 70 rather than 50, 50, 70
+- "(MATH 135 with minimum grade of 80% or MATH 145)" does not pick up 80%
+- "(MATH 128 with at least 70% or MATH 138 with at least 60% or MATH 148)" not recognized either
+- "Cumulative overall average of at least 80%" needs a field
+- Functionality incorrect: CS 146 or a grade of 60% or higher in CS 136 or 138 (lack of "one of")
+- remove inefficiencies in Requirements.py with calling same loop multiple times
+- Prereqs and Antireqs classes do not accept text such as "Prereq: Open only to students in the following
+  Faculties: ARTS, AHS, ENV, SCI." or "Antireq: All second,third or fourth year CS courses or equivalents"
