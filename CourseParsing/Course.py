@@ -10,7 +10,7 @@ Hao Wei Huang
 """
 
 import re
-from Requirements import Prereqs, Antireqs
+from CourseParsing.Requirements import Prereqs, Antireqs
 
 
 class Course:
