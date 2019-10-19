@@ -16,6 +16,7 @@ from bs4 import BeautifulSoup
 from ProgramParsing.MajorReq import MajorReq
 from StringToNumber import StringToNumber
 
+
 class MajorParser:
     def __init__(self):
         self.http = urllib3.PoolManager()
@@ -27,10 +28,7 @@ class MajorParser:
         self.data = BeautifulSoup(response.data, 'html.parser')
 
     def is_blockquote(self, html):
-        if html.name == "blockquote":
-            return True
-        else:
-            return False
+        return html.name == "blockquote"
 
     def require_all(self, html, major):
         courses = html.findAll("a")
@@ -44,8 +42,7 @@ class MajorParser:
         major = self.data.find_all('h1')
         major = major[0].contents[0]
 
-
-        information = self.data.find_all(['p','blockquote'])
+        information = self.data.find_all(['p', 'blockquote'])
 
         i = 0
         while i < len(information):
@@ -56,14 +53,14 @@ class MajorParser:
                 elif "All of" in str(information[i]):
                     self.require_all(information[i+1], major)
                 elif "additional" in str(information[i]):
-                    numberAdditionalString = str(information[i].contents[0]).lower().split(' ')[0]
-                    numberAdditional = StringToNumber[numberAdditionalString].value[0]
-                    self.requirement.append(MajorReq(information[i + 1], "Additional", major, numberAdditional))
+                    number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
+                    number_additional = StringToNumber[number_additional_string].value[0]
+                    self.requirement.append(MajorReq(information[i + 1], "Additional", major, number_additional))
                 i += 1
             elif "additional" in str(information[i]):
-                numberAdditionalString = str(information[i].contents[0]).lower().split(' ')[0]
-                numberAdditional = StringToNumber[numberAdditionalString].value[0]
-                self.requirement.append(MajorReq(information[i], "Additional", major, numberAdditional))
+                number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
+                number_additional = StringToNumber[number_additional_string].value[0]
+                self.requirement.append(MajorReq(information[i], "Additional", major, number_additional))
 
             # TODO: All the other special cases that requires additional parsing
             i += 1
@@ -73,6 +70,7 @@ class MajorParser:
         for req in self.requirement:
             output += str(req) + "\n"
         return output
+
 
 if __name__ == "__main__":
     file = "RequiredCSMajor.html"
