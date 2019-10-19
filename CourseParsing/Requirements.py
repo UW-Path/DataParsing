@@ -5,6 +5,9 @@ pertaining to prerequisites and anti-requisites.
 Date:
 October 13th, 2019
 
+Updated:
+October 19th, 2019
+
 Contributors:
 Calder Lund
 """
@@ -172,7 +175,7 @@ class Prereqs:
     def __print_not_open(self):
         output = ""
         for i, not_open in enumerate(self.not_open):
-            output += not_open
+            output += not_open.replace("'", "")
             if i != len(self.not_open) - 1:
                 output += ", "
         return output
@@ -180,7 +183,7 @@ class Prereqs:
     def __print_only(self):
         output = ""
         for i, only in enumerate(self.students_only):
-            output += only
+            output += only.replace("'", "")
             if i != len(self.students_only) - 1:
                 output += ", "
         return output
