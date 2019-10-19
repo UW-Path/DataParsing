@@ -62,14 +62,14 @@ class Prereqs:
                 # at least XX% in CS XXX
                 change = True
                 match = re.findall("(?:..% (?:or higher )?in (?:one of )?)?(?:[A-Z]+ )?[1-9][0-9][0-9]" +
-                                   "(?: with a grade of at least ..%)?", c)
+                                   "(?: with (?:(?:a )?(?:minimum )?grade of )?(?:at least )?..%)?", c)
                 for m in match:
                     if "or" in m:
                         change = False
                     m = m.replace(" or higher", "").replace("one of ", "")
                     if m[-1] == "%":
-                        grade = m [-3:-1]
-                        course = m[:-3].replace(" with a grade of at least ", "")
+                        grade = m[-3:-1]
+                        course = re.search("(?:[A-Z]+ )?[1-9][0-9][0-9]", m).group()
                     elif "%" not in m:
                         course = m
                         if change:
@@ -110,7 +110,12 @@ class Prereqs:
             m = re.search("(.*) students only", category)
             if m:
                 m = m.group(1).strip()
-                self.students_only = re.split(" and ", m)
+                self.students_only = re.split(" and | or ", m)
+                break
+            m2 = re.search("Open only to students in the following [Ff]aculties: (.*)", category)
+            if m2:
+                m2 = m2.group(1).strip()
+                self.students_only = re.split(", | or ", m2)
                 break
 
     def __min_level(self, prereqs):
