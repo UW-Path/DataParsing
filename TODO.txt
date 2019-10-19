@@ -12,6 +12,8 @@ TODO: *Start from Faculty of Math then expand (IGNORE SOFTWARE ENGINEERING)
 - Design frontend
 - Add contact us section for customer input
 - Parse UWFlow for Course difficulty, usefulness and availability
+- Breath and Depth for CS
+
 
 Deficiencies:
 - "(MATH 106 or 114 or 115 with a grade of at least 70%)" should all be 70 rather than 50, 50, 70
@@ -19,3 +21,4 @@ Deficiencies:
 - Functionality incorrect: CS 146 or a grade of 60% or higher in CS 136 or 138 (lack of "one of")
 - remove inefficiencies in Requirements.py with calling same loop multiple times
 - Prereqs and Antireqs classes do not accept text like or "Antireq: All second,third or fourth year CS courses or equivalents"
+- CS 600- or 700-level courses Not parsed in degree req
