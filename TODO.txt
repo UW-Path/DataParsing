@@ -15,6 +15,18 @@ TODO: *Start from Faculty of Math then expand (IGNORE SOFTWARE ENGINEERING)
 - In the future add different course calender years for academic plans (up to 5 years in history)
 
 
+After fixing stuff, we should be able to call directly from db to start making API that allows us to make functions such as:
+• are prereqs met?
+• are there antireqs?
+• is the major/minor/option requirement satisfied?
+• give courses prereqs? (including the prereq's prereqs)
+• how many credits have been received?
+• how many credits needed?
+• etc.
+
+Please list what other feature will be needed that you can think of.
+
+
 Deficiencies:
 - "(MATH 106 or 114 or 115 with a grade of at least 70%)" should all be 70 rather than 50, 50, 70
 - "Cumulative overall average of at least 80%" needs a field
