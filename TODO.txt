@@ -15,10 +15,7 @@ TODO: *Start from Faculty of Math then expand (IGNORE SOFTWARE ENGINEERING)
 
 Deficiencies:
 - "(MATH 106 or 114 or 115 with a grade of at least 70%)" should all be 70 rather than 50, 50, 70
-- "(MATH 135 with minimum grade of 80% or MATH 145)" does not pick up 80%
-- "(MATH 128 with at least 70% or MATH 138 with at least 60% or MATH 148)" not recognized either
 - "Cumulative overall average of at least 80%" needs a field
 - Functionality incorrect: CS 146 or a grade of 60% or higher in CS 136 or 138 (lack of "one of")
 - remove inefficiencies in Requirements.py with calling same loop multiple times
-- Prereqs and Antireqs classes do not accept text such as "Prereq: Open only to students in the following
-  Faculties: ARTS, AHS, ENV, SCI." or "Antireq: All second,third or fourth year CS courses or equivalents"
+- Prereqs and Antireqs classes do not accept text like or "Antireq: All second,third or fourth year CS courses or equivalents"
