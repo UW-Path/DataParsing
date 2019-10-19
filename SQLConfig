@@ -1,14 +1,30 @@
 //Table for course info
 
-CREATE TABLE Course_Info (
+CREATE TABLE course_info (
     id SERIAL PRIMARY KEY,
-    course_code varchar(255),
-    course_id varchar(255),
-    course_name varchar(255),
-    credit varchar(255),
-    info varchar(1000),
-    prereq varchar(500),
-    antireq varchar(500),
-    offering varchar (255),
-    online boolean
-    );
+    course_code VARCHAR(255),
+    course_id VARCHAR(255),
+    course_name VARCHAR(255),
+    credit VARCHAR(255),
+    info VARCHAR(1000),
+    antireq VARCHAR(500),
+    offering VARCHAR(255),
+    online BOOLEAN
+);
+
+// Table for prereqs
+// TODO - Have field for cumulative average
+
+CREATE TABLE prereqs (
+    id SERIAL PRIMARY KEY,
+    course_code VARCHAR(255),
+    prereq VARCHAR(500),
+    grades INT,
+    not_open VARCHAR(250),
+    only VARCHAR(250),
+    min_level VARCHAR(10)
+);
+
+// Table for antireqs
+// TODO - Create table for antireq with additional information, like "Antireq: All second,third or
+// TODO - fourth year CS courses or equivalents"

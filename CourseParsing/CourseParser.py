@@ -5,6 +5,9 @@ their respected prerequisites.
 Date:
 October 10th, 2019
 
+Updated:
+October 19th, 2019
+
 Contributors:
 Calder Lund
 """
@@ -12,13 +15,13 @@ Calder Lund
 import urllib3
 from bs4 import BeautifulSoup
 from CourseParsing.Course import Course
-#from Database import *
+
 
 class CourseParser:
-    '''
+    """
     TODO - Document this portion of code
     CourseParser()
-    '''
+    """
 
     def __init__(self):
         self.http = urllib3.PoolManager()
@@ -41,12 +44,3 @@ class CourseParser:
         for course in self.courses:
             output += str(course) + "\n"
         return output
-
-if __name__ == "__main__":
-    file = "CoursesMATH1920.html"
-
-    parser = CourseParser()
-    parser.load_file(file)
-    print(parser)
-
-    #insert_courses(parser.courses)

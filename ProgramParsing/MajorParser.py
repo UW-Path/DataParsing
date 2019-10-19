@@ -4,6 +4,9 @@ CourseParser.py is a library built to receive information on Major Requirements
 Date:
 October 14th, 2019
 
+Updated:
+October 19th, 2019
+
 Contributors:
 Hao Wei Huang
 """

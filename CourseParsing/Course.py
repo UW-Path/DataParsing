@@ -4,6 +4,9 @@ Course is an object class that stores information regarding a specific course.
 Date:
 October 11th, 2019
 
+Updated:
+October 19th, 2019
+
 Contributors:
 Calder Lund
 Hao Wei Huang
@@ -33,7 +36,10 @@ class Course:
         :return: string
         """
         # First occurrence always has course code
-        return self.html.find("a").get("name")
+        course = self.html.find("a").get("name")
+        code = re.findall("[A-Z]+", course)[0]
+        num = course.strip(code)
+        return code + " " + num
 
     def __prereqs(self):
         """
@@ -42,11 +48,12 @@ class Course:
         :return: list(str)
         """
         all_i = self.html.find_all("i")
+        prereqs = Prereqs()
         for i in all_i:
             if i and i.string and i.string.strip().startswith("Prereq:"):
-                prereqs = Prereqs()
                 prereqs.load_prereqs(i.string.strip().replace("\n", " "))
-                return prereqs.str()
+                break
+        return prereqs
 
     def __antireqs(self):
         """
@@ -60,6 +67,7 @@ class Course:
                 antireqs = Antireqs()
                 antireqs.load_antireqs(i.string.strip().replace("\n", " "))
                 return antireqs.str()
+        return ""
 
 
     def __info(self):
