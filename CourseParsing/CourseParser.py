@@ -11,8 +11,8 @@ Calder Lund
 
 import urllib3
 from bs4 import BeautifulSoup
-from Course import Course
-from Database import *
+from CourseParsing.Course import Course
+#from Database import *
 
 class CourseParser:
     '''
@@ -49,4 +49,4 @@ if __name__ == "__main__":
     parser.load_file(file)
     print(parser)
 
-    insert_courses(parser.courses)
+    #insert_courses(parser.courses)
