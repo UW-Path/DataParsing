@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class StringToNumber(Enum):
     one = 1,
     two = 2,
