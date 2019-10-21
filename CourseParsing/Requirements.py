@@ -6,7 +6,7 @@ Date:
 October 13th, 2019
 
 Updated:
-October 19th, 2019
+October 20th, 2019
 
 Contributors:
 Calder Lund
@@ -225,12 +225,14 @@ class Prereqs:
 class Antireqs:
     def __init__(self):
         self.antireqs = []
+        self.extra_info = ""
 
     def load_antireqs(self, antireqs):
         if isinstance(antireqs, str):
             antireqs = antireqs.replace("Antireq: ", "")
 
-            self.antireqs = re.findall("(?:[A-Z]+ )?[1-9][0-9][0-9]", antireqs)
+            self.antireqs = re.findall("(?:[A-Z]+ )?[1-9][0-9][0-9][A-Z]?", antireqs)
+            self.extra_info = antireqs if not len(self.antireqs) else ""
             self.__fix_antireqs()
 
             return True
@@ -238,19 +240,28 @@ class Antireqs:
 
     def __fix_antireqs(self):
         code = ""
+
         for i in range(len(self.antireqs)):
             antireq = self.antireqs[i]
             code_num = antireq.split()
+
             if len(code_num) == 2:
                 code = code_num[0]
             else:
                 antireq = code + " " + antireq
+
             self.antireqs[i] = antireq
 
-    def str(self):
+    def str(self, flag="antireqs"):
         output = ""
-        for i, antireq in enumerate(self.antireqs):
-            output += antireq
-            if i != len(self.antireqs) - 1:
-                output += ", "
+
+        if flag == "antireqs":
+            for i, antireq in enumerate(self.antireqs):
+                output += antireq
+                if i != len(self.antireqs) - 1:
+                    output += ", "
+
+        elif flag == "extra":
+            output = self.extra_info
+
         return output

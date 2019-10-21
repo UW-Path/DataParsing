@@ -5,7 +5,7 @@ Date:
 October 11th, 2019
 
 Updated:
-October 19th, 2019
+October 20th, 2019
 
 Contributors:
 Calder Lund
@@ -62,12 +62,12 @@ class Course:
         :return: list(str)
         """
         all_i = self.html.find_all("i")
+        antireqs = Antireqs()
         for i in all_i:
             if i and i.string and i.string.strip().startswith("Antireq:"):
-                antireqs = Antireqs()
                 antireqs.load_antireqs(i.string.strip().replace("\n", " "))
-                return antireqs.str()
-        return ""
+                break
+        return antireqs
 
 
     def __info(self):
@@ -125,18 +125,21 @@ class Course:
         """
         # First occurrence always has course code
         filtered = re.search("(?<=Offered: ).*]", self.info)
-        if (filtered):
-            #Should parse in F, W, S] string, ending in ]
+
+        if filtered:
+            # Should parse in F, W, S] string, ending in ]
             filtered = filtered.group()
             return filtered[:-1].split(",")
         else:
-            #sometime it is in another line
+            # sometime it is in another line
             all_i = self.html.find_all("i")
+
             for i in all_i:
                 if i and i.string and i.string.strip().startswith("[Note:"):
                     note = i.string.strip().replace("\n", " ")
                     filtered = re.search("(?<=Offered: ).*]", note)
-                    if (filtered):
+
+                    if filtered:
                         # Should parse in F, W, S] string, ending in ]
                         filtered = filtered.group()
                         return filtered[:-1].split(",")
@@ -146,13 +149,16 @@ class Course:
 
     def __str__(self):
         output = self.code + ": " + self.name
+
         if self.online:
             output += " (offered Online)"
         output += "\n"
         output += "\tCourse ID: " + self.id + "\tCourse credit: " + str(self.credit) + "\n"
         output += "\t" + self.info + "\n"
+
         if self.prereqs:
-            output += "Prereqs:  " + self.prereqs + "\n"
+            output += "Prereqs:  " + self.prereqs.str() + "\n"
         if self.antireqs:
-            output += "Antireqs: " + self.antireqs + "\n"
+            output += "Antireqs: " + self.antireqs.str() + "\n"
+
         return output

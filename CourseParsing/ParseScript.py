@@ -1,8 +1,9 @@
 from Database import DatabaseConnection
 from CourseParsing.CourseParser import CourseParser
 
+
 if __name__ == "__main__":
-    file = "CoursesMATH1920.html"
+    file = "CoursesCS1920.html"
 
     parser = CourseParser()
     parser.load_file(file)
