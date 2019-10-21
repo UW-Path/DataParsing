@@ -12,22 +12,36 @@ import re
 
 
 class MajorReq:
-    def __init__(self, html, type, major, additional = 0):
+    def __init__(self, html, req, program, additional = 0):
         self.html = html
-        self.major = major
-        self.type = type
+        self.programName = program
+        self.req = req
+        self.planType = self.__plan_type()
         self.additional = additional
-        self.courseCode = self.__course_code()
+        self.courseCodes = self.__course_codes()
         self.numberOfCourses = self.__number_of_courses()
 
     def __has_numbers(self, input_string):
+        """
+                Check if input_string has numbers (0-9)
+                :return: bool
+        """
         return bool(re.search(r'\d', input_string))
 
     def __require_all(self):
+        """
+                Return course (for ALL courses)
+                :return: str
+        """
         # hold be parsed already by course parser
         return self.html.contents[0]
 
     def __require_one(self):
+        """
+                Return course appended together (for one of)
+                Note: Append list at the end with comma
+                :return: str
+        """
         vals = []
         courses = self.html.findAll("a")
         for course in courses:
@@ -35,6 +49,11 @@ class MajorReq:
         return ", ".join(vals)
 
     def __additional(self):
+        """
+                Return course (for Additional courses)
+                Note: Append list at the end with comma
+                :return: str
+        """
         vals = []
         if self.html.name == "blockquote":
             for line in self.html.contents:
@@ -57,32 +76,54 @@ class MajorReq:
 
         return ", ".join(vals)
 
-    def __course_code(self):
+    def __course_codes(self):
         """
-        Returns course code of a block of requirement (either One of/All of)
+        Returns course code of a block of requirement (either One of/All of/Additional)
 
         :return: string
         """
-        if self.type == "One of":
+        if self.req == "One of":
             return self.__require_one()
-        elif self.type == "All of":
+        elif self.req == "All of":
             return self.__require_all()
-        elif self.type == "Additional":
+        elif self.req == "Additional":
             return self.__additional()
 
     def __number_of_courses(self):
-        if self.type == "One of":
+        """
+                Returns courses needed for the group of course_codes
+
+                :return: int
+        """
+        if self.req == "One of":
             return 1
-        elif self.type == "All of":
+        elif self.req == "All of":
             return 1
-        elif self.type == "Additional":
+        elif self.req == "Additional":
             return self.additional
 
-    def __str__(self):
-        output = "Requirement for: " + self.major
-        output += "\n"
-        if self.type == "Additional":
-            output += "\tCourse (" + self.type + " " + str(self.additional) + " of) : " + self.courseCode + "\n"
+    def __plan_type(self):
+        """
+                Returns the type of plan (Major, Minor, Specialization, Optimization)
+                :return: int
+        """
+        if "joint" in str(self.programName).lower():
+            return "Joint"
+        elif "minor" in str(self.programName).lower():
+            return "Minor"
+        elif "specialization" in str(self.programName).lower():
+            return "Specialization"
+        elif "option" in str(self.programName).lower():
+            return "Option"
         else:
-            output += "\tCourse (" + self.type + ") : " + self.courseCode + "\n"
+            # Assume it is major
+            return "Major"
+
+    def __str__(self):
+        output = "Requirement for: " + self.programName + " (" + self.planType + ")"
+        output += "\n"
+        if self.req == "Additional":
+            output += "\tCourse (" + self.req + " " + str(self.additional) + ") : " + self.courseCodes + "\n"
+        else:
+            output += "\tCourse (" + self.req + ") : " + self.courseCodes + "\n"
         return output
