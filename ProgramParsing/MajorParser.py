@@ -33,13 +33,19 @@ class MajorParser:
     def require_all(self, html, major):
         courses = html.findAll("a")
         for course in courses:
+            #TODO: need to accept ENGL378/MATH111 format (right now only takes in ENGL378)
             self.requirement.append(MajorReq(course, "All of", major))
 
     def load_file(self, file):
+        """
+                Parse html file to gather a list of required courses for the major
+
+                :return:
+        """
         html = open(file)
         self.data = BeautifulSoup(html, 'html.parser')
 
-        major = self.data.find_all('h1')
+        major = self.data.find_all("span", class_="pageTitle")
         major = major[0].contents[0]
 
         information = self.data.find_all(['p', 'blockquote'])
@@ -73,7 +79,11 @@ class MajorParser:
 
 
 if __name__ == "__main__":
+
+    #TODO Automate this part
     file = "RequiredCSMajor.html"
+
+    file = "RequiredActsciMajor.html"
 
     parser = MajorParser()
     parser.load_file(file)
