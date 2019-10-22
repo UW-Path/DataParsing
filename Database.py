@@ -6,7 +6,7 @@ Date:
 October 13th, 2019
 
 Updated:
-October 19th, 2019
+October 20th, 2019
 
 Contributors:
 Calder Lund
@@ -34,7 +34,7 @@ class DatabaseConnection:
         self.cursor = self.connection.cursor()
         self.course_table = course_table
         self.prereqs_table = prereqs_table
-        self.antireas_table = antireqs_table
+        self.antireqs_table = antireqs_table
 
     def execute(self, command):
         try:
@@ -64,7 +64,6 @@ class DatabaseConnection:
             course_name VARCHAR(255),
             credit VARCHAR(255),
             info VARCHAR(1000),
-            antireq VARCHAR(500),
             offering VARCHAR(255),
             online BOOLEAN
         )"""
@@ -89,8 +88,13 @@ class DatabaseConnection:
         """
         Creates antireqs table.
         """
-        # TODO - implement & update SQL Config
-        return ""
+        command = "CREATE TABLE IF NOT EXISTS " + self.antireqs_table + """ (
+            id SERIAL PRIMARY KEY,
+            course_code VARCHAR(255),
+            antireq VARCHAR(500),
+            extra_info VARCHAR(500)
+        )"""
+        self.execute(command)
 
     def insert_prereqs(self, code, prereqs):
         """
@@ -109,6 +113,22 @@ class DatabaseConnection:
 
         return self.execute(command)
 
+    def insert_antireqs(self, code, antireqs):
+        """
+        Inserts antireq data in antireqs table.
+
+        :param code: string
+        :param antireqs: Antireq
+        :return: boolean
+        """
+        not_exist = "SELECT 1 FROM " + self.antireqs_table + "\n"
+        not_exist += "WHERE course_code = '" + code + "'"
+        command = "INSERT INTO " + self.antireqs_table + " (course_code, antireq, extra_info)"
+        command += "\nSELECT '" + code + "', '" + antireqs.str("antireqs") + "', '" + antireqs.str("extra") + "'\n"
+        command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
+
+        return self.execute(command)
+
     def insert_course(self, course):
         """
         Inserts course data in course table.
@@ -120,10 +140,10 @@ class DatabaseConnection:
         not_exist = "SELECT 1 FROM " + self.course_table + "\n"
         not_exist += "WHERE course_code = '" + course.code + "'"
         command = "INSERT INTO " + self.course_table + " (course_code, course_id, course_name, credit, info, " + \
-                  "antireq, offering, online) "
+                  "offering, online) "
         command += "SELECT '" + course.code + "', '" + course.id + "', '" + course.name + "', '" + \
-                   str(course.credit) + "', '" + course.info.replace("'", "''") + "', '" + course.antireqs + \
-                   "', '" + ",".join(course.offering) + "', " + str(course.online) + "\n"
+                   str(course.credit) + "', '" + course.info.replace("'", "''") + "', '" + ",".join(course.offering) + \
+                   "', " + str(course.online) + "\n"
         command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
 
         return self.execute(command)
@@ -139,6 +159,7 @@ class DatabaseConnection:
         fail = 0
         for course in courses:
             if self.insert_prereqs(course.code, course.prereqs) and \
+               self.insert_antireqs(course.code, course.antireqs) and \
                self.insert_course(course):
                 success += 1
             else:
