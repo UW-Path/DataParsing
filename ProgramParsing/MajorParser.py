@@ -46,16 +46,25 @@ class MajorParser:
         self.data = BeautifulSoup(html, 'html.parser')
 
         major = self.data.find_all("span", class_="pageTitle")
-        major = major[0].contents[0]
+        major = str(major[0].contents[0])
+
+        if ("Overview and Degree Requirements" in major):
+            major = major.replace(" Overview and Degree Requirements", "")
 
         information = self.data.find_all(['p', 'blockquote'])
 
         i = 0
         while i < len(information):
+            if (i == 28):
+                print("HI")
             # check if next var is blockquote
             if i + 1 < len(information) and self.is_blockquote(information[i+1]):
                 if "One of" in str(information[i]):
                     self.requirement.append(MajorReq(information[i + 1], "One of", major))
+                elif "Two of" in str(information[i]):
+                    self.requirement.append(MajorReq(information[i + 1], "Two of", major))
+                elif "Three of" in str(information[i]):
+                    self.requirement.append(MajorReq(information[i + 1], "Three of", major))
                 elif "All of" in str(information[i]):
                     self.require_all(information[i+1], major)
                 elif "additional" in str(information[i]):
@@ -76,17 +85,4 @@ class MajorParser:
         for req in self.requirement:
             output += str(req) + "\n"
         return output
-
-
-if __name__ == "__main__":
-
-    #TODO Automate this part
-    file = "RequiredCSMajor.html"
-
-    file = "RequiredActsciMajor.html"
-
-    parser = MajorParser()
-    parser.load_file(file)
-
-    print(parser)
 

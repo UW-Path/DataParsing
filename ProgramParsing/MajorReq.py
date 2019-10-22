@@ -20,6 +20,7 @@ class MajorReq:
         self.additional = additional
         self.courseCodes = self.__course_codes()
         self.numberOfCourses = self.__number_of_courses()
+        #TODO: Require Table II
 
     def __has_numbers(self, input_string):
         """
@@ -36,7 +37,7 @@ class MajorReq:
         # hold be parsed already by course parser
         return self.html.contents[0]
 
-    def __require_one(self):
+    def __require(self):
         """
                 Return course appended together (for one of)
                 Note: Append list at the end with comma
@@ -67,12 +68,23 @@ class MajorReq:
                             course = m.strip("\n")
                             vals.append(course)
         else:
-            match = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
-                               str(self.html.contents[0]))
-            if match:
-                for m in match:
-                    course = m.strip("\n")
-                    vals.append(course)
+
+            #loop through to find all string
+            i = 0
+            while(i < len(self.html.contents)):
+                match = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
+                                   str(self.html.contents[i]))
+                if match:
+                    for m in match:
+                        course = m.strip("\n")
+                        vals.append(course)
+                i+=1
+            #serach for links
+            match = self.html.find_all("a")
+            if (match):
+                for course in match:
+                    vals.append(course.string)
+                #TODO : FILL IT IN
 
         return ", ".join(vals)
 
@@ -82,12 +94,13 @@ class MajorReq:
 
         :return: string
         """
-        if self.req == "One of":
-            return self.__require_one()
-        elif self.req == "All of":
+
+        if self.req == "All of":
             return self.__require_all()
         elif self.req == "Additional":
             return self.__additional()
+        else:
+            return self.__require()
 
     def __number_of_courses(self):
         """
@@ -99,6 +112,12 @@ class MajorReq:
             return 1
         elif self.req == "All of":
             return 1
+        elif self.req == "Two of":
+            return 2
+        elif self.req == "Three of":
+            return 3
+        elif self.req == "Four of":
+            return 4
         elif self.req == "Additional":
             return self.additional
 
