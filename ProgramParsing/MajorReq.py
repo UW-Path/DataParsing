@@ -49,6 +49,9 @@ class MajorReq:
             vals.append(course.contents[0])
         return ", ".join(vals)
 
+    def __getLevelCourses(self, string):
+        return re.findall(r"[1-9][0-9][0-9]-", string)
+
     def __additional(self):
         """
                 Return course (for Additional courses)
@@ -66,18 +69,49 @@ class MajorReq:
                     if match:
                         for m in match:
                             course = m.strip("\n")
-                            vals.append(course)
-        else:
+                            if not str(course).startswith("("):
+                                vals.append(course)
+                    else:
+                        #find for another match cs 300-
+                        maj = ""
+                        match = self.__getLevelCourses(str(line))
 
+                        if match:
+                            for word in str(line).split(' '):
+                                if (word.isupper()):
+                                    maj = word.strip("\n")
+                                    break;
+                            if maj.startswith("("): break
+                            for m in match:
+                                course = m.strip("\n")
+                                vals.append(maj + " " + course)
+
+
+
+        else:
             #loop through to find all string
             i = 0
             while(i < len(self.html.contents)):
+                line = str(self.html.contents[i])
                 match = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
-                                   str(self.html.contents[i]))
+                                   line)
                 if match:
                     for m in match:
                         course = m.strip("\n")
                         vals.append(course)
+                else:
+                    #look for 300- 400- courses
+                    maj = ""
+                    match = self.__getLevelCourses(line)
+
+                    if match:
+                        for word in str(line).split(' '):
+                            if (word.isupper()):
+                                maj = word.strip("\n")
+                                break;
+                        for m in match:
+                            course = m.strip("\n")
+                            vals.append(maj + " " + course)
                 i+=1
             #serach for links
             match = self.html.find_all("a")

@@ -4,8 +4,7 @@ from ProgramParsing.MajorParser import MajorParser
 if __name__ == "__main__":
     files = ["RequiredCSMajor.html", "RequiredActsciMajor.html", "RequiredCFMMajor.html"]
 
-
-    #files = ["RequiredCFMMajor.html"]
+    #files = ["RequiredCFMMajor.html"] #use this for single files
 
     dbc = DatabaseConnection()
 
