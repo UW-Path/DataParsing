@@ -55,8 +55,6 @@ class MajorParser:
 
         i = 0
         while i < len(information):
-            if (i == 28):
-                print("HI")
             # check if next var is blockquote
             if i + 1 < len(information) and self.is_blockquote(information[i+1]):
                 if "One of" in str(information[i]):

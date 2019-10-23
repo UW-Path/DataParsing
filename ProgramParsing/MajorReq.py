@@ -9,7 +9,7 @@ Hao Wei Huang
 """
 
 import re
-
+from StringToNumber import StringToNumber
 
 class MajorReq:
     def __init__(self, html, req, program, additional = 0):
@@ -108,18 +108,12 @@ class MajorReq:
 
                 :return: int
         """
-        if self.req == "One of":
+        if self.req == "All of":
             return 1
-        elif self.req == "All of":
-            return 1
-        elif self.req == "Two of":
-            return 2
-        elif self.req == "Three of":
-            return 3
-        elif self.req == "Four of":
-            return 4
         elif self.req == "Additional":
             return self.additional
+        else:
+            return StringToNumber[str(self.req).lower().split(' ')[0]].value[0]
 
     def __plan_type(self):
         """
