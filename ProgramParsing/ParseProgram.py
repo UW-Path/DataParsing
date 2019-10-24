@@ -2,9 +2,13 @@ from Database import DatabaseConnection
 from ProgramParsing.MajorParser import MajorParser
 
 if __name__ == "__main__":
-    files = ["RequiredCSMajor.html", "RequiredActsciMajor.html", "RequiredCFMMajor.html"]
+    files = ["RequiredCSMajor.html", "RequiredActsciMajor.html", "RequiredCFMMajor.html",
+             "RequiredAISpecialization.html", "RequiredBioinformaticsSpecialization.html",
+             "RequiredBusinessSpecialization.html", "RequiredFineArtSpecialization.html",
+             "RequiredHumanComputerInteractionSpecialization.html", "RequiredSoftwareSpecialization.html",
+             "RequiredDigitalHardware.html"]
 
-    #files = ["RequiredCFMMajor.html"] #use this for single files
+    files = ["RequiredDigitalHardware.html"] #use this for single files
 
     dbc = DatabaseConnection()
 

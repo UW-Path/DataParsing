@@ -42,7 +42,7 @@ class MajorParser:
 
                 :return:
         """
-        html = open(file)
+        html = open(file, encoding="utf8")
         self.data = BeautifulSoup(html, 'html.parser')
 
         major = self.data.find_all("span", class_="pageTitle")
@@ -63,6 +63,18 @@ class MajorParser:
                     self.requirement.append(MajorReq(information[i + 1], "Two of", major))
                 elif "Three of" in str(information[i]):
                     self.requirement.append(MajorReq(information[i + 1], "Three of", major))
+                elif "Four of" in str(information[i]):
+                    self.requirement.append(MajorReq(information[i + 1], "Four of", major))
+                elif "Five of" in str(information[i]):
+                    self.requirement.append(MajorReq(information[i + 1], "Five of", major))
+                elif "Six of" in str(information[i]):
+                    self.requirement.append(MajorReq(information[i + 1], "Six of", major))
+                elif "Seven of" in str(information[i]):
+                    self.requirement.append(MajorReq(information[i + 1], "Seven of", major))
+                elif "Eight of" in str(information[i]):
+                    self.requirement.append(MajorReq(information[i + 1], "Eight of", major))
+                elif "Nine of" in str(information[i]):
+                    self.requirement.append(MajorReq(information[i + 1], "Nine of", major))
                 elif "All of" in str(information[i]):
                     self.require_all(information[i+1], major)
                 elif "additional" in str(information[i]):
@@ -71,7 +83,17 @@ class MajorParser:
                     self.requirement.append(MajorReq(information[i + 1], "Additional", major, number_additional))
                 i += 1
             elif "additional" in str(information[i]):
-                number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
+                if (i == 0): #special case first p cannot be additional
+                    i += 1
+                    continue
+
+                try:
+                    #TODO Figure out logic
+                    number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
+                except:
+                    i+=1
+                    continue
+
                 number_additional = StringToNumber[number_additional_string].value[0]
                 self.requirement.append(MajorReq(information[i], "Additional", major, number_additional))
 
