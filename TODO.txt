@@ -8,11 +8,23 @@ TODO: *Start from Faculty of Math then expand (IGNORE SOFTWARE ENGINEERING)
 - document CourseParser.py
 - add parsing functionality for additional subjects
 - make nicer README
-- In the future add different course calender years for academic plans (up to 5 years in history)
 - Design frontend
 - Add contact us section for customer input
 - Parse UWFlow for Course difficulty, usefulness and availability
 - Breath and Depth for CS
+- In the future add different course calender years for academic plans (up to 5 years in history)
+
+
+After fixing stuff, we should be able to call directly from db to start making API that allows us to make functions such as:
+• are prereqs met?
+• are there antireqs?
+• is the major/minor/option requirement satisfied?
+• give courses prereqs? (including the prereq's prereqs)
+• how many credits have been received?
+• how many credits needed?
+• etc.
+
+Please list what other feature will be needed that you can think of.
 
 
 Deficiencies:

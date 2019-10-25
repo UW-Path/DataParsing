@@ -1,2 +1,2 @@
-__all__ = ["MajorParser"]
-from ProgramParsing import MajorParser
+__all__ = ["MajorParser", "MajorReq"]
+from ProgramParsing import *

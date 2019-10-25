@@ -2,10 +2,7 @@ from Database import DatabaseConnection
 from CourseParsing.CourseParser import CourseParser
 
 if __name__ == "__main__":
-    file = "CoursesMATH1920.html"
-
-    parser = CourseParser()
-    parser.load_file(file)
+    files = ["CoursesCS1920.html", "CoursesCO1920.html", "CoursesMATH1920.html"]
 
     dbc = DatabaseConnection()
 
@@ -13,7 +10,12 @@ if __name__ == "__main__":
     dbc.create_prereqs()
     dbc.create_antireqs()
 
-    dbc.insert_courses(parser.courses)
+    for file in files:
+        parser = CourseParser()
+        parser.load_file(file)
 
-    dbc.commit()
+        dbc.insert_courses(parser.courses)
+
+        dbc.commit()
+
     dbc.close()
