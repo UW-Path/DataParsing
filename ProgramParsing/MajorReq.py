@@ -46,7 +46,8 @@ class MajorReq:
         vals = []
         courses = self.html.findAll("a")
         for course in courses:
-            vals.append(course.contents[0])
+            if course.contents[0] not in vals: #prevent duplicate keys
+                vals.append(course.contents[0])
         return ", ".join(vals)
 
     def __getLevelCourses(self, string):
@@ -69,7 +70,7 @@ class MajorReq:
                     if match:
                         for m in match:
                             course = m.strip("\n")
-                            if not str(course).startswith("("):
+                            if not str(course).startswith("(") or not str(course).startswith("Note"):
                                 vals.append(course)
                     else:
                         #find for another match cs 300-
@@ -81,7 +82,7 @@ class MajorReq:
                                 if (word.isupper()):
                                     maj = word.strip("\n")
                                     break;
-                            if maj.startswith("("): break
+                            if maj.startswith("(") or maj.startswith("Note"): break
                             for m in match:
                                 course = m.strip("\n")
                                 vals.append(maj + " " + course)

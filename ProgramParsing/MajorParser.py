@@ -86,13 +86,11 @@ class MajorParser:
                 if (i == 0): #special case first p cannot be additional
                     i += 1
                     continue
-
-                try:
-                    #TODO Figure out logic
-                    number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
-                except:
-                    i+=1
+                if (information[i].contents[0].name == None):
+                    i += 1
                     continue
+
+                number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
 
                 number_additional = StringToNumber[number_additional_string].value[0]
                 self.requirement.append(MajorReq(information[i], "Additional", major, number_additional))

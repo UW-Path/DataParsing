@@ -8,7 +8,7 @@ if __name__ == "__main__":
              "RequiredHumanComputerInteractionSpecialization.html", "RequiredSoftwareSpecialization.html",
              "RequiredDigitalHardware.html"]
 
-    files = ["RequiredDigitalHardware.html"] #use this for single files
+    files = ["RequiredHumanComputerInteractionSpecialization.html"] #use this for single files
 
     dbc = DatabaseConnection()
 
