@@ -12,7 +12,7 @@ import re
 from StringToNumber import StringToNumber
 
 class MajorReq:
-    def __init__(self, html, req, program, additional = 0):
+    def __init__(self, html, req, program, additionalRequirement, additional = 0):
         self.html = html
         self.programName = program
         self.req = req
@@ -20,6 +20,7 @@ class MajorReq:
         self.additional = additional
         self.courseCodes = self.__course_codes()
         self.numberOfCourses = self.__number_of_courses()
+        self.additionalRequirement = additionalRequirement
         #TODO: Require Table II
 
     def __has_numbers(self, input_string):

@@ -5,10 +5,9 @@ if __name__ == "__main__":
     files = ["RequiredCSMajor.html", "RequiredActsciMajor.html", "RequiredCFMMajor.html",
              "RequiredAISpecialization.html", "RequiredBioinformaticsSpecialization.html",
              "RequiredBusinessSpecialization.html", "RequiredFineArtSpecialization.html",
-             "RequiredHumanComputerInteractionSpecialization.html", "RequiredSoftwareSpecialization.html",
-             "RequiredDigitalHardware.html"]
-
-    files = ["RequiredHumanComputerInteractionSpecialization.html"] #use this for single files
+             "RequiredSoftwareSpecialization.html", "RequiredDigitalHardware.html"]
+    #RequiredHumanComputerInteractionSpecialization.html not doable
+    #files = ["RequiredCSMajor.html"] #use this for single files
 
     dbc = DatabaseConnection()
 
