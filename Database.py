@@ -62,7 +62,8 @@ class DatabaseConnection:
             program_name VARCHAR(255),
             plan_type VARCHAR(255),
             course_codes VARCHAR(255),
-            number_of_courses int
+            number_of_courses int,
+            additional_requirements VARCHAR(255) 
         );
         """
         self.execute(command)
@@ -192,8 +193,9 @@ class DatabaseConnection:
         not_exist = "SELECT 1 FROM " + self.requirements_table + "\n"
         not_exist += "WHERE course_codes = '" + requirement.courseCodes + "' AND program_name = '" + requirement.programName + "'"
 
-        command = "INSERT INTO " + self.requirements_table + " (program_name, plan_type, course_codes, number_of_courses) "
+        command = "INSERT INTO " + self.requirements_table + " (program_name, plan_type, course_codes, number_of_courses, additional_requirements) "
         command += "SELECT '" + requirement.programName + "', '" + requirement.planType + "', '" + requirement.courseCodes + "', " + str(requirement.numberOfCourses)
+        command += ", '" + requirement.additionalRequirement + "'"
         command += " WHERE NOT EXISTS (\n" + not_exist + "\n);"
 
         return self.execute(command)
