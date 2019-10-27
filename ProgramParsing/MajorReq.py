@@ -80,8 +80,9 @@ class MajorReq:
 
                         if match:
                             for word in str(line).split(' '):
-                                if (word.isupper()):
+                                if (word.isupper() or "math" in word): #special case for "One additional 300- or 400-level math course.
                                     maj = word.strip("\n")
+                                    maj = maj.upper()
                                     break;
                             if maj.startswith("(") or maj.startswith("Note"): break
                             for m in match:
@@ -108,8 +109,9 @@ class MajorReq:
 
                     if match:
                         for word in str(line).split(' '):
-                            if (word.isupper()):
+                            if (word.isupper() or "math" in word):
                                 maj = word.strip("\n")
+                                maj = maj.upper()
                                 break;
                         for m in match:
                             course = m.strip("\n")

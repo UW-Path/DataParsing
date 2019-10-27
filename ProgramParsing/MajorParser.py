@@ -15,6 +15,7 @@ import urllib3
 from bs4 import BeautifulSoup
 from ProgramParsing.MajorReq import MajorReq
 from StringToNumber import StringToNumber
+import re
 
 
 class MajorParser:
@@ -28,6 +29,21 @@ class MajorParser:
         response = self.http.request('GET', url)
         self.data = BeautifulSoup(response.data, 'html.parser')
 
+    def __has_numbers(self, input_string):
+        """
+                Check if input_string has numbers (0-9)
+                :return: bool
+        """
+        return bool(re.search(r'\d', input_string))
+
+    def __stringIsNumber(self, s):
+        s = str(s).split(" ")[0].lower()
+        if "one" in s or "one" in s or "two" in s or "three" in s or "four" in s or "five" in s \
+                or "six" in s or "seven" in s or "eight" in s or "nine" in s or "ten" in s:
+            return True
+        else:
+            return False
+
     def is_blockquote(self, html):
         return html.name == "blockquote"
 
@@ -39,14 +55,16 @@ class MajorParser:
 
     def getAdditionalRequirement(self):
         additionalRequirment = []
-        paragraphs = self.data.find_all("p")
+        paragraphs = self.data.find_all(["p"]) #cant use span because will get everything else
         for p in paragraphs:
             #a bit hardcoded
-            if ("all the requirements" in str(p) and "plan" in str(p)):
+            if (("all the requirements" in str(p) or "course requirements" in str(p) or "all requirements" in str(p)) and "plan" in str(p)):
                 reqs = p.find_all("a")
                 print(reqs)
                 for req in reqs:
-                    additionalRequirment.append(req.contents[0])
+                    #span added for special case for  PMATH additional req #does not work
+                    if(not self.__has_numbers(req.contents[0])):
+                        additionalRequirment.append(req.contents[0])
         return ", ".join(additionalRequirment)
     def load_file(self, file):
         """
@@ -62,6 +80,8 @@ class MajorParser:
 
         if ("Overview and Degree Requirements" in major):
             major = major.replace(" Overview and Degree Requirements", "")
+
+        #TODO: Need a case where this tile area is Degree Requirements
 
         #Find all additional requirement
         self.additionalRequirement = self.getAdditionalRequirement()
@@ -97,18 +117,24 @@ class MajorParser:
                     number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
                     number_additional = StringToNumber[number_additional_string].value[0]
                     self.requirement.append(MajorReq(information[i + 1], "Additional", major, self.additionalRequirement, number_additional))
+                else:
+                    i += 1
                 i += 1
-            elif "additional" in str(information[i]):
+            elif "additional" in str(information[i]) or self.__stringIsNumber(str(information[i])):
                 if (i == 0): #special case first p cannot be additional
                     i += 1
                     continue
-                if (information[i].contents[0].name == None):
+                #make sure there's a tag and format such as "Three 400- level courses (without additional)
+                if (information[i].contents[0].name == None) and not (self.__stringIsNumber(str(information[i]))):
                     i += 1
                     continue
 
                 number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
 
-                number_additional = StringToNumber[number_additional_string].value[0]
+                number_additional = StringToNumber[number_additional_string].value
+                if (not isinstance(number_additional, int)):
+                    number_additional = number_additional[0]
+                #need to check if number_additional is an INT
                 self.requirement.append(MajorReq(information[i], "Additional", major, self.additionalRequirement, number_additional))
 
             # TODO: All the other special cases that requires additional parsing
