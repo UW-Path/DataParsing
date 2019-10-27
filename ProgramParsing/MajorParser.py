@@ -36,6 +36,23 @@ class MajorParser:
         """
         return bool(re.search(r'\d', input_string))
 
+    def __get_major(self):
+        major = self.data.find_all("span", id= "ctl00_contentMain_lblBottomTitle")
+        major = major[0].contents[0].string
+
+        #Parsing the heading above the highlighted span
+        #if major == degree req, spcialization, parse the highlighted span
+
+        if ("requirements" in major.lower() or "specializations" in major.lower()):
+            major = self.data.find_all("span", class_="pageTitle")
+            major = str(major[0].contents[0])
+
+        if ("Overview and Degree Requirements" in major):
+            major = major.replace(" Overview and Degree Requirements", "")
+
+        return major
+        # TODO: Need a case where this tile area is Degree Requirements
+
     def __stringIsNumber(self, s):
         s = str(s).split(" ")[0].lower()
         if "one" in s or "one" in s or "two" in s or "three" in s or "four" in s or "five" in s \
@@ -75,13 +92,8 @@ class MajorParser:
         html = open(file, encoding="utf8")
         self.data = BeautifulSoup(html, 'html.parser')
 
-        major = self.data.find_all("span", class_="pageTitle")
-        major = str(major[0].contents[0])
 
-        if ("Overview and Degree Requirements" in major):
-            major = major.replace(" Overview and Degree Requirements", "")
-
-        #TODO: Need a case where this tile area is Degree Requirements
+        major = self.__get_major()
 
         #Find all additional requirement
         self.additionalRequirement = self.getAdditionalRequirement()

@@ -46,7 +46,7 @@ if __name__ == "__main__":
     #TODO parse which specialization is under which major
 
     #continue with Data Science
-    #files = ["RequiredMATH-MS-Business-Specialization.html"] #use this for single files
+    #files = ["RequiredMATHCPAFINMajor.html"] #use this for single files
 
 
     dbc = DatabaseConnection()
