@@ -2,12 +2,6 @@
 CourseParser.py is a library built to receive information on courses and
 their respected prerequisites.
 
-Date:
-October 10th, 2019
-
-Updated:
-October 19th, 2019
-
 Contributors:
 Calder Lund
 """

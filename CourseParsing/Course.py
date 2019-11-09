@@ -1,12 +1,6 @@
 """
 Course is an object class that stores information regarding a specific course.
 
-Date:
-October 11th, 2019
-
-Updated:
-October 20th, 2019
-
 Contributors:
 Calder Lund
 Hao Wei Huang
