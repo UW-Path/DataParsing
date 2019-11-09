@@ -21,6 +21,7 @@ class Course:
         self.html = html
         self.code = self.__code()
         self.prereqs = self.__prereqs()
+        self.coreqs = self.__coreqs()
         self.antireqs = self.__antireqs()
         self.info = self.__info()
         self.name = self.__name()
@@ -54,6 +55,20 @@ class Course:
                 prereqs.load_prereqs(i.string.strip().replace("\n", " "))
                 break
         return prereqs
+
+    def __coreqs(self):
+        """
+        Returns a list of the course's required corequisites.
+
+        :return: list(str)
+        """
+        all_i = self.html.find_all("i")
+        coreqs = Prereqs()
+        for i in all_i:
+            if i and i.string and i.string.strip().startswith("Coreq:"):
+                coreqs.load_prereqs(i.string.strip().replace("\n", " "))
+                break
+        return coreqs
 
     def __antireqs(self):
         """
@@ -157,8 +172,11 @@ class Course:
         output += "\t" + self.info + "\n"
 
         if self.prereqs:
-            output += "Prereqs:  " + self.prereqs.str() + "\n"
+            output += self.prereqs.str("pretty")
+        if self.coreqs:
+            output += "Coreqs: " + self.coreqs.str("coreqs") + "\n"
         if self.antireqs:
             output += "Antireqs: " + self.antireqs.str() + "\n"
+            output += self.antireqs.str("extra") + "\n"
 
         return output

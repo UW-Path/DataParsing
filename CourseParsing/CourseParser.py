@@ -33,7 +33,7 @@ class CourseParser:
         self.data = BeautifulSoup(response.data, 'html.parser')
 
     def load_file(self, file):
-        html = open(file, encoding="utf8")
+        html = open(file, encoding="ISO-8859-1")
         self.data = BeautifulSoup(html, 'html.parser')
         information = self.data.find_all("center")
         for info in information:

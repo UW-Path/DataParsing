@@ -62,7 +62,13 @@ class Prereqs:
             for c in category:
                 pre = []
                 grades = []
-                # at least XX% in CS XXX
+                '''Cases:
+                STAT 220 with a grade of at least 70%
+                at least 60% in MTHEL 131
+                At least 60% in ACTSC 231
+                
+                '''
+
                 change = True
                 match = re.findall("(?:..% (?:or higher )?in (?:one of )?)?(?:[A-Z]+ )?[1-9][0-9][0-9]" +
                                    "(?: with (?:(?:a )?(?:minimum )?grade of )?(?:at least )?..%)?", c)
@@ -71,7 +77,7 @@ class Prereqs:
                         change = False
                     m = m.replace(" or higher", "").replace("one of ", "")
                     if m[-1] == "%":
-                        grade = m[-3:-1]
+                        grade = int(m[-3:-1])
                         course = re.search("(?:[A-Z]+ )?[1-9][0-9][0-9]", m).group()
                     elif "%" not in m:
                         course = m
@@ -99,7 +105,9 @@ class Prereqs:
             m = re.search("Not open to (.*) students", category)
             if m:
                 self.not_open = re.split(',| & ', m.group(1))
-                break
+            m2 = re.search("Not open to students who have received credit for ([A-Z]+ [1-9][0-9][0-9])+", category)
+            if m2:
+                self.not_open = re.split(',| & ', m2.group(1))
 
     def __students_only(self, prereqs):
         """
@@ -202,12 +210,13 @@ class Prereqs:
         4. only     - ex. "Computer Science"
         5. level    - ex. "3A"
         6. pretty   - prettyprint()
+        7. coreqs   - ex. "CS 241 or CS 245, SE 212"
 
         :param flag: string (default="prereqs")
         :return: string
         """
         output = ""
-        if flag == "prereqs":
+        if flag == "prereqs" or flag == "coreqs":
             output = self.__print_prereqs()
         if flag == "grades":
             output = self.__print_grades()

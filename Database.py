@@ -29,11 +29,13 @@ root.addHandler(handler)
 
 class DatabaseConnection:
     def __init__(self, user="postgres", password="1234", host="localhost", port="8888", database="postgres",
-                 course_table="course_info", prereqs_table="prereqs", antireqs_table="antireqs", requirements_table = "requirements"):
+                 course_table="course_info", prereqs_table="prereqs", coreqs_table="coreqs", antireqs_table="antireqs",
+                 requirements_table = "requirements"):
         self.connection = psycopg2.connect(user=user, password=password, host=host, port=port, database=database)
         self.cursor = self.connection.cursor()
         self.course_table = course_table
         self.prereqs_table = prereqs_table
+        self.coreqs_table = coreqs_table
         self.antireqs_table = antireqs_table
         self.requirements_table = requirements_table
 
@@ -79,7 +81,7 @@ class DatabaseConnection:
             course_id VARCHAR(255),
             course_name VARCHAR(255),
             credit VARCHAR(255),
-            info VARCHAR(1000),
+            info VARCHAR(2000),
             offering VARCHAR(255),
             online BOOLEAN
         )"""
@@ -97,6 +99,17 @@ class DatabaseConnection:
             not_open VARCHAR(250),
             only_from VARCHAR(250),
             min_level VARCHAR(10)
+        )"""
+        self.execute(command)
+
+    def create_coreqs(self):
+        """
+        Creates coreqs table.
+        """
+        command = "CREATE TABLE IF NOT EXISTS " + self.coreqs_table + """ (
+            id SERIAL PRIMARY KEY,
+            course_code VARCHAR(255),
+            coreq VARCHAR(500)
         )"""
         self.execute(command)
 
@@ -125,6 +138,22 @@ class DatabaseConnection:
         command = "INSERT INTO " + self.prereqs_table + " (course_code, prereq, grades, not_open, only_from, min_level)"
         command += "\nSELECT '" + code + "', '" + prereqs.str("prereqs") + "', '" + prereqs.str("grades") + "', '" + \
                    prereqs.str("not_open") + "', '" + prereqs.str("only") + "', '" + prereqs.str("level") + "'\n"
+        command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
+
+        return self.execute(command)
+
+    def insert_coreqs(self, code, coreqs):
+        """
+        Inserts coreq data in coreqs table.
+
+        :param code: string
+        :param coreqs: Antireq
+        :return: boolean
+        """
+        not_exist = "SELECT 1 FROM " + self.coreqs_table + "\n"
+        not_exist += "WHERE course_code = '" + code + "'"
+        command = "INSERT INTO " + self.coreqs_table + " (course_code, coreq)"
+        command += "\nSELECT '" + code + "', '" + coreqs.str("coreqs") + "'\n"
         command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
 
         return self.execute(command)
@@ -175,6 +204,7 @@ class DatabaseConnection:
         fail = 0
         for course in courses:
             if self.insert_prereqs(course.code, course.prereqs) and \
+               self.insert_coreqs(course.code, course.prereqs) and \
                self.insert_antireqs(course.code, course.antireqs) and \
                self.insert_course(course):
                 success += 1
