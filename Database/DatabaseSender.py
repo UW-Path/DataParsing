@@ -1,59 +1,17 @@
 """
-Database.py receives information about UW courses and sends that information
-to an SQL database for later use.
-
-Date:
-October 13th, 2019
-
-Updated:
-October 20th, 2019
+DatabaseSender.py sends information about UW courses to an SQL database for later use.
 
 Contributors:
 Calder Lund
 Hao Wei Huang
 """
 
-import psycopg2
-import logging
-import sys
-
-root = logging.getLogger()
-root.setLevel(logging.DEBUG)
-
-handler = logging.StreamHandler(sys.stdout)
-handler.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-root.addHandler(handler)
+from Database.DatabaseConnection import DatabaseConnection
 
 
-class DatabaseConnection:
-    def __init__(self, user="postgres", password="1234", host="localhost", port="8888", database="postgres",
-                 course_table="course_info", prereqs_table="prereqs", coreqs_table="coreqs", antireqs_table="antireqs",
-                 requirements_table = "requirements"):
-        self.connection = psycopg2.connect(user=user, password=password, host=host, port=port, database=database)
-        self.cursor = self.connection.cursor()
-        self.course_table = course_table
-        self.prereqs_table = prereqs_table
-        self.coreqs_table = coreqs_table
-        self.antireqs_table = antireqs_table
-        self.requirements_table = requirements_table
-
-    def execute(self, command):
-        try:
-            root.info(command)
-            self.cursor.execute(command)
-            return True
-        except Exception as e:
-            root.error(e)
-            return False
-
-    def commit(self):
-        if self.connection:
-            self.connection.commit()
-
-    def close(self):
-        self.connection.close()
+class DatabaseSender(DatabaseConnection):
+    def __init__(self):
+        DatabaseConnection.__init__(self)
 
     def create_requirements(self):
         """
@@ -204,15 +162,15 @@ class DatabaseConnection:
         fail = 0
         for course in courses:
             if self.insert_prereqs(course.code, course.prereqs) and \
-               self.insert_coreqs(course.code, course.prereqs) and \
-               self.insert_antireqs(course.code, course.antireqs) and \
-               self.insert_course(course):
+                    self.insert_coreqs(course.code, course.prereqs) and \
+                    self.insert_antireqs(course.code, course.antireqs) and \
+                    self.insert_course(course):
                 success += 1
             else:
                 fail += 1
 
-        root.info("Successfully inserted: %d rows", success)
-        root.info("Failed to insert: %d rows", fail)
+        self.root.info("Successfully inserted: %d rows", success)
+        self.root.info("Failed to insert: %d rows", fail)
 
     def insert_requirement(self, requirement):
         """
@@ -246,5 +204,5 @@ class DatabaseConnection:
             else:
                 fail += 1
 
-        root.info("Successfully inserted: %d rows", success)
-        root.info("Failed to insert: %d rows", fail)
+        self.root.info("Successfully inserted: %d rows", success)
+        self.root.info("Failed to insert: %d rows", fail)

@@ -1,9 +1,6 @@
 """
 Major is an object class that stores information for major requirements
 
-Date:
-October 14th, 2019
-
 Contributors:
 Hao Wei Huang
 """

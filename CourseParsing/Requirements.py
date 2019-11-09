@@ -2,12 +2,6 @@
 Requirements is an object class that parses and tracks information
 pertaining to prerequisites and anti-requisites.
 
-Date:
-October 13th, 2019
-
-Updated:
-October 20th, 2019
-
 Contributors:
 Calder Lund
 """
