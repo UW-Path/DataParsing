@@ -1,4 +1,4 @@
-from Database import DatabaseConnection
+from Database.DatabaseSender import DatabaseSender
 from ProgramParsing.MajorParser import MajorParser
 
 if __name__ == "__main__":
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     #files = ["RequiredMATHCPAFINMajor.html"] #use this for single files
 
 
-    dbc = DatabaseConnection()
+    dbc = DatabaseSender()
 
     dbc.create_requirements()
 
