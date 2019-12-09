@@ -6,7 +6,8 @@ if __name__ == "__main__":
     api = ValidationCheckApi(dbc)
 
     try:
-        anti_req = api.get_course_pre_reqs("CS 341")
+        anti_req = api.get_course_anti_reqs("CS 341")
+        print(api.can_take_course(["CS 245", "ECE 406", "ACTSC 232"], "ACTSC 331"))
         print(dbc.select("*", "course_info"))
         print(dbc.select("*", "prereqs"))
         print(dbc.select("*", "coreqs"))
