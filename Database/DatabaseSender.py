@@ -162,7 +162,7 @@ class DatabaseSender(DatabaseConnection):
         fail = 0
         for course in courses:
             if self.insert_prereqs(course.code, course.prereqs) and \
-                    self.insert_coreqs(course.code, course.prereqs) and \
+                    self.insert_coreqs(course.code, course.coreqs) and \
                     self.insert_antireqs(course.code, course.antireqs) and \
                     self.insert_course(course):
                 success += 1

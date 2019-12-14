@@ -1,5 +1,5 @@
 """
-ValidationCheckApi.py is a controller to validate if course can be taken
+ValidationCheckAPI.py is a controller to validate if course can be taken
 
 Contributors:
 Hao Wei Huang
@@ -9,7 +9,7 @@ Last Updated Dec 8
 
 from builtins import any
 
-class ValidationCheckApi:
+class ValidationCheckAPI:
     def __init__(self, connection):
         self.dbc = connection
 

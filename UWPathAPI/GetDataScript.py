@@ -1,9 +1,9 @@
 from Database.DatabaseReceiver import DatabaseReceiver
-from UWPathAPI.ValidationCheckApi import ValidationCheckApi
+from UWPathAPI.ValidationCheckAPI import ValidationCheckAPI
 
 if __name__ == "__main__":
     dbc = DatabaseReceiver()
-    api = ValidationCheckApi(dbc)
+    api = ValidationCheckAPI(dbc)
 
     try:
         anti_req = api.get_course_anti_reqs("CS 341")
