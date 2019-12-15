@@ -4,7 +4,6 @@ from UWPathAPI.ValidationCheckAPI import ValidationCheckAPI
 if __name__ == "__main__":
     dbc = DatabaseReceiver()
     api = ValidationCheckAPI(dbc)
-
     try:
         anti_req = api.get_course_anti_reqs("CS 341")
         print(api.can_take_course(["CS 245", "ECE 406", "ACTSC 232"], "ACTSC 331"))

@@ -37,8 +37,8 @@ class ValidationCheckAPI:
                 if p in list_of_courses_taken:
                     met_req = True
                     break
-                if not met_req:
-                    return False
+            if not met_req:
+                return False
         return True
 
 
