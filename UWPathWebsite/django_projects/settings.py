@@ -10,6 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+
+"""
+Admin username and password: 1234
+"""
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

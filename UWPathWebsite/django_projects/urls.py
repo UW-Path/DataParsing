@@ -19,6 +19,9 @@ import UWPath.views as uwPath
 
 urlpatterns = [
     path(r'admin/', admin.site.urls),
-    path(r'', uwPath.AllApp.as_view()),
+    path(r'api/', uwPath.AllApp.as_view()),
+    path(r'api/course-info/get/<str:pk>/', uwPath.Course_Info_API.as_view()),
+    path(r'api/course-info/', uwPath.Course_Info_List.as_view()),
+    # path('', uwPath.index, name='index'),
     re_path(r'(?P<pk>\d+)', uwPath.AppView.as_view()),
 ]
