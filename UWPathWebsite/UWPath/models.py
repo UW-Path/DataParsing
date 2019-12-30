@@ -18,8 +18,8 @@ class UwpathApp(models.Model):
 
 
 class Antireqs(models.Model):
-    course_code = models.CharField(max_length=255, blank=True, null=True)
-    antireq = models.CharField(max_length=500, blank=True, null=True)
+    course_code = models.CharField(max_length=255, primary_key=True)
+    antireq = models.CharField(max_length=500)
     extra_info = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
@@ -93,7 +93,7 @@ class AuthUserUserPermissions(models.Model):
 
 
 class Coreqs(models.Model):
-    course_code = models.CharField(max_length=255, blank=True, null=True)
+    course_code = models.CharField(max_length=255, primary_key=True)
     coreq = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
@@ -160,7 +160,7 @@ class DjangoSession(models.Model):
 
 
 class Prereqs(models.Model):
-    course_code = models.CharField(max_length=255, blank=True, null=True)
+    course_code = models.CharField(max_length=255, primary_key=True)
     prereq = models.CharField(max_length=500, blank=True, null=True)
     grades = models.CharField(max_length=250, blank=True, null=True)
     not_open = models.CharField(max_length=250, blank=True, null=True)
@@ -173,6 +173,7 @@ class Prereqs(models.Model):
 
 
 class Requirements(models.Model):
+    id = models.IntegerField(primary_key=True)
     program_name = models.CharField(max_length=255, blank=True, null=True)
     plan_type = models.CharField(max_length=255, blank=True, null=True)
     course_codes = models.CharField(max_length=255, blank=True, null=True)
