@@ -1,13 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>UWPath</title>
-</head>
-<body style="background-image: url({% static 'img/background.jpg' %});">
+{% extends 'base.html' %}
+
+{% block content %}
 <div class="display-4">Welcome to UWPath</div>
-</body>
-</html>
+{% endblock %}
