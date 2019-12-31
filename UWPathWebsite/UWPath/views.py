@@ -9,6 +9,9 @@ from .serializer import AppSerializer, CourseInfoSerializer, CoreqsSerializer, A
 
 # Create your views here.
 
+def index(request):
+    return render(request, 'index.html')
+
 class AllApp(APIView):
     queryset = UwpathApp.objects.all()
     serializer_class = AppSerializer

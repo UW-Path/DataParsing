@@ -30,6 +30,6 @@ urlpatterns = [
     path(r'api/antireqs/get/<str:pk>', uwPath.Antireqs_API.as_view()),
     path(r'api/requirements/', uwPath.Requirements_List.as_view()),
     path(r'api/requirements/get/<str:pk>', uwPath.Requirements_API.as_view()),
-    # path('', uwPath.index, name='index'),
+    path('', uwPath.index, name='index'),
     re_path(r'(?P<pk>\d+)', uwPath.AppView.as_view()),
 ]
