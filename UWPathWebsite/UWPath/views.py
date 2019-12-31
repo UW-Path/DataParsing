@@ -10,7 +10,8 @@ from .serializer import AppSerializer, CourseInfoSerializer, CoreqsSerializer, A
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    programs = Requirements_List().get_unique_major()
+    return render(request, 'index.html', {'programs': programs})
 
 class AllApp(APIView):
     queryset = UwpathApp.objects.all()
@@ -149,3 +150,6 @@ class Requirements_List(APIView):
         list = Requirements.objects.all()[:10]
         serializer = RequirementsSerializer(list, many=True)
         return Response(serializer.data)
+    def get_unique_major(self, format=None):
+        querySet = Requirements.objects.values('program_name').distinct()
+        return querySet

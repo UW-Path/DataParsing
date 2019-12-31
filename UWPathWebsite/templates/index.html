@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="display-4">Welcome to UWPath</div>
+<div>
+    <div class="display-4">Welcome to UWPath</div>
+    {% for program in programs %}
+        <tr>
+            {{ program.program_name }}
+        </tr>
+    {%  endfor %}
+</div>
 {% endblock %}
