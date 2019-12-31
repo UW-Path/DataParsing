@@ -31,17 +31,17 @@ class MajorParser:
         return bool(re.search(r'\d', input_string))
 
     def __get_major(self):
-        major = self.data.find_all("span", id= "ctl00_contentMain_lblBottomTitle")
+        major = self.data.find_all("span", id="ctl00_contentMain_lblBottomTitle")
         major = major[0].contents[0].string
 
         #Parsing the heading above the highlighted span
         #if major == degree req, spcialization, parse the highlighted span
 
-        if ("requirements" in major.lower() or "specializations" in major.lower()):
+        if "requirements" in major.lower() or "specializations" in major.lower():
             major = self.data.find_all("span", class_="pageTitle")
             major = str(major[0].contents[0])
 
-        if ("Overview and Degree Requirements" in major):
+        if "Overview and Degree Requirements" in major:
             major = major.replace(" Overview and Degree Requirements", "")
 
         return major
@@ -61,22 +61,23 @@ class MajorParser:
     def require_all(self, html, major):
         courses = html.findAll("a")
         for course in courses:
-            #TODO: need to accept ENGL378/MATH111 format (right now only takes in ENGL378)
+            # TODO: need to accept ENGL378/MATH111 format (right now only takes in ENGL378)
             self.requirement.append(MajorReq(course, "All of", major, self.additionalRequirement))
 
     def getAdditionalRequirement(self):
         additionalRequirment = []
-        paragraphs = self.data.find_all(["p"]) #cant use span because will get everything else
+        paragraphs = self.data.find_all(["p"]) # cant use span because will get everything else
         for p in paragraphs:
-            #a bit hardcoded
-            if (("all the requirements" in str(p) or "course requirements" in str(p) or "all requirements" in str(p)) and "plan" in str(p)):
+            # a bit hardcoded
+            if ("all the requirements" in str(p) or "course requirements" in str(p) or "all requirements" in str(p)) and "plan" in str(p):
                 reqs = p.find_all("a")
                 print(reqs)
                 for req in reqs:
-                    #span added for special case for  PMATH additional req #does not work
+                    # span added for special case for  PMATH additional req #does not work
                     if(not self.__has_numbers(req.contents[0])):
                         additionalRequirment.append(req.contents[0])
         return ", ".join(additionalRequirment)
+
     def load_file(self, file):
         """
                 Parse html file to gather a list of required courses for the major
@@ -86,12 +87,10 @@ class MajorParser:
         html = open(file, encoding="utf8")
         self.data = BeautifulSoup(html, 'html.parser')
 
-
         major = self.__get_major()
 
-        #Find all additional requirement
+        # Find all additional requirement
         self.additionalRequirement = self.getAdditionalRequirement()
-
 
         information = self.data.find_all(['p', 'blockquote'])
 
@@ -127,20 +126,20 @@ class MajorParser:
                     i += 1
                 i += 1
             elif "additional" in str(information[i]) or self.__stringIsNumber(str(information[i])):
-                if (i == 0): #special case first p cannot be additional
+                if i == 0:  # special case first p cannot be additional
                     i += 1
                     continue
-                #make sure there's a tag and format such as "Three 400- level courses (without additional)
-                if (information[i].contents[0].name == None) and not (self.__stringIsNumber(str(information[i]))):
+                # make sure there's a tag and format such as "Three 400- level courses (without additional)
+                if information[i].contents[0].name is None and not self.__stringIsNumber(str(information[i])):
                     i += 1
                     continue
 
                 number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
 
                 number_additional = StringToNumber[number_additional_string].value
-                if (not isinstance(number_additional, int)):
+                if not isinstance(number_additional, int):
                     number_additional = number_additional[0]
-                #need to check if number_additional is an INT
+                # need to check if number_additional is an INT
                 self.requirement.append(MajorReq(information[i], "Additional", major, self.additionalRequirement, number_additional))
 
             # TODO: All the other special cases that requires additional parsing

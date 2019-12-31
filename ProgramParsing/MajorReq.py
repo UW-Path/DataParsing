@@ -8,6 +8,7 @@ Hao Wei Huang
 import re
 from StringToNumber import StringToNumber
 
+
 class MajorReq:
     def __init__(self, html, req, program, additionalRequirement, additional = 0):
         self.html = html
@@ -18,7 +19,7 @@ class MajorReq:
         self.courseCodes = self.__course_codes()
         self.numberOfCourses = self.__number_of_courses()
         self.additionalRequirement = additionalRequirement
-        #TODO: Require Table II
+        # TODO: Require Table II
 
     def __has_numbers(self, input_string):
         """
@@ -71,27 +72,25 @@ class MajorReq:
                             if not str(course).startswith("(") or not str(course).startswith("Note"):
                                 vals.append(course)
                     else:
-                        #find for another match cs 300-
+                        # find for another match cs 300-
                         maj = ""
                         match = self.__getLevelCourses(str(line))
 
                         if match:
                             for word in str(line).split(' '):
-                                if (word.isupper() or "math" in word): #special case for "One additional 300- or 400-level math course.
+                                if word.isupper() or "math" in word: # special case for "One additional 300- or 400-level math course.
                                     maj = word.strip("\n")
                                     maj = maj.upper()
-                                    break;
+                                    break
                             if maj.startswith("(") or maj.startswith("Note"): break
                             for m in match:
                                 course = m.strip("\n")
                                 vals.append(maj + " " + course)
 
-
-
         else:
-            #loop through to find all string
+            # loop through to find all string
             i = 0
-            while(i < len(self.html.contents)):
+            while i < len(self.html.contents):
                 line = str(self.html.contents[i])
                 match = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
                                    line)
@@ -100,23 +99,23 @@ class MajorReq:
                         course = m.strip("\n")
                         vals.append(course)
                 else:
-                    #look for 300- 400- courses
+                    # look for 300- 400- courses
                     maj = ""
                     match = self.__getLevelCourses(line)
 
                     if match:
                         for word in str(line).split(' '):
-                            if (word.isupper() or "math" in word):
+                            if word.isupper() or "math" in word:
                                 maj = word.strip("\n")
                                 maj = maj.upper()
-                                break;
+                                break
                         for m in match:
                             course = m.strip("\n")
                             vals.append(maj + " " + course)
-                i+=1
-            #serach for links
+                i += 1
+            # search for links
             match = self.html.find_all("a")
-            if (match):
+            if match:
                 for course in match:
                     vals.append(course.string)
                 #TODO : FILL IT IN
