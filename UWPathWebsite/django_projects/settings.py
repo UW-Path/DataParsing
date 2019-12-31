@@ -10,6 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+
+"""
+Admin username and password: 1234
+"""
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -56,7 +61,7 @@ ROOT_URLCONF = 'django_projects.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
