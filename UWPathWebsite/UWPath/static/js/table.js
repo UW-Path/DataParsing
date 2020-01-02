@@ -1,10 +1,18 @@
 /* Custom Dragula JS */
 window.onload = function() {
   dragula([
-    document.getElementById("to-do"),
-    document.getElementById("doing"),
-    document.getElementById("done"),
-    document.getElementById("trash")
+    document.getElementById("required"),
+    document.getElementById("1A"),
+    document.getElementById("1B"),
+    document.getElementById("2A"),
+    document.getElementById("2B"),
+    document.getElementById("3A"),
+    document.getElementById("3B"),
+    document.getElementById("4A"),
+    document.getElementById("4B"),
+    document.getElementById("5A"),
+    document.getElementById("5B"),
+    document.getElementById("trash"),
   ]);
 }
 

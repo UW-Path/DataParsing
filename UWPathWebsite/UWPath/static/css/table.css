@@ -60,7 +60,6 @@ footer {
   width: 20rem;
   height: 5.3rem;
   margin: auto;
-  background: #a8a8a8;
   border: #000013 0.2rem solid;
   border-radius: 0.2rem;
   padding: 0.4rem;
@@ -85,7 +84,6 @@ footer {
 .column {
   width: 8.4rem;
   margin: 0 0.6rem;
-  background: #a8a8a8;
   border: #000013 0.2rem solid;
   border-radius: 0.2rem;
 }
@@ -99,20 +97,54 @@ footer {
   text-align: center;
 }
 
-.to-do-column .column-header {
-  background: #ff872f;
+.required-column .column-header {
+  background: #e1bee7;
 }
 
-.doing-column .column-header {
-  background: #13a4d9;
+.oneA-column .column-header {
+  background: #bbdefb;
 }
 
-.done-column .column-header {
-  background: #15d072;
+.oneB-column .column-header {
+  background: #bbdefb;
 }
+
+.twoA-column .column-header {
+  background: #c8e6c9;
+}
+
+.twoB-column .column-header {
+  background: #c8e6c9;
+}
+
+
+.threeA-column .column-header {
+  background: #f0f4c3;
+}
+
+.threeB-column .column-header {
+  background: #f0f4c3;
+}
+
+.fourA-column .column-header {
+  background: #ffccbc;
+}
+
+.fourB-column .column-header {
+  background: #ffccbc;
+}
+
+.fiveA-column .column-header {
+  background: #cfd8dc;
+}
+
+.fiveB-column .column-header {
+  background: #cfd8dc;
+}
+
 
 .trash-column .column-header {
-  background: #ff4444;
+  background: #e1bee7;
 }
 
 .task-list {

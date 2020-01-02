@@ -3,85 +3,135 @@
 
 
 {% block table %}
-
+    <br>
 <section class="add-task-container">
-  <input type="text" maxlength="12" id="taskText" placeholder="New Task..." onkeydown="if (event.keyCode == 13)
+    <input type="text" maxlength="12" id="taskText" placeholder="Course XXX" onkeydown="if (event.keyCode == 13)
                         document.getElementById('add').click()">
-  <button id="add" class="button add-button" onclick="addTask()">Add New Task</button>
+    <button id="add" class="button add-button" onclick="addTask()">Add Course</button>
 </section>
 
 <main class="main-container">
-  <ul class="columns">
+    <ul class="columns">
 
-    <li class="column to-do-column">
-      <div class="column-header">
-        <h4>To Do</h4>
-      </div>
-      <ul class="task-list" id="to-do">
-        <li class="task">
-          <p>Analysis</p>
-        </li>
-        <li class="task">
-          <p>Coding</p>
-        </li>
-        <li class="task">
-          <p>Card Sorting</p>
-        </li>
-        <li class="task">
-          <p>Measure</p>
-        </li>
-      </ul>
-    </li>
-
-    <li class="column doing-column">
-      <div class="column-header">
-        <h4>Doing</h4>
-      </div>
-      <ul class="task-list" id="doing">
-        <li class="task">
-          <p>Hypothesis</p>
-        </li>
-        <li class="task">
-          <p>User Testing</p>
-        </li>
-        <li class="task">
-          <p>Prototype</p>
-        </li>
-      </ul>
-    </li>
-
-    <li class="column done-column">
-      <div class="column-header">
-        <h4>Done</h4>
-      </div>
-      <ul class="task-list" id="done">
-        <li class="task">
-          <p>Ideation</p>
-        </li>
-        <li class="task">
-          <p>Sketches</p>
-        </li>
-      </ul>
-    </li>
-
-    <li class="column trash-column">
-      <div class="column-header">
-        <h4>Trash</h4>
-      </div>
-      <ul class="task-list" id="trash">
-        <li class="task">
-          <p>Interviews</p>
-        </li>
-        <li class="task">
-          <p>Research</p>
+        <li class="column required-column">
+            <div class="column-header">
+                <h4>Required Courses</h4>
+            </div>
+            <ul class="task-list" id="required">
+                <li class="task">
+                    <p>CS135</p>
+                </li>
+                <li class="task">
+                    <p>CS136</p>
+                </li>
+                <li class="task">
+                    <p>MATH239</p>
+                </li>
+                <li class="task">
+                    <p>MATH101</p>
+                </li>
+            </ul>
         </li>
 
-      </ul>
-      <div class="column-button">
-        <button class="button delete-button" onclick="emptyTrash()">Delete</button>
-      </div>
-    </li>
+        <li class="column oneA-column">
+            <div class="column-header">
+                <h4>1A</h4>
+            </div>
+            <ul class="task-list" id="1A">
+                <li class="task">
+                    <p>MATH XXX</p>
+                </li>
+            </ul>
+        </li>
 
-  </ul>
+        <li class="column oneB-column">
+            <div class="column-header">
+                <h4>1B</h4>
+            </div>
+            <ul class="task-list" id="1B">
+                <li class="task">
+                    <p>MATH XXX</p>
+                </li>
+            </ul>
+        </li>
+
+        <li class="column twoA-column">
+            <div class="column-header">
+                <h4>2A</h4>
+            </div>
+            <ul class="task-list" id="2A">
+                <li class="task">
+                    <p>MATH XXX</p>
+                </li>
+            </ul>
+        </li>
+
+        <li class="column twoB-column">
+            <div class="column-header">
+                <h4>2B</h4>
+            </div>
+            <ul class="task-list" id="2B">
+                <li class="task">
+                    <p>MATH XXX</p>
+                </li>
+            </ul>
+        </li>
+
+        <li class="column threeA-column">
+            <div class="column-header">
+                <h4>3A</h4>
+            </div>
+            <ul class="task-list" id="3A">
+                <li class="task">
+                    <p>MATH XXX</p>
+                </li>
+            </ul>
+        </li>
+
+        <li class="column threeB-column">
+            <div class="column-header">
+                <h4>3B</h4>
+            </div>
+            <ul class="task-list" id="3B">
+                <li class="task">
+                    <p>MATH XXX</p>
+                </li>
+            </ul>
+        </li>
+
+        <li class="column fourA-column">
+            <div class="column-header">
+                <h4>4A</h4>
+            </div>
+            <ul class="task-list" id="4A">
+                <li class="task">
+                    <p>MATH XXX</p>
+                </li>
+            </ul>
+        </li>
+
+        <li class="column fourB-column">
+            <div class="column-header">
+                <h4>4B</h4>
+            </div>
+            <ul class="task-list" id="4B">
+                <li class="task">
+                    <p>MATH XXX</p>
+                </li>
+            </ul>
+        </li>
+
+        <li class="column trash-column">
+            <div class="column-header">
+                <h4>Trash</h4>
+            </div>
+            <ul class="task-list" id="trash">
+            </ul>
+            <div class="column-button">
+                <button class="button delete-button" onclick="emptyTrash()">Delete</button>
+            </div>
+        </li>
+
+    </ul>
 </main>
 {% endblock %}
