@@ -31,5 +31,8 @@ urlpatterns = [
     path(r'api/requirements/', uwPath.Requirements_List.as_view()),
     path(r'api/requirements/get/<str:pk>', uwPath.Requirements_API.as_view()),
     path('', uwPath.index, name='index'),
+    #a little bit hardcoded below
+    path(r'major/<str:major>/<str:majorExtended>/', uwPath.chosen_degree, name='chosen_degree'),
+    path(r'major/<str:major>/', uwPath.chosen_degree, name='chosen_degree'),
     re_path(r'(?P<pk>\d+)', uwPath.AppView.as_view()),
 ]

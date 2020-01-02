@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load general_tags %}
+
+{% block content %}
+    <div class="display-4">
+        {{ major }}
+    </div>
+    <div>
+        {% for req in requirements %}
+            {{ req }}
+        {%  endfor %}
+    </div>
+{% endblock %}

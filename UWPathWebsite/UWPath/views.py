@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,6 +13,16 @@ from .serializer import AppSerializer, CourseInfoSerializer, CoreqsSerializer, A
 def index(request):
     programs = Requirements_List().get_unique_major()
     return render(request, 'index.html', {'programs': programs})
+
+def chosen_degree(request, major, majorExtended= ""):
+    if majorExtended:
+        # this is to solve bug where Degree Name includes '/'
+        major = major + "/" + majorExtended
+    programs = Requirements_List().get_unique_major()
+    requirements = Requirements_List().get_major_requirement(major)
+    if not requirements:
+        return HttpResponseNotFound('<h1>404 Not Found: Major not valid</h1>')
+    return render(request, 'chosen_degree.html', {'programs': programs, 'major': major, 'requirements': requirements})
 
 class AllApp(APIView):
     queryset = UwpathApp.objects.all()
@@ -152,4 +163,8 @@ class Requirements_List(APIView):
         return Response(serializer.data)
     def get_unique_major(self, format=None):
         querySet = Requirements.objects.values('program_name').order_by('program_name').distinct()
+        return querySet
+
+    def get_major_requirement(self, major):
+        querySet = Requirements.objects.values().filter(program_name=major).order_by('program_name')
         return querySet

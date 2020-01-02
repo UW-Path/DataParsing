@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
+{% load general_tags %}
 
 {% block content %}
-<div>
-    <div class="display-4">Welcome to UWPath</div>
-    </br>
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Select Your Major
-    </button>
-    <div class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButton">
-        {% for program in programs %}
-            <li>
-                <a class="dropdown-item" href="#">{{ program.program_name }}</a>
-            </li>
-        {%  endfor %}
+    <div>
+        <div class="display-4">Welcome to UWPath</div>
+        </br>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Your Major
+        </button>
+        <div class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButton">
+            {% for program in programs %}
+                <li>
+{#                 <a class="dropdown-item" value="{% get_degree_major program.program_name as major %}" href="{% url 'chosen_degree' major=program.program_name %}">#}
+                    <a class="dropdown-item" value="{% get_degree_major program.program_name as major %}" href="/major/{{ program.program_name }}/">
+                        {{ program.program_name }}
+                    </a>
+                </li>
+            {%  endfor %}
+        </div>
+
+    {{ major }}
+
     </div>
-</div>
 {% endblock %}
