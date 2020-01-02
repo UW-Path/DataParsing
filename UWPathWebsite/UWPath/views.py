@@ -3,7 +3,6 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.generics import ListAPIView
 from .models import UwpathApp, CourseInfo, Coreqs, Prereqs, Antireqs, Requirements
 from .serializer import AppSerializer, CourseInfoSerializer, CoreqsSerializer, AntireqsSerializer, PrereqsSerializer, RequirementsSerializer
 
@@ -22,7 +21,7 @@ def chosen_degree(request, major, majorExtended= ""):
     requirements = Requirements_List().get_major_requirement(major)
     if not requirements:
         return HttpResponseNotFound('<h1>404 Not Found: Major not valid</h1>')
-    return render(request, 'chosen_degree.html', {'programs': programs, 'major': major, 'requirements': requirements})
+    return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements})
 
 class AllApp(APIView):
     queryset = UwpathApp.objects.all()

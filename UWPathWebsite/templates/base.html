@@ -8,14 +8,20 @@
     <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+
     <title>UWPath</title>
 </head>
 <body style="background-image: url({% static 'img/background.jpg' %});">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.3/dragula.min.js'></script>
+<script src="{% static 'js/table.js' %}"></script>
 <div class="container">
-        <div class="row">
-            {% block content %}
-            {% endblock %}
-        </div>
+
+
+        {% block content %}
+        {% endblock %}
+
 </div>
 </body>
 </html>
