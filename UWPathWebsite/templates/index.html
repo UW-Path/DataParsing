@@ -3,21 +3,16 @@
 {% block content %}
 <div>
     <div class="display-4">Welcome to UWPath</div>
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown button
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
+    </br>
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Select Your Major
+    </button>
+    <div class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButton">
+        {% for program in programs %}
+            <li>
+                <a class="dropdown-item" href="#">{{ program.program_name }}</a>
+            </li>
+        {%  endfor %}
     </div>
-
-    {% for program in programs %}
-        <tr>
-            {{ program.program_name }}
-        </tr>
-    {%  endfor %}
 </div>
 {% endblock %}

@@ -1,3 +1,5 @@
+/*Need to clear cache ctrl F5 to see css change*/
+
 div {
     color: darkslateblue;
 }
@@ -9,4 +11,10 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.scrollable-dropdown {
+  height: auto;
+  max-height: 300px;
+  overflow-x: hidden;
 }

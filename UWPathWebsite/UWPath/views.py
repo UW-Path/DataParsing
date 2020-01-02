@@ -151,5 +151,5 @@ class Requirements_List(APIView):
         serializer = RequirementsSerializer(list, many=True)
         return Response(serializer.data)
     def get_unique_major(self, format=None):
-        querySet = Requirements.objects.values('program_name').distinct()
+        querySet = Requirements.objects.values('program_name').order_by('program_name').distinct()
         return querySet
