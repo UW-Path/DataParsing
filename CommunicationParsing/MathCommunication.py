@@ -36,6 +36,12 @@ class Communications:
     def is_in_list2(self, course_code):
         return course_code in self.__list2 or self.is_in_list1(course_code)
 
+    def get_list1(self):
+        return self.__list1
+
+    def get_list2(self):
+        return self.__list2
+
     def __str__(self):
         output = "List 1:\n"
         for course in self.__list1:
@@ -46,15 +52,3 @@ class Communications:
             output += "- " + course + "\n"
 
         return output
-
-
-if __name__ == "__main__":
-    com = Communications()
-    com.load_file("MathReq.html")
-
-    courses = ["MATH 235", "EMLS 102R", "ENGL 108B"]
-    for course in courses:
-        print(course)
-        print("In List 1:", com.is_in_list1(course))
-        print("In List 2:", com.is_in_list2(course))
-        print()
