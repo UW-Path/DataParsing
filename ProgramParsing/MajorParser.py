@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 from ProgramParsing.MajorReq import MajorReq
 from StringToNumber import StringToNumber
 import re
+import pkg_resources
 
 
 class MajorParser:
@@ -84,7 +85,8 @@ class MajorParser:
 
                 :return:
         """
-        html = open(file, encoding="utf8")
+        html = pkg_resources.resource_string(__name__, file)
+        # html = open(file, encoding="utf8")
         self.data = BeautifulSoup(html, 'html.parser')
 
         major = self.__get_major()

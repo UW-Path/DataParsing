@@ -6,6 +6,8 @@ Calder Lund
 """
 
 import re
+
+import pkg_resources
 from bs4 import BeautifulSoup
 
 
@@ -15,7 +17,9 @@ class Communications:
         self.__list2 = []
 
     def load_file(self, file):
-        html = open(file, encoding="ISO-8859-1")
+        html = pkg_resources.resource_string(__name__, file)
+        ### Below doesn't work for all
+        # html = open(file, encoding="ISO-8859-1")
         self.data = BeautifulSoup(html, 'html.parser')
         ul = self.data.find_all("ul")
         list_num = 0
