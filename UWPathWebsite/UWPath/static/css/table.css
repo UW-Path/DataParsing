@@ -186,7 +186,8 @@ li {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   margin: 0.4rem;
-  height: 4rem;
+  min-height: 4rem;
+  height: auto;
   border: #000013 0.15rem solid;
   border-radius: 0.2rem;
   cursor: move;

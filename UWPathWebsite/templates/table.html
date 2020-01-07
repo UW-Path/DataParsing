@@ -18,18 +18,11 @@
                 <h4>Required Courses</h4>
             </div>
             <ul class="task-list" id="required">
+                {% for req in requirements %}
                 <li class="task">
-                    <p>CS135</p>
+                    <p>{{ req.course_codes }}</p>
                 </li>
-                <li class="task">
-                    <p>CS136</p>
-                </li>
-                <li class="task">
-                    <p>MATH239</p>
-                </li>
-                <li class="task">
-                    <p>MATH101</p>
-                </li>
+                {%  endfor %}
             </ul>
         </li>
 
@@ -38,9 +31,6 @@
                 <h4>1A</h4>
             </div>
             <ul class="task-list" id="1A">
-                <li class="task">
-                    <p>MATH XXX</p>
-                </li>
             </ul>
         </li>
 
@@ -49,9 +39,6 @@
                 <h4>1B</h4>
             </div>
             <ul class="task-list" id="1B">
-                <li class="task">
-                    <p>MATH XXX</p>
-                </li>
             </ul>
         </li>
 
@@ -60,9 +47,6 @@
                 <h4>2A</h4>
             </div>
             <ul class="task-list" id="2A">
-                <li class="task">
-                    <p>MATH XXX</p>
-                </li>
             </ul>
         </li>
 
@@ -71,9 +55,6 @@
                 <h4>2B</h4>
             </div>
             <ul class="task-list" id="2B">
-                <li class="task">
-                    <p>MATH XXX</p>
-                </li>
             </ul>
         </li>
 
@@ -82,9 +63,6 @@
                 <h4>3A</h4>
             </div>
             <ul class="task-list" id="3A">
-                <li class="task">
-                    <p>MATH XXX</p>
-                </li>
             </ul>
         </li>
 
@@ -93,9 +71,6 @@
                 <h4>3B</h4>
             </div>
             <ul class="task-list" id="3B">
-                <li class="task">
-                    <p>MATH XXX</p>
-                </li>
             </ul>
         </li>
 
@@ -104,9 +79,6 @@
                 <h4>4A</h4>
             </div>
             <ul class="task-list" id="4A">
-                <li class="task">
-                    <p>MATH XXX</p>
-                </li>
             </ul>
         </li>
 
@@ -115,9 +87,6 @@
                 <h4>4B</h4>
             </div>
             <ul class="task-list" id="4B">
-                <li class="task">
-                    <p>MATH XXX</p>
-                </li>
             </ul>
         </li>
 

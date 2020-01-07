@@ -1,0 +1,7 @@
+Make sure local database is setup under django_projects/settings.py under var DATABASES
+
+open cmd to UWPathWebsite and run the following commands:
+
+python manage.py makemigrations
+python manage.py migrate
+
