@@ -83,6 +83,17 @@ class DatabaseSender(DatabaseConnection):
         )"""
         self.execute(command)
 
+    def create_communications(self):
+        """
+        Creates communications table.
+        """
+        command = "CREATE TABLE IF NOT EXISTS " + self.communications_table + """ (
+            id SERIAL PRIMARY KEY,
+            course_code VARCHAR(255),
+            list_number INT
+        )"""
+        self.execute(command)
+
     def insert_prereqs(self, code, prereqs):
         """
         Inserts prereq data in prereqs table.
@@ -128,6 +139,22 @@ class DatabaseSender(DatabaseConnection):
         not_exist += "WHERE course_code = '" + code + "'"
         command = "INSERT INTO " + self.antireqs_table + " (course_code, antireq, extra_info)"
         command += "\nSELECT '" + code + "', '" + antireqs.str("antireqs") + "', '" + antireqs.str("extra") + "'\n"
+        command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
+
+        return self.execute(command)
+
+    def insert_communication(self, code, list_num):
+        """
+        Inserts communication data in communication table.
+
+        :param code: string
+        :param list_num: int
+        :return: boolean
+        """
+        not_exist = "SELECT 1 FROM " + self.communications_table + "\n"
+        not_exist += "WHERE course_code = '" + code + "'"
+        command = "INSERT INTO " + self.communications_table + " (course_code, list_number)"
+        command += "\nSELECT '" + code + "', " + str(list_num) + "\n"
         command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
 
         return self.execute(command)
