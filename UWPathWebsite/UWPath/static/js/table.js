@@ -18,6 +18,8 @@ window.onload = function() {
 
 /* Vanilla JS to add a new task */
 function addTask() {
+  // TODO Communicate with backend to confirm it is a course
+  debugger
   /* Get task text from input */
   var inputTask = document.getElementById("taskText").value;
   /* Add task to the 'Required' column */

@@ -5,5 +5,5 @@ open cmd to UWPathWebsite and run the following commands:
 python manage.py makemigrations
 python manage.py migrate
 
- python manage.py runserver
+python manage.py runserver
 

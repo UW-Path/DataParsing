@@ -9,7 +9,7 @@ Calder Lund
 import urllib3
 from bs4 import BeautifulSoup
 from CourseParsing.Course import Course
-
+import pkg_resources
 
 class CourseParser:
     """
@@ -27,7 +27,8 @@ class CourseParser:
         self.data = BeautifulSoup(response.data, 'html.parser')
 
     def load_file(self, file):
-        html = open(file, encoding="ISO-8859-1")
+        html = pkg_resources.resource_string(__name__, file)
+        # html = open(file, encoding="ISO-8859-1")
         self.data = BeautifulSoup(html, 'html.parser')
         information = self.data.find_all("center")
         for info in information:
