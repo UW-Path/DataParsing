@@ -19,9 +19,19 @@
             </div>
             <ul class="task-list" id="required">
                 {% for req in requirements %}
-                <li class="task">
-                    <p>{{ req.course_codes }}</p>
-                </li>
+                    {% for i in req.number_of_courses|times %}
+                    <li class="task">
+                        <p>{{ req.course_codes }}</p>
+                    </li>
+                    {%  endfor %}
+                {%  endfor %}
+
+                {% for req in minor_requirements %}
+                    {% for i in req.number_of_courses|times %}
+                    <li class="task">
+                        <p>{{ req.course_codes }}</p>
+                    </li>
+                    {%  endfor %}
                 {%  endfor %}
             </ul>
         </li>

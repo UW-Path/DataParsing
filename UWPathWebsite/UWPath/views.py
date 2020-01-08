@@ -13,7 +13,7 @@ def index(request):
     programs = Requirements_List().get_unique_major()
     return render(request, 'index.html', {'programs': programs})
 
-def chosen_degree(request, major, majorExtended= ""):
+def chosen_degree(request, major, majorExtended= "", minor = "", minorExtended = ""):
     if majorExtended:
         # this is to solve bug where Degree Name includes '/'
         major = major + "/" + majorExtended
@@ -21,6 +21,17 @@ def chosen_degree(request, major, majorExtended= ""):
     requirements = Requirements_List().get_major_requirement(major)
     if not requirements:
         return HttpResponseNotFound('<h1>404 Not Found: Major not valid</h1>')
+
+    # minor and options
+    if minor:
+        if minorExtended:
+            # this is to solve bug where Degree Name includes '/'
+            minor = minor + "/" + minorExtended
+        minor_requirements = Requirements_List().get_major_requirement(minor)
+        if not minor_requirements:
+            return HttpResponseNotFound('<h1>404 Not Found: Minor not valid</h1>')
+        return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'minor': minor, 'minor_requirements': minor_requirements})
+
     return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements})
 
 class AllApp(APIView):
@@ -161,7 +172,7 @@ class Requirements_List(APIView):
         serializer = RequirementsSerializer(list, many=True)
         return Response(serializer.data)
     def get_unique_major(self, format=None):
-        querySet = Requirements.objects.values('program_name').order_by('program_name').distinct()
+        querySet = Requirements.objects.values('program_name', 'plan_type').order_by('program_name').distinct()
         return querySet
 
     def get_major_requirement(self, major):
