@@ -183,3 +183,14 @@ class Requirements(models.Model):
     class Meta:
         managed = False
         db_table = 'requirements'
+
+
+class Communications(models.Model):
+    # Table I
+    id = models.IntegerField(primary_key=True)
+    course_code = models.CharField(max_length=255, blank=True, null=True)
+    list_number = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'communications'

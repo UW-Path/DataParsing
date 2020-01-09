@@ -3,8 +3,9 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import UwpathApp, CourseInfo, Coreqs, Prereqs, Antireqs, Requirements
-from .serializer import AppSerializer, CourseInfoSerializer, CoreqsSerializer, AntireqsSerializer, PrereqsSerializer, RequirementsSerializer
+from .models import UwpathApp, CourseInfo, Coreqs, Prereqs, Antireqs, Requirements, Communications
+from .serializer import AppSerializer, CourseInfoSerializer, CoreqsSerializer, AntireqsSerializer, PrereqsSerializer, \
+    RequirementsSerializer, CommunicationsSerializer
 
 
 # Create your views here.
@@ -178,3 +179,27 @@ class Requirements_List(APIView):
     def get_major_requirement(self, major):
         querySet = Requirements.objects.values().filter(program_name=major).order_by('program_name')
         return querySet
+
+
+class Communications_API(APIView):
+    def get(self, request, pk, format=None):
+        try:
+            app = Communications.objects.get(pk=pk)
+            serializer = CommunicationsSerializer(app)
+            return Response(serializer.data)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def get_object(self, request, pk, format=None):
+        try:
+            app = Communications.objects.get(pk=pk)
+            return app
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class Communications_List(APIView):
+    def get(self, request, format=None):
+        list = Communications.objects.all()[:10]
+        serializer = CommunicationsSerializer(list, many=True)
+        return Response(serializer.data)

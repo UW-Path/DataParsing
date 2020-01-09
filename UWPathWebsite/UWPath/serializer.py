@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import UwpathApp, CourseInfo, Antireqs, Coreqs, Prereqs, Requirements
-
+from .models import *
 
 class AppSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,4 +31,9 @@ class PrereqsSerializer(serializers.ModelSerializer):
 class RequirementsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Requirements
+        fields =  '__all__'
+
+class CommunicationsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Communications
         fields =  '__all__'

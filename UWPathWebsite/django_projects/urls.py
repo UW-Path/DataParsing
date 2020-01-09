@@ -18,6 +18,7 @@ from django.contrib import admin
 import UWPath.views as uwPath
 
 urlpatterns = [
+    path('', uwPath.index, name='index'),
     path(r'admin/', admin.site.urls),
     path(r'api/', uwPath.AllApp.as_view()),
     path(r'api/course-info/get/<str:pk>', uwPath.Course_Info_API.as_view()),
@@ -30,7 +31,9 @@ urlpatterns = [
     path(r'api/antireqs/get/<str:pk>', uwPath.Antireqs_API.as_view()),
     path(r'api/requirements/', uwPath.Requirements_List.as_view()),
     path(r'api/requirements/get/<str:pk>', uwPath.Requirements_API.as_view()),
-    path('', uwPath.index, name='index'),
+    path(r'api/communications/', uwPath.Communications_List.as_view()),
+    path(r'api/communications/get/<int:pk>', uwPath.Communications_API.as_view()),
+
     #a little bit hardcoded below
     path(r'major/<str:major>/<str:majorExtended>/', uwPath.chosen_degree, name='chosen_degree'),
     path(r'major/<str:major>/', uwPath.chosen_degree, name='chosen_degree'),
