@@ -16,7 +16,7 @@
         <div class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButton">
             {% for program in programs %}
                 <li>
-                    {% if program.plan_type != "Major" %}
+                    {% if program.plan_type != "Major" and program.plan_type != "Table" %}
 {#                 <a class="dropdown-item" value="{% get_degree_major program.program_name as major %}" href="{% url 'chosen_degree' major=program.program_name %}">#}
                     <a class="dropdown-item" value="{% get_degree_major program.program_name as minor_selected %}" href="{{ request.path }}minor/{{ program.program_name }}/">
                         {{ program.program_name }}
