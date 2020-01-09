@@ -54,5 +54,4 @@ class Communications:
         output += "List 2:\n"
         for course in self.__list2:
             output += "- " + course + "\n"
-
         return output

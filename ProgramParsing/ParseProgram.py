@@ -10,7 +10,7 @@ if __name__ == "__main__":
              "RequiredBusinessSpecialization.html", "RequiredFineArtSpecialization.html",
              "RequiredSoftwareSpecialization.html", "RequiredMATH-MS-Business-Specialization.html", "RequiredDigitalHardware.html", "RequiredACTSCIJoint.html",
              "RequiredAMATHJoint.html", "RequiredCSJoint.html",
-             "RequiredACTSCI-FINANCE-Option.html"]
+             "RequiredACTSCI-FINANCE-Option.html", "TableII.html"]
 
     #below files are not parsable because "One of.." doesn not beong to a <p> tag
         #RequiredHumanComputerInteractionSpecialization.html
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     #TODO parse which specialization is under which major
 
     #continue with Data Science
-    #files = ["RequiredMATHCPAFINMajor.html"] #use this for single files
+    files = ["TableII.html"] #use this for single files
 
 
     dbc = DatabaseSender()

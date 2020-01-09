@@ -33,8 +33,12 @@ class MajorParser:
 
     def __get_major(self):
         major = self.data.find_all("span", id="ctl00_contentMain_lblBottomTitle")
-        major = major[0].contents[0].string
 
+        if major:
+            major = major[0].contents[0].string
+        else:
+            #Exception for Table II data
+            return "Table II"
         #Parsing the heading above the highlighted span
         #if major == degree req, spcialization, parse the highlighted span
 

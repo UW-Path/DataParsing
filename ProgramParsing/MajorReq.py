@@ -162,6 +162,8 @@ class MajorReq:
             return "Specialization"
         elif "option" in str(self.programName).lower():
             return "Option"
+        elif "table" in str(self.programName).lower():
+            return "Table"
         else:
             # Assume it is major
             return "Major"
