@@ -94,6 +94,20 @@ class DatabaseSender(DatabaseConnection):
         )"""
         self.execute(command)
 
+    def create_breadth(self):
+        """
+        Creates breadth table.
+        """
+        command = "CREATE TABLE IF NOT EXISTS " + self.breadth_table + """ (
+            subject VARCHAR(255) PRIMARY KEY,
+            name VARCHAR(255),
+            humanities BOOLEAN,
+            social_science BOOLEAN,
+            pure_science BOOLEAN,
+            applied_science BOOLEAN
+        )"""
+        self.execute(command)
+
     def insert_prereqs(self, code, prereqs):
         """
         Inserts prereq data in prereqs table.
@@ -155,6 +169,24 @@ class DatabaseSender(DatabaseConnection):
         not_exist += "WHERE course_code = '" + code + "'"
         command = "INSERT INTO " + self.communications_table + " (course_code, list_number)"
         command += "\nSELECT '" + code + "', " + str(list_num) + "\n"
+        command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
+
+        return self.execute(command)
+
+    def insert_breadth(self, breadth_data):
+        """
+        Inserts breadth data in breadth table.
+
+        :param breadth_data: list
+        :return: boolean
+        """
+        not_exist = "SELECT 1 FROM " + self.breadth_table + "\n"
+        not_exist += "WHERE subject = '" + breadth_data["subject"] + "'"
+        command = "INSERT INTO " + self.breadth_table
+        command += " (subject, name, humanities, social_science, pure_science, applied_science)"
+        command += "\nSELECT '" + breadth_data["subject"] + "', '" + breadth_data["name"] + "', "
+        command += str(breadth_data["humanities"]) + ", " + str(breadth_data["social_science"]) + ", "
+        command += str(breadth_data["pure_science"]) + ", " + str(breadth_data["applied_science"]) + "\n"
         command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
 
         return self.execute(command)
