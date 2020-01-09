@@ -1,0 +1,12 @@
+1. Make sure Postgres is setup:
+    - Currently, only local server is available
+    - Default Database Connection is:
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '8888'
+2. Run the following script to load all parse tables
+    - CommunicationParsing/CommunicationScript.py
+    - CourseParsing/CourseParser.py
+    - ProgramParsing/ParseProgram.py

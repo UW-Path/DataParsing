@@ -8,6 +8,7 @@ Calder Lund
 from Database.DatabaseConnection import DatabaseConnection
 import pandas as pd
 
+# Might not need in the future (Hao Wei 2020/01/09)
 
 class DatabaseReceiver(DatabaseConnection):
     def __init__(self):
