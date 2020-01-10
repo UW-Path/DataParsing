@@ -15,7 +15,8 @@ import sys
 class DatabaseConnection(object):
     def __init__(self, user="postgres", password="1234", host="localhost", port="8888", database="postgres",
                  course_table="course_info", prereqs_table="prereqs", coreqs_table="coreqs", antireqs_table="antireqs",
-                 requirements_table = "requirements", communications_table="communications"):
+                 requirements_table = "requirements", communications_table="communications",
+                 breadth_table="breadth_table"):
         self.connection = psycopg2.connect(user=user, password=password, host=host, port=port, database=database)
         self.cursor = self.connection.cursor()
         self.course_table = course_table
@@ -24,6 +25,7 @@ class DatabaseConnection(object):
         self.antireqs_table = antireqs_table
         self.requirements_table = requirements_table
         self.communications_table = communications_table
+        self.breadth_table = breadth_table
 
         self.root = logging.getLogger()
         self.root.setLevel(logging.DEBUG)
