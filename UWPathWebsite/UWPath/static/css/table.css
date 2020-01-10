@@ -34,7 +34,6 @@ footer {
   display: flex;
   width: 20rem;
   height: 5.3rem;
-  margin: auto;
   border: #000013 0.2rem solid;
   border-radius: 0.2rem;
   padding: 0.4rem;
@@ -124,6 +123,8 @@ footer {
 
 .task-list {
   min-height: 3rem;
+  max-height: 37em;
+  overflow-y: auto;
 }
 
 ul {

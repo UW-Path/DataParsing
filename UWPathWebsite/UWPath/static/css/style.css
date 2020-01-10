@@ -18,3 +18,9 @@ body {
   max-height: 300px;
   overflow-x: hidden;
 }
+
+.flex{
+  display: flex;
+  justify-content: center;
+  height: 5.3rem;
+}

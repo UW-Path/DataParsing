@@ -12,9 +12,12 @@ window.onload = function() {
     document.getElementById("4B"),
     document.getElementById("5A"),
     document.getElementById("5B"),
-    document.getElementById("trash"),
-  ]);
+    document.getElementById("trash")
+  ]).on('drop', function (el) {
+    emptyTrash()
+  });
 }
+
 
 /* Vanilla JS to add a new task */
 function addTask() {

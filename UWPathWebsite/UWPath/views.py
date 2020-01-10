@@ -32,7 +32,6 @@ def chosen_degree(request, major, majorExtended= "", minor = "", minorExtended =
         if not minor_requirements:
             return HttpResponseNotFound('<h1>404 Not Found: Minor not valid</h1>')
         return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'minor': minor, 'minor_requirements': minor_requirements})
-
     return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements})
 
 class AllApp(APIView):
@@ -45,7 +44,6 @@ class AllApp(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class AppView(APIView):
     def get(self, request, pk, format=None):
@@ -128,7 +126,6 @@ class Prereqs_List(APIView):
         serializer = PrereqsSerializer(list, many=True)
         return Response(serializer.data)
 
-
 class Antireqs_API(APIView):
     def get(self, request, pk, format=None):
         try:
@@ -180,7 +177,6 @@ class Requirements_List(APIView):
         querySet = Requirements.objects.values().filter(program_name=major).order_by('program_name')
         return querySet
 
-
 class Communications_API(APIView):
     def get(self, request, pk, format=None):
         try:
@@ -189,14 +185,12 @@ class Communications_API(APIView):
             return Response(serializer.data)
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
     def get_object(self, request, pk, format=None):
         try:
             app = Communications.objects.get(pk=pk)
             return app
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
 
 class Communications_List(APIView):
     def get(self, request, format=None):

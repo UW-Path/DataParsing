@@ -1,116 +1,102 @@
 {% extends 'chosen_degree.html' %}
 {% load general_tags %}
-
-
 {% block table %}
-    <br>
-<section class="add-task-container">
-    <input type="text" maxlength="12" id="taskText" placeholder="Course XXX" onkeydown="if (event.keyCode == 13)
-                        document.getElementById('add').click()">
-    <button id="add" class="button add-button" onclick="addTask()">Add Course</button>
-</section>
-
+<br>
+<div class="flex">
+   <div class="add-task-container">
+      <div>
+         <input type="text" maxlength="12" id="taskText" placeholder="Course XXX" onkeydown="if (event.keyCode == 13)
+            document.getElementById('add').click()">
+         <button id="add" class="button add-button" onclick="addTask()">Add Course</button>
+      </div>
+   </div>
+   <div class="column trash-column">
+      <div class="column-header">
+         <h4>Trash</h4>
+      </div>
+      <div class="task-list" id="trash">
+      </div>
+   </div>
+</div>
 <main class="main-container">
-    <ul class="columns">
-
-        <li class="column required-column">
-            <div class="column-header">
-                <h4>Required Courses</h4>
-            </div>
-            <ul class="task-list" id="required">
-                {% for req in requirements %}
-                    {% for i in req.number_of_courses|times %}
-                    <li class="task">
-                        <p>{{ req.course_codes }}</p>
-                    </li>
-                    {%  endfor %}
-                {%  endfor %}
-
-                {% for req in minor_requirements %}
-                    {% for i in req.number_of_courses|times %}
-                    <li class="task">
-                        <p>{{ req.course_codes }}</p>
-                    </li>
-                    {%  endfor %}
-                {%  endfor %}
-            </ul>
-        </li>
-
-        <li class="column oneA-column">
-            <div class="column-header">
-                <h4>1A</h4>
-            </div>
-            <ul class="task-list" id="1A">
-            </ul>
-        </li>
-
-        <li class="column oneB-column">
-            <div class="column-header">
-                <h4>1B</h4>
-            </div>
-            <ul class="task-list" id="1B">
-            </ul>
-        </li>
-
-        <li class="column twoA-column">
-            <div class="column-header">
-                <h4>2A</h4>
-            </div>
-            <ul class="task-list" id="2A">
-            </ul>
-        </li>
-
-        <li class="column twoB-column">
-            <div class="column-header">
-                <h4>2B</h4>
-            </div>
-            <ul class="task-list" id="2B">
-            </ul>
-        </li>
-
-        <li class="column threeA-column">
-            <div class="column-header">
-                <h4>3A</h4>
-            </div>
-            <ul class="task-list" id="3A">
-            </ul>
-        </li>
-
-        <li class="column threeB-column">
-            <div class="column-header">
-                <h4>3B</h4>
-            </div>
-            <ul class="task-list" id="3B">
-            </ul>
-        </li>
-
-        <li class="column fourA-column">
-            <div class="column-header">
-                <h4>4A</h4>
-            </div>
-            <ul class="task-list" id="4A">
-            </ul>
-        </li>
-
-        <li class="column fourB-column">
-            <div class="column-header">
-                <h4>4B</h4>
-            </div>
-            <ul class="task-list" id="4B">
-            </ul>
-        </li>
-
-        <li class="column trash-column">
-            <div class="column-header">
-                <h4>Trash</h4>
-            </div>
-            <ul class="task-list" id="trash">
-            </ul>
-            <div class="column-button">
-                <button class="button delete-button" onclick="emptyTrash()">Delete</button>
-            </div>
-        </li>
-
-    </ul>
+   <ul class="columns">
+      <li class="column required-column" style="width: 16.8rem">
+         <div class="column-header">
+            <h4>Required Courses</h4>
+         </div>
+         <ul class="task-list" id="required">
+            {% for req in requirements %}
+            {% for i in req.number_of_courses|times %}
+            <li class="task">
+               <p>{{ req.course_codes }}</p>
+            </li>
+            {%  endfor %}
+            {%  endfor %}
+            {% for req in minor_requirements %}
+            {% for i in req.number_of_courses|times %}
+            <li class="task">
+               <p>{{ req.course_codes }}</p>
+            </li>
+            {%  endfor %}
+            {%  endfor %}
+         </ul>
+      </li>
+      <li class="column oneA-column">
+         <div class="column-header">
+            <h4>1A</h4>
+         </div>
+         <ul class="task-list" id="1A">
+         </ul>
+      </li>
+      <li class="column oneB-column">
+         <div class="column-header">
+            <h4>1B</h4>
+         </div>
+         <ul class="task-list" id="1B">
+         </ul>
+      </li>
+      <li class="column twoA-column">
+         <div class="column-header">
+            <h4>2A</h4>
+         </div>
+         <ul class="task-list" id="2A">
+         </ul>
+      </li>
+      <li class="column twoB-column">
+         <div class="column-header">
+            <h4>2B</h4>
+         </div>
+         <ul class="task-list" id="2B">
+         </ul>
+      </li>
+      <li class="column threeA-column">
+         <div class="column-header">
+            <h4>3A</h4>
+         </div>
+         <ul class="task-list" id="3A">
+         </ul>
+      </li>
+      <li class="column threeB-column">
+         <div class="column-header">
+            <h4>3B</h4>
+         </div>
+         <ul class="task-list" id="3B">
+         </ul>
+      </li>
+      <li class="column fourA-column">
+         <div class="column-header">
+            <h4>4A</h4>
+         </div>
+         <ul class="task-list" id="4A">
+         </ul>
+      </li>
+      <li class="column fourB-column">
+         <div class="column-header">
+            <h4>4B</h4>
+         </div>
+         <ul class="task-list" id="4B">
+         </ul>
+      </li>
+   </ul>
 </main>
 {% endblock %}
