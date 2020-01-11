@@ -14,6 +14,7 @@ def index(request):
     programs = Requirements_List().get_unique_major()
     return render(request, 'index.html', {'programs': programs})
 
+
 def chosen_degree(request, major, majorExtended= "", minor = "", minorExtended = ""):
     if majorExtended:
         # this is to solve bug where Degree Name includes '/'
@@ -34,6 +35,7 @@ def chosen_degree(request, major, majorExtended= "", minor = "", minorExtended =
         return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'minor': minor, 'minor_requirements': minor_requirements})
     return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements})
 
+
 class AllApp(APIView):
     queryset = UwpathApp.objects.all()
     serializer_class = AppSerializer
@@ -44,6 +46,7 @@ class AllApp(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class AppView(APIView):
     def get(self, request, pk, format=None):
@@ -58,6 +61,7 @@ class AppView(APIView):
         app = UwpathApp.objects.get(pk=pk)
         app.delete()
         return Response(status=status.HTTP_200_OK)
+
 
 class Course_Info_API(APIView):
     def get(self, request, pk, format=None):
@@ -75,11 +79,13 @@ class Course_Info_API(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+
 class Course_Info_List(APIView):
     def get(self, request, format=None):
         list = CourseInfo.objects.all()[:10]
         serializer = CourseInfoSerializer(list, many=True)
         return Response(serializer.data)
+
 
 class Coreqs_API(APIView):
     def get(self, request, pk, format=None):
@@ -97,16 +103,18 @@ class Coreqs_API(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+
 class Coreqs_List(APIView):
     def get(self, request, format=None):
         list = Coreqs.objects.all()[:10]
         serializer = CoreqsSerializer(list, many=True)
         return Response(serializer.data)
 
+
 class Prereqs_API(APIView):
     def get(self, request, pk, format=None):
         try:
-            #if no primary key, then default go by id
+            # if no primary key, then default go by id
             app = Prereqs.objects.get(pk=pk)
             serializer = PrereqsSerializer(app)
             return Response(serializer.data)
@@ -120,11 +128,13 @@ class Prereqs_API(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+
 class Prereqs_List(APIView):
     def get(self, request, format=None):
         list = Prereqs.objects.all()[:10]
         serializer = PrereqsSerializer(list, many=True)
         return Response(serializer.data)
+
 
 class Antireqs_API(APIView):
     def get(self, request, pk, format=None):
@@ -142,11 +152,13 @@ class Antireqs_API(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+
 class Antireqs_List(APIView):
     def get(self, request, format=None):
         list = Antireqs.objects.all()[:10]
         serializer = AntireqsSerializer(list, many=True)
         return Response(serializer.data)
+
 
 class Requirements_API(APIView):
     def get(self, request, pk, format=None):
@@ -164,11 +176,13 @@ class Requirements_API(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+
 class Requirements_List(APIView):
     def get(self, request, format=None):
         list = Requirements.objects.all()[:10]
         serializer = RequirementsSerializer(list, many=True)
         return Response(serializer.data)
+
     def get_unique_major(self, format=None):
         querySet = Requirements.objects.values('program_name', 'plan_type').order_by('program_name').distinct()
         return querySet
@@ -176,6 +190,7 @@ class Requirements_List(APIView):
     def get_major_requirement(self, major):
         querySet = Requirements.objects.values().filter(program_name=major).order_by('program_name')
         return querySet
+
 
 class Communications_API(APIView):
     def get(self, request, pk, format=None):
@@ -185,12 +200,14 @@ class Communications_API(APIView):
             return Response(serializer.data)
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
     def get_object(self, request, pk, format=None):
         try:
             app = Communications.objects.get(pk=pk)
             return app
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 class Communications_List(APIView):
     def get(self, request, format=None):
