@@ -26,6 +26,15 @@ function addTask() {
   /* Get task text from input */
   var inputTask = document.getElementById("taskText").value;
   /* Add task to the 'Required' column */
+  $.ajax({
+    url: 'http://127.0.0.1:8000/api/course-info/get/' + inputTask,
+    type: 'get', // This is the default though, you don't actually need to always mention it
+    success: function(data) {
+        debugger
+    },
+    failure: function(data) {
+    }
+});
   document.getElementById("required").innerHTML +=
     "<li class='task'><p>" + inputTask + "</p></li>";
   /* Clear task text from input after adding task */
