@@ -35,7 +35,7 @@ function addTask() {
     },
       error: function(data) {
         document.getElementById("required").innerHTML +=
-            "<li class='task'><p>* " + inputTask + " *</p></li>";
+            "<li class='task'><p>" + inputTask + " *</p></li>";
     }
 });
   /* Clear task text from input after adding task */

@@ -36,6 +36,37 @@
             </div>
         {%  endfor %}
 
+        {% if "Table I" in requirements.0.additional_requirements or "Communication Skills Requirement" in requirements.0.additional_requirements  %}
+            <b>You need to satisfy Table I (Choose a course from List I and one from List II): </b>
+            <br>
+            <b>List I</b>
+            {%  for req in table1 %}
+                {%  if req.list_number == 1 %}
+                <div style="color: #0c5460">
+                    {{ req.course_code }}
+                </div>
+                {% endif %}
+            {% endfor %}
+            <b>List II</b>
+            {%  for req in table1 %}
+                {%  if req.list_number == 2 %}
+                <div style="color: #0c5460">
+                    {{ req.course_code }}
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if "Table II" in requirements.0.additional_requirements %}
+            <b>You need to satisfy Table II: </b>
+            <br>
+            {%  for req in table2 %}
+                <div style="color: #0c5460">
+                    {{ req.number_of_courses }} of {{ req.course_codes }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
         {% if minor_requirements %}
             <b>You need to meet the following {{minor_requirements.0.plan_type}} requirements: </b>
             <br>
@@ -45,10 +76,10 @@
                 </div>
             {%  endfor %}
         {% endif %}
-
     </div>
     <div>
         {%  block table %}
         {% endblock %}
     </div>
+    <div class="asterisk"><small><b>* Course is not found in the Database (acts as an override)</b></small></div>
 {% endblock %}

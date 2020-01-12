@@ -11,11 +11,20 @@ from .serializer import AppSerializer, CourseInfoSerializer, CoreqsSerializer, A
 # Create your views here.
 
 def index(request):
+    #Renders Home page with a drop down of major users can select form
     programs = Requirements_List().get_unique_major()
     return render(request, 'index.html', {'programs': programs})
 
 
 def chosen_degree(request, major, majorExtended= "", minor = "", minorExtended = ""):
+    #Renders the requiremnts + table for major/minor requested for
+
+    #communications for math
+    table1 = Communications_List().get_list()
+    #Basic honors math req
+    table2 = Requirements_List().get_major_requirement("Table II")
+
+
     if majorExtended:
         # this is to solve bug where Degree Name includes '/'
         major = major + "/" + majorExtended
@@ -32,10 +41,10 @@ def chosen_degree(request, major, majorExtended= "", minor = "", minorExtended =
         minor_requirements = Requirements_List().get_major_requirement(minor)
         if not minor_requirements:
             return HttpResponseNotFound('<h1>404 Not Found: Minor not valid</h1>')
-        return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'minor': minor, 'minor_requirements': minor_requirements})
-    return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements})
+        return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'minor': minor, 'minor_requirements': minor_requirements, 'table1':table1, 'table2':table2})
+    return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'table1':table1, 'table2':table2})
 
-
+# Anything that starts with class (APIView) can be accessed through url.py via Django Restframework
 class AllApp(APIView):
     queryset = UwpathApp.objects.all()
     serializer_class = AppSerializer
@@ -214,3 +223,6 @@ class Communications_List(APIView):
         list = Communications.objects.all()[:10]
         serializer = CommunicationsSerializer(list, many=True)
         return Response(serializer.data)
+    def get_list(self):
+        querySet = Communications.objects.values()
+        return querySet
