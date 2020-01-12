@@ -3,7 +3,7 @@ UWPath is a website that helps University of Waterloo students plan their future
 
 
 # Set Up#
-Refer to requirements.txt for all the modules needed
+Refer to requirements.txt for all the Python modules needed. Project is built with Python 3.8.
 
 ## Backend ##
 1. Make sure Postgres is setup:
