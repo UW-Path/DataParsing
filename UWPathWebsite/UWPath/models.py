@@ -102,8 +102,8 @@ class Coreqs(models.Model):
 
 
 class CourseInfo(models.Model):
-    course_code = models.CharField(max_length=255, blank=True, primary_key=True)
-    course_id = models.CharField(max_length=255)
+    course_code = models.CharField(max_length=255, primary_key=True)
+    course_id = models.CharField(max_length=255, blank=True, null=True)
     course_name = models.CharField(max_length=255, blank=True, null=True)
     credit = models.CharField(max_length=255, blank=True, null=True)
     info = models.CharField(max_length=2000, blank=True, null=True)
