@@ -14,20 +14,32 @@ class ValidationCheckAPI:
     def __init__(self, connection):
         self.dbc = connection
 
-    def can_take_course(self, list_of_courses_taken, course):
+    def can_take_course(self, list_of_courses_taken, current_term_courses, course):
         # TODO Throw errors in the future
         """
-        Check if the course violates any prereq, coreq, and antireq requirments (ignore coreqs for now)
+        Check if the course violates any prereq, coreq, and antireq requirments
         :param list_of_courses_taken: list[str]
         :param course: str
         :return: Bool
         """
         anti_reqs = self.get_course_anti_reqs(course)
-        pre_reqs = self.get_course_pre_reqs(course)
+        pre_reqs  = self.get_course_pre_reqs(course)
+        co_reqs   = self.get_course_co_reqs(course)
 
         # ex: antireqs = [MATH 128, MATH 129] we want to check if
         for anti_req in anti_reqs:
             if any(c in anti_req for c in list_of_courses_taken):
+                return False
+
+        for co_req in co_reqs:
+            met_req = False
+            co_req = co_req.split(" or ")
+            # separate or in one co_req string
+            for c in co_req:
+                if c in current_term_courses or c in list_of_courses_taken:
+                    met_req = True
+                    break
+            if not met_req:
                 return False
 
         for pre_req in pre_reqs:
@@ -41,7 +53,6 @@ class ValidationCheckAPI:
             if not met_req:
                 return False
         return True
-
 
     def get_course_anti_reqs(self, course_name):
         """

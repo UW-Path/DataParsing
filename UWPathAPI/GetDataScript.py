@@ -6,7 +6,27 @@ if __name__ == "__main__":
     api = ValidationCheckAPI(dbc)
     try:
         anti_req = api.get_course_anti_reqs("CS 341")
-        print(api.can_take_course(["CS 245", "ECE 406", "ACTSC 232"], "ACTSC 331"))
+
+        print("Should be true:", end=" ")
+        print(api.can_take_course(["CS 245", "ECE 406", "MATH 146", "MATH 138"],
+                                  ["STAT 231"], "ACTSC 291"))
+
+        print("coreq not met:", end=" ")
+        print(api.can_take_course(["CS 245", "ECE 406", "MATH 146", "MATH 138"],
+                                  ["STAT 230"], "ACTSC 291"))
+
+        print("coreq met from previous term:", end=" ")
+        print(api.can_take_course(["CS 245", "ECE 406", "MATH 146", "MATH 138", "STAT 231"],
+                                  [], "ACTSC 291"))
+
+        print("prereqs not met:", end=" ")
+        print(api.can_take_course(["CS 245", "ECE 406", "MATH 138", "STAT 231"],
+                                  [], "ACTSC 291"))
+
+        print("prereqs not met because it is on same term:", end=" ")
+        print(api.can_take_course(["CS 245", "ECE 406", "MATH 146", "STAT 231"],
+                                  ["MATH 138"], "ACTSC 291"))
+
         print(dbc.select("*", "course_info"))
         print(dbc.select("*", "prereqs"))
         print(dbc.select("*", "coreqs"))
