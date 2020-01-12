@@ -35,13 +35,17 @@
                 {{ req.number_of_courses }} of {{ req.course_codes }}
             </div>
         {%  endfor %}
-        <b>You need to meet the following {{minor_requirements.0.plan_type}} requirements: </b>
-        <br>
-        {% for req in minor_requirements %}
-            <div style="color: #0c5460">
-                {{ req.number_of_courses }} of {{ req.course_codes }}
-            </div>
-        {%  endfor %}
+
+        {% if minor_requirements %}
+            <b>You need to meet the following {{minor_requirements.0.plan_type}} requirements: </b>
+            <br>
+            {% for req in minor_requirements %}
+                <div style="color: #0c5460">
+                    {{ req.number_of_courses }} of {{ req.course_codes }}
+                </div>
+            {%  endfor %}
+        {% endif %}
+
     </div>
     <div>
         {%  block table %}
