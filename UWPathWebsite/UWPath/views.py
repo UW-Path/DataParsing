@@ -16,7 +16,7 @@ def index(request):
     return render(request, 'index.html', {'programs': programs})
 
 
-def chosen_degree(request, major, majorExtended= "", minor = "", minorExtended = ""):
+def requirements(request, major, majorExtended= "", minor = "", minorExtended = ""):
     #Renders the requiremnts + table for major/minor requested for
 
     #communications for math

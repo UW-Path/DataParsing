@@ -27,6 +27,13 @@
         </div>
     {% endif %}
 
+     <div>
+        {%  block table %}
+        {% endblock %}
+    </div>
+    <div class="asterisk"><small><b>* Course is not found in the Database (acts as an override)</b></small></div>
+    </br>
+
     {# Requiements description starts here #}
 
     <div class="row">
@@ -91,9 +98,4 @@
             {% endif %}
         </div>
     </div>
-    <div>
-        {%  block table %}
-        {% endblock %}
-    </div>
-    <div class="asterisk"><small><b>* Course is not found in the Database (acts as an override)</b></small></div>
 {% endblock %}
