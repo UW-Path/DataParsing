@@ -27,14 +27,12 @@ window.onload = function() {
           /* This else statement is not implemented. It just passes through. */
           var list_of_courses_taken = getTaken(term);
           var current_term_courses = getCurrent(term);
-
           $.ajax({
               url: 'http://127.0.0.1:8000/api/meets_prereqs/get/' + course,
               type: 'get', // This is the default though, you don't actually need to always mention it
               data: {list_of_courses_taken: list_of_courses_taken, current_term_courses: current_term_courses},
               async: false,
               success: function(data) {
-                  debugger
                   var can_take = data.can_take;
                   console.log(can_take);
                   // Do something
@@ -53,25 +51,26 @@ window.onload = function() {
 
 /* Vanilla JS to add a new task */
 function addTask() {
-  /* Get task text from input */
-  var inputTask = document.getElementById("taskText").value.toUpperCase();
-  // check if inputTask has whitespace
-  if (/\S/.test(inputTask)) {
-    /* Add task to the 'Required' column */
-    $.ajax({
-      url: 'http://127.0.0.1:8000/api/course-info/get/' + inputTask,
-      type: 'get', // This is the default though, you don't actually need to always mention it
-      success: function (data) {
-        document.getElementById("required").innerHTML +=
-            "<li class='task'><p>" + inputTask + "</p></li>";
-      },
-      error: function (data) {
-        document.getElementById("required").innerHTML +=
-            "<li class='task'><p>" + inputTask + " *</p></li>";
+    /* Get task text from input */
+    var inputTask = document.getElementById("taskText").value.toUpperCase();
+    // check if inputTask has whitespace
+    if (/\S/.test(inputTask)) {
+        /* Add task to the 'Required' column */
+        $.ajax({
+            url: 'http://127.0.0.1:8000/api/course-info/get/' + inputTask,
+            type: 'get', // This is the default though, you don't actually need to always mention it
+            success: function (data) {
+                document.getElementById("required").innerHTML +=
+                    "<li class='task'><p>" + inputTask + "</p></li>";
+            },
+            error: function (data) {
+                document.getElementById("required").innerHTML +=
+                    "<li class='task'><p>" + inputTask + " *</p></li>";
+            }
+        });
+        /* Clear task text from input after adding task */
+        document.getElementById("taskText").value = "";
     }
-  });
-  /* Clear task text from input after adding task */
-  document.getElementById("taskText").value = "";
 }
 
 /* Vanilla JS to delete tasks in 'Trash' column */
