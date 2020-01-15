@@ -36,12 +36,12 @@ urlpatterns = [
     path(r'api/meets_prereqs/get/<str:pk>', uwPath.UWPath_API.as_view()),
 
     #a little bit hardcoded below
-    path(r'major/<str:major>/<str:majorExtended>/', uwPath.chosen_degree, name='chosen_degree'),
-    path(r'major/<str:major>/', uwPath.chosen_degree, name='chosen_degree'),
+    path(r'major/<str:major>/<str:majorExtended>/', uwPath.requirements, name='requirements'),
+    path(r'major/<str:major>/', uwPath.requirements, name='requirements'),
 
-    path(r'major/<str:major>/<str:majorExtended>/minor/<str:minor>/', uwPath.chosen_degree, name='chosen_degree'),
-    path(r'major/<str:major>/<str:majorExtended>/minor/<str:minor>/<str:minorExtended>/', uwPath.chosen_degree, name='chosen_degree'),
-    path(r'major/<str:major>/minor/<str:minor>/', uwPath.chosen_degree, name='chosen_degree'),
-    path(r'major/<str:major>/minor/<str:minor>/<str:minorExtended>/', uwPath.chosen_degree, name='chosen_degree'),
+    path(r'major/<str:major>/<str:majorExtended>/minor/<str:minor>/', uwPath.requirements, name='requirements'),
+    path(r'major/<str:major>/<str:majorExtended>/minor/<str:minor>/<str:minorExtended>/', uwPath.requirements, name='requirements'),
+    path(r'major/<str:major>/minor/<str:minor>/', uwPath.requirements, name='requirements'),
+    path(r'major/<str:major>/minor/<str:minor>/<str:minorExtended>/', uwPath.requirements, name='requirements'),
     re_path(r'(?P<pk>\d+)', uwPath.AppView.as_view()),
 ]

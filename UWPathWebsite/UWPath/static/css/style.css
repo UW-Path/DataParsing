@@ -24,3 +24,8 @@ body {
   justify-content: center;
   height: 5.3rem;
 }
+
+.asterisk{
+  color: darkred;
+  text-align: right;
+}

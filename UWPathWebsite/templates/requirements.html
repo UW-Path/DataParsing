@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load general_tags %}
+
+{% block content %}
+
+    <div class="display-4">
+        {{ major }}
+    </div>
+    <h3>
+        {{ minor }}
+    </h3>
+    {% if not minor %}
+     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Your Minor
+        </button>
+        <div class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButton">
+            {% for program in programs %}
+                <li>
+                    {% if program.plan_type != "Major" and program.plan_type != "Table" %}
+{#                 <a class="dropdown-item" value="{% get_degree_major program.program_name as major %}" href="{% url 'chosen_degree' major=program.program_name %}">#}
+                    <a class="dropdown-item" value="{% get_degree_major program.program_name as minor_selected %}" href="{{ request.path }}minor/{{ program.program_name }}/">
+                        {{ program.program_name }}
+                    </a>
+                   {%  endif %}
+                </li>
+            {%  endfor %}
+        </div>
+    {% endif %}
+
+     <div>
+        {%  block table %}
+        {% endblock %}
+    </div>
+    <div class="asterisk"><small><b>* Course is not found in the Database (acts as an override)</b></small></div>
+    </br>
+
+    {# Requiements description starts here #}
+
+    <div class="row">
+        <div class="col-6">
+            <b>You need to meet the following major requirements: </b>
+            <br>
+            {% for req in requirements %}
+                <div style="color: #0c5460">
+                    {{ req.number_of_courses }} of {{ req.course_codes }}
+                </div>
+            {%  endfor %}
+        </div>
+        <div class="col-6">
+            {% if "Table I" in requirements.0.additional_requirements or "Communication Skills Requirement" in requirements.0.additional_requirements  %}
+                <b>You need to satisfy Table I (Choose a course from List I and one from List II): </b>
+                </br>
+                <div class="row">
+                    <div class="col-6">
+                    <b style="color: darkslategray">List I</b>
+                        {%  for req in table1 %}
+                            {%  if req.list_number == 1 %}
+                            <div style="color: #0c5460">
+                                {{ req.course_code }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-6">
+                    <b style="color: darkslategray">List II</b>
+                        {%  for req in table1 %}
+                            {%  if req.list_number == 2 %}
+                            <div style="color: #0c5460">
+                                {{ req.course_code }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-6">
+            {% if "Table II" in requirements.0.additional_requirements %}
+                <b>You need to satisfy Table II: </b>
+                <br>
+                {%  for req in table2 %}
+                    <div style="color: #0c5460">
+                        {{ req.number_of_courses }} of {{ req.course_codes }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="col-6">
+            {% if minor_requirements %}
+                <b>You need to meet the following {{minor_requirements.0.plan_type}} requirements: </b>
+                <br>
+                {% for req in minor_requirements %}
+                    <div style="color: #0c5460">
+                        {{ req.number_of_courses }} of {{ req.course_codes }}
+                    </div>
+                {%  endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
