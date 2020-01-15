@@ -250,8 +250,8 @@ class UWPath_API(APIView):
         response_data = {}
 
         if can_take:
-            response_data["can_take"] = "true"
+            response_data["can_take"] = True
         else:
-            response_data["can_take"] = "false"
+            response_data["can_take"] = False
 
         return Response(response_data)

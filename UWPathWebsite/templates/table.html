@@ -33,7 +33,7 @@
                <p>English List II</p>
             </li>
             {%  endif %}
-                {% if "Table II" in requirements.0.additional_requirements %}
+             {% if "Table II" in requirements.0.additional_requirements %}
                 {% for req in table2 %}
                 {% for i in req.number_of_courses|times %}
                 <li class="task">
@@ -43,18 +43,18 @@
                 {%  endfor %}
             {%  endif %}
             {% for req in requirements %}
-            {% for i in req.number_of_courses|times %}
-            <li class="task">
-               <p>{{ req.course_codes }}</p>
-            </li>
-            {%  endfor %}
+                {% for i in req.number_of_courses|times %}
+                <li class="task">
+                   <p>{{ req.course_codes }}</p>
+                </li>
+                {%  endfor %}
             {%  endfor %}
             {% for req in minor_requirements %}
-            {% for i in req.number_of_courses|times %}
-            <li class="task">
-               <p>{{ req.course_codes }}</p>
-            </li>
-            {%  endfor %}
+                {% for i in req.number_of_courses|times %}
+                <li class="task">
+                   <p>{{ req.course_codes }}</p>
+                </li>
+                {%  endfor %}
             {%  endfor %}
          </ul>
       </li>

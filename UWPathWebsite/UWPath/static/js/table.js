@@ -23,6 +23,11 @@ window.onload = function() {
       if (term === "trash") {
           emptyTrash();
       }
+      else if (term === "required"){
+          //no operations if courses are dragged back to required courses
+          // need to change in future because all course needs to be validated again
+          return
+      }
       else if (!(course.endsWith("*") || course.includes(","))) {
           /* This else statement is not implemented. It just passes through. */
           var list_of_courses_taken = getTaken(term);
@@ -36,14 +41,22 @@ window.onload = function() {
                   var can_take = data.can_take;
                   console.log(can_take);
                   // Do something
+                  if (can_take){
+                    document.getElementById(term).style.color = "green";
+                  }
+                  else {
+                    document.getElementById(term).style.color = "red";
+                  }
               },
               error: function(data) {
-                  alert("Error: cannot determine if course can be taken.")
+                  document.getElementById(term).style.color = "grey";
+                  // alert("Error: cannot determine if course can be taken.")
               }
           });
       }
       else {
           // Do something when course is not a real course code.
+          //Hao Wei: I think this returns error above
       }
   });
 };
