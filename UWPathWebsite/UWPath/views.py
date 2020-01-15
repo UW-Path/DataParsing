@@ -234,6 +234,11 @@ class UWPath_API(APIView):
     def get(self, request, pk, format=None):
         api = ValidationCheckAPI()
 
+        #Check if valid course first
+        courseInfo = Course_Info_API().get_object(None, pk)
+        if (type(courseInfo) != CourseInfo):
+            return HttpResponseNotFound('<h1>404 Not Found: Course not valid</h1>')
+
         prereqs = Prereqs_API().get_object(None, pk)
         coreqs = Coreqs_API().get_object(None, pk)
         antireqs = Antireqs_API().get_object(None, pk)

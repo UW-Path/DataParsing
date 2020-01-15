@@ -19,6 +19,7 @@ window.onload = function() {
       const course = $(el).text().trim();
       const term = $(target).attr("id");
       const sourceId = $(source).attr("id");
+      const draggedId = el.id;
 
       if (term === "trash") {
           emptyTrash();
@@ -26,6 +27,7 @@ window.onload = function() {
       else if (term === "required"){
           //no operations if courses are dragged back to required courses
           // need to change in future because all course needs to be validated again
+          document.getElementById(draggedId).style.color = "darkslateblue"; //back to original color
           return
       }
       else if (!(course.endsWith("*") || course.includes(","))) {
@@ -42,14 +44,14 @@ window.onload = function() {
                   console.log(can_take);
                   // Do something
                   if (can_take){
-                    document.getElementById(term).style.color = "green";
+                    document.getElementById(draggedId).style.color = "green";
                   }
                   else {
-                    document.getElementById(term).style.color = "red";
+                    document.getElementById(draggedId).style.color = "red";
                   }
               },
               error: function(data) {
-                  document.getElementById(term).style.color = "grey";
+                  document.getElementById(draggedId).style.color = "grey";
                   // alert("Error: cannot determine if course can be taken.")
               }
           });
@@ -65,7 +67,9 @@ window.onload = function() {
 /* Vanilla JS to add a new task */
 function addTask() {
     /* Get task text from input */
-    var inputTask = document.getElementById("taskText").value.toUpperCase();
+    const inputTask = document.getElementById("taskText").value.toUpperCase();
+    var id = inputTask + "(" + Math.round(Math.random() * 100 )  +")"; //generate random number to prevent unique id
+    id = id.replace(" ", "");
     // check if inputTask has whitespace
     if (/\S/.test(inputTask)) {
         /* Add task to the 'Required' column */
@@ -74,11 +78,11 @@ function addTask() {
             type: 'get', // This is the default though, you don't actually need to always mention it
             success: function (data) {
                 document.getElementById("required").innerHTML +=
-                    "<li class='task'><p>" + inputTask + "</p></li>";
+                    "<li class='task' id='" + id + "'>" + "<p>" + inputTask + "</p></li>";
             },
             error: function (data) {
                 document.getElementById("required").innerHTML +=
-                    "<li class='task'><p>" + inputTask + " *</p></li>";
+                    "<li class='task' id='" + id + "'>" + "<p>" + inputTask + " *</p></li>";
             }
         });
         /* Clear task text from input after adding task */

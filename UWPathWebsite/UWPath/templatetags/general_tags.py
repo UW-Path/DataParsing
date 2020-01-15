@@ -6,6 +6,10 @@ register = template.Library()
 def get_degree_major(major):
     return str(major)
 
+@register.filter(name='strip_spaces')
+def strip_spaces(s):
+    return s.replace(" ", "")
+
 @register.filter(name='times')
 def times(number):
     return range(number)
