@@ -33,6 +33,7 @@ urlpatterns = [
     path(r'api/requirements/get/<str:pk>', uwPath.Requirements_API.as_view()),
     path(r'api/communications/', uwPath.Communications_List.as_view()),
     path(r'api/communications/get/<int:pk>', uwPath.Communications_API.as_view()),
+    path(r'api/meets_prereqs/get/<str:pk>', uwPath.UWPath_API.as_view()),
 
     #a little bit hardcoded below
     path(r'major/<str:major>/<str:majorExtended>/', uwPath.requirements, name='requirements'),

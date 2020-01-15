@@ -6,6 +6,7 @@ from rest_framework import status
 from .models import UwpathApp, CourseInfo, Coreqs, Prereqs, Antireqs, Requirements, Communications
 from .serializer import AppSerializer, CourseInfoSerializer, CoreqsSerializer, AntireqsSerializer, PrereqsSerializer, \
     RequirementsSerializer, CommunicationsSerializer
+from UWPathAPI.ValidationCheckAPI import ValidationCheckAPI
 
 
 # Create your views here.
@@ -223,6 +224,34 @@ class Communications_List(APIView):
         list = Communications.objects.all()[:10]
         serializer = CommunicationsSerializer(list, many=True)
         return Response(serializer.data)
+
     def get_list(self):
         querySet = Communications.objects.values()
         return querySet
+
+
+class UWPath_API(APIView):
+    def get(self, request, pk, format=None):
+        api = ValidationCheckAPI()
+
+        prereqs = Prereqs_API().get_object(None, pk)
+        coreqs = Coreqs_API().get_object(None, pk)
+        antireqs = Antireqs_API().get_object(None, pk)
+
+        api.set_prereqs(prereqs.prereq)
+        api.set_coreqs(coreqs.coreq)
+        api.set_antireqs(antireqs.antireq)
+
+        list_of_courses_taken = request.GET.getlist("list_of_courses_taken[]")
+        current_term_courses = request.GET.getlist("current_term_courses[]")
+
+        can_take = api.can_take_course(list_of_courses_taken, current_term_courses, pk)
+
+        response_data = {}
+
+        if can_take:
+            response_data["can_take"] = "true"
+        else:
+            response_data["can_take"] = "false"
+
+        return Response(response_data)
