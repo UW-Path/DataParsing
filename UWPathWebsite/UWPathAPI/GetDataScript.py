@@ -1,4 +1,9 @@
-from Database.DatabaseReceiver import DatabaseReceiver
+######################################################################
+#                                                                    #
+#         This code is obsolete. Will be removed eventually.         #
+#                                                                    #
+######################################################################
+
 from UWPathAPI.ValidationCheckAPI import ValidationCheckAPI
 
 if __name__ == "__main__":
