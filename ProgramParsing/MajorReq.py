@@ -69,6 +69,7 @@ class MajorReq:
                     if match:
                         for m in match:
                             course = m.strip("\n")
+                            course = m.strip("\r\n")
                             if not str(course).startswith("(") or not str(course).startswith("Note"):
                                 vals.append(course)
                     else:
@@ -80,11 +81,14 @@ class MajorReq:
                             for word in str(line).split(' '):
                                 if word.isupper() or "math" in word: # special case for "One additional 300- or 400-level math course.
                                     maj = word.strip("\n")
+                                    maj = word.strip("\r\n")
                                     maj = maj.upper()
                                     break
-                            if maj.startswith("(") or maj.startswith("Note"): break
+                            if maj.startswith("(") or maj.startswith("Note"):
+                                break
                             for m in match:
                                 course = m.strip("\n")
+                                course = m.strip("\r\n")
                                 vals.append(maj + " " + course)
 
         else:

@@ -42,7 +42,7 @@ class MajorParser:
         #Parsing the heading above the highlighted span
         #if major == degree req, spcialization, parse the highlighted span
 
-        if "requirements" in major.lower() or "specializations" in major.lower():
+        if "requirements" in major.lower() or "specializations" in major.lower() or "specialization" in major.lower():
             major = self.data.find_all("span", class_="pageTitle")
             major = str(major[0].contents[0])
 

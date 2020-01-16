@@ -8,17 +8,21 @@ if __name__ == "__main__":
              "RequiredComputationalMATHMajor.html", "RequiredMATHStudiesMajor.html",
              "RequiredAISpecialization.html", "RequiredBioinformaticsSpecialization.html",
              "RequiredBusinessSpecialization.html", "RequiredFineArtSpecialization.html",
-             "RequiredSoftwareSpecialization.html", "RequiredMATH-MS-Business-Specialization.html", "RequiredDigitalHardware.html", "RequiredACTSCIJoint.html",
+             "RequiredSoftwareSpecialization.html", "RequiredDigitalHardware.html", "RequiredACTSCIJoint.html",
              "RequiredAMATHJoint.html", "RequiredCSJoint.html",
              "RequiredACTSCI-FINANCE-Option.html", "TableII.html"]
 
     #continue with Data Science
-    #files = ["TableII.html"] #use this for single files
+    #files = ["RequiredMATH-MS-Business-Specialization.html"] #use this for single files
 
-    #below files are not parsable because "One of.." doesn not beong to a <p> tag
+    #Repeat program name
+        #RequiredMATH - MS - Business - Specialization.html
+
+    #below files are not parsable because "One of.."(or like the sorts) doesn not beong to a <p> tag
         #RequiredHumanComputerInteractionSpecialization.html
         #RequiredACTSCI-PredictiveAnalysis-Option.html
         #RequiredDATASciMajor.html
+        #RequiredCOMajor.html (also "All of ..." followed by 2 courses, but english specifies only one or the other
     # below files are not parsable because COMPLETELY DIFF FORMAT
         #RequiredAMATHBiologySpecialization.html
         #RequiredAMATHEconSpecialization.html
@@ -57,7 +61,6 @@ if __name__ == "__main__":
         parser.load_file(file)
 
         print(parser)
-
         # Parser requirement is a list of MajorReq Object
         dbc.insert_requirements(parser.requirement)
 
