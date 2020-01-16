@@ -238,3 +238,14 @@ li {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
 }
+
+.list-icon{
+  /*margin: 1em;*/
+  color: coral;
+  margin: 0.2em;
+}
+
+.list-icon:hover{
+  cursor: pointer;
+  color: tomato;
+}
