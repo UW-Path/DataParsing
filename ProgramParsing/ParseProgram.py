@@ -13,7 +13,7 @@ if __name__ == "__main__":
              "RequiredACTSCI-FINANCE-Option.html", "TableII.html"]
 
     #continue with Data Science
-    #files = ["RequiredMATH-MS-Business-Specialization.html"] #use this for single files
+    files = ["RequiredCSMajor.html"] #use this for single files
 
     #Repeat program name
         #RequiredMATH - MS - Business - Specialization.html
