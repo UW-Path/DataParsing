@@ -63,11 +63,11 @@ class MajorParser:
     def is_blockquote(self, html):
         return html.name == "blockquote"
 
-    def require_all(self, html, major):
+    def require_all(self, html, major, relatedMajor):
         courses = html.findAll("a")
         for course in courses:
             # TODO: need to accept ENGL378/MATH111 format (right now only takes in ENGL378)
-            self.requirement.append(MajorReq(course, "All of", major, self.additionalRequirement))
+            self.requirement.append(MajorReq(course, "All of", major, relatedMajor, self.additionalRequirement))
 
     def getAdditionalRequirement(self):
         additionalRequirment = []
@@ -83,6 +83,17 @@ class MajorParser:
                         additionalRequirment.append(req.contents[0])
         return ", ".join(additionalRequirment)
 
+    def __get_relatedMajor(self, major):
+        relatedMajor = self.data.find_all("span", id="ctl00_contentMain_lblTopTitle")
+        if relatedMajor:
+            relatedMajor = relatedMajor[0].contents[0].string
+        else:
+            return ""
+        if "Academic Plans and Requirements" in relatedMajor:
+            return major
+        else:
+            return relatedMajor
+
     def load_file(self, file):
         """
                 Parse html file to gather a list of required courses for the major
@@ -95,6 +106,9 @@ class MajorParser:
 
         major = self.__get_major()
 
+        # find the major related to specializations and options
+        relatedMajor = self.__get_relatedMajor(major)
+
         # Find all additional requirement
         self.additionalRequirement = self.getAdditionalRequirement()
 
@@ -105,29 +119,29 @@ class MajorParser:
             # check if next var is blockquote
             if i + 1 < len(information) and self.is_blockquote(information[i+1]):
                 if "One of" in str(information[i]):
-                    self.requirement.append(MajorReq(information[i + 1], "One of", major, self.additionalRequirement))
+                    self.requirement.append(MajorReq(information[i + 1], "One of", major, relatedMajor, self.additionalRequirement))
                 elif "Two of" in str(information[i]):
-                    self.requirement.append(MajorReq(information[i + 1], "Two of", major, self.additionalRequirement))
+                    self.requirement.append(MajorReq(information[i + 1], "Two of", major, relatedMajor, self.additionalRequirement))
                 elif "Three of" in str(information[i]):
-                    self.requirement.append(MajorReq(information[i + 1], "Three of", major, self.additionalRequirement))
+                    self.requirement.append(MajorReq(information[i + 1], "Three of", major, relatedMajor, self.additionalRequirement))
                 elif "Four of" in str(information[i]):
-                    self.requirement.append(MajorReq(information[i + 1], "Four of", major, self.additionalRequirement))
+                    self.requirement.append(MajorReq(information[i + 1], "Four of", major, relatedMajor, self.additionalRequirement))
                 elif "Five of" in str(information[i]):
-                    self.requirement.append(MajorReq(information[i + 1], "Five of", major, self.additionalRequirement))
+                    self.requirement.append(MajorReq(information[i + 1], "Five of", major, relatedMajor, self.additionalRequirement))
                 elif "Six of" in str(information[i]):
-                    self.requirement.append(MajorReq(information[i + 1], "Six of", major, self.additionalRequirement))
+                    self.requirement.append(MajorReq(information[i + 1], "Six of", major, relatedMajor, self.additionalRequirement))
                 elif "Seven of" in str(information[i]):
-                    self.requirement.append(MajorReq(information[i + 1], "Seven of", major, self.additionalRequirement))
+                    self.requirement.append(MajorReq(information[i + 1], "Seven of", major, relatedMajor, self.additionalRequirement))
                 elif "Eight of" in str(information[i]):
-                    self.requirement.append(MajorReq(information[i + 1], "Eight of", major, self.additionalRequirement))
+                    self.requirement.append(MajorReq(information[i + 1], "Eight of", major, relatedMajor, self.additionalRequirement))
                 elif "Nine of" in str(information[i]):
-                    self.requirement.append(MajorReq(information[i + 1], "Nine of", major, self.additionalRequirement))
+                    self.requirement.append(MajorReq(information[i + 1], "Nine of", major, relatedMajor, self.additionalRequirement))
                 elif "All of" in str(information[i]):
-                    self.require_all(information[i+1], major)
+                    self.require_all(information[i+1], major, relatedMajor)
                 elif "additional" in str(information[i]):
                     number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
                     number_additional = StringToNumber[number_additional_string].value[0]
-                    self.requirement.append(MajorReq(information[i + 1], "Additional", major, self.additionalRequirement, number_additional))
+                    self.requirement.append(MajorReq(information[i + 1], "Additional", major, relatedMajor, self.additionalRequirement, number_additional))
                 else:
                     i += 1
                 i += 1
@@ -146,7 +160,7 @@ class MajorParser:
                 if not isinstance(number_additional, int):
                     number_additional = number_additional[0]
                 # need to check if number_additional is an INT
-                self.requirement.append(MajorReq(information[i], "Additional", major, self.additionalRequirement, number_additional))
+                self.requirement.append(MajorReq(information[i], "Additional", major, relatedMajor, self.additionalRequirement, number_additional))
 
             # TODO: All the other special cases that requires additional parsing
             i += 1

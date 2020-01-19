@@ -10,9 +10,10 @@ from StringToNumber import StringToNumber
 
 
 class MajorReq:
-    def __init__(self, html, req, program, additionalRequirement, additional = 0):
+    def __init__(self, html, req, program, relatedMajor, additionalRequirement, additional = 0):
         self.html = html
         self.programName = program
+        self.majorName = relatedMajor  # self._get_related(relatedMajor)
         self.req = req
         self.planType = self.__plan_type()
         self.additional = additional
