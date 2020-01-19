@@ -34,6 +34,10 @@ def requirements(request, major, majorExtended= "", minor = "", minorExtended = 
     if not requirements:
         return HttpResponseNotFound('<h1>404 Not Found: Major not valid</h1>')
 
+    #filter minor returned
+    majorName = requirements.first()['major_name']
+    programs = programs.filter(major_name = majorName).exclude(plan_type = "Major")
+
     # minor and options
     if minor:
         if minorExtended:
@@ -194,7 +198,7 @@ class Requirements_List(APIView):
         return Response(serializer.data)
 
     def get_unique_major(self, format=None):
-        querySet = Requirements.objects.values('program_name', 'plan_type').order_by('program_name').distinct()
+        querySet = Requirements.objects.values('program_name', 'plan_type', 'major_name').order_by('program_name').distinct()
         return querySet
 
     def get_major_requirement(self, major):

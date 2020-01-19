@@ -174,6 +174,7 @@ class Prereqs(models.Model):
 
 class Requirements(models.Model):
     id = models.IntegerField(primary_key=True)
+    major_name = models.CharField(max_length=255, blank=True, null=True)
     program_name = models.CharField(max_length=255, blank=True, null=True)
     plan_type = models.CharField(max_length=255, blank=True, null=True)
     course_codes = models.CharField(max_length=255, blank=True, null=True)
