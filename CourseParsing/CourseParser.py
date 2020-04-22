@@ -26,13 +26,16 @@ class CourseParser:
         response = self.http.request('GET', url)
         self.data = BeautifulSoup(response.data, 'html.parser')
 
-    def load_file(self, file):
-        html = pkg_resources.resource_string(__name__, file)
-        # html = open(file, encoding="ISO-8859-1")
+    def load_html(self, html):
         self.data = BeautifulSoup(html, 'html.parser')
         information = self.data.find_all("center")
         for info in information:
             self.courses.append(Course(info))
+
+    def load_file(self, file):
+        html = pkg_resources.resource_string(__name__, file)
+        # html = open(file, encoding="ISO-8859-1")
+        self.load_html(html)
 
     def __str__(self):
         output = ""

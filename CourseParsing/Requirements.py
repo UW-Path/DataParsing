@@ -158,7 +158,13 @@ class Prereqs:
                     num = course[1]
                 else:
                     num = course[0]
-                output += id + " " + num
+                try:
+                    output += id + " " + num
+                except Exception as e:
+                    print(courses)
+                    print(course)
+                    raise e
+
                 if j != len(courses) - 1:
                     output += " or "
             if i != len(self.prereqs) - 1:
