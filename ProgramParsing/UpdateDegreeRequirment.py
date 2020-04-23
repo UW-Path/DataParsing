@@ -36,8 +36,8 @@ if __name__ == '__main__':
     links = table.find_all("a")
     for link in links:
         href = link['href']
-        fileName = link.text.rstrip().replace("/", "-").split(" ")
-        fileName = "/" + "-".join(fileName) + ".html"
+        fileName = href.split("/")[-1]
+        fileName = "/" + fileName + ".html"
         if "http" not in href:
             href = root + href
         print("Fetching " + href + "...")

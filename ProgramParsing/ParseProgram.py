@@ -1,19 +1,34 @@
 from Database.DatabaseSender import DatabaseSender
 from ProgramParsing.MajorParser import MajorParser
+import os
 
 if __name__ == "__main__":
-    files = ["RequiredCSMajor.html", "RequiredActsciMajor.html", "RequiredCFMMajor.html", "RequiredSTATMajor.html",
-             "RequiredAPPLIEDMajor.html", "RequiredAMATH-SCI-COMP-Major.html", "RequiredCOMajor.html",
-             "RequiredPMATHTeachingMajor.html", "RequiredBiostatisticsMajor.html", "RequiredMATH-Finance-Major.html",
-             "RequiredComputationalMATHMajor.html", "RequiredMATHStudiesMajor.html",
-             "RequiredAISpecialization.html", "RequiredBioinformaticsSpecialization.html",
-             "RequiredBusinessSpecialization.html", "RequiredFineArtSpecialization.html",
-             "RequiredSoftwareSpecialization.html", "RequiredDigitalHardware.html", "RequiredACTSCIJoint.html",
-             "RequiredAMATHJoint.html", "RequiredCSJoint.html",
-             "RequiredACTSCI-FINANCE-Option.html", "TableII.html"]
+    dir = os.path.dirname(__file__)
+    path = os.path.join(dir, 'ProgramSpecs')
+    files = ["/ProgramSpecs/" + f for f in os.listdir(path) if f.endswith(".html")]
+    files.append("TableII.html")
 
-    #continue with Data Science
-    #files = ["RequiredCSMajor.html"] #use this for single files
+    #Update Files Not Parsable:
+        # Data-Science.html, One of, Two of... not in <p>
+        # ENG-Software-Engineering.html Different format
+    #Need to Investigate
+    filesToIgnore = ["MATH-Bachelor-of-Computer-Science-Data-Science.html", "ENG-Software-Engineering.html", "MATH-Math-or-Fin-Analysis-Risk-Mgt-Degree-Reqmnt.html"]
+    filesToIgnore = ["/ProgramSpecs/" + f for f in filesToIgnore]
+
+    # files = ["/ProgramSpecs/MATH-Math-or-Fin-Analysis-Risk-Mgt-Degree-Reqmnt.html"] #use this for single files
+
+
+
+    # files = ["RequiredCSMajor.html", "RequiredActsciMajor.html", "RequiredCFMMajor.html", "RequiredSTATMajor.html",
+    #          "RequiredAPPLIEDMajor.html", "RequiredAMATH-SCI-COMP-Major.html", "RequiredCOMajor.html",
+    #          "RequiredPMATHTeachingMajor.html", "RequiredBiostatisticsMajor.html", "RequiredMATH-Finance-Major.html",
+    #          "RequiredComputationalMATHMajor.html", "RequiredMATHStudiesMajor.html",
+    #          "RequiredAISpecialization.html", "RequiredBioinformaticsSpecialization.html",
+    #          "RequiredBusinessSpecialization.html", "RequiredFineArtSpecialization.html",
+    #          "RequiredSoftwareSpecialization.html", "RequiredDigitalHardware.html", "RequiredACTSCIJoint.html",
+    #          "RequiredAMATHJoint.html", "RequiredCSJoint.html",
+    #          "RequiredACTSCI-FINANCE-Option.html", "TableII.html"]
+
 
     #Repeat program name
         #RequiredMATH - MS - Business - Specialization.html
@@ -57,6 +72,8 @@ if __name__ == "__main__":
     dbc.create_requirements()
 
     for file in files:
+        if (file in filesToIgnore): continue
+        print("CURRENT FILE PARSING : " + file)
         parser = MajorParser()
         parser.load_file(file)
 

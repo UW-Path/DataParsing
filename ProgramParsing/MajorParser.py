@@ -139,9 +139,14 @@ class MajorParser:
                 elif "All of" in str(information[i]):
                     self.require_all(information[i+1], major, relatedMajor)
                 elif "additional" in str(information[i]):
-                    number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
-                    number_additional = StringToNumber[number_additional_string].value[0]
-                    self.requirement.append(MajorReq(information[i + 1], "Additional", major, relatedMajor, self.additionalRequirement, number_additional))
+                    try:
+                        number_additional_string = str(information[i].contents[0]).lower().split(' ')[0]
+                        number_additional = StringToNumber[number_additional_string].value[0]
+                        self.requirement.append(
+                            MajorReq(information[i + 1], "Additional", major, relatedMajor, self.additionalRequirement,
+                                     number_additional))
+                    except:
+                        print("An exception occurred: " + str(information[i]))
                 else:
                     i += 1
                 i += 1
