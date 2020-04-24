@@ -66,7 +66,7 @@ class MajorParser:
     def require_all(self, html, major, relatedMajor):
         courses = html.findAll("a")
         for course in courses:
-            # TODO: need to accept ENGL378/MATH111 format (right now only takes in ENGL378)
+            # TODO: need to accept ENGL378/MATH111 format (right now only takes in both)
             self.requirement.append(MajorReq(course, "All of", major, relatedMajor, self.additionalRequirement))
 
     def getAdditionalRequirement(self):

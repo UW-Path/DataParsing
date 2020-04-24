@@ -7,6 +7,7 @@ from .models import UwpathApp, CourseInfo, Coreqs, Prereqs, Antireqs, Requiremen
 from .serializer import AppSerializer, CourseInfoSerializer, CoreqsSerializer, AntireqsSerializer, PrereqsSerializer, \
     RequirementsSerializer, CommunicationsSerializer
 from UWPathAPI.ValidationCheckAPI import ValidationCheckAPI
+from django.db.models import Q
 
 
 # Create your views here.
@@ -36,14 +37,14 @@ def requirements(request, major, majorExtended= "", minor = "", minorExtended = 
 
     #filter minor returned
     majorName = requirements.first()['major_name']
-    programs = programs.filter(major_name = majorName).exclude(plan_type = "Major")
+    programs = programs.filter(Q(major_name = majorName) | Q(plan_type = "Joint")).exclude(plan_type = "Major")
 
     # minor and options
     if minor:
         if minorExtended:
             # this is to solve bug where Degree Name includes '/'
             minor = minor + "/" + minorExtended
-        minor_requirements = Requirements_List().get_major_requirement(minor)
+        minor_requirements = Requirements_List().get_minor_requirement(minor)
         if not minor_requirements:
             return HttpResponseNotFound('<h1>404 Not Found: Minor not valid</h1>')
         return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'minor': minor, 'minor_requirements': minor_requirements, 'table1':table1, 'table2':table2})
@@ -203,6 +204,10 @@ class Requirements_List(APIView):
 
     def get_major_requirement(self, major):
         querySet = Requirements.objects.values().filter(program_name=major).order_by('program_name')
+        return querySet
+
+    def get_minor_requirement(self, minor):
+        querySet = Requirements.objects.values().filter(program_name=minor).order_by('program_name')
         return querySet
 
 
