@@ -35,17 +35,17 @@
 
     {# Requiements description starts here #}
 
-    <div class="row">
-        <div class="col-6">
+    <div class="row course-req-box">
+        <div class="col-6" style="margin-top: 0.5em;">
             <b>You need to meet the following major requirements: </b>
             <br>
             {% for req in requirements %}
-                <div style="color: #0c5460">
+                <div class="course-req-color">
                     {{ req.number_of_courses }} of {{ req.course_codes }}
                 </div>
             {%  endfor %}
         </div>
-        <div class="col-6">
+        <div class="col-6" style="margin-top: 0.5em;">
             {% if "Table I" in requirements.0.additional_requirements or "Communication Skills Requirement" in requirements.0.additional_requirements  %}
                 <b>You need to satisfy Table I (Choose a course from List I and one from List II): </b>
                 </br>
@@ -54,7 +54,7 @@
                     <b style="color: darkslategray">List I</b>
                         {%  for req in table1 %}
                             {%  if req.list_number == 1 %}
-                            <div style="color: #0c5460">
+                            <div class="course-req-color">
                                 {{ req.course_code }}
                             </div>
                             {% endif %}
@@ -64,7 +64,7 @@
                     <b style="color: darkslategray">List II</b>
                         {%  for req in table1 %}
                             {%  if req.list_number == 2 %}
-                            <div style="color: #0c5460">
+                            <div class="course-req-color">
                                 {{ req.course_code }}
                             </div>
                             {% endif %}
@@ -73,24 +73,24 @@
                 </div>
             {% endif %}
         </div>
-        <div class="col-6">
+        <div class="col-6" style="margin-top: 0.5em;">
             {% if "Table II" in requirements.0.additional_requirements %}
                 <b>You need to satisfy Table II: </b>
                 <br>
                 {%  for req in table2 %}
-                    <div style="color: #0c5460">
+                    <div class="course-req-color">
                         {{ req.number_of_courses }} of {{ req.course_codes }}
                     </div>
                 {% endfor %}
             {% endif %}
         </div>
 
-        <div class="col-6">
+        <div class="col-6" style="margin-top: 0.5em;">
             {% if minor_requirements %}
                 <b>You need to meet the following {{minor_requirements.0.plan_type}} requirements: </b>
                 <br>
                 {% for req in minor_requirements %}
-                    <div style="color: #0c5460">
+                    <div class="course-req-color">
                         {{ req.number_of_courses }} of {{ req.course_codes }}
                     </div>
                 {%  endfor %}

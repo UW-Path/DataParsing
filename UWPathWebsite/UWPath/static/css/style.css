@@ -29,3 +29,13 @@ body {
   color: darkred;
   text-align: right;
 }
+
+.course-req-box{
+  border-radius: 2em;
+  margin: 1em;
+  background-color: #9e9e9ee0;
+}
+
+.course-req-color{
+  color: snow;
+}
