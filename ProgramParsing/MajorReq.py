@@ -78,19 +78,22 @@ class MajorReq:
                         maj = ""
                         match = self.__getLevelCourses(str(line))
 
-                        if match:
-                            for word in str(line).split(' '):
-                                if word.isupper() or "math" in word: # special case for "One additional 300- or 400-level math course.
-                                    maj = word.strip("\n")
-                                    maj = maj.strip("\r\n")
-                                    maj = maj.upper()
-                                    break
-                            if maj.startswith("(") or maj.startswith("Note"):
+                        for word in str(line).split(' '):
+                            if word.isupper() or "math" in word:  # special case for "One additional 300- or 400-level math course.
+                                maj = word.strip("\n")
+                                maj = maj.strip("\r\n")
+                                maj = maj.upper()
                                 break
+                        if maj.startswith("(") or maj.startswith("Note"):
+                            break
+
+                        if match:
                             for m in match:
                                 course = m.strip("\n")
                                 course = course.strip("\r\n")
                                 vals.append(maj + " " + course)
+                        elif maj:
+                            vals.append(maj) #Only indicate major but not level
 
         else:
             # loop through to find all string
@@ -108,15 +111,22 @@ class MajorReq:
                     maj = ""
                     match = self.__getLevelCourses(line)
 
+                    for word in str(line).split(' '):
+                        if word.isupper() or "math" in word:  # special case for "One additional 300- or 400-level math course.
+                            maj = word.strip("\n")
+                            maj = maj.strip("\r\n")
+                            maj = maj.upper()
+                            break
+                    if maj.startswith("(") or maj.startswith("Note"):
+                        break
+
                     if match:
-                        for word in str(line).split(' '):
-                            if word.isupper() or "math" in word:
-                                maj = word.strip("\n")
-                                maj = maj.upper()
-                                break
                         for m in match:
                             course = m.strip("\n")
+                            course = course.strip("\r\n")
                             vals.append(maj + " " + course)
+                    elif maj:
+                        vals.append(maj)  # Only indicate major but not level
                 i += 1
             # search for links
             match = self.html.find_all("a")
