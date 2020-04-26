@@ -45,6 +45,7 @@ def requirements(request, major, majorExtended= "", minor = "", minorExtended = 
             # this is to solve bug where Degree Name includes '/'
             minor = minor + "/" + minorExtended
         minor_requirements = Requirements_List().get_minor_requirement(minor)
+        minor_requirements = minor_requirements.filter(Q(major_name = majorName) | Q(plan_type = "Joint"))
         if not minor_requirements:
             return HttpResponseNotFound('<h1>404 Not Found: Minor not valid</h1>')
         return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'minor': minor, 'minor_requirements': minor_requirements, 'table1':table1, 'table2':table2})
