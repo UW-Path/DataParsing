@@ -64,10 +64,13 @@ class MajorParser:
         return html.name == "blockquote"
 
     def require_all(self, html, major, relatedMajor):
-        courses = html.findAll("a")
-        for course in courses:
-            # TODO: need to accept ENGL378/MATH111 format (right now only takes in both)
-            self.requirement.append(MajorReq(course, "All of", major, relatedMajor, self.additionalRequirement))
+        # courses = html.findAll("a")
+        # TODO: need to accept ENGL378/MATH111 format (right now only takes in both)
+        lines = html.get_text().split("\n")
+        for line in lines:
+            line = line.strip()
+            if line and not str(line).startswith("Note") and not str(line).startswith("("):
+                self.requirement.append(MajorReq(None, "All of", major, relatedMajor, self.additionalRequirement, 0, text=line))
 
     def getAdditionalRequirement(self):
         additionalRequirment = []

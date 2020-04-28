@@ -10,17 +10,18 @@ from StringToNumber import StringToNumber
 
 
 class MajorReq:
-    def __init__(self, html, req, program, relatedMajor, additionalRequirement, additional = 0):
+    def __init__(self, html, req, program, relatedMajor, additionalRequirement, additional = 0, text = ""):
         self.html = html
         self.programName = program
         self.majorName = relatedMajor  # self._get_related(relatedMajor)
         self.req = req
+        self.text = text
         self.planType = self.__plan_type()
         self.additional = additional
         self.courseCodes = self.__course_codes()
         self.numberOfCourses = self.__number_of_courses()
         self.additionalRequirement = additionalRequirement
-        # TODO: Require Table II
+
 
     def __has_numbers(self, input_string):
         """
@@ -31,11 +32,12 @@ class MajorReq:
 
     def __require_all(self):
         """
-                Return course (for ALL courses)
+                Return course (for ALL courses); Parse through text segment to parse CS XXX/CS XXX courses
                 :return: str
         """
         # hold be parsed already by course parser
-        return self.html.contents[0]
+        courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}\b", self.text)
+        return ", ".join(courses)
 
     def __require(self):
         """
@@ -158,7 +160,8 @@ class MajorReq:
                 :return: int
         """
         if self.req == "All of":
-            return 1
+            length = len(self.courseCodes.split(","))
+            return length
         elif self.req == "Additional":
             return self.additional
         else:
