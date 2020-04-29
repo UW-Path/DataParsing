@@ -10,12 +10,11 @@ from StringToNumber import StringToNumber
 
 
 class MajorReq:
-    def __init__(self, html, req, program, relatedMajor, additionalRequirement, additional = 0, text = ""):
-        self.html = html
+    def __init__(self, list, req, program, relatedMajor, additionalRequirement, additional = 0):
+        self.list = list
         self.programName = program
         self.majorName = relatedMajor  # self._get_related(relatedMajor)
         self.req = req
-        self.text = text
         self.planType = self.__plan_type()
         self.additional = additional
         self.courseCodes = self.__course_codes()
@@ -30,114 +29,13 @@ class MajorReq:
         """
         return bool(re.search(r'\d', input_string))
 
-    def __require_all(self):
-        """
-                Return course (for ALL courses); Parse through text segment to parse CS XXX/CS XXX courses
-                :return: str
-        """
-        # hold be parsed already by course parser
-        courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}\b", self.text)
-        return ", ".join(courses)
-
     def __require(self):
         """
                 Return course appended together (for one of)
                 Note: Append list at the end with comma
                 :return: str
         """
-        vals = []
-        courses = self.html.findAll("a")
-        for course in courses:
-            if course.contents[0] not in vals: #prevent duplicate keys
-                vals.append(course.contents[0])
-        return ", ".join(vals)
-
-    def __getLevelCourses(self, string):
-        return re.findall(r"[1-9][0-9][0-9]-", string)
-
-    def __additional(self):
-        """
-                Return course (for Additional courses)
-                Note: Append list at the end with comma
-                :return: str
-        """
-        vals = []
-        if self.html.name == "blockquote":
-            for line in self.html.contents:
-                if line.name == "a" and self.__has_numbers(line.contents[0]):
-                    vals.append(line.contents[0])
-                else:
-                    match = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
-                                       str(line))
-                    if match:
-                        for m in match:
-                            course = m.strip("\n")
-                            course = course.strip("\r\n")
-                            if not str(course).startswith("(") or not str(course).startswith("Note"):
-                                vals.append(course)
-                    else:
-                        # find for another match cs 300-
-                        maj = ""
-                        match = self.__getLevelCourses(str(line))
-
-                        for word in str(line).split(' '):
-                            if word.isupper() or "math" in word:  # special case for "One additional 300- or 400-level math course.
-                                maj = word.strip("\n")
-                                maj = maj.strip("\r\n")
-                                maj = maj.upper()
-                                break
-                        if maj.startswith("(") or maj.startswith("Note"):
-                            break
-
-                        if match:
-                            for m in match:
-                                course = m.strip("\n")
-                                course = course.strip("\r\n")
-                                vals.append(maj + " " + course)
-                        elif maj:
-                            vals.append(maj) #Only indicate major but not level
-
-        else:
-            # loop through to find all string
-            i = 0
-            while i < len(self.html.contents):
-                line = str(self.html.contents[i])
-                match = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
-                                   line)
-                if match:
-                    for m in match:
-                        course = m.strip("\n")
-                        vals.append(course)
-                else:
-                    # look for 300- 400- courses
-                    maj = ""
-                    match = self.__getLevelCourses(line)
-
-                    for word in str(line).split(' '):
-                        if word.isupper() or "math" in word:  # special case for "One additional 300- or 400-level math course.
-                            maj = word.strip("\n")
-                            maj = maj.strip("\r\n")
-                            maj = maj.upper()
-                            break
-                    if maj.startswith("(") or maj.startswith("Note"):
-                        break
-
-                    if match:
-                        for m in match:
-                            course = m.strip("\n")
-                            course = course.strip("\r\n")
-                            vals.append(maj + " " + course)
-                    elif maj:
-                        vals.append(maj)  # Only indicate major but not level
-                i += 1
-            # search for links
-            match = self.html.find_all("a")
-            if match:
-                for course in match:
-                    vals.append(course.string)
-                #TODO : FILL IT IN
-
-        return ", ".join(vals)
+        return ", ".join(self.list)
 
     def __course_codes(self):
         """
@@ -145,13 +43,7 @@ class MajorReq:
 
         :return: string
         """
-
-        if self.req == "All of":
-            return self.__require_all()
-        elif self.req == "Additional":
-            return self.__additional()
-        else:
-            return self.__require()
+        return self.__require()
 
     def __number_of_courses(self):
         """
