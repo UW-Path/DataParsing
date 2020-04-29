@@ -99,7 +99,7 @@ class MajorParser:
             if line.startswith("Note") and not line.startswith("("):
                 i += 1
                 continue
-            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}\b", line)
+            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W]{0,1}\b", line)
             if not courses and list:
                 # List has ended
                 break
@@ -120,7 +120,7 @@ class MajorParser:
                     break #search is over
 
                 # regular CS 135
-                courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}\b", line)
+                courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W]{0,1}\b", line)
                 if courses: foundPattern = True
                 for course in courses:
                     list.append(course)
@@ -162,7 +162,7 @@ class MajorParser:
             line = info[i].strip()
             i += 1
             #regular CS 135
-            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}\b", line)
+            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W]{0,1}\b", line)
             for course in courses:
                 list.append(course)
 
@@ -190,7 +190,19 @@ class MajorParser:
                         list.append(maj + " " + course)
                 elif maj:
                     list.append(maj)  # Only indicate major but not level
+                else:
+                    #Four additional elective courses
+                    list.append("Elective")
         return i, list
+
+    def is_additional(self, string):
+        try:
+            secondWord = str(string).split(" ")[1]
+        except:
+            return False
+        if "additional" == secondWord:
+            return True
+        else: return False
 
     def load_file(self, file):
         """
@@ -246,7 +258,7 @@ class MajorParser:
             elif "All of" in information[i]:
                 i, list = self.__course_list(information, i)
                 self.require_all(list, major, relatedMajor)
-            elif "additional" in information[i] and self.__stringIsNumber(information[i]): #should this be and?
+            elif self.is_additional(information[i]) or self.__stringIsNumber(information[i]): #Three 400- Level courses
                 number_additional_string = information[i].lower().split(' ')[0]
                 number_additional = StringToNumber[number_additional_string].value
                 if not isinstance(number_additional, int):
