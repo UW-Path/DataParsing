@@ -99,7 +99,7 @@ class MajorParser:
             if line.startswith("Note") or line.startswith("("):
                 i += 1
                 continue
-            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W,T,R,L]{0,1}\b", line)
+            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
             if not courses and list:
                 # List has ended
                 break
@@ -160,7 +160,7 @@ class MajorParser:
                             ignoreCourses.append(maj + " " + course)
 
                 # regular CS 135
-                courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W,T,R,L]{0,1}\b", line)
+                courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
                 if courses: foundPattern = True
                 for course in courses:
                     if course not in ignoreCourses:
@@ -214,7 +214,7 @@ class MajorParser:
                     list.append("Elective")
 
             # regular CS 135
-            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W,T,R,L]{0,1}\b", line)
+            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
             for course in courses:
                 if course not in ignoreCourses:
                     list.append(course)
