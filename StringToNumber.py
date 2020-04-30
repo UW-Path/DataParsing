@@ -11,4 +11,5 @@ class StringToNumber(Enum):
     seven = 7,
     eight = 8,
     nine = 9,
-    ten = 10
+    ten = 10,
+    an = 1

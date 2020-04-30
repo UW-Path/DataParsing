@@ -96,10 +96,10 @@ class MajorParser:
         list = []
         while i < len(info):
             line = info[i].strip()
-            if line.startswith("Note") and not line.startswith("("):
+            if line.startswith("Note") or line.startswith("("):
                 i += 1
                 continue
-            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W]{0,1}\b", line)
+            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W,T,R,L]{0,1}\b", line)
             if not courses and list:
                 # List has ended
                 break
@@ -118,14 +118,13 @@ class MajorParser:
                 foundPattern = False
                 if "additional" in line:
                     break #search is over
+                if line.startswith("Note") or line.startswith("("):
+                    i += 1
+                    continue
 
-                # regular CS 135
-                courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W]{0,1}\b", line)
-                if courses: foundPattern = True
-                for course in courses:
-                    list.append(course)
+                ignoreCourses = [] #To prevent duplicate of ABC XXX-DEF XXX from single regex
 
-                # range CS 389-CS495
+                # range CS 389-CS 495
                 courses = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
                                      line)
                 if courses:
@@ -134,6 +133,10 @@ class MajorParser:
                         course = course.strip("\n").strip("\r\n")
                         if not str(course).startswith("("):
                             list.append(course)
+                            c = course.split("-")
+                            for item in c:
+                                item = item.strip()
+                                ignoreCourses.append(item)
                 else:
                     # find for another match cs 300-
                     maj = ""
@@ -152,6 +155,17 @@ class MajorParser:
                             course = m.strip("\n")
                             course = course.strip("\r\n")
                             list.append(maj + " " + course)
+                            #add CS 300- to ignore list for regex
+                            course = course.replace("-", "")
+                            ignoreCourses.append(maj + " " + course)
+
+                # regular CS 135
+                courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W,T,R,L]{0,1}\b", line)
+                if courses: foundPattern = True
+                for course in courses:
+                    if course not in ignoreCourses:
+                        list.append(course)
+
 
                 if not foundPattern and list:
                     # List has ended
@@ -161,10 +175,8 @@ class MajorParser:
         else:
             line = info[i].strip()
             i += 1
-            #regular CS 135
-            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W]{0,1}\b", line)
-            for course in courses:
-                list.append(course)
+
+            ignoreCourses = []  # To prevent duplicate of ABC XXX-DEF XXX from single regex
 
             #range CS 389-CS495
             courses = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",line)
@@ -173,6 +185,10 @@ class MajorParser:
                     course = course.strip("\n").strip("\r\n")
                     if not str(course).startswith("("):
                         list.append(course)
+                        c = course.split("-")
+                        for item in c:
+                            item = item.strip()
+                            ignoreCourses.append(item)
             else:
                 # find for another match cs 300-
                 maj = ""
@@ -188,14 +204,27 @@ class MajorParser:
                         course = m.strip("\n")
                         course = course.strip("\r\n")
                         list.append(maj + " " + course)
+                        # add CS 300- to ignore list for regex
+                        course = course.replace("-", "")
+                        ignoreCourses.append(maj + " " + course)
                 elif maj:
                     list.append(maj)  # Only indicate major but not level
                 else:
                     #Four additional elective courses
                     list.append("Elective")
+
+            # regular CS 135
+            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[W,T,R,L]{0,1}\b", line)
+            for course in courses:
+                if course not in ignoreCourses:
+                    list.append(course)
+
         return i, list
 
     def is_additional(self, string):
+        string = str(string).lower()
+        if "recommended" in string:
+            return False
         try:
             secondWord = str(string).split(" ")[1]
         except:
@@ -228,37 +257,38 @@ class MajorParser:
 
         i = 0
         while i < len(information):
-            if "One of" in information[i]:
+            if information[i].strip().lower().startswith("one of"):
                 i, list = self.__course_list(information, i)
                 self.requirement.append(MajorReq(list, "One of", major, relatedMajor, self.additionalRequirement))
-            elif "Two of" in information[i]:
+            elif information[i].strip().lower().startswith("two of"):
                 i, list = self.__course_list(information, i)
                 self.requirement.append(MajorReq(list, "Two of", major, relatedMajor, self.additionalRequirement))
-            elif "Three of" in information[i]:
+            elif information[i].strip().lower().startswith("three of"):
                 i, list = self.__course_list(information, i)
                 self.requirement.append(MajorReq(list, "Three of", major, relatedMajor, self.additionalRequirement))
-            elif "Four of" in information[i]:
+            elif information[i].strip().lower().startswith("four of"):
                 i, list = self.__course_list(information, i)
                 self.requirement.append(MajorReq(list, "Four of", major, relatedMajor, self.additionalRequirement))
-            elif "Five of" in information[i]:
+            elif information[i].strip().lower().startswith("five of"):
                 i, list = self.__course_list(information, i)
                 self.requirement.append(MajorReq(list, "Five of", major, relatedMajor, self.additionalRequirement))
-            elif "Six of" in information[i]:
+            elif information[i].strip().lower().startswith("six of"):
                 i, list = self.__course_list(information, i)
                 self.requirement.append(MajorReq(list, "Six of", major, relatedMajor, self.additionalRequirement))
-            elif "Seven of" in information[i]:
+            elif information[i].strip().lower().startswith("seven of"):
                 i, list = self.__course_list(information, i)
                 self.requirement.append(MajorReq(list, "Seven of", major, relatedMajor, self.additionalRequirement))
-            elif "Eight of" in information[i]:
+            elif information[i].strip().lower().startswith("eight of"):
                 i, list = self.__course_list(information, i)
                 self.requirement.append(MajorReq(list, "Eight of", major, relatedMajor, self.additionalRequirement))
-            elif "Nine of" in information[i]:
+            elif information[i].strip().lower().startswith("nine of"):
                 i, list = self.__course_list(information, i)
                 self.requirement.append(MajorReq(list, "Nine of", major, relatedMajor, self.additionalRequirement))
-            elif "All of" in information[i]:
+            elif information[i].strip().lower().startswith("all of"):
                 i, list = self.__course_list(information, i)
                 self.require_all(list, major, relatedMajor)
-            elif self.is_additional(information[i]) or self.__stringIsNumber(information[i]): #Three 400- Level courses
+            elif (self.is_additional(information[i]) or self.__stringIsNumber(information[i])) \
+                    and "excluding the following" not in information[i]: #Three 400- Level courses
                 number_additional_string = information[i].lower().split(' ')[0]
                 number_additional = StringToNumber[number_additional_string].value
                 if not isinstance(number_additional, int):
