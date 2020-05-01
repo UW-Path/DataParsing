@@ -95,8 +95,11 @@ class MajorParser:
     def __course_list(self, info, i):
         list = []
         while i < len(info):
+
             line = info[i].strip()
-            if line.startswith("Note") or line.startswith("("):
+
+            #Table II exception a bit hardcoded (info[i] == " ")
+            if line.startswith("Note") or line.startswith("(") or info[i] == "        ":
                 i += 1
                 continue
             courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
@@ -114,7 +117,7 @@ class MajorParser:
             #"Two additional courses from"
             i += 1 #skip first line
             while i < len(info):
-                line = info[i].strip()
+                line = info[i].strip().replace(" to ", "-")
                 foundPattern = False
                 if "additional" in line:
                     break #search is over
@@ -161,6 +164,11 @@ class MajorParser:
 
                 # regular CS 135
                 courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
+                #to find courses that says excluding CO 480
+                exclude = re.findall(r"excluding \b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
+                if exclude:
+                    excludeCourse = exclude[0].replace("excluding ", "") #take course code
+                    ignoreCourses.append(excludeCourse)
                 if courses: foundPattern = True
                 for course in courses:
                     if course not in ignoreCourses:
@@ -173,7 +181,7 @@ class MajorParser:
                 i += 1
 
         else:
-            line = info[i].strip()
+            line = info[i].strip().replace(" to ", "-")
             i += 1
 
             ignoreCourses = []  # To prevent duplicate of ABC XXX-DEF XXX from single regex
@@ -215,6 +223,11 @@ class MajorParser:
 
             # regular CS 135
             courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
+            # to find courses that says excluding CO 480
+            exclude = re.findall(r"excluding \b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
+            if exclude:
+                excludeCourse = exclude[0].replace("excluding ", "")  # take course code
+                ignoreCourses.append(excludeCourse)
             for course in courses:
                 if course not in ignoreCourses:
                     list.append(course)
@@ -251,9 +264,11 @@ class MajorParser:
         # Find all additional requirement
         self.additionalRequirement = self.getAdditionalRequirement()
 
-        # information = self.data.find_all(['p', 'blockquote'])
-        information = self.data.find("span", {'class': 'MainContent'}).get_text().split("\n")
-
+        try:
+            information = self.data.find("span", {'class': 'MainContent'}).get_text().split("\n")
+        except:
+            #Table II exception
+            information = self.data.find("body").get_text().split("\n")
 
         i = 0
         while i < len(information):
