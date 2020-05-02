@@ -21,11 +21,15 @@ if __name__ == '__main__':
     dir = os.path.dirname(__file__)
     path = os.path.join(dir, 'ProgramSpecs')
 
-    #delete old files
-    files = [f for f in os.listdir(path) if f.endswith(".html")]
+    #check if folder exist
+    if os.path.isdir(path):
+        #delete old files
+        files = [f for f in os.listdir(path) if f.endswith(".html")]
 
-    for f in files:
-        os.remove(os.path.join(path, f))
+        for f in files:
+            os.remove(os.path.join(path, f))
+    else:
+        os.mkdir(path)
 
     #fetch programs
     http = urllib3.PoolManager()
