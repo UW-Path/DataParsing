@@ -46,7 +46,7 @@ class Course:
         prereqs = Prereqs()
         for i in all_i:
             if i and i.string and i.string.strip().startswith("Prereq:"):
-                prereqs.load_prereqs(i.string.strip().replace("\n", " "))
+                prereqs.load_prereqs(i.string.strip().replace("\n", " "), self.code)
                 break
         return prereqs
 
@@ -60,7 +60,7 @@ class Course:
         coreqs = Prereqs()
         for i in all_i:
             if i and i.string and i.string.strip().startswith("Coreq:"):
-                coreqs.load_prereqs(i.string.strip().replace("\n", " "))
+                coreqs.load_prereqs(i.string.strip().replace("\n", " "), re.findall("[A-Z][A-Z]+", self.code)[0])
                 break
         return coreqs
 
@@ -85,7 +85,7 @@ class Course:
 
         :return: string
         """
-        return self.html.find_all("td")[3].string.strip("\n ")
+        return self.html.find_all("td")[3].string.strip("\n ").replace("'", "")
 
     def __name(self):
         """
@@ -94,7 +94,7 @@ class Course:
         :return: string
         """
         # Course name is always second occurrence
-        return self.html.find_all("b")[1].string
+        return self.html.find_all("b")[1].string.replace("'", "")
 
     def __id(self):
         """
@@ -103,7 +103,7 @@ class Course:
         :return: string
         """
         # self.html.find_all("td")[1] --> <td align="right">Course ID: XXXXXX</td>
-        return self.html.find_all("td")[1].string.strip("Course ID: ")
+        return self.html.find_all("td")[1].string.strip("Course ID: ").replace("'", "")
 
     def __credit(self):
         """

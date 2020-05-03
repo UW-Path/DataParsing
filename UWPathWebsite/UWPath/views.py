@@ -253,8 +253,8 @@ class UWPath_API(APIView):
         coreqs = Coreqs_API().get_object(None, pk)
         antireqs = Antireqs_API().get_object(None, pk)
 
-        api.set_prereqs(prereqs.prereq)
-        api.set_coreqs(coreqs.coreq)
+        api.set_prereqs(prereqs.logic, prereqs.courses)
+        api.set_coreqs(coreqs.logic, coreqs.courses)
         api.set_antireqs(antireqs.antireq)
 
         list_of_courses_taken = request.GET.getlist("list_of_courses_taken[]")

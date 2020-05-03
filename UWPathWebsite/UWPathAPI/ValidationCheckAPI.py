@@ -11,11 +11,20 @@ Last Updated Jan 12th
 from builtins import any
 
 
+def get_char(i):
+    return chr(i + ord('A'))
+
+def get_index(c):
+    return ord(c) - ord('A')
+
+
 class ValidationCheckAPI:
     def __init__(self):
         self.antireqs = []
-        self.prereqs = []
-        self.coreqs = []
+        self.prereq_logic = ""
+        self.prereq_courses = []
+        self.coreq_logic = ""
+        self.coreq_courses = []
 
     def set_antireqs(self, antireqs):
         """
@@ -28,27 +37,35 @@ class ValidationCheckAPI:
         else:
             self.antireqs = []
 
-    def set_coreqs(self, coreqs):
+    def set_coreqs(self, logic, courses):
         """
         Sets all coreqs of a given course.
 
         :param coreqs: str
         """
-        if len(coreqs):
-            self.coreqs = coreqs.split(", ")
+        if len(logic):
+            self.coreq_logic = logic
         else:
-            self.coreqs = []
+            self.coreq_logic = "True"
+        if len(courses):
+            self.coreq_courses = courses.split(",")
+        else:
+            self.coreq_courses = []
 
-    def set_prereqs(self, prereqs):
+    def set_prereqs(self, logic, courses):
         """
         Sets all prereqs of a given course.
 
         :param prereqs: str
         """
-        if len(prereqs):
-            self.prereqs = prereqs.split(", ")
+        if len(logic):
+            self.prereq_logic = logic
         else:
-            self.prereqs = []
+            self.prereq_logic = "True"
+        if len(courses):
+            self.prereq_courses = courses.split(",")
+        else:
+            self.prereq_courses = []
 
     def can_take_course(self, list_of_courses_taken, current_term_courses, course):
         # TODO Throw errors in the future
@@ -59,30 +76,36 @@ class ValidationCheckAPI:
         :return: Bool
         """
 
-        # ex: antireqs = [MATH 128, MATH 129] we want to check if
+        # ANTIREQ
         for anti_req in self.antireqs:
-            if any(c in anti_req for c in list_of_courses_taken):
+            if any(c in anti_req for c in list_of_courses_taken + current_term_courses):
                 return False
 
-        for co_req in self.coreqs:
-            met_req = False
-            co_req = co_req.split(" or ")
-            # separate or in one co_req string
-            for c in co_req:
-                if c in current_term_courses or c in list_of_courses_taken:
-                    met_req = True
-                    break
-            if not met_req:
-                return False
+        # COREQ
+        coreq_logic = self.coreq_logic
+        for i in range(len(self.coreq_courses)):
+            if self.coreq_courses[i] in list_of_courses_taken + current_term_courses:
+                coreq_logic = coreq_logic.replace(get_char(i)+" ", "True ")
+            else:
+                coreq_logic = coreq_logic.replace(get_char(i)+" ", "False ")
 
-        for pre_req in self.prereqs:
-            met_req = False
-            pre_req = pre_req.split(" or ")
-            # separate or in one pre-req string
-            for p in pre_req:
-                if p in list_of_courses_taken:
-                    met_req = True
-                    break
-            if not met_req:
+        try:
+            if not eval(coreq_logic):
                 return False
-        return True
+        except Exception as e:
+            # EMAIL(course, self.coreq_courses, self.coreq_logic, list_of_courses_taken, current_term_courses, e)
+            pass
+
+        # PREREQ
+        prereq_logic = self.prereq_logic
+        for i in range(len(self.prereq_courses)):
+            if self.prereq_courses[i] in list_of_courses_taken:
+                prereq_logic = prereq_logic.replace(get_char(i)+" ", "True ")
+            else:
+                prereq_logic = prereq_logic.replace(get_char(i)+" ", "False ")
+
+        try:
+            return eval(prereq_logic)
+        except Exception as e:
+            # EMAIL(course, self.prereq_courses, self.prereq_logic, list_of_courses_taken, current_term_courses, e)
+            return True

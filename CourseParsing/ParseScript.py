@@ -19,8 +19,6 @@ def get_course_codes():
 
 if __name__ == "__main__":
     course_codes = get_course_codes()
-    course_codes.remove("FINE")  # For now
-    course_codes.remove("ECON")  # For now
 
     dbc = DatabaseSender()
 
@@ -40,6 +38,7 @@ if __name__ == "__main__":
         try:
             fp = urllib.request.urlopen("http://www.ucalendar.uwaterloo.ca/2021/COURSE/course-" + code + ".html")
         except Exception as e:
+            print(code)
             continue
         mybytes = fp.read()
         html = mybytes.decode("ISO-8859-1")

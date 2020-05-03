@@ -1,2 +1,2 @@
-__all__ = ["CourseParser", "Course"]
-from CourseParsing import Course, CourseParser
+__all__ = ["CourseParser", "Course", "AsciiTranslator", "ParseTree"]
+from CourseParsing import Course, CourseParser, AsciiTranslator, ParseTree

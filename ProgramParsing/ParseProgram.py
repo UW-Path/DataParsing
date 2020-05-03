@@ -19,6 +19,7 @@ if __name__ == "__main__":
 
     dbc = DatabaseSender()
 
+    dbc.execute("DROP TABLE " + dbc.requirements_table + ";")
     dbc.create_requirements()
 
     for file in files:

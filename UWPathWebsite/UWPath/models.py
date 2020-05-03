@@ -94,7 +94,8 @@ class AuthUserUserPermissions(models.Model):
 
 class Coreqs(models.Model):
     course_code = models.CharField(max_length=255, primary_key=True)
-    coreq = models.CharField(max_length=500, blank=True, null=True)
+    logic = models.CharField(max_length=500, blank=True, null=True)
+    courses = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -161,7 +162,8 @@ class DjangoSession(models.Model):
 
 class Prereqs(models.Model):
     course_code = models.CharField(max_length=255, primary_key=True)
-    prereq = models.CharField(max_length=500, blank=True, null=True)
+    logic = models.CharField(max_length=500, blank=True, null=True)
+    courses = models.CharField(max_length=500, blank=True, null=True)
     grades = models.CharField(max_length=250, blank=True, null=True)
     not_open = models.CharField(max_length=250, blank=True, null=True)
     only_from = models.CharField(max_length=250, blank=True, null=True)
