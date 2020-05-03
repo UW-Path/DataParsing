@@ -482,13 +482,17 @@ class Antireqs:
         if isinstance(antireqs, str):
             antireqs = antireqs.replace("Antireq: ", "")
             antireqs = re.sub("[0-9]{3}[0-9]", "", antireqs)
+            antireqs = re.sub("[a-zA-Z\\-]*[a-z][a-zA-Z\\-]*", "", antireqs)
 
-            for _ in range(30):
-                antireqs = re.sub("([A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)(?:\\s*/\\s*|\\s*,\\s*)([0-9]{3}[A-Z]?[A-Z]?)",
+            for _ in range(1):
+                antireqs = re.sub("([A-Z][A-Z]+)\\s*([0-9]{3})([A-Z])\\s*/\\s*([A-Z])",
+                                  r"\1 \2\3, \1 \2\4", antireqs)
+                antireqs = re.sub("([A-Z][A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)(?:\\s*/\\s*|\\s*,\\s*)([0-9]{3}[A-Z]?[A-Z]?)",
                                   r"\1 \2, \1 \3", antireqs)
-                antireqs = re.sub("([A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)(?:\\s*/\\s*|\\s*,\\s*)([A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)",
+                antireqs = re.sub("([A-Z][A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)(?:\\s*/\\s*|\\s*,\\s*)"
+                                  "([A-Z][A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)",
                                   r"\1 \2, \3 \4", antireqs)
-                antireqs = re.sub("([A-Z]+)\\s*(?:\\s*/\\s*|\\s*,\\s*)([A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)",
+                antireqs = re.sub("([A-Z][A-Z]+)\\s*(?:\\s*/\\s*|\\s*,\\s*)([A-Z][A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)",
                                   r"\1 \3, \2 \3", antireqs)
 
             self.antireqs = re.findall("(?:[A-Z]+ )?[1-9][0-9][0-9][A-Z]?[A-Z]?", antireqs)
