@@ -150,8 +150,6 @@ class Course:
 
         if self.prereqs:
             output += self.prereqs.str("pretty")
-        if self.coreqs:
-            output += "Coreqs: " + self.coreqs.str("coreqs") + "\n"
         if self.antireqs:
             output += "Antireqs: " + self.antireqs.str() + "\n"
             output += self.antireqs.str("extra") + "\n"

@@ -447,15 +447,14 @@ class Prereqs:
         4. only     - ex. "Computer Science"
         5. level    - ex. "3A"
         6. pretty   - prettyprint()
-        7. coreqs   - ex. "CS 241 or CS 245, SE 212"
-        8. logic    - ex. "( ( A and B ) or C )"
+        7. logic    - ex. "( ( A and B ) or C )"
         8. courses  - ex. "CS 123,CS 234,CS 345"
 
         :param flag: string (default="prereqs")
         :return: string
         """
         output = ""
-        if flag == "prereqs" or flag == "coreqs":
+        if flag == "prereqs":
             output = self.__print_prereqs()
         if flag == "grades":
             output = self.__print_grades()
@@ -482,8 +481,17 @@ class Antireqs:
     def load_antireqs(self, antireqs):
         if isinstance(antireqs, str):
             antireqs = antireqs.replace("Antireq: ", "")
+            antireqs = re.sub("[0-9]{3}[0-9]", "", antireqs)
 
-            self.antireqs = re.findall("(?:[A-Z]+ )?[1-9][0-9][0-9][A-Z]?", antireqs)
+            for _ in range(30):
+                antireqs = re.sub("([A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)(?:\\s*/\\s*|\\s*,\\s*)([0-9]{3}[A-Z]?[A-Z]?)",
+                                  r"\1 \2, \1 \3", antireqs)
+                antireqs = re.sub("([A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)(?:\\s*/\\s*|\\s*,\\s*)([A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)",
+                                  r"\1 \2, \3 \4", antireqs)
+                antireqs = re.sub("([A-Z]+)\\s*(?:\\s*/\\s*|\\s*,\\s*)([A-Z]+)\\s*([0-9]{3}[A-Z]?[A-Z]?)",
+                                  r"\1 \3, \2 \3", antireqs)
+
+            self.antireqs = re.findall("(?:[A-Z]+ )?[1-9][0-9][0-9][A-Z]?[A-Z]?", antireqs)
             self.extra_info = antireqs if not len(self.antireqs) else ""
             self.__fix_antireqs()
 

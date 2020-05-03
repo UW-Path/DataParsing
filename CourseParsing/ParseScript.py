@@ -24,7 +24,6 @@ if __name__ == "__main__":
 
     dbc.execute("DROP TABLE " + dbc.course_table + ";")
     dbc.execute("DROP TABLE " + dbc.prereqs_table + ";")
-    dbc.execute("DROP TABLE " + dbc.coreqs_table + ";")
     dbc.execute("DROP TABLE " + dbc.antireqs_table + ";")
 
     dbc.create_courses()
@@ -50,3 +49,4 @@ if __name__ == "__main__":
         dbc.commit()
 
     dbc.close()
+    print(course_codes)

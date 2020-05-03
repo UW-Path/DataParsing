@@ -31,6 +31,5 @@ if __name__ == "__main__":
         wb.open("http://www.ucalendar.uwaterloo.ca/2021/COURSE/course-" + code + ".html", new=2)
         print(dbc.get_course_info("WHERE course_code LIKE '" + code + " %'"))
         print(dbc.get_prereqs("WHERE course_code LIKE '" + code + " %'"))
-        print(dbc.get_coreqs("WHERE course_code LIKE '" + code + " %'"))
         print(dbc.get_antireqs("WHERE course_code LIKE '" + code + " %'"))
         input()
