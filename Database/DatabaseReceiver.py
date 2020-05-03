@@ -38,18 +38,6 @@ class DatabaseReceiver(DatabaseConnection):
         df.set_index("index", inplace=True)
         return df
 
-    def get_coreqs(self, condition = ""):
-        """
-        Calls DatabaseConnection.select to retrieve data from coreqs table.
-
-        :return: pandas.DataFrame
-        """
-        columns = ["index", "course_code", "coreq"]
-        data = self.select("*", self.coreqs_table, condition)
-        df = pd.DataFrame(data, columns=columns)
-        df.set_index("index", inplace=True)
-        return df
-
     def get_antireqs(self, condition = ""):
         """
         Calls DatabaseConnection.select to retrieve data from antireqs table.

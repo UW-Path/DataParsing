@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import UwpathApp, CourseInfo, Coreqs, Prereqs, Antireqs, Requirements, Communications
-from .serializer import AppSerializer, CourseInfoSerializer, CoreqsSerializer, AntireqsSerializer, PrereqsSerializer, \
+from .models import UwpathApp, CourseInfo, Prereqs, Antireqs, Requirements, Communications
+from .serializer import AppSerializer, CourseInfoSerializer, AntireqsSerializer, PrereqsSerializer, \
     RequirementsSerializer, CommunicationsSerializer
 from UWPathAPI.ValidationCheckAPI import ValidationCheckAPI
 from django.db.models import Q
@@ -100,30 +100,6 @@ class Course_Info_List(APIView):
     def get(self, request, format=None):
         list = CourseInfo.objects.all()[:10]
         serializer = CourseInfoSerializer(list, many=True)
-        return Response(serializer.data)
-
-
-class Coreqs_API(APIView):
-    def get(self, request, pk, format=None):
-        try:
-            app = Coreqs.objects.get(pk=pk)
-            serializer = CoreqsSerializer(app)
-            return Response(serializer.data)
-        except:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-    def get_object(self, request, pk, format=None):
-        try:
-            app = Coreqs.objects.get(pk=pk)
-            return app
-        except:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-
-class Coreqs_List(APIView):
-    def get(self, request, format=None):
-        list = Coreqs.objects.all()[:10]
-        serializer = CoreqsSerializer(list, many=True)
         return Response(serializer.data)
 
 
@@ -250,11 +226,9 @@ class UWPath_API(APIView):
             return HttpResponseNotFound('<h1>404 Not Found: Course not valid</h1>')
 
         prereqs = Prereqs_API().get_object(None, pk)
-        coreqs = Coreqs_API().get_object(None, pk)
         antireqs = Antireqs_API().get_object(None, pk)
 
         api.set_prereqs(prereqs.logic, prereqs.courses)
-        api.set_coreqs(coreqs.logic, coreqs.courses)
         api.set_antireqs(antireqs.antireq)
 
         list_of_courses_taken = request.GET.getlist("list_of_courses_taken[]")

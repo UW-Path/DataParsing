@@ -18,11 +18,6 @@ class AntireqsSerializer(serializers.ModelSerializer):
         fields =  '__all__'
 
 
-class CoreqsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Coreqs
-        fields =  '__all__'
-
 class PrereqsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prereqs

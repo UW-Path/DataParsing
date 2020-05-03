@@ -29,7 +29,6 @@ if __name__ == "__main__":
 
     dbc.create_courses()
     dbc.create_prereqs()
-    dbc.create_coreqs()
     dbc.create_antireqs()
 
     for code in course_codes:

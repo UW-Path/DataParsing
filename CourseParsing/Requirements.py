@@ -8,7 +8,7 @@ Calder Lund
 
 import re
 from CourseParsing.AsciiTranslator import get_char, get_index
-from CourseParsing.ParseTree import remove_dup_bracket, translate_to_python
+from CourseParsing.ParseTree import remove_dup_bracket, translate_to_python, denote_coreqs, fix_logic
 
 
 class Prereqs:
@@ -23,6 +23,9 @@ class Prereqs:
         self.courses = []
 
     def letters_to_courses(self, options, courses):
+        """
+        Depreciated
+        """
         output = ""
         for option in options:
             for char in option:
@@ -39,16 +42,16 @@ class Prereqs:
         :return: boolean
         """
         if isinstance(prereqs, str):
-            prereqs = prereqs.replace("Prereq: ", "").replace("Coreq: ", "")
+            prereqs = prereqs.replace("Prereq: ", "")
+            prereqs = prereqs.replace("Coreq: ", "***")
             prereqs_alt = re.split("[;.]", prereqs)
 
             # Remove single upper characters
             prereqs = re.sub("^[A-Z] ", "", prereqs)
             prereqs = re.sub("([^A-Za-z0-9])[A-Z] ", "\1 ", prereqs)
 
-            # Deal with corequisite options in the prereq
-            # prereqs = re.sub("co(?:-)?req(?:uisite)?(?::)?", "*", prereqs) # requires logic for multiple coreq options
-            prereqs = re.sub("co(?:-)?req(?:uisite)?(?::)?", "", prereqs)
+            # Deal with corequisite options in the prereq by deonoting all courses after ### as a coreq
+            prereqs = re.sub("[Cc]o(?:-)?req(?:uisite)?(?::)?", "###", prereqs)
 
             # Convert to numbers for parsing readability
             prereqs = prereqs.replace("One ", "1 ").replace("one ", "1 ").replace("0.50", "1").replace("0.5", "1")
@@ -211,18 +214,18 @@ class Prereqs:
 
             # Replace "2 A , < B & C > /| D" with "< 2 A | < B & C > | D >"
             comma_indices = [(m.start(0), m.end(0)) for m in
-                             re.finditer("[1-9] ([A-Z]|< [^>]+ >)(?:\\s*(,|/\\||\\|)\\s*([A-Z]|< [^>]+ >))+", prereqs)]
+                             re.finditer("[1-9] ([A-Za-z]|< [^>]+ >)(?:\\s*(,|/\\||\\|)\\s*([A-Za-z]|< [^>]+ >))+", prereqs)]
             for i in range(len(comma_indices)-1, -1, -1):
                 start, end = comma_indices[i]
                 prereqs = prereqs[:start] + " < " + prereqs[start:end].replace(",", " | ") + \
                           " > " + prereqs[end:]
 
             # Enclose all remaining /| groupings with < >
-            prereqs = re.sub("((?:[A-Z]|< .+ >)(?:\\s*/\\|\\s*(?:[A-Z]|< .+ >))+)", r"< \1 >", prereqs)
+            prereqs = re.sub("((?:[A-Za-z]|< .+ >)(?:\\s*/\\|\\s*(?:[A-Za-z]|< .+ >))+)", r"< \1 >", prereqs)
             prereqs = prereqs.replace("/|", "|")
 
             # Enclose all remaining , groupings with < >
-            prereqs = re.sub("((?:[A-Z]|< [^>]+ >)(?:\\s*,\\s*(?:[A-Z]|< [^>]+ >))+)", r"< \1 >", prereqs)
+            prereqs = re.sub("((?:[A-Za-z]|< [^>]+ >)(?:\\s*,\\s*(?:[A-Za-z]|< [^>]+ >))+)", r"< \1 >", prereqs)
             prereqs = prereqs.replace(",", " & ")
 
             # Clean spaces
@@ -243,10 +246,19 @@ class Prereqs:
                         if new_prereqs == prereqs:
                             break
                         prereqs = new_prereqs
+
+                    # Modify courses to indicate coreqs
+                    courses = denote_coreqs(prereqs, courses)
                     prereqs = translate_to_python(prereqs)
 
-                self.logic = prereqs
-                self.courses = courses
+                if self.logic:
+                    self.logic = "( " + self.logic + " and " + prereqs + " )"
+                    self.courses += courses
+                    self.logic = fix_logic(self.logic)
+                else:
+                    self.logic = prereqs
+                    self.courses = courses
+
             except Exception as e:
                 print(e)
                 print(prereqs)
@@ -571,7 +583,7 @@ if __name__ == "__main__":
                    "(Data Science) students only.")
     p.load_prereqs("MATH 137 or 147 and (STAT 220 with a grade of at least 70% or a corequisite of STAT 230 or 240); "
                    "Level at least 2A; Not open to students who have received credit for ACTSC 232.")"""
-
+    """
     # Broken Cases
     # p.load_prereqs("BIOL 140/240 and 140/240L")  # BIOL [fixed]
     # p.load_prereqs("PSYCH 101/101R")  # PSYCH [not broken]
@@ -587,8 +599,6 @@ if __name__ == "__main__":
     #                "Computer Science students only.")  # CS [fixed]
     # p.load_prereqs("One of ECON 221, ENVS 278, HLTH 204, SDS 250R, KIN 232, PSCI 214/314, PSYCH 292, REC 371, "
     #                "SOC/LS 280, any STAT course;")  # STAT [not broken]
-    p.load_prereqs("MATH 137 or 147 and (STAT 220 with a grade of at least 70% or a corequisite of STAT 230 or 240); "
-                   "Level at least 2A; Not open to students who have received credit for ACTSC 232.")  # ACTSC
     # p.load_prereqs("(ECE 105, 106) or (PHYS 112 or 122); (ECE 205 or MATH 211) or ((MATH 227 or 237 or 247) "
     #                "and (MATH 228 or AMATH 250 or 251)).")  # ECE [fixed]
     # p.load_prereqs("(One of PHYS 112, 122) or (ECE 105, 106); (One of MATH 108, 119, 128, 138, 148).")  # ECE [fixed]
@@ -598,16 +608,15 @@ if __name__ == "__main__":
     p.load_prereqs("FINE 308; At least 1.0 unit in 300-level FINE studio courses; a grade of 75% in each 300-level"
                    " studio course; Level at least 4A Intensive Studio Specialization.")  # FINE
     p.load_prereqs("475.", "FINE")  # FINE
-    p.load_prereqs("One of PHYS 112,122; Two of MATH 128, 138, 148; (MATH 227 or co-requisite: AMATH 231).")  # PHYS
     # p.load_prereqs("PHYS 234 or CHEM 356;One of MATH 228,AMATH 250,251; MATH 227 or 237 or 247.")  # PHYS [not broken]
     p.load_prereqs("PHYS 256L for Science students except for Mathematical Physics Plan.")  # PHYS
     # p.load_prereqs("One of PHYS 122 (winter 2019 or later), 224, 242")  # PHYS [fixed]
     # p.load_prereqs("One of PHYS 112, 122, 125, ECE 106; One of MATH 128, 138, 148,(SYDE 111,112);One of PHYS 224, 233,"
     #                " CS 473, CHEM 209, 356; Level at least 3A SCI, MATH or ENG stdnts")  # PHYS [partially fixed]
-    p.load_prereqs("One of MATH 128, 138, 148,(SYDE 111,112);")
+    p.load_prereqs("One of MATH 128, 138, 148,(SYDE 111,112);")"""
     # p.load_prereqs("(PHYS 334 or AMATH 373); PHYS 363; (PHYS 364 and 365) or (AMATH 332, 351, 353)") [fixed]
     #p.load_prereqs("Level at least 4A; one of PHYS 380, 383, 395, 396")  # PHYS [not broken]
-    p.load_prereqs("ECON 211 or Science and Business students or Biotech/Chartered Professional"
+    """p.load_prereqs("ECON 211 or Science and Business students or Biotech/Chartered Professional"
                    " Accountancy students.")  # ECON
     p.load_prereqs("ECON101 or ECON100/COMM103;ECON211 or one of MATH128,138,148; ECON221 or one of ARTS280,ENVS278,"
                    "KIN222,232,PSCI214/314,PSYCH292, REC371, SDS250R, SMF230, SOC/LS280,STAT202, 206,211,220,230,240,"
@@ -620,17 +629,22 @@ if __name__ == "__main__":
                    " statistics course; or for Math stdnts ECON101 or ECON100/COMM103, ECON102 and ACTSC372"
                    " after fall 2014.")  # ECON
     p.load_prereqs("FINE 319; At least four 200-level FINE studio courses; Level at least 3A")
-    p.load_prereqs("At least 1.0 unit of 300-level FINE studio courses")
-    p.load_prereqs("One of ECON 221, STAT 211, 231, 241; AFM 241 or CS 330; Accounting and Financial Management, "
-                   "Mathematics/CPA, or Biotechnology/CPA students.")  # AFM
+    p.load_prereqs("At least 1.0 unit of 300-level FINE studio courses")"""
+    # p.load_prereqs("One of ECON 221, STAT 211, 231, 241; AFM 241 or CS 330; Accounting and Financial Management, "
+    #                "Mathematics/CPA, or Biotechnology/CPA students.")  # AFM
     # p.load_prereqs("CHEM 262 or 264 or 266 or NE 122/222.")  # CHEM
     # p.load_prereqs("CHEM 233 or 237 or NE 224 and CHEM 265 or 267.")  # CHEM
-    p.load_prereqs("MATH 136 or 146, 237 or 247, STAT 230or240 &(one of AFM 272/ACTSC 291,ACTSC 371,ECON 371,BUS 393W);"
-                   "Lev at least 3A;Not open to GenMath stdts.")
-    p.load_prereqs("(AFM 372/ACTSC 391or(ACTSC 231, 371)or(ACTSC 231, BUS 393W)),((STAT 330,333) or STAT 334); ACTSC,"
-                   " Math/FARM, Math Fin students only.")
-    p.load_prereqs("CS 341, STAT 241 or at least 60% in STAT 231")
-    p.load_prereqs("CHEM 123 or 125, MATH 128;")
-    p.load_prereqs("CHEM 120, 123 or CHEM 121, 125;")
-
-
+    # p.load_prereqs("MATH 136 or 146, 237 or 247, STAT 230or240 &(one of AFM 272/ACTSC 291,ACTSC 371,ECON 371,BUS 393W);"
+    #                "Lev at least 3A;Not open to GenMath stdts.")
+    # p.load_prereqs("(AFM 372/ACTSC 391or(ACTSC 231, 371)or(ACTSC 231, BUS 393W)),((STAT 330,333) or STAT 334); ACTSC,"
+    #                " Math/FARM, Math Fin students only.")
+    # p.load_prereqs("CS 341, STAT 241 or at least 60% in STAT 231")
+    # p.load_prereqs("CHEM 123 or 125, MATH 128;")
+    # p.load_prereqs("CHEM 120, 123 or CHEM 121, 125;")
+    p.load_prereqs("One of PHYS 112,122; Two of MATH 128, 138, 148; (MATH 227 or co-requisite: AMATH 231).")  # PHYS
+    p.load_prereqs("MATH 137 or 147 and (STAT 220 with a grade of at least 70% or a corequisite of STAT 230 or 240); "
+                   "Level at least 2A; Not open to students who have received credit for ACTSC 232.")  # ACTSC
+    p.load_prereqs("Prereq: MATH 145 or")
+    p.load_prereqs("Coreq: MATH 136")
+    p.load_prereqs("One of MATH 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, CS 100, 101, 102, 103, 104, 105, 106"
+                   ", 107, 108, 109, STAT 100, 101, 102, 103, 104, 105, 106, 107, 108, 109")

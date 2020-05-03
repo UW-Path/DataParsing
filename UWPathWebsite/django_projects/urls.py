@@ -25,8 +25,6 @@ urlpatterns = [
     path(r'api/course-info/', uwPath.Course_Info_List.as_view()),
     path(r'api/prereqs/', uwPath.Prereqs_List.as_view()),
     path(r'api/prereqs/get/<str:pk>', uwPath.Prereqs_API.as_view()),
-    path(r'api/coreqs/', uwPath.Coreqs_List.as_view()),
-    path(r'api/coreqs/get/<str:pk>', uwPath.Coreqs_API.as_view()),
     path(r'api/antireqs/', uwPath.Antireqs_List.as_view()),
     path(r'api/antireqs/get/<str:pk>', uwPath.Antireqs_API.as_view()),
     path(r'api/requirements/', uwPath.Requirements_List.as_view()),

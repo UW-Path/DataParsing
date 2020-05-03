@@ -92,16 +92,6 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
-class Coreqs(models.Model):
-    course_code = models.CharField(max_length=255, primary_key=True)
-    logic = models.CharField(max_length=500, blank=True, null=True)
-    courses = models.CharField(max_length=500, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'coreqs'
-
-
 class CourseInfo(models.Model):
     course_code = models.CharField(max_length=255, primary_key=True)
     course_id = models.CharField(max_length=255, blank=True, null=True)

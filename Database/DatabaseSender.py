@@ -46,23 +46,6 @@ class DatabaseSender(DatabaseConnection):
         )"""
         self.execute(command)
 
-    def __create_prereqs(self):
-        """
-        Depriciated
-
-        Creates prereqs table.
-        """
-        command = "CREATE TABLE IF NOT EXISTS " + self.prereqs_table + """ (
-            id SERIAL PRIMARY KEY,
-            course_code VARCHAR(255),
-            prereq VARCHAR(500),
-            grades VARCHAR(250),
-            not_open VARCHAR(250),
-            only_from VARCHAR(250),
-            min_level VARCHAR(10)
-        )"""
-        self.execute(command)
-
     def create_prereqs(self):
         """
         Creates prereqs table.
@@ -79,21 +62,10 @@ class DatabaseSender(DatabaseConnection):
         )"""
         self.execute(command)
 
-    def __create_coreqs(self):
-        """
-        Depriciated
-
-        Creates coreqs table.
-        """
-        command = "CREATE TABLE IF NOT EXISTS " + self.coreqs_table + """ (
-            id SERIAL PRIMARY KEY,
-            course_code VARCHAR(255),
-            coreq VARCHAR(500)
-        )"""
-        self.execute(command)
-
     def create_coreqs(self):
         """
+        Depreciated
+
         Creates coreqs table.
         """
         command = "CREATE TABLE IF NOT EXISTS " + self.coreqs_table + """ (
@@ -141,25 +113,6 @@ class DatabaseSender(DatabaseConnection):
         )"""
         self.execute(command)
 
-    def __insert_prereqs(self, code, prereqs):
-        """
-        Depreciated
-
-        Inserts prereq data in prereqs table.
-
-        :param code: string
-        :param prereqs: Prereqs
-        :return: boolean
-        """
-        not_exist = "SELECT 1 FROM " + self.prereqs_table + "\n"
-        not_exist += "WHERE course_code = '" + code + "'"
-        command = "INSERT INTO " + self.prereqs_table + " (course_code, prereq, grades, not_open, only_from, min_level)"
-        command += "\nSELECT '" + code + "', '" + prereqs.str("prereqs") + "', '" + prereqs.str("grades") + "', '" + \
-                   prereqs.str("not_open") + "', '" + prereqs.str("only") + "', '" + prereqs.str("level") + "'\n"
-        command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
-
-        return self.execute(command)
-
     def insert_prereqs(self, code, prereqs):
         """
         Inserts prereq data in prereqs table.
@@ -179,26 +132,10 @@ class DatabaseSender(DatabaseConnection):
 
         return self.execute(command)
 
-    def __insert_coreqs(self, code, coreqs):
+    def insert_coreqs(self, code, coreqs):
         """
         Depreciated
 
-        Inserts coreq data in coreqs table.
-
-        :param code: string
-        :param coreqs: Antireq
-        :return: boolean
-        """
-        not_exist = "SELECT 1 FROM " + self.coreqs_table + "\n"
-        not_exist += "WHERE course_code = '" + code + "'"
-        command = "INSERT INTO " + self.coreqs_table + " (course_code, coreq)"
-        command += "\nSELECT '" + code + "', '" + coreqs.str("coreqs") + "'\n"
-        command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
-
-        return self.execute(command)
-
-    def insert_coreqs(self, code, coreqs):
-        """
         Inserts coreq data in coreqs table.
 
         :param code: string
@@ -293,7 +230,6 @@ class DatabaseSender(DatabaseConnection):
         fail = 0
         for course in courses:
             if self.insert_prereqs(course.code, course.prereqs) and \
-                    self.insert_coreqs(course.code, course.coreqs) and \
                     self.insert_antireqs(course.code, course.antireqs) and \
                     self.insert_course(course):
                 success += 1

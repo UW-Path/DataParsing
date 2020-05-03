@@ -12,9 +12,13 @@ from builtins import any
 
 
 def get_char(i):
+    if i + ord('A') > ord('Z'):
+        return chr(i - 26 + ord('a'))
     return chr(i + ord('A'))
 
 def get_index(c):
+    if ord(c) - ord('A') > 26:
+        return ord(c) - ord('a') + 26
     return ord(c) - ord('A')
 
 
@@ -81,28 +85,19 @@ class ValidationCheckAPI:
             if any(c in anti_req for c in list_of_courses_taken + current_term_courses):
                 return False
 
-        # COREQ
-        coreq_logic = self.coreq_logic
-        for i in range(len(self.coreq_courses)):
-            if self.coreq_courses[i] in list_of_courses_taken + current_term_courses:
-                coreq_logic = coreq_logic.replace(get_char(i)+" ", "True ")
-            else:
-                coreq_logic = coreq_logic.replace(get_char(i)+" ", "False ")
-
-        try:
-            if not eval(coreq_logic):
-                return False
-        except Exception as e:
-            # EMAIL(course, self.coreq_courses, self.coreq_logic, list_of_courses_taken, current_term_courses, e)
-            pass
-
-        # PREREQ
+        # PREREQ & COREQ
         prereq_logic = self.prereq_logic
         for i in range(len(self.prereq_courses)):
-            if self.prereq_courses[i] in list_of_courses_taken:
-                prereq_logic = prereq_logic.replace(get_char(i)+" ", "True ")
+            if self.prereq_courses[i][0] == "_":
+                if self.prereq_courses[i][1:] in list_of_courses_taken + current_term_courses:
+                    prereq_logic = prereq_logic.replace(get_char(i)+" ", "True ")
+                else:
+                    prereq_logic = prereq_logic.replace(get_char(i)+" ", "False ")
             else:
-                prereq_logic = prereq_logic.replace(get_char(i)+" ", "False ")
+                if self.prereq_courses[i] in list_of_courses_taken:
+                    prereq_logic = prereq_logic.replace(get_char(i)+" ", "True ")
+                else:
+                    prereq_logic = prereq_logic.replace(get_char(i)+" ", "False ")
 
         try:
             return eval(prereq_logic)

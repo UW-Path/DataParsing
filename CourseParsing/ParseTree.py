@@ -1,4 +1,4 @@
-from CourseParsing.AsciiTranslator import get_char
+from CourseParsing.AsciiTranslator import get_char, get_index
 import re
 
 
@@ -82,7 +82,7 @@ def translate_to_python(logic, courses=None):
     i = 0
     while i < len(logic):
         if logic[i] in "123456":  # Does not support nested "X of" statements
-            logic[i] = "(" + logic[i] + " <= len(tuple(filter(None, ["
+            logic[i] = "(" + logic[i] + " <= len(tuple(filter(None,["
             in_cond = True
         elif in_cond and logic[i] == "(":
             i += logic[i:].index(")")
@@ -101,8 +101,17 @@ def translate_to_python(logic, courses=None):
             start = x + 1
 
     logic = " ".join(logic)
-    return logic.replace("|", "or").replace("&", "and")
+    return logic.replace("|", "or").replace("&", "and").replace(" ***", "").replace(" ###", "")
 
+
+def fix_logic(logic):
+    logic = logic.split()
+    index = 0
+    for i in range(len(logic)):
+        if len(logic[i]) == 1 and logic[i].isalpha():
+            logic[i] = get_char(index)
+            index += 1
+    return " ".join(logic)
 
 
 class ParseTree:
@@ -209,6 +218,44 @@ def verify(logic, debug=False):
         print(pt)
 
 
+def denote_coreqs_helper(logic, courses, i):
+    while logic[i] != ">":
+        i += 1
+        if logic[i] == "<":
+            i, courses = denote_coreqs_helper(logic, courses, i)
+        else:
+            index = get_index(logic[i])
+            if 0 <= index < len(courses) and courses[index][0] != "_":
+                courses[index] = "_" + courses[index]
+    i += 1
+    return i, courses
+
+
+def denote_coreqs(logic, courses):
+    logic = logic.split()
+    coreq_indicators = []
+    coreq_all = []
+
+    for i in range(len(logic)):
+        if logic[i] == "###":
+            coreq_indicators.append(i)
+        if logic[i] == "***":
+            coreq_all.append(i)
+
+    for i in coreq_all:
+        i += 1
+        while i < len(logic):
+            index = get_index(logic[i])
+            if 0 <= index < len(courses) and courses[index][0] != "_":
+                courses[index] = "_" + courses[index]
+            i += 1
+
+    for i in coreq_indicators:
+        i, courses = denote_coreqs_helper(logic, courses, i)
+
+    return courses
+
+
 if __name__ == "__main__":
     """logic = [
         "< A >",
@@ -229,4 +276,4 @@ if __name__ == "__main__":
         verify(l)
         print("_____________")"""
 
-    print(translate_to_python("< 2 A | < B & C > | D | E >"))
+    # print(translate_to_python("< 2 A | < B & C > | D | E >"))
