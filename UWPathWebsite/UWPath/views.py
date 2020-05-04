@@ -1,13 +1,14 @@
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import UwpathApp, CourseInfo, Prereqs, Antireqs, Requirements, Communications
+from .models import UwpathApp, CourseInfo, Prereqs, Antireqs, Requirements, Communications, ContactForm
 from .serializer import AppSerializer, CourseInfoSerializer, AntireqsSerializer, PrereqsSerializer, \
     RequirementsSerializer, CommunicationsSerializer
 from UWPathAPI.ValidationCheckAPI import ValidationCheckAPI
 from django.db.models import Q
+
 
 
 # Create your views here.
@@ -54,7 +55,17 @@ def requirements(request, major, majorExtended= "", minor = "", minorExtended = 
 
 def contact(request):
     #Contact me form
-    return render(request, 'contact.html')
+    submitted = False
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            return HttpResponseRedirect('/contact?submitted=True')
+    else:
+        form = ContactForm()
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'contact.html', {'form': form, 'submitted': submitted})
 
 # Anything that starts with class (APIView) can be accessed through url.py via Django Restframework
 class AllApp(APIView):

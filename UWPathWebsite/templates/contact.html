@@ -1,12 +1,27 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends "base.html" %}
+
+{% block title %}Contact Us{% endblock title %}
 
 {% block content %}
-<body>
-    <form>
-        <p>First Name: <input type="text" name="firstname"></p>
-        <p>Last Name: <input type="text" name="lastname"></p>
-        <p><input type="submit" value="submit"></p>
-    </form>
-</body>
-{% endblock %}
+    <div style="padding: 1.2em;">
+        <h1>Contact us</h1>
+
+        {% if submitted %}
+            <p class="success">
+                Your message was submitted successfully. Thank you.
+            </p>
+
+        {% else %}
+            <form action="" method="post" novalidate>
+                <table>
+                    {{ form.as_table }}
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><input type="submit" value="Submit"></td>
+                    </tr>
+                </table>
+                {% csrf_token %}
+            </form>
+        {% endif %}
+    </div>
+{% endblock content %}

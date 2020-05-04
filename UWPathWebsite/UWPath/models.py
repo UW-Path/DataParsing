@@ -190,7 +190,8 @@ class Communications(models.Model):
 
 
 class ContactForm(forms.Form):
-     name = forms.CharField(max_length=100, label='John Smith')
-     email = forms.EmailField(required=False,label='abc@gmail.com')
+     name = forms.CharField(max_length=100)
+     email = forms.EmailField(required=True)
      subject = forms.CharField(max_length=100)
      message = forms.CharField(widget=forms.Textarea)
+
