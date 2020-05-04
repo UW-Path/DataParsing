@@ -35,8 +35,7 @@ class DatabaseSender(DatabaseConnection):
         """
         # TODO - remove antireq field
         command = "CREATE TABLE IF NOT EXISTS " + self.course_table + """ (
-            id SERIAL PRIMARY KEY,
-            course_code VARCHAR(255),
+            course_code VARCHAR(255) PRIMARY KEY,
             course_id VARCHAR(255),
             course_name VARCHAR(255),
             credit VARCHAR(255),
@@ -51,14 +50,14 @@ class DatabaseSender(DatabaseConnection):
         Creates prereqs table.
         """
         command = "CREATE TABLE IF NOT EXISTS " + self.prereqs_table + """ (
-            id SERIAL PRIMARY KEY,
-            course_code VARCHAR(255),
+            course_code VARCHAR(255) PRIMARY KEY,
             logic VARCHAR(500),
             courses VARCHAR(500),
             grades VARCHAR(250),
             not_open VARCHAR(250),
             only_from VARCHAR(250),
-            min_level VARCHAR(10)
+            min_level VARCHAR(10),
+            FOREIGN KEY ( course_code ) REFERENCES """ + self.course_table + """ ( course_code )
         )"""
         self.execute(command)
 
@@ -67,10 +66,10 @@ class DatabaseSender(DatabaseConnection):
         Creates antireqs table.
         """
         command = "CREATE TABLE IF NOT EXISTS " + self.antireqs_table + """ (
-            id SERIAL PRIMARY KEY,
-            course_code VARCHAR(255),
+            course_code VARCHAR(255) PRIMARY KEY,
             antireq VARCHAR(500),
-            extra_info VARCHAR(500)
+            extra_info VARCHAR(500),
+            FOREIGN KEY ( course_code ) REFERENCES """ + self.course_table + """ ( course_code )
         )"""
         self.execute(command)
 
@@ -81,7 +80,8 @@ class DatabaseSender(DatabaseConnection):
         command = "CREATE TABLE IF NOT EXISTS " + self.communications_table + """ (
             id SERIAL PRIMARY KEY,
             course_code VARCHAR(255),
-            list_number INT
+            list_number INT,
+            FOREIGN KEY ( course_code ) REFERENCES """ + self.course_table + """ ( course_code )
         )"""
         self.execute(command)
 
@@ -197,9 +197,8 @@ class DatabaseSender(DatabaseConnection):
         success = 0
         fail = 0
         for course in courses:
-            if self.insert_prereqs(course.code, course.prereqs) and \
-                    self.insert_antireqs(course.code, course.antireqs) and \
-                    self.insert_course(course):
+            if self.insert_course(course) and self.insert_prereqs(course.code, course.prereqs) and \
+                    self.insert_antireqs(course.code, course.antireqs):
                 success += 1
             else:
                 fail += 1

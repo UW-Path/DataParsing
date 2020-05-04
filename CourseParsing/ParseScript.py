@@ -49,3 +49,4 @@ if __name__ == "__main__":
         dbc.commit()
 
     dbc.close()
+    print(course_codes)

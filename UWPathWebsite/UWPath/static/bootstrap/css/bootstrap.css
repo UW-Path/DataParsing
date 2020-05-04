@@ -10221,4 +10221,22 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+
+#popup-1 {
+  display: none;
+  background-color: rgba(0,0,0,0.2);
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+}
+
+.popup-content {
+  position: relative;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: white;
+  width: 85%;
+  top: 5vh;
+  border:2px black solid;
+}
 /*# sourceMappingURL=bootstrap.css.map */

@@ -3,6 +3,13 @@ const terms = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]; //Add 5A 5B for 
 
 /* Custom Dragula JS */
 window.onload = function() {
+    var closePopup1 = document.getElementById('close-popup-1');
+
+    closePopup1.addEventListener('click', () => {
+        var popup1 = document.getElementById("popup-1");
+        popup1.style.display = "none";
+    });
+
     dragger = dragula([
         document.getElementById("required"),
         document.getElementById("1A"),
@@ -127,7 +134,6 @@ function emptyTrash() {
   document.getElementById("trash").innerHTML = "";
 }
 
-
 function getTaken(term_index) {
     let taken = [];
 
@@ -148,7 +154,89 @@ function getCurrent(term_index) {
     return [termCourses, termCoursesText];
 }
 
-function changeColour(str) {
-    document.getElementById(str).style.color = "blue";
+function popupWindow(str) {
+    let el = document.getElementById(str);
+    let course_text = el.innerText;
+    document.getElementById("popup-1").style.display = "block";
+    debugger;
+    let content = document.getElementsByClassName("popup-content")[0];
+    $.ajax({
+        url: 'http://127.0.0.1:8000/api/course-info/get/' + course_text,
+        type: 'get',
+        async: false,
+        success: function (data) {
+            let code = data.course_code;
+            let id = data.course_id;
+            let name = data.course_name;
+            let credit = data.credit;
+            let info = data.info;
+            let offering = data.offering;
+            let online = data.online;
+
+            html += "<p>" + code + "<br>" + id + "<br>" + name + "<br>" +
+                credit + "<br>" + info + "<br>" + offering + "<br>" + online.toString() + "</p>" +
+                "<button id='close-popup-1'>Close</button>";
+            content.innerHTML = html;
+            var closePopup1 = document.getElementById('close-popup-1');
+
+            closePopup1.addEventListener('click', () => {
+                var popup1 = document.getElementById("popup-1");
+                popup1.style.display = "none";
+            });
+        },
+        error: function () {
+            html += "<p>ERROR</p>" + "<button id='close-popup-1'>Close</button>";
+            content.innerHTML = html;
+            var closePopup1 = document.getElementById('close-popup-1');
+
+            closePopup1.addEventListener('click', () => {
+                var popup1 = document.getElementById("popup-1");
+                popup1.style.display = "none";
+            });
+        }
+    });
 }
 
+function generateHTML(course) {
+    let html = "<h3>" + course + "</h3>";
+    $.ajax({
+        url: 'http://127.0.0.1:8000/api/course-info/get/' + course,
+        type: 'get',
+        async: false,
+        success: function (data) {
+            let id = data.course_id;
+            let name = data.course_name;
+            let credit = data.credit;
+            let info = data.info;
+            let offering = data.offering;
+            let online = data.online;
+
+            html += "<large-p><strong>" + name + "</strong> (" + credit + ") ID:" + id +
+                " [" + offering + "]";
+            if (online) {
+                html += " Available online";
+            }
+            html += "<br>" + info + "<br></large-p>";
+        },
+        error: function () {
+            html += "<large-p>ERROR</large-p>";
+        }
+    });
+    return html;
+}
+
+function popupWindow(str) {
+    let el = document.getElementById(str);
+    let course_text = el.innerText;
+    let content = document.getElementsByClassName("popup-content")[0];
+    let html = generateHTML(course_text);
+    html += "<br><button id='close-popup-1'>Close</button>";
+    content.innerHTML = html;
+    document.getElementById("popup-1").style.display = "block";
+
+    let closePopup1 = document.getElementById('close-popup-1');
+    closePopup1.addEventListener('click', () => {
+        let popup1 = document.getElementById("popup-1");
+        popup1.style.display = "none";
+    });
+}

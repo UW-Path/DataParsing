@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'UWPath.apps.UwpathConfig',
-    'rest_framework'
+    'rest_framework',
+    'bootstrap_modal_forms'
 ]
 
 MIDDLEWARE = [

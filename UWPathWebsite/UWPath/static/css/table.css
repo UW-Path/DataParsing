@@ -19,6 +19,15 @@ p {
   font-family: "Roboto Slab", serif;
 }
 
+large-p {
+  font-family: "Roboto Slab", serif;
+  font-size: large;
+}
+
+my-header {
+  font-family: "Roboto Slab", serif;
+  font-size: x-large;
+}
 
 
 header,

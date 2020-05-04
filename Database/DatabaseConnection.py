@@ -37,7 +37,7 @@ class DatabaseConnection(object):
 
     def execute(self, command):
         try:
-            self.root.info(command)
+            # self.root.info(command)
             self.cursor.execute(command)
             return True
         except Exception as e:
