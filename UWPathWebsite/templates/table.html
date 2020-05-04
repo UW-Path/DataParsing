@@ -26,17 +26,20 @@
          </div>
          <ul class="task-list" id="required">
             {% if "Table I" in requirements.0.additional_requirements or "Communication Skills Requirement" in requirements.0.additional_requirements  %}
-            <li class="task" id="engl1">
+            <li class="task" id="engl1"
+                onclick="changeColour('engl1')">
                <p>English List I</p>
             </li>
-            <li class="task" id="engl2">
+            <li class="task" id="engl2"
+                onclick="changeColour('engl2')">
                <p>English List II</p>
             </li>
             {%  endif %}
              {% if "Table II" in requirements.0.additional_requirements %}
                 {% for req in table2 %}
                 {% for i in req.number_of_courses|times %}
-                    <li class="task" id="{{ req.course_codes | strip_spaces}}({{ i }})">
+                    <li class="task" id="{{ req.course_codes | strip_spaces}}({{ i }})"
+                        onclick="changeColour('{{ req.course_codes | strip_spaces}}({{ i }})')">
                        <p>{{ req.course_codes }}</p>
 {#                        <i class="material-icons list-icon">info</i>#}
                     </li>
@@ -45,7 +48,8 @@
             {%  endif %}
             {% for req in requirements %}
                 {% for i in req.number_of_courses|times %}
-                    <li class="task" id="{{ req.course_codes | strip_spaces}}({{ i }})">
+                    <li class="task" id="{{ req.course_codes | strip_spaces}}({{ i }})"
+                        onclick="changeColour('{{ req.course_codes | strip_spaces}}({{ i }})')">
                        <p>{{ req.course_codes }}</p>
 {#                       <i class="material-icons list-icon">info</i>#}
                     </li>
@@ -53,7 +57,8 @@
             {%  endfor %}
             {% for req in minor_requirements %}
                 {% for i in req.number_of_courses|times %}
-                    <li class="task" id="{{ req.course_codes | strip_spaces}}({{ i }})">
+                    <li class="task" id="{{ req.course_codes | strip_spaces}}({{ i }})"
+                        onclick="changeColour('{{ req.course_codes | strip_spaces}}({{ i }})')">
                        <p>{{ req.course_codes }} </p>
 {#                       <i class="material-icons list-icon">info</i>#}
                     </li>

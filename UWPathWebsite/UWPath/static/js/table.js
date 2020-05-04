@@ -3,48 +3,49 @@ const terms = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]; //Add 5A 5B for 
 
 /* Custom Dragula JS */
 window.onload = function() {
-  dragula([
-    document.getElementById("required"),
-    document.getElementById("1A"),
-    document.getElementById("1B"),
-    document.getElementById("2A"),
-    document.getElementById("2B"),
-    document.getElementById("3A"),
-    document.getElementById("3B"),
-    document.getElementById("4A"),
-    document.getElementById("4B"),
-    document.getElementById("5A"),
-    document.getElementById("5B"),
-    document.getElementById("trash")
-  ]).on('drop', function (el, target, source) {
-      const term = $(target).attr("id");
-      const src = $(source).attr("id");
-      let draggedId = el.id;
-      let termIndex = 0;
+    dragger = dragula([
+        document.getElementById("required"),
+        document.getElementById("1A"),
+        document.getElementById("1B"),
+        document.getElementById("2A"),
+        document.getElementById("2B"),
+        document.getElementById("3A"),
+        document.getElementById("3B"),
+        document.getElementById("4A"),
+        document.getElementById("4B"),
+        document.getElementById("5A"),
+        document.getElementById("5B"),
+        document.getElementById("trash")
+    ]);
+    dragger.on('drop', function (el, target, source) {
+        const term = $(target).attr("id");
+        const src = $(source).attr("id");
+        let draggedId = el.id;
+        let termIndex = 0;
 
-      if (term === "trash") {
-          emptyTrash();
-          checkSchedule(termIndex)
-      }
-      else if (term === "required"){
-          // no operations if courses are dragged back to required courses
-          // need to change in future because all course needs to be validated again
-          document.getElementById(draggedId).style.color = "darkslateblue"; // back to original color
-          checkSchedule(termIndex)
-      }
-      else {
-          if (src === "required"){
-              //only check schedule for course after term has been dropped
-              termIndex = terms.indexOf(term);
-          }
-          else{
-              //src is Term Number
-              termIndex = Math.min(terms.indexOf(src), terms.indexOf(term));
-          }
-          // else needs to check all schedule again`
-          checkSchedule(termIndex);
-      }
-  });
+        if (term === "trash") {
+            emptyTrash();
+            checkSchedule(termIndex)
+        }
+        else if (term === "required"){
+            // no operations if courses are dragged back to required courses
+            // need to change in future because all course needs to be validated again
+            document.getElementById(draggedId).style.color = "darkslateblue"; // back to original color
+            checkSchedule(termIndex)
+        }
+        else {
+            if (src === "required"){
+                //only check schedule for course after term has been dropped
+                termIndex = terms.indexOf(term);
+            }
+            else{
+                //src is Term Number
+                termIndex = Math.min(terms.indexOf(src), terms.indexOf(term));
+            }
+            // else needs to check all schedule again`
+            checkSchedule(termIndex);
+        }
+    });
 };
 
 
@@ -108,11 +109,11 @@ function addTask() {
             type: 'get', // This is the default though, you don't actually need to always mention it
             success: function (data) {
                 document.getElementById("required").innerHTML +=
-                    "<li class='task' id='" + id + "'>" + "<p>" + inputTask + "</p></li>";
+                    "<li class='task' id='" + id + "' onclick='changeColour(\"" + id + "\")'>" + "<p>" + inputTask + "</p></li>";
             },
             error: function (data) {
                 document.getElementById("required").innerHTML +=
-                    "<li class='task' id='" + id + "'>" + "<p>" + inputTask + " *</p></li>";
+                    "<li class='task' id='" + id + "' onclick='changeColour(\"" + id + "\")'>" + "<p>" + inputTask + " *</p></li>";
             }
         });
         /* Clear task text from input after adding task */
@@ -146,3 +147,8 @@ function getCurrent(term_index) {
     termCoursesText = [].concat.apply([], termCoursesText);
     return [termCourses, termCoursesText];
 }
+
+function changeColour(str) {
+    document.getElementById(str).style.color = "blue";
+}
+
