@@ -51,6 +51,11 @@ def requirements(request, major, majorExtended= "", minor = "", minorExtended = 
         return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'minor': minor, 'minor_requirements': minor_requirements, 'table1':table1, 'table2':table2})
     return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'table1':table1, 'table2':table2})
 
+
+def contact(request):
+    #Contact me form
+    return render(request, 'contact.html')
+
 # Anything that starts with class (APIView) can be accessed through url.py via Django Restframework
 class AllApp(APIView):
     queryset = UwpathApp.objects.all()
@@ -244,3 +249,5 @@ class UWPath_API(APIView):
             response_data["can_take"] = False
 
         return Response(response_data)
+
+
