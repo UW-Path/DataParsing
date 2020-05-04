@@ -103,4 +103,5 @@ class ValidationCheckAPI:
             return eval(prereq_logic)
         except Exception as e:
             # EMAIL(course, self.prereq_courses, self.prereq_logic, list_of_courses_taken, current_term_courses, e)
+            # Error Log
             return True
