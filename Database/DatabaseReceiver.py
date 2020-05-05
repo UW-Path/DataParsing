@@ -20,7 +20,8 @@ class DatabaseReceiver(DatabaseConnection):
 
         :return: pandas.DataFrame
         """
-        columns = ["index", "course_code", "course_id", "course_name", "credit", "info", "offering", "online"]
+        columns = ["index", "course_code", "course_id", "course_name", "credit", "info", "offering",
+                   "online", "prereqs", "coreqs", "antireqs"]
         data = self.select("*", self.course_table, condition)
         df = pd.DataFrame(data, columns=columns)
         df.set_index("index", inplace=True)
@@ -32,7 +33,7 @@ class DatabaseReceiver(DatabaseConnection):
 
         :return: pandas.DataFrame
         """
-        columns = ["index", "course_code", "prereq", "grades", "not_open", "only_from", "min_level"]
+        columns = ["index", "course_code", "logic", "courses", "grades", "not_open", "only_from", "min_level"]
         data = self.select("*", self.prereqs_table, condition)
         df = pd.DataFrame(data, columns=columns)
         df.set_index("index", inplace=True)

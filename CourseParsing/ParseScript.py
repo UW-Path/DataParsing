@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
     dbc = DatabaseSender()
 
-    dbc.execute("DROP TABLE " + dbc.course_table + ";")
+    dbc.execute("DROP TABLE " + dbc.course_table + " CASCADE;")
     dbc.execute("DROP TABLE " + dbc.prereqs_table + ";")
     dbc.execute("DROP TABLE " + dbc.antireqs_table + ";")
 

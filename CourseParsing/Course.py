@@ -14,8 +14,14 @@ class Course:
     def __init__(self, html):
         self.html = html
         self.code = self.__code()
+
+        self.prereq_text = ""
+        self.coreq_text = ""
+        self.antireq_text = ""
+
         self.prereqs = self.__prereqs()
         self.antireqs = self.__antireqs()
+
         self.info = self.__info()
         self.name = self.__name()
         self.id = self.__id()
@@ -44,8 +50,14 @@ class Course:
         all_i = self.html.find_all("i")
         prereqs = Prereqs()
         for i in all_i:
-            if i and i.string and i.string.replace("\n", " ").strip().startswith(("Coreq:", "Prereq:")):
-                prereqs.load_prereqs(i.string.strip().replace("\n", " "), re.findall("[A-Z][A-Z]+", self.code)[0])
+            if i and i.string:
+                string = i.string.replace("\n", " ").strip()
+                if string.startswith("Prereq:"):
+                    prereqs.load_prereqs(string, re.findall("[A-Z][A-Z]+", self.code)[0])
+                    self.prereq_text = string.replace("Prereq:", "")
+                elif string.startswith("Coreq:"):
+                    prereqs.load_prereqs(string, re.findall("[A-Z][A-Z]+", self.code)[0])
+                    self.coreq_text = string.replace("Coreq:", "")
         return prereqs
 
     def __antireqs(self):
@@ -58,7 +70,9 @@ class Course:
         antireqs = Antireqs()
         for i in all_i:
             if i and i.string and i.string.strip().startswith("Antireq:"):
-                antireqs.load_antireqs(i.string.strip().replace("\n", " "))
+                string = i.string.strip().replace("\n", " ")
+                antireqs.load_antireqs(string)
+                self.antireq_text = string.replace("Antireq:", "")
                 break
         return antireqs
 

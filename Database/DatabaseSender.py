@@ -41,7 +41,10 @@ class DatabaseSender(DatabaseConnection):
             credit VARCHAR(255),
             info VARCHAR(2000),
             offering VARCHAR(255),
-            online BOOLEAN
+            online BOOLEAN,
+            prereqs VARCHAR(500),
+            coreqs VARCHAR(500),
+            antireqs VARCHAR(500)
         )"""
         self.execute(command)
 
@@ -179,10 +182,11 @@ class DatabaseSender(DatabaseConnection):
         not_exist = "SELECT 1 FROM " + self.course_table + "\n"
         not_exist += "WHERE course_code = '" + course.code + "'"
         command = "INSERT INTO " + self.course_table + " (course_code, course_id, course_name, credit, info, " + \
-                  "offering, online) "
+                  "offering, online, prereqs, coreqs, antireqs) "
         command += "SELECT '" + course.code + "', '" + course.id + "', '" + course.name + "', '" + \
                    str(course.credit) + "', '" + course.info.replace("'", "''") + "', '" + ",".join(course.offering) + \
-                   "', " + str(course.online) + "\n"
+                   "', " + str(course.online) + ", '" + course.prereq_text.replace("'", "''") + "', '" + \
+                   course.coreq_text.replace("'", "''") + "', '" + course.antireq_text.replace("'", "''") + "'\n"
         command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
 
         return self.execute(command)

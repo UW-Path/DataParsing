@@ -116,11 +116,11 @@ function addTask() {
             type: 'get', // This is the default though, you don't actually need to always mention it
             success: function (data) {
                 document.getElementById("required").innerHTML +=
-                    "<li class='task' id='" + id + "' onclick='changeColour(\"" + id + "\")'>" + "<p>" + inputTask + "</p></li>";
+                    "<li class='task' id='" + id + "' onclick='popupWindow(\"" + id + "\")'>" + "<p>" + inputTask + "</p></li>";
             },
             error: function (data) {
                 document.getElementById("required").innerHTML +=
-                    "<li class='task' id='" + id + "' onclick='changeColour(\"" + id + "\")'>" + "<p>" + inputTask + " *</p></li>";
+                    "<li class='task' id='" + id + "' onclick='popupWindow(\"" + id + "\")'>" + "<p>" + inputTask + " *</p></li>";
             }
         });
         /* Clear task text from input after adding task */
@@ -154,49 +154,6 @@ function getCurrent(term_index) {
     return [termCourses, termCoursesText];
 }
 
-function popupWindow(str) {
-    let el = document.getElementById(str);
-    let course_text = el.innerText;
-    document.getElementById("popup-1").style.display = "block";
-    debugger;
-    let content = document.getElementsByClassName("popup-content")[0];
-    $.ajax({
-        url: 'http://127.0.0.1:8000/api/course-info/get/' + course_text,
-        type: 'get',
-        async: false,
-        success: function (data) {
-            let code = data.course_code;
-            let id = data.course_id;
-            let name = data.course_name;
-            let credit = data.credit;
-            let info = data.info;
-            let offering = data.offering;
-            let online = data.online;
-
-            html += "<p>" + code + "<br>" + id + "<br>" + name + "<br>" +
-                credit + "<br>" + info + "<br>" + offering + "<br>" + online.toString() + "</p>" +
-                "<button id='close-popup-1'>Close</button>";
-            content.innerHTML = html;
-            var closePopup1 = document.getElementById('close-popup-1');
-
-            closePopup1.addEventListener('click', () => {
-                var popup1 = document.getElementById("popup-1");
-                popup1.style.display = "none";
-            });
-        },
-        error: function () {
-            html += "<p>ERROR</p>" + "<button id='close-popup-1'>Close</button>";
-            content.innerHTML = html;
-            var closePopup1 = document.getElementById('close-popup-1');
-
-            closePopup1.addEventListener('click', () => {
-                var popup1 = document.getElementById("popup-1");
-                popup1.style.display = "none";
-            });
-        }
-    });
-}
-
 function generateHTML(course) {
     let html = "<h3>" + course + "</h3>";
     $.ajax({
@@ -208,15 +165,25 @@ function generateHTML(course) {
             let name = data.course_name;
             let credit = data.credit;
             let info = data.info;
-            let offering = data.offering;
             let online = data.online;
+            let prereqs = data.prereqs;
+            let coreqs = data.coreqs;
+            let antireqs = data.antireqs;
 
-            html += "<large-p><strong>" + name + "</strong> (" + credit + ") ID:" + id +
-                " [" + offering + "]";
+            html += "<p style='font-size: 17px'><b>" + name + "</b> (" + credit + ") ID:" + id;
+            html += "</p><p style='font-size: 15px'>" + info;
             if (online) {
-                html += " Available online";
+                html += "<br><i>Available online.</i>";
             }
-            html += "<br>" + info + "<br></large-p>";
+            html += "</p><p style='font-size: 15px'>";
+            if (prereqs) {
+                html += "<b>Prereq: </b>" + prereqs + "<br>";
+            } if (coreqs) {
+                html += "<b>Coreq: </b>" + coreqs + "<br>";
+            } if (antireqs) {
+                html += "<b>Antireq: </b>" + antireqs + "<br>";
+            }
+            html += "</p>";
         },
         error: function () {
             html += "<large-p>ERROR</large-p>";
