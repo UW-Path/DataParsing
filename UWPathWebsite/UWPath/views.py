@@ -1,8 +1,11 @@
+from django.core.mail import get_connection, send_mail, EmailMessage
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+
+from django_projects import settings
 from .models import UwpathApp, CourseInfo, Prereqs, Antireqs, Requirements, Communications, ContactForm
 from .serializer import AppSerializer, CourseInfoSerializer, AntireqsSerializer, PrereqsSerializer, \
     RequirementsSerializer, CommunicationsSerializer
@@ -60,6 +63,18 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            # for debugging
+            # con = get_connection('django.core.mail.backends.console.EmailBackend')
+            try:
+                subject = cd['subject'] + ' from ' + cd['email']
+                msg = EmailMessage(subject,
+                          cd['message'],
+                          settings.EMAIL_HOST_USER,
+                          [settings.EMAIL_HOST_USER])
+                msg.send()
+            except:
+                return render(request, 'contact.html', {'form': form, 'submitted': submitted, 'error': True})
+
             return HttpResponseRedirect('/contact?submitted=True')
     else:
         form = ContactForm()

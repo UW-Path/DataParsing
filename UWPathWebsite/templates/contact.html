@@ -4,11 +4,16 @@
 
 {% block content %}
     <div style="padding: 1.2em;">
+        {%  if error %}
+            <div class="alert alert-danger">
+                <strong>Sorry, an error has occurred</strong>
+            </div>
+        {% endif %}
         <h1>Contact us</h1>
 
         {% if submitted %}
             <p class="success">
-                Your message was submitted successfully. Thank you.
+                Thank you for contacting us!
             </p>
 
         {% else %}
