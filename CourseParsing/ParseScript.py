@@ -19,6 +19,9 @@ def get_course_codes():
 
 if __name__ == "__main__":
     course_codes = get_course_codes()
+    course_codes.remove("BUS")
+    course_codes.remove("NON-MATH")
+    course_codes.remove('Elective')
 
     dbc = DatabaseSender()
 

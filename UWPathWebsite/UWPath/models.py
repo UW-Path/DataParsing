@@ -94,6 +94,8 @@ class AuthUserUserPermissions(models.Model):
 
 class CourseInfo(models.Model):
     course_code = models.CharField(max_length=255, primary_key=True)
+    course_abbr = models.CharField(max_length=10)
+    course_number = models.IntegerField()
     course_id = models.CharField(max_length=255, blank=True, null=True)
     course_name = models.CharField(max_length=255, blank=True, null=True)
     credit = models.CharField(max_length=255, blank=True, null=True)

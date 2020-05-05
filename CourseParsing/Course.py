@@ -13,7 +13,10 @@ from CourseParsing.Requirements import Prereqs, Antireqs
 class Course:
     def __init__(self, html):
         self.html = html
-        self.code = self.__code()
+        self.course_code = ""
+        self.course_number = ""
+        self.course_abbr = ""
+        self.__code()
 
         self.prereq_text = ""
         self.coreq_text = ""
@@ -39,7 +42,9 @@ class Course:
         course = self.html.find("a").get("name")
         code = re.findall("[A-Z]+", course)[0]
         num = course.strip(code)
-        return code + " " + num
+        self.course_code = code + " " + num
+        self.course_number = num
+        self.course_abbr = code
 
     def __prereqs(self):
         """
@@ -53,10 +58,10 @@ class Course:
             if i and i.string:
                 string = i.string.replace("\n", " ").strip()
                 if string.startswith("Prereq:"):
-                    prereqs.load_prereqs(string, re.findall("[A-Z][A-Z]+", self.code)[0])
+                    prereqs.load_prereqs(string, re.findall("[A-Z][A-Z]+", self.course_code)[0])
                     self.prereq_text = string.replace("Prereq:", "")
                 elif string.startswith("Coreq:"):
-                    prereqs.load_prereqs(string, re.findall("[A-Z][A-Z]+", self.code)[0])
+                    prereqs.load_prereqs(string, re.findall("[A-Z][A-Z]+", self.course_code)[0])
                     self.coreq_text = string.replace("Coreq:", "")
         return prereqs
 
@@ -154,7 +159,7 @@ class Course:
         return []
 
     def __str__(self):
-        output = self.code + ": " + self.name
+        output = self.course_code + ": " + self.name
 
         if self.online:
             output += " (offered Online)"

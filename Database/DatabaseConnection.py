@@ -41,6 +41,7 @@ class DatabaseConnection(object):
             self.cursor.execute(command)
             return True
         except Exception as e:
+            print(command)
             self.root.error(e)
             return False
 

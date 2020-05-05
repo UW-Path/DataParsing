@@ -20,8 +20,8 @@ class DatabaseReceiver(DatabaseConnection):
 
         :return: pandas.DataFrame
         """
-        columns = ["index", "course_code", "course_id", "course_name", "credit", "info", "offering",
-                   "online", "prereqs", "coreqs", "antireqs"]
+        columns = ["index", "course_code", "course_abbr", "course_number", "course_id", "course_name", "credit",
+                   "info", "offering", "online", "prereqs", "coreqs", "antireqs"]
         data = self.select("*", self.course_table, condition)
         df = pd.DataFrame(data, columns=columns)
         df.set_index("index", inplace=True)

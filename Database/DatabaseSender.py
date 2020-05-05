@@ -36,6 +36,8 @@ class DatabaseSender(DatabaseConnection):
         # TODO - remove antireq field
         command = "CREATE TABLE IF NOT EXISTS " + self.course_table + """ (
             course_code VARCHAR(255) PRIMARY KEY,
+            course_abbr VARCHAR(10),
+            course_number INT,
             course_id VARCHAR(255),
             course_name VARCHAR(255),
             credit VARCHAR(255),
@@ -180,13 +182,15 @@ class DatabaseSender(DatabaseConnection):
         :return: boolean
         """
         not_exist = "SELECT 1 FROM " + self.course_table + "\n"
-        not_exist += "WHERE course_code = '" + course.code + "'"
-        command = "INSERT INTO " + self.course_table + " (course_code, course_id, course_name, credit, info, " + \
-                  "offering, online, prereqs, coreqs, antireqs) "
-        command += "SELECT '" + course.code + "', '" + course.id + "', '" + course.name + "', '" + \
-                   str(course.credit) + "', '" + course.info.replace("'", "''") + "', '" + ",".join(course.offering) + \
-                   "', " + str(course.online) + ", '" + course.prereq_text.replace("'", "''") + "', '" + \
-                   course.coreq_text.replace("'", "''") + "', '" + course.antireq_text.replace("'", "''") + "'\n"
+        not_exist += "WHERE course_code = '" + course.course_code + "'"
+        command = "INSERT INTO " + self.course_table + " (course_code, course_abbr, course_number, course_id, " \
+                                                       "course_name, credit, info, offering, online, prereqs," \
+                                                       " coreqs, antireqs) "
+        command += "SELECT '" + course.course_code + "', '" + course.course_abbr + "', " + course.course_number + \
+                   ", '" + course.id + "', '" + course.name + "', '" + str(course.credit) + "', '" + \
+                   course.info.replace("'", "''") + "', '" + ",".join(course.offering) + "', " + str(course.online) + \
+                   ", '" + course.prereq_text.replace("'", "''") + "', '" + course.coreq_text.replace("'", "''") + \
+                   "', '" + course.antireq_text.replace("'", "''") + "'\n"
         command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
 
         return self.execute(command)
@@ -201,8 +205,8 @@ class DatabaseSender(DatabaseConnection):
         success = 0
         fail = 0
         for course in courses:
-            if self.insert_course(course) and self.insert_prereqs(course.code, course.prereqs) and \
-                    self.insert_antireqs(course.code, course.antireqs):
+            if self.insert_course(course) and self.insert_prereqs(course.course_code, course.prereqs) and \
+                    self.insert_antireqs(course.course_code, course.antireqs):
                 success += 1
             else:
                 fail += 1
