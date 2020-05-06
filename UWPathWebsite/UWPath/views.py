@@ -133,8 +133,11 @@ class Course_Info_API(APIView):
             start = int(request.GET['start'])
             end = int(request.GET['end'])
             code = request.GET['code']
-            app = CourseInfo.objects.filter(course_abbr__exact=code)
-            app = app.filter(course_number__gte=start).filter(course_number__lte=end)
+            if (code != "none"):
+                app = CourseInfo.objects.filter(course_abbr__exact=code)
+                app = app.filter(course_number__gte=start).filter(course_number__lte=end)
+            else:
+                app = CourseInfo.objects.filter(course_number__gte=start).filter(course_number__lte=end)
             serializer = CourseInfoSerializer(app, many=True)
             return Response(serializer.data)
         except Exception as e:

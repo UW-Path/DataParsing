@@ -180,7 +180,7 @@ function filter_courses(start, end, code) {
 }
 
 function getListOfCourses(course_text) {
-    let courses = [];
+    let courses = new Set();
     let number_regex = /[1-9][0-9][0-9]/g;
     let range_regex = /[A-Z]+\s?[1-9][0-9][0-9][A-Z]?-[A-Z]+\s?[1-9][0-9][0-9][A-Z]?/g;
     let level_regex = /[A-Z]+ [1-9]00-/g;
@@ -197,7 +197,10 @@ function getListOfCourses(course_text) {
             start = course[0].match(number_regex)[0];
             end = course[1].match(number_regex)[0];
             code = course[0].match(code_regex)[0];
-            courses = courses.concat(filter_courses(start, end, code));
+            let filtered_courses = filter_courses(start, end, code);
+            for (let j = 0; j < filtered_courses.length; j++) {
+                courses.add(filtered_courses[j]);
+            }
         }
         course_text = course_text.replace(range_regex, "");
     }
@@ -208,17 +211,23 @@ function getListOfCourses(course_text) {
         for (i = 0; i < level_courses.length; i++) {
             course = level_courses[i].match(course_regex);
             start = course[0].match(number_regex)[0];
-            end = (Math.floor((parseInt(start) + 100) / 100) * 100).toString();
+            end = 1000;
             code = course[0].match(code_regex)[0];
             if (code == "MATH") {
                 let codes = ["ACTSC", "AMATH", "CO", "CS", "MATBUS", "MATH", "PMATH", "STAT"];
                 let j;
                 for (j = 0; j < codes.length; j++) {
-                    courses = courses.concat(filter_courses(start, end, codes[j]));
+                    let filtered_courses = filter_courses(start, end, codes[j]);
+                    for (let k = 0; k < filtered_courses.length; k++) {
+                        courses.add(filtered_courses[k]);
+                    }
                 }
             }
             else {
-                courses = courses.concat(filter_courses(start, end, code));
+                let filtered_courses = filter_courses(start, end, code);
+                for (let j = 0; j < filtered_courses.length; j++) {
+                    courses.add(filtered_courses[j]);
+                }
             }
         }
         course_text = course_text.replace(level_regex, "");
@@ -227,23 +236,62 @@ function getListOfCourses(course_text) {
     // Generate courses from courses
     let other_courses = course_text.match(course_regex);
     if (other_courses) {
-        courses = courses.concat(other_courses);
+        for (let j = 0; j < other_courses.length; j++) {
+            courses.add(other_courses[j]);
+        }
         course_text = course_text.replace(course_regex, "");
     }
 
     if (course_text === "English List I") {
-        courses = ["EMLS 101R", "EMLS 102R", "EMLS 129R", "ENGL 129R", "ENGL 109", "SPCOM 100", "SPCOM 223"]
+        let filtered_courses = ["EMLS 101R", "EMLS 102R", "EMLS 129R", "ENGL 129R", "ENGL 109", "SPCOM 100", "SPCOM 223"];
+        for (let j = 0; j < filtered_courses.length; j++) {
+            courses.add(filtered_courses[j]);
+        }
     }
     if (course_text === "English List II") {
-        courses = ["EMLS 101R", "EMLS 102R", "EMLS 129R", "ENGL 129R", "ENGL 109", "SPCOM 100", "SPCOM 223",
-                   "EMLS 103R", "EMLS 104R", "EMLS 110R", "ENGL 108B", "ENGL 108D", "ENGL 119", "ENGL 208B", "ENGL 209",
-                   "ENGL 210E", "ENGL 210F", "ENGL 378", "MTHEL 300", "SPCOM 225", "SPCOM 227", "SPCOM 228"]
+        let filtered_courses = ["EMLS 101R", "EMLS 102R", "EMLS 129R", "ENGL 129R", "ENGL 109", "SPCOM 100", "SPCOM 223",
+            "EMLS 103R", "EMLS 104R", "EMLS 110R", "ENGL 108B", "ENGL 108D", "ENGL 119", "ENGL 208B", "ENGL 209",
+            "ENGL 210E", "ENGL 210F", "ENGL 378", "MTHEL 300", "SPCOM 225", "SPCOM 227", "SPCOM 228"];
+        for (let j = 0; j < filtered_courses.length; j++) {
+            courses.add(filtered_courses[j]);
+        }
     }
 
-    return courses;
+    if (course_text === "MATH" || course_text === "NON-MATH") {
+        codes = ["ACTSC", "AMATH", "CO", "CS", "MATBUS", "MATH", "PMATH", "STAT"];
+        for (let i = 0; i < codes.length; i++) {
+            let filtered_courses = filter_courses(100, 1000, codes[i]);
+            for (let j = 0; j < filtered_courses.length; j++) {
+                courses.add(filtered_courses[j]);
+            }
+        }
+        if (course_text === "NON-MATH") {
+            let new_courses = new Set();
+            let filtered_courses = filter_courses(100, 1000, "none");
+            for (let j = 0; j < filtered_courses.length; j++) {
+                new_courses.add(filtered_courses[j]);
+            }
+            courses = new Set([...new_courses].filter(x => !courses.has(x)));
+        }
+    }
+    else {
+        // Generate courses from code
+        let code_courses = course_text.match(code_regex);
+        if (code_courses) {
+            for (i = 0; i < code_courses.length; i++) {
+                let filtered_courses = filter_courses(100, 1000, code_courses[i]);
+                for (let j = 0; j < filtered_courses.length; j++) {
+                    courses.add(filtered_courses[j]);
+                }
+            }
+            course_text = course_text.replace(code_regex, "");
+        }
+    }
+
+    return Array.from(courses);
 }
 
-function generateHTML(course) {
+function generateCourseHTML(course) {
     let html = "<h3>" + course + "</h3>";
     $.ajax({
         url: 'http://127.0.0.1:8000/api/course-info/get/' + course,
@@ -281,12 +329,30 @@ function generateHTML(course) {
     return html;
 }
 
+function generateInputHTML(course, codes) {
+    let html = "<h3>" + course + "</h3>";
+    html += "<p>Enter a course with ";
+    if (course === "MATH") {
+        html += "any ";
+    } else if (course === "NON-MATH") {
+        html += "none ";
+    }
+    html += "of the following abbreviations:</p>";
+    html += "<ul>";
+    for (let i = 0; i < codes.length; i++) {
+        html += "<li>" + codes[i] + "</li>";
+    }
+    html += "</ul>";
+    html += "<label for='course_code'>Course:</label><input type='text' id='course_code' name='course_code'><br><br>";
+    html += "<button id=''>Display course description</button>";
+}
+
 function popupWindow(str) {
     let el = document.getElementById(str);
     let course_text = el.innerText;
     let courses = getListOfCourses(course_text);
     let content = document.getElementsByClassName("popup-content")[0];
-    let html = generateHTML(course_text);
+    let html = generateCourseHTML(course_text);
     html += "<br><button id='close-popup-1'>Close</button>";
     content.innerHTML = html;
     document.getElementById("popup-1").style.display = "block";
