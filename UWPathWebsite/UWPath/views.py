@@ -4,6 +4,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import api_view
 
 from django_projects import settings
 from .models import UwpathApp, CourseInfo, Prereqs, Antireqs, Requirements, Communications, ContactForm
@@ -124,6 +125,20 @@ class Course_Info_API(APIView):
             app = CourseInfo.objects.get(pk=pk)
             return app
         except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    @api_view(('GET',))
+    def filter(request):
+        try:
+            start = int(request.GET['start'])
+            end = int(request.GET['end'])
+            code = request.GET['code']
+            app = CourseInfo.objects.filter(course_abbr__exact=code)
+            app = app.filter(course_number__gte=start).filter(course_number__lte=end)
+            serializer = CourseInfoSerializer(app, many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            print(e)
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
