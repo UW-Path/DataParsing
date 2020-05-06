@@ -54,7 +54,7 @@ class MajorParser:
 
     def __stringIsNumber(self, s):
         s = str(s).split(" ")[0].lower()
-        if "one" in s or "one" in s or "two" in s or "three" in s or "four" in s or "five" in s \
+        if "one" in s or "two" in s or "three" in s or "four" in s or "five" in s \
                 or "six" in s or "seven" in s or "eight" in s or "nine" in s or "ten" in s:
             return True
         else:
