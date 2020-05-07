@@ -30,13 +30,16 @@ def requirements(request, major, majorExtended= "", minor = "", minorExtended = 
     table1 = Communications_List().get_list()
     #Basic honors math req
     table2 = Requirements_List().get_major_requirement("Table II")
+    # so we don't exclude courses from requirement
+    table2_course_codes = [r["course_codes"] for r in table2 if("Table II" in r["additional_requirements"])]
+
 
 
     if majorExtended:
         # this is to solve bug where Degree Name includes '/'
         major = major + "/" + majorExtended
     programs = Requirements_List().get_unique_major()
-    requirements = Requirements_List().get_major_requirement(major)
+    requirements = Requirements_List().get_major_requirement(major).exclude(course_codes__in = table2_course_codes)
     if not requirements:
         return HttpResponseNotFound('<h1>404 Not Found: Major not valid</h1>')
 
@@ -50,7 +53,9 @@ def requirements(request, major, majorExtended= "", minor = "", minorExtended = 
             # this is to solve bug where Degree Name includes '/'
             minor = minor + "/" + minorExtended
         minor_requirements = Requirements_List().get_minor_requirement(minor)
+        requirements_course_codes_list = [r["course_codes"] for r in requirements]
         minor_requirements = minor_requirements.filter(Q(major_name = majorName) | Q(plan_type = "Joint"))
+        minor_requirements = minor_requirements.exclude(course_codes__in = requirements_course_codes_list)
         if not minor_requirements:
             return HttpResponseNotFound('<h1>404 Not Found: Minor not valid</h1>')
         return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'minor': minor, 'minor_requirements': minor_requirements, 'table1':table1, 'table2':table2})
