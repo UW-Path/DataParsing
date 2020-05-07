@@ -24,6 +24,7 @@ window.onload = function() {
         document.getElementById("5B"),
         document.getElementById("trash")
     ]);
+
     dragger.on('drop', function (el, target, source) {
         const term = $(target).attr("id");
         const src = $(source).attr("id");
@@ -277,8 +278,12 @@ function getListOfCourses(course_text) {
     return courses;
 }
 
-function generateCourseHTML(course) {
-    let html = "<h3>" + course + "</h3>";
+function generateCourseHTML(course, isScrollable = false) {
+    // isScrollable check if the course is within a list of courses to choose from
+    // for single courses
+    let html = ""
+    if (isScrollable) html += "<div>" + "<h3>" + course + "</h3>" + "</div>";
+    else html += "<div class='card-header'>" + "<h3>" + course + "</h3>" + "</div>";
     $.ajax({
         url: 'http://127.0.0.1:8000/api/course-info/get/' + course,
         type: 'get',
@@ -292,20 +297,22 @@ function generateCourseHTML(course) {
             let prereqs = data.prereqs;
             let coreqs = data.coreqs;
             let antireqs = data.antireqs;
-
+            if (isScrollable) html += "<div>"
+            else html += "<div class='card-body'>"
             html += "<p style='font-size: 14px'><b>" + name + "</b> (" + credit + ") ID:" + id;
-            html += "</p><div id='wrapper' style='max-height: 170px;'>" + info;
+            html += "</p><div id='wrapper' style='max-height: 170px; overflow-y: initial'>" + info;
             if (online) {
                 html += "<br><i>Available online.</i>";
             }
-            html += "</div>";
+            html += "</br>";
             if (prereqs) {
-                html += "<b>Prereq: </b>" + prereqs + "<br>";
+                html += "</br><b>Prereq: </b>" + prereqs;
             } if (coreqs) {
-                html += "<b>Coreq: </b>" + coreqs + "<br>";
+                html += "</br><b>Coreq: </b>" + coreqs;
             } if (antireqs) {
-                html += "<b>Antireq: </b>" + antireqs + "<br>";
+                html += "</br><b>Antireq: </b>" + antireqs;
             }
+            html += "</div></div>"
         },
         error: function () {
             html += "<large-p>ERROR</large-p>";
@@ -315,21 +322,24 @@ function generateCourseHTML(course) {
 }
 
 function generateScrollHTML(courses, codes, course_text) {
-    let html = "<h3 style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 75ch;\">" + course_text + "</h3>";
-    html += '<div id="container"><div id="left"><div id="wrapper"><ul>';
+    let html = "<div class='card-header'>";
+    html += "<h3 style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 75ch; padding: 0.1rem;\">" + course_text + "</h3></div>";
+    html += "<div class='card-body'>";
+    html += '<div id="container"><div id="left"><div id="wrapper" style="overflow-y: initial"><ul>';
     for (let i = 0; i < codes.length; i++) {
         html += '<li style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 45ch;cursor: pointer" class="bold">' +
             '<a style="color: #007bff" onclick="replaceCourseHTML(\'' +
             codes[i] + '\')">' + codes[i] + "</a>: " + courses[codes[i]] + '</li>';
     }
     html += '</ul></div></div>';
-    html += '<div id="right">' + generateCourseHTML(codes[0]) + '</div></div><br>';
+    html += '<div id="right">' + generateCourseHTML(codes[0], true) + '</div></div><br>';
+    html += "</div>";
     return html;
 }
 
 function replaceCourseHTML(course) {
     let el = document.getElementById("right");
-    el.innerHTML = generateCourseHTML(course);
+    el.innerHTML = generateCourseHTML(course,true);
 }
 
 function popupWindow(str) {
@@ -346,9 +356,10 @@ function popupWindow(str) {
     else {
         html = generateScrollHTML(courses, codes, course_text);
     }
-    html += "<div id='container'><button id='close-popup-1'>Close</button></div>";
+    html += "<div id='container' style='padding: 1em; padding-top: 2em;'><button class='btn btn-danger' id='close-popup-1'>Close</button></div>";
     content.innerHTML = html;
     document.getElementById("popup-1").style.display = "block";
+    document.getElementById("popup-1").style.width = "98%";
 
     let closePopup1 = document.getElementById('close-popup-1');
     closePopup1.addEventListener('click', () => {
