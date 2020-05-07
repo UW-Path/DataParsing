@@ -327,9 +327,8 @@ function generateScrollHTML(courses, codes, course_text) {
     html += "<div class='card-body' style='padding-bottom: 0em'>";
     html += '<div id="container"><div id="left"><div id="wrapper" style="overflow-y: initial"><ul>';
     for (let i = 0; i < codes.length; i++) {
-        html += '<li style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 45ch;cursor: pointer" class="bold">' +
-            '<a style="color: #007bff" onclick="replaceCourseHTML(\'' +
-            codes[i] + '\')">' + codes[i] + "</a>: " + courses[codes[i]] + '</li>';
+        html += '<li style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 45ch;cursor: pointer" class="bold" onclick="replaceCourseHTML(\'' +
+            codes[i] + '\')"><a style="color: #007bff">' + codes[i] + "</a>: " + courses[codes[i]] + '</li>';
     }
     html += '</ul></div></div>';
     html += '<div id="right">' + generateCourseHTML(codes[0], true) + '</div></div><br>';
