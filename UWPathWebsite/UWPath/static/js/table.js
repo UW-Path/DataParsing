@@ -324,8 +324,8 @@ function generateCourseHTML(course, isScrollable = false) {
 function generateScrollHTML(courses, codes, course_text) {
     let html = "<div class='card-header'>";
     html += "<h3 style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 75ch; padding: 0.1rem;\">" + course_text + "</h3></div>";
-    html += "<div class='card-body'>";
-    html += '<div id="container"><div id="left"><div id="wrapper" style="overflow-y: scroll"><ul>';
+    html += "<div class='card-body' style='padding-bottom: 0em'>";
+    html += '<div id="container"><div id="left"><div id="wrapper" style="overflow-y: initial"><ul>';
     for (let i = 0; i < codes.length; i++) {
         html += '<li style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 45ch;cursor: pointer" class="bold">' +
             '<a style="color: #007bff" onclick="replaceCourseHTML(\'' +
@@ -356,7 +356,7 @@ function popupWindow(str) {
     else {
         html = generateScrollHTML(courses, codes, course_text);
     }
-    html += "<div id='container' style='padding: 1em; padding-top: 2em;'><button class='btn btn-danger' id='close-popup-1'>Close</button></div>";
+    html += "<div id='container' style='padding: 1em; padding-top: 0em;'><button class='btn btn-danger' id='close-popup-1'>Close</button></div>";
     content.innerHTML = html;
     document.getElementById("popup-1").style.display = "block";
     document.getElementById("popup-1").style.width = "98%";
