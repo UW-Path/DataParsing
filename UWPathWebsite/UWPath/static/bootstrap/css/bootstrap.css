@@ -10249,8 +10249,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 #container{width:100%;overflow: hidden}
-#left{float:left;width:40%;overflow-y: scroll}
-#right{float:right;width:60%;overflow-y: scroll}
+#left{float:left;width:37%;overflow-y: scroll; min-height: 44vh;}
+#right{float:right;width:60%;overflow-y: scroll; min-height: 44vh;}
 
 .bold:hover{
   font-weight:bold;
