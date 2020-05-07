@@ -281,9 +281,9 @@ function getListOfCourses(course_text) {
 function generateCourseHTML(course, isScrollable = false) {
     // isScrollable check if the course is within a list of courses to choose from
     // for single courses
-    let html = ""
-    if (isScrollable) html += "<div>" + "<h3>" + course + "</h3>" + "</div>";
-    else html += "<div class='card-header'>" + "<h3>" + course + "</h3>" + "</div>";
+    let html = "";
+    if (isScrollable) html += "<button class='btn btn-primary' id='select-course' style='float: right;'>Select</button><div>" + "<h3>" + course + "</h3></div>";
+    else html += "<div class='card-header'><a class=\"close\" id='close-popup-1'>×</a>" + "<h3>" + course + "</h3></div>";
     $.ajax({
         url: 'http://127.0.0.1:8000/api/course-info/get/' + course,
         type: 'get',
@@ -297,8 +297,8 @@ function generateCourseHTML(course, isScrollable = false) {
             let prereqs = data.prereqs;
             let coreqs = data.coreqs;
             let antireqs = data.antireqs;
-            if (isScrollable) html += "<div>"
-            else html += "<div class='card-body'>"
+            if (isScrollable) html += "<div>";
+            else html += "<div class='card-body'>";
             html += "<p style='font-size: 14px'><b>" + name + "</b> (" + credit + ") ID:" + id;
             html += "</p><div id='wrapper' style='max-height: 170px; overflow-y: initial'>" + info;
             if (online) {
@@ -322,7 +322,7 @@ function generateCourseHTML(course, isScrollable = false) {
 }
 
 function generateScrollHTML(courses, codes, course_text) {
-    let html = "<div class='card-header'>";
+    let html = "<div class='card-header'><a class=\"close\" id='close-popup-1'>×</a>";
     html += "<h3 style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 75ch; padding: 0.1rem;\">" + course_text + "</h3></div>";
     html += "<div class='card-body' style='padding-bottom: 0em'>";
     html += '<div id="container"><div id="left"><div id="wrapper" style="overflow-y: initial"><ul>';
@@ -355,7 +355,6 @@ function popupWindow(str) {
     else {
         html = generateScrollHTML(courses, codes, course_text);
     }
-    html += "<div id='container' style='padding: 1em; padding-top: 0em;'><button class='btn btn-danger' id='close-popup-1'>Close</button></div>";
     content.innerHTML = html;
     document.getElementById("popup-1").style.display = "block";
     document.getElementById("popup-1").style.width = "98%";
