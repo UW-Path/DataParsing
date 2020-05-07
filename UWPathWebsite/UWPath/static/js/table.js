@@ -318,7 +318,7 @@ function generateScrollHTML(courses, codes, course_text) {
     let html = "<h3 style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 75ch;\">" + course_text + "</h3>";
     html += '<div id="container"><div id="left"><div id="wrapper"><ul>';
     for (let i = 0; i < codes.length; i++) {
-        html += '<li style="word-wrap: break-word"><a style="color: #007bff;cursor: pointer" onclick="replaceCourseHTML(\'' +
+        html += '<li style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 45ch;" class="bold"><a style="color: #007bff;cursor: pointer" onclick="replaceCourseHTML(\'' +
             codes[i] + '\')">' + codes[i] + "</a>: " + courses[codes[i]] + '</li>';
     }
     html += '</ul></div></div>';

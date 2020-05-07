@@ -10244,11 +10244,15 @@ a.text-dark:hover, a.text-dark:focus {
 #wrapper {
   overflow-y:auto;
   max-height: 300px;
-  width:90%;
+  width:100%;
   position: relative;
 }
 
 #container{width:100%;overflow: hidden}
 #left{float:left;width:40%;overflow-y: scroll}
 #right{float:right;width:60%;overflow-y: scroll}
+
+.bold:hover{
+  font-weight:bold;
+}
 /*# sourceMappingURL=bootstrap.css.map */
