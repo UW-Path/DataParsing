@@ -43,3 +43,27 @@ body {
 .contact-link{
   font-size: 1.5em;
 }
+
+
+/*Button in homepage*/
+.home-page-btn{
+  border-radius: 0.5em;
+  font-weight: 600;
+  margin: 0 10px;
+  width: 14em;
+  padding: 10px 0;
+  transition: 0.4s;
+}
+
+.log {
+  color: #3949ab;
+  background-color: rgba(255, 255, 255, 1);
+  border: 0.1em solid #3949ab;
+}
+
+
+.home-page-btn:hover {
+  color: white;
+  box-shadow: 0 0 20px #7986cb;
+  background-color: #3949ab;
+}
