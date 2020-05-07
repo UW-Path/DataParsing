@@ -109,7 +109,9 @@ class ValidationCheckAPI:
         except Exception as e:
             # EMAIL(course, self.prereq_courses, self.prereq_logic, list_of_courses_taken, current_term_courses, e)
             # Error Log
-            error_message = "Error Message: " + str(e) + ". \n\nOccurred at: " + str(datetime.now())
+            error_message = "Error Message: " + str(e) + "."
+            error_message += "\n\ncan_take_course({}, {}, {})".format(list_of_courses_taken, current_term_courses, course)
+            error_message += "\n\nOccurred at: " + str(datetime.now()) + " (UTC)"
             msg = EmailMessage("Error in ValidationCheckAPI/CanTakeCourse",
                                error_message,
                                settings.EMAIL_HOST_USER,
