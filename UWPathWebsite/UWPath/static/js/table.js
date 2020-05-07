@@ -155,7 +155,7 @@ function getCurrent(term_index) {
 }
 
 function filter_courses(start, end, code) {
-    let courses = [];
+    let course_title = {};
     $.ajax({
         url: 'http://127.0.0.1:8000/api/course-info/filter',
         type: 'get',
@@ -168,7 +168,7 @@ function filter_courses(start, end, code) {
         success: function (data) {
             let i;
             for (i = 0; i < data.length; i++) {
-                courses.push(data[i].course_code);
+                course_title[data[i].course_code] = data[i].course_name;
             }
         },
         error: function (xhr, status, error) {
@@ -176,11 +176,11 @@ function filter_courses(start, end, code) {
             alert(err.Message);
         }
     });
-    return courses;
+    return course_title;
 }
 
 function getListOfCourses(course_text) {
-    let courses = new Set();
+    let courses = {};
     let number_regex = /[1-9][0-9][0-9]/g;
     let range_regex = /[A-Z]+\s?[1-9][0-9][0-9][A-Z]?-[A-Z]+\s?[1-9][0-9][0-9][A-Z]?/g;
     let level_regex = /[A-Z]+ [1-9]00-/g;
@@ -198,9 +198,7 @@ function getListOfCourses(course_text) {
             end = course[1].match(number_regex)[0];
             code = course[0].match(code_regex)[0];
             let filtered_courses = filter_courses(start, end, code);
-            for (let j = 0; j < filtered_courses.length; j++) {
-                courses.add(filtered_courses[j]);
-            }
+            courses = Object.assign({}, courses, filtered_courses);
         }
         course_text = course_text.replace(range_regex, "");
     }
@@ -218,16 +216,12 @@ function getListOfCourses(course_text) {
                 let j;
                 for (j = 0; j < codes.length; j++) {
                     let filtered_courses = filter_courses(start, end, codes[j]);
-                    for (let k = 0; k < filtered_courses.length; k++) {
-                        courses.add(filtered_courses[k]);
-                    }
+                    courses = Object.assign({}, courses, filtered_courses);
                 }
             }
             else {
                 let filtered_courses = filter_courses(start, end, code);
-                for (let j = 0; j < filtered_courses.length; j++) {
-                    courses.add(filtered_courses[j]);
-                }
+                courses = Object.assign({}, courses, filtered_courses);
             }
         }
         course_text = course_text.replace(level_regex, "");
@@ -236,42 +230,40 @@ function getListOfCourses(course_text) {
     // Generate courses from courses
     let other_courses = course_text.match(course_regex);
     if (other_courses) {
-        for (let j = 0; j < other_courses.length; j++) {
-            courses.add(other_courses[j]);
-        }
+        let filtered_courses = filter_courses(0, 1000, other_courses.toString());
+        courses = Object.assign({}, courses, filtered_courses);
         course_text = course_text.replace(course_regex, "");
     }
 
     if (course_text === "English List I") {
         let filtered_courses = ["EMLS 101R", "EMLS 102R", "EMLS 129R", "ENGL 129R", "ENGL 109", "SPCOM 100", "SPCOM 223"];
-        for (let j = 0; j < filtered_courses.length; j++) {
-            courses.add(filtered_courses[j]);
-        }
+        filtered_courses = filter_courses(0, 1000, filtered_courses.toString());
+        courses = Object.assign({}, courses, filtered_courses);
     }
-    if (course_text === "English List II") {
+    else if (course_text === "English List II") {
         let filtered_courses = ["EMLS 101R", "EMLS 102R", "EMLS 129R", "ENGL 129R", "ENGL 109", "SPCOM 100", "SPCOM 223",
             "EMLS 103R", "EMLS 104R", "EMLS 110R", "ENGL 108B", "ENGL 108D", "ENGL 119", "ENGL 208B", "ENGL 209",
             "ENGL 210E", "ENGL 210F", "ENGL 378", "MTHEL 300", "SPCOM 225", "SPCOM 227", "SPCOM 228"];
-        for (let j = 0; j < filtered_courses.length; j++) {
-            courses.add(filtered_courses[j]);
-        }
+        filtered_courses = filter_courses(0, 1000, filtered_courses.toString());
+        courses = Object.assign({}, courses, filtered_courses);
     }
 
-    if (course_text === "MATH" || course_text === "NON-MATH") {
+    else if (course_text === "MATH" || course_text === "NON-MATH") {
         codes = ["ACTSC", "AMATH", "CO", "CS", "MATBUS", "MATH", "PMATH", "STAT"];
         for (let i = 0; i < codes.length; i++) {
             let filtered_courses = filter_courses(100, 1000, codes[i]);
-            for (let j = 0; j < filtered_courses.length; j++) {
-                courses.add(filtered_courses[j]);
-            }
+            courses = Object.assign({}, courses, filtered_courses);
         }
         if (course_text === "NON-MATH") {
-            let new_courses = new Set();
+            let new_courses = {};
             let filtered_courses = filter_courses(100, 1000, "none");
-            for (let j = 0; j < filtered_courses.length; j++) {
-                new_courses.add(filtered_courses[j]);
+            new_courses = Object.assign({}, new_courses, filtered_courses);
+            let course_keys = [...Object.keys(new_courses)].filter(x => !Object.keys(courses).has(x));
+            new_courses = {};
+            for (let i = 0; i < course_keys.length; i++) {
+                new_courses[course_keys[i]] = courses[course_keys];
             }
-            courses = new Set([...new_courses].filter(x => !courses.has(x)));
+            courses = new_courses;
         }
     }
     else {
@@ -280,15 +272,13 @@ function getListOfCourses(course_text) {
         if (code_courses) {
             for (i = 0; i < code_courses.length; i++) {
                 let filtered_courses = filter_courses(100, 1000, code_courses[i]);
-                for (let j = 0; j < filtered_courses.length; j++) {
-                    courses.add(filtered_courses[j]);
-                }
+                courses = Object.assign({}, courses, filtered_courses);
             }
             course_text = course_text.replace(code_regex, "");
         }
     }
 
-    return Array.from(courses);
+    return courses;
 }
 
 function generateCourseHTML(course) {
@@ -307,12 +297,12 @@ function generateCourseHTML(course) {
             let coreqs = data.coreqs;
             let antireqs = data.antireqs;
 
-            html += "<p style='font-size: 17px'><b>" + name + "</b> (" + credit + ") ID:" + id;
-            html += "</p><p style='font-size: 15px'>" + info;
+            html += "<p style='font-size: 14px'><b>" + name + "</b> (" + credit + ") ID:" + id;
+            html += "</p><div id='wrapper' style='max-height: 220px;'>" + info;
             if (online) {
                 html += "<br><i>Available online.</i>";
             }
-            html += "</p><p style='font-size: 15px'>";
+            html += "<p style='font-size: 14px'>";
             if (prereqs) {
                 html += "<b>Prereq: </b>" + prereqs + "<br>";
             } if (coreqs) {
@@ -320,7 +310,7 @@ function generateCourseHTML(course) {
             } if (antireqs) {
                 html += "<b>Antireq: </b>" + antireqs + "<br>";
             }
-            html += "</p>";
+            html += "</p></div>";
         },
         error: function () {
             html += "<large-p>ERROR</large-p>";
@@ -329,31 +319,32 @@ function generateCourseHTML(course) {
     return html;
 }
 
-function generateInputHTML(course, codes) {
-    let html = "<h3>" + course + "</h3>";
-    html += "<p>Enter a course with ";
-    if (course === "MATH") {
-        html += "any ";
-    } else if (course === "NON-MATH") {
-        html += "none ";
-    }
-    html += "of the following abbreviations:</p>";
-    html += "<ul>";
+function generateScrollHTML(courses, codes, course_text) {
+    let html = "<h3>" + course_text + "</h3>";
+    html += '<div id="container"><div id="left"><div id="wrapper"><ul>';
     for (let i = 0; i < codes.length; i++) {
-        html += "<li>" + codes[i] + "</li>";
+        html += '<li style="word-wrap: break-word">' + codes[i] + ": " + courses[codes[i]] + '</li>';
     }
-    html += "</ul>";
-    html += "<label for='course_code'>Course:</label><input type='text' id='course_code' name='course_code'><br><br>";
-    html += "<button id=''>Display course description</button>";
+    html += '</ul></div></div>';
+    html += '<div id="right">' + generateCourseHTML(codes[0]) + '</div></div><br>';
+    return html;
 }
 
 function popupWindow(str) {
     let el = document.getElementById(str);
     let course_text = el.innerText;
     let courses = getListOfCourses(course_text);
+    let codes = Object.keys(courses);
+
     let content = document.getElementsByClassName("popup-content")[0];
-    let html = generateCourseHTML(course_text);
-    html += "<br><button id='close-popup-1'>Close</button>";
+    let html = "";
+    if (codes.length === 1) {
+        html = generateCourseHTML(codes[0]);
+    }
+    else {
+        html = generateScrollHTML(courses, codes, course_text);
+    }
+    html += "<div id='container'><button id='close-popup-1'>Close</button></div>";
     content.innerHTML = html;
     document.getElementById("popup-1").style.display = "block";
 

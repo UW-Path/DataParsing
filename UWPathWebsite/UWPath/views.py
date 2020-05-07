@@ -133,7 +133,11 @@ class Course_Info_API(APIView):
             start = int(request.GET['start'])
             end = int(request.GET['end'])
             code = request.GET['code']
-            if (code != "none"):
+            if any(char.isdigit() for char in code):
+                code = code.split(",")
+                app = CourseInfo.objects.filter(course_code__in=code)
+                app = app.filter(course_number__gte=start).filter(course_number__lte=end)
+            elif code != "none":
                 app = CourseInfo.objects.filter(course_abbr__exact=code)
                 app = app.filter(course_number__gte=start).filter(course_number__lte=end)
             else:
