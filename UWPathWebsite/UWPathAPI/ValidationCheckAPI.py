@@ -15,6 +15,8 @@ from django.core.mail import EmailMessage
 
 from django_projects import settings
 
+import re
+
 
 def get_char(i):
     if i + ord('A') > ord('Z'):
@@ -76,6 +78,32 @@ class ValidationCheckAPI:
         else:
             self.prereq_courses = []
 
+    def level_can_take(self, logic, course, taken_courses, i):
+        if course.endswith("000"):
+            print(logic.find(get_char(i)))
+            new_string = ""
+            for taken in taken_courses:
+                course_start = re.match("[A-Z]+ [1-9]", taken).group(0)
+                if course_start == course[:-3]:
+                    new_string += "True and "
+            if new_string == "":
+                logic = logic.replace(get_char(i)+" ", "False ")
+            else:
+                logic = logic.replace(get_char(i)+" ", new_string[:-5]+" ")
+            print(logic)
+        elif course in taken_courses:
+            logic = logic.replace(get_char(i)+" ", "True ")
+        else:
+            logic = logic.replace(get_char(i)+" ", "False ")
+
+        iter = re.finditer("len\\(tuple\\(filter\\(None,\\[ (?:True|False)((?: and True)+)", logic)
+        for m in iter:
+            start = m.start(0)
+            end = m.end(0)
+            logic = logic[:start] + logic[start:end].replace(" and", ",") + logic[end:]
+
+        return logic
+
     def can_take_course(self, list_of_courses_taken, current_term_courses, course):
         # TODO Throw errors in the future
         """
@@ -94,15 +122,11 @@ class ValidationCheckAPI:
         prereq_logic = self.prereq_logic
         for i in range(len(self.prereq_courses)):
             if self.prereq_courses[i][0] == "_":
-                if self.prereq_courses[i][1:] in list_of_courses_taken + current_term_courses:
-                    prereq_logic = prereq_logic.replace(get_char(i)+" ", "True ")
-                else:
-                    prereq_logic = prereq_logic.replace(get_char(i)+" ", "False ")
+                prereq_logic = self.level_can_take(prereq_logic, self.prereq_courses[i][1:],
+                                                   list_of_courses_taken + current_term_courses, i)
             else:
-                if self.prereq_courses[i] in list_of_courses_taken:
-                    prereq_logic = prereq_logic.replace(get_char(i)+" ", "True ")
-                else:
-                    prereq_logic = prereq_logic.replace(get_char(i)+" ", "False ")
+                prereq_logic = self.level_can_take(prereq_logic, self.prereq_courses[i],
+                                                   list_of_courses_taken, i)
 
         try:
             return eval(prereq_logic)

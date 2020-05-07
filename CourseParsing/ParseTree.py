@@ -88,7 +88,7 @@ def translate_to_python(logic, courses=None):
             i += logic[i:].index(")")
         elif in_cond and logic[i] in "&)":
             in_cond = False
-            logic[i] = "]))))"
+            logic[i] = "])))))"
         elif in_cond and logic[i] == "|":
             logic[i] = ","
         i += 1
