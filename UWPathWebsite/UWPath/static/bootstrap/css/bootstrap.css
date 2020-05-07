@@ -10236,7 +10236,7 @@ a.text-dark:hover, a.text-dark:focus {
   margin: 0 auto;
   background-color: white;
   width: 85%;
-  max-height: 420px;
+  max-height: inherit;
   top: 5vh;
   border:2px black solid;
 }
@@ -10248,7 +10248,15 @@ a.text-dark:hover, a.text-dark:focus {
   position: relative;
 }
 
-#container{width:100%;overflow: hidden}
+#container{
+  width:100%;
+  overflow: hidden;
+  max-height: inherit;
+  box-sizing:border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
 #left{float:left;width:37%;overflow-y: scroll; min-height: 44vh;}
 #right{float:right;width:60%;overflow-y: scroll; min-height: 44vh;}
 
