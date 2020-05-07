@@ -325,7 +325,7 @@ function generateScrollHTML(courses, codes, course_text) {
     let html = "<div class='card-header'>";
     html += "<h3 style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 75ch; padding: 0.1rem;\">" + course_text + "</h3></div>";
     html += "<div class='card-body'>";
-    html += '<div id="container"><div id="left"><div id="wrapper" style="overflow-y: initial"><ul>';
+    html += '<div id="container"><div id="left"><div id="wrapper" style="overflow-y: scroll"><ul>';
     for (let i = 0; i < codes.length; i++) {
         html += '<li style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 45ch;cursor: pointer" class="bold">' +
             '<a style="color: #007bff" onclick="replaceCourseHTML(\'' +
