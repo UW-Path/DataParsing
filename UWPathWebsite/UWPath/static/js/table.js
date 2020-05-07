@@ -248,23 +248,19 @@ function getListOfCourses(course_text) {
         courses = Object.assign({}, courses, filtered_courses);
     }
 
-    else if (course_text === "MATH" || course_text === "NON-MATH") {
+    else if (course_text === "MATH") {
         codes = ["ACTSC", "AMATH", "CO", "CS", "MATBUS", "MATH", "PMATH", "STAT"];
-        for (let i = 0; i < codes.length; i++) {
-            let filtered_courses = filter_courses(100, 1000, codes[i]);
-            courses = Object.assign({}, courses, filtered_courses);
-        }
-        if (course_text === "NON-MATH") {
-            let new_courses = {};
-            let filtered_courses = filter_courses(100, 1000, "none");
-            new_courses = Object.assign({}, new_courses, filtered_courses);
-            let course_keys = [...Object.keys(new_courses)].filter(x => !Object.keys(courses).has(x));
-            new_courses = {};
-            for (let i = 0; i < course_keys.length; i++) {
-                new_courses[course_keys[i]] = courses[course_keys];
-            }
-            courses = new_courses;
-        }
+        let filtered_courses = filter_courses(100, 1000, codes.toString());
+        courses = Object.assign({}, courses, filtered_courses);
+    }
+    else if (course_text === "NON-MATH") {
+        codes = ["ACTSC", "AMATH", "CO", "CS", "MATBUS", "MATH", "PMATH", "STAT"];
+        let filtered_courses = filter_courses(100, 1000, "~"+codes.toString());
+        courses = Object.assign({}, courses, filtered_courses);
+    }
+    else if (course_text === "Elective") {
+        let filtered_courses = filter_courses(100, 1000, "none");
+        courses = Object.assign({}, courses, filtered_courses);
     }
     else {
         // Generate courses from code
@@ -298,11 +294,11 @@ function generateCourseHTML(course) {
             let antireqs = data.antireqs;
 
             html += "<p style='font-size: 14px'><b>" + name + "</b> (" + credit + ") ID:" + id;
-            html += "</p><div id='wrapper' style='max-height: 220px;'>" + info;
+            html += "</p><div id='wrapper' style='max-height: 170px;'>" + info;
             if (online) {
                 html += "<br><i>Available online.</i>";
             }
-            html += "<p style='font-size: 14px'>";
+            html += "</div>";
             if (prereqs) {
                 html += "<b>Prereq: </b>" + prereqs + "<br>";
             } if (coreqs) {
@@ -310,7 +306,6 @@ function generateCourseHTML(course) {
             } if (antireqs) {
                 html += "<b>Antireq: </b>" + antireqs + "<br>";
             }
-            html += "</p></div>";
         },
         error: function () {
             html += "<large-p>ERROR</large-p>";
@@ -320,21 +315,27 @@ function generateCourseHTML(course) {
 }
 
 function generateScrollHTML(courses, codes, course_text) {
-    let html = "<h3>" + course_text + "</h3>";
+    let html = "<h3 style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 75ch;\">" + course_text + "</h3>";
     html += '<div id="container"><div id="left"><div id="wrapper"><ul>';
     for (let i = 0; i < codes.length; i++) {
-        html += '<li style="word-wrap: break-word">' + codes[i] + ": " + courses[codes[i]] + '</li>';
+        html += '<li style="word-wrap: break-word"><a style="color: #007bff;cursor: pointer" onclick="replaceCourseHTML(\'' +
+            codes[i] + '\')">' + codes[i] + "</a>: " + courses[codes[i]] + '</li>';
     }
     html += '</ul></div></div>';
     html += '<div id="right">' + generateCourseHTML(codes[0]) + '</div></div><br>';
     return html;
 }
 
+function replaceCourseHTML(course) {
+    let el = document.getElementById("right");
+    el.innerHTML = generateCourseHTML(course);
+}
+
 function popupWindow(str) {
     let el = document.getElementById(str);
     let course_text = el.innerText;
     let courses = getListOfCourses(course_text);
-    let codes = Object.keys(courses);
+    let codes = Object.keys(courses).sort();
 
     let content = document.getElementsByClassName("popup-content")[0];
     let html = "";
