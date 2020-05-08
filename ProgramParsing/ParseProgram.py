@@ -13,7 +13,7 @@ if __name__ == "__main__":
                      "MATH-Mathematical-Optimization1.html",]
     filesToIgnore = ["/ProgramSpecs/" + f for f in filesToIgnore]
 
-    #files = ["/ProgramSpecs/MATH-Joint-Pure-Mathematics1.html"] #use this for single files
+    # files = ["/ProgramSpecs/MATH-Computer-Sci-Business-Spec.html"] #use this for single files
 
     #TODO parse which specialization is under which major
 

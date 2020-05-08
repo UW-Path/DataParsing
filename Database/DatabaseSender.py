@@ -21,7 +21,7 @@ class DatabaseSender(DatabaseConnection):
             id SERIAL PRIMARY KEY,
             program_name VARCHAR(255),
             plan_type VARCHAR(255),
-            course_codes VARCHAR(255),
+            course_codes VARCHAR(510),
             number_of_courses int,
             additional_requirements VARCHAR(255), 
             major_name VARCHAR(255) 
@@ -221,7 +221,7 @@ class DatabaseSender(DatabaseConnection):
         :return: None
         """
         not_exist = "SELECT 1 FROM " + self.requirements_table + "\n"
-        not_exist += "WHERE course_codes = '" + requirement.courseCodes + "' AND program_name = '" + requirement.programName + "'"
+        not_exist += "WHERE course_codes = '" + requirement.courseCodes + "' AND program_name = '" + requirement.programName + "' AND major_name = '" + requirement.majorName + "'"
 
         command = "INSERT INTO " + self.requirements_table + " (program_name, plan_type, course_codes, number_of_courses, additional_requirements, major_name) "
         command += "SELECT '" + requirement.programName + "', '" + requirement.planType + "', '" + requirement.courseCodes + "', " + str(requirement.numberOfCourses)

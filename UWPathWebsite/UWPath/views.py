@@ -39,7 +39,32 @@ def requirements(request, major, majorExtended= "", minor = "", minorExtended = 
         # this is to solve bug where Degree Name includes '/'
         major = major + "/" + majorExtended
     programs = Requirements_List().get_unique_major()
+    #Prevent duplicate courses in table II and major
     requirements = Requirements_List().get_major_requirement(major).exclude(course_codes__in = table2_course_codes)
+
+    #check for additional req in major
+    if requirements:
+        additional_req = requirements.first()["additional_requirements"]
+        if "Honours" or "BCS" in additional_req:
+            #find additional req
+            additional_req_list = additional_req.split(",")
+            for i in additional_req_list:
+                if "Honours" in i or "BCS" in i:
+                    if i == "BCS":
+                        bcs_req = Requirements_List().get_major_requirement("Bachelor of Computer Science")
+                        requirements = bcs_req | requirements
+                        if "Table II" in bcs_req.first()["additional_requirements"]:
+                            requirements = table2 | requirements
+                        requirements = requirements.distinct()
+                    else:
+                        i = str(i).replace("Honours ", "")
+                        new_req = Requirements_List().get_major_requirement(i)
+                        requirements = new_req | requirements
+                        if "Table II" in new_req.first()["additional_requirements"]:
+                            requirements = table2 | requirements
+                        requirements = requirements.distinct()
+                    break
+
     if not requirements:
         return HttpResponseNotFound('<h1>404 Not Found: Major not valid</h1>')
 
