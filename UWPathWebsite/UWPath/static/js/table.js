@@ -287,6 +287,7 @@ function replaceCourse(element, course) {
 }
 
 function generateCourseHTML(course, isScrollable = false, element = "") {
+    let uwFlowLink = "https://uwflow.com/course/" + course.replace(" ", "");
     // isScrollable check if the course is within a list of courses to choose from
     // for single courses
     let html = "";
@@ -310,7 +311,8 @@ function generateCourseHTML(course, isScrollable = false, element = "") {
             let antireqs = data.antireqs;
             if (isScrollable) html += "<div>";
             else html += "<div class='card-body'><div id=\"container\" style='overflow-y: scroll; min-height: 44vh;'>";
-            html += "<p style='font-size: 14px'><b>" + name + "</b> (" + credit + ") ID:" + id;
+            html += "<br style='font-size: 14px'><b>" + name + "</b> (" + credit + ") ID:" + id + " "
+                + "</br><a href='" + uwFlowLink + "'target='_blank'>Course Schedule</a>";
             html += "</p><div id='wrapper' style='max-height: 170px; overflow-y: initial'>" + info;
             if (online) {
                 html += "<br><i>Available online.</i>";
