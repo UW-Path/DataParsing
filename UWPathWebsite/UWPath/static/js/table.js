@@ -278,17 +278,15 @@ function getListOfCourses(course_text) {
     return courses;
 }
 
+function closePopup() {
+    let popup1 = document.getElementById("popup-1");
+    popup1.style.display = "none";
+}
+
 function replaceCourse(element, course) {
     let el = document.getElementById(element);
     el.innerHTML = "<p>" + course + "</p>";
-    let content = document.getElementsByClassName("popup-content")[0];
-    content.innerHTML = generateCourseHTML(course);
-
-    let closePopup1 = document.getElementById('close-popup-1');
-    closePopup1.addEventListener('click', () => {
-        let popup1 = document.getElementById("popup-1");
-        popup1.style.display = "none";
-    });
+    closePopup();
 }
 
 function generateCourseHTML(course, isScrollable = false, element = "") {
@@ -378,7 +376,6 @@ function popupWindow(str) {
 
     let closePopup1 = document.getElementById('close-popup-1');
     closePopup1.addEventListener('click', () => {
-        let popup1 = document.getElementById("popup-1");
-        popup1.style.display = "none";
+        closePopup();
     });
 }
