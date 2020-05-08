@@ -44,6 +44,7 @@ footer {
 }
 
 .main-container {
+  overflow-x: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -139,6 +140,10 @@ ul {
 
 li {
   list-style-type: none;
+}
+
+li:first-child {
+  /*something*/
 }
 
 .column-button {
