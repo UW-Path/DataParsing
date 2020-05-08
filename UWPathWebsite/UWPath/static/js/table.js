@@ -278,11 +278,27 @@ function getListOfCourses(course_text) {
     return courses;
 }
 
-function generateCourseHTML(course, isScrollable = false) {
+function replaceCourse(element, course) {
+    let el = document.getElementById(element);
+    el.innerHTML = "<p>" + course + "</p>";
+    let content = document.getElementsByClassName("popup-content")[0];
+    content.innerHTML = generateCourseHTML(course);
+
+    let closePopup1 = document.getElementById('close-popup-1');
+    closePopup1.addEventListener('click', () => {
+        let popup1 = document.getElementById("popup-1");
+        popup1.style.display = "none";
+    });
+}
+
+function generateCourseHTML(course, isScrollable = false, element = "") {
     // isScrollable check if the course is within a list of courses to choose from
     // for single courses
     let html = "";
-    if (isScrollable) html += "<button class='btn btn-primary' id='select-course' style='float: right;'>Select</button><div>" + "<h3>" + course + "</h3></div>";
+    if (isScrollable) {
+        html += "<button class='btn btn-primary' id='select-course' style='float: right;'" +
+            "onclick='replaceCourse(\"" + element + "\",\"" + course + "\")'>Select</button><div>" + "<h3>" + course + "</h3></div>";
+    }
     else html += "<div class='card-header'><a class=\"close\" id='close-popup-1'>×</a>" + "<h3>" + course + "</h3></div>";
     $.ajax({
         url: 'http://127.0.0.1:8000/api/course-info/get/' + course,
@@ -321,24 +337,25 @@ function generateCourseHTML(course, isScrollable = false) {
     return html;
 }
 
-function generateScrollHTML(courses, codes, course_text) {
+function generateScrollHTML(courses, codes, course_text, element) {
     let html = "<div class='card-header'><a class=\"close\" id='close-popup-1'>×</a>";
     html += "<h3 style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 75ch; padding: 0.1rem;\">" + course_text + "</h3></div>";
     html += "<div class='card-body' style='padding-bottom: 0em'>";
     html += '<div id="container"><div id="left"><div id="wrapper" style="overflow-y: initial"><ul>';
     for (let i = 0; i < codes.length; i++) {
         html += '<li style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 45ch;cursor: pointer" class="bold" onclick="replaceCourseHTML(\'' +
-            codes[i] + '\')"><a style="color: #007bff">' + codes[i] + "</a>: " + courses[codes[i]] + '</li>';
+            codes[i] + "','" + element + '\')"><a style="color: #007bff">' + codes[i] + "</a>: " + courses[codes[i]] + '</li>';
     }
     html += '</ul></div></div>';
-    html += '<div id="right">' + generateCourseHTML(codes[0], true) + '</div></div><br>';
+    html += '<div id="right">' + generateCourseHTML(codes[0], true, element) + '</div></div><br>';
     html += "</div>";
     return html;
 }
 
-function replaceCourseHTML(course) {
+function replaceCourseHTML(course, element) {
     let el = document.getElementById("right");
-    el.innerHTML = generateCourseHTML(course,true);
+    el.innerHTML = generateCourseHTML(course,true, element);
+
 }
 
 function popupWindow(str) {
@@ -353,7 +370,7 @@ function popupWindow(str) {
         html = generateCourseHTML(codes[0]);
     }
     else {
-        html = generateScrollHTML(courses, codes, course_text);
+        html = generateScrollHTML(courses, codes, course_text, str);
     }
     content.innerHTML = html;
     document.getElementById("popup-1").style.display = "block";
