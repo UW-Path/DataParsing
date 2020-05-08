@@ -4,11 +4,7 @@ const terms = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]; //Add 5A 5B for 
 /* Custom Dragula JS */
 window.onload = function() {
     var closePopup1 = document.getElementById('close-popup-1');
-
-    closePopup1.addEventListener('click', () => {
-        var popup1 = document.getElementById("popup-1");
-        popup1.style.display = "none";
-    });
+    closePopup1.addEventListener('click', () => {closePopup();});
 
     dragger = dragula([
         document.getElementById("required"),
@@ -33,13 +29,13 @@ window.onload = function() {
 
         if (term === "trash") {
             emptyTrash();
-            checkSchedule(termIndex)
+            checkSchedule(termIndex);
         }
         else if (term === "required"){
             // no operations if courses are dragged back to required courses
             // need to change in future because all course needs to be validated again
             document.getElementById(draggedId).style.color = "darkslateblue"; // back to original color
-            checkSchedule(termIndex)
+            checkSchedule(termIndex);
         }
         else {
             if (src === "required"){
@@ -286,6 +282,7 @@ function closePopup() {
 function replaceCourse(element, course) {
     let el = document.getElementById(element);
     el.innerHTML = "<p>" + course + "</p>";
+    checkSchedule(0);
     closePopup();
 }
 
@@ -312,7 +309,7 @@ function generateCourseHTML(course, isScrollable = false, element = "") {
             let coreqs = data.coreqs;
             let antireqs = data.antireqs;
             if (isScrollable) html += "<div>";
-            else html += "<div class='card-body'>";
+            else html += "<div class='card-body'><div id=\"container\" style='overflow-y: scroll; min-height: 44vh;'>";
             html += "<p style='font-size: 14px'><b>" + name + "</b> (" + credit + ") ID:" + id;
             html += "</p><div id='wrapper' style='max-height: 170px; overflow-y: initial'>" + info;
             if (online) {
@@ -326,7 +323,8 @@ function generateCourseHTML(course, isScrollable = false, element = "") {
             } if (antireqs) {
                 html += "</br><b>Antireq: </b>" + antireqs;
             }
-            html += "</div></div>"
+            html += "</div></div>";
+            if (!isScrollable) html += "</div>";
         },
         error: function () {
             html += "<large-p>ERROR</large-p>";
@@ -353,7 +351,6 @@ function generateScrollHTML(courses, codes, course_text, element) {
 function replaceCourseHTML(course, element) {
     let el = document.getElementById("right");
     el.innerHTML = generateCourseHTML(course,true, element);
-
 }
 
 function popupWindow(str) {
