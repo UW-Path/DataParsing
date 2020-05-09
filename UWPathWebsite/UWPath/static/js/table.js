@@ -18,6 +18,16 @@ window.onload = function() {
         document.getElementById("4B"),
         document.getElementById("5A"),
         document.getElementById("5B"),
+        document.getElementById("6A"),
+        document.getElementById("6B"),
+        document.getElementById("7A"),
+        document.getElementById("7B"),
+        document.getElementById("8A"),
+        document.getElementById("8B"),
+        document.getElementById("9A"),
+        document.getElementById("9B"),
+        document.getElementById("10A"),
+        document.getElementById("10B"),
         document.getElementById("trash")
     ]);
 
@@ -129,6 +139,31 @@ function addTask() {
 function emptyTrash() {
   /* Clear tasks from 'Trash' column */
   document.getElementById("trash").innerHTML = "";
+
+}
+
+function addTerm(){
+    var ul  = document.getElementById("table");
+    var li = document.createElement("li");
+    var children = ul.children.length + 1;
+    li.classList.add('column');
+    if (children%8 === 2 || children%8 === 3){
+        li.classList.add('oneA-column');
+    }
+    else if (children%8 === 4 || children%8 === 5){
+        li.classList.add('twoA-column');
+    }
+    else if (children%8 === 6 || children%8 === 7){
+        li.classList.add('threeA-column');
+    }
+    else{
+        li.classList.add('fourA-column');
+    }
+    debugger
+    var term = (children%2)? "B":"A";
+    term = Math.floor(children/2).toString() + term;
+    li.innerHTML = "<div class='column-header'><h4>" + term + "</h4></div><ul class='task-list' id=" + term + "></ul>";
+    ul.appendChild(li)
 }
 
 function getTaken(term_index) {

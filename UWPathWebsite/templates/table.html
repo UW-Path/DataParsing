@@ -17,9 +17,12 @@
             <div class="task-list" id="trash">
             </div>
         </div>
+        <div>
+            <button id="add" class="button add-term-button" style="align-items: flex-end" onclick="addTerm()">Add Term</button>
+        </div>
     </div>
     <main class="main-container">
-        <ul class="columns">
+        <ul class="columns" id="table">
             <li class="column required-column" style="width: 16.8rem">
                 <div class="column-header">
                     <h4>Required Courses</h4>
@@ -28,6 +31,7 @@
                     {% if "Table I" in requirements.0.additional_requirements or "Communication Skills Requirement" in requirements.0.additional_requirements %}
                         <li class="task" id="engl1"
                             onclick="popupWindow('engl1')">
+{#                            <a class="close" id='close-popup-1'>×</a>#}
                             <p>English List I</p>
                         </li>
                         <li class="task" id="engl2"
@@ -67,56 +71,56 @@
                 </ul>
             </li>
 
-            <li class="column-term column-term-first oneA-column">
+            <li class="column oneA-column">
                 <div class="column-header">
                     <h4>1A</h4>
                 </div>
                 <ul class="task-list" id="1A">
                 </ul>
             </li>
-            <li class="column-term oneB-column">
+            <li class="column oneB-column">
                 <div class="column-header">
                     <h4>1B</h4>
                 </div>
                 <ul class="task-list" id="1B">
                 </ul>
             </li>
-            <li class="column-term twoA-column">
+            <li class="column twoA-column">
                 <div class="column-header">
                     <h4>2A</h4>
                 </div>
                 <ul class="task-list" id="2A">
                 </ul>
             </li>
-            <li class="column-term twoB-column">
+            <li class="column twoB-column">
                 <div class="column-header">
                     <h4>2B</h4>
                 </div>
                 <ul class="task-list" id="2B">
                 </ul>
             </li>
-            <li class="column-term threeA-column">
+            <li class="column threeA-column">
                 <div class="column-header">
                     <h4>3A</h4>
                 </div>
                 <ul class="task-list" id="3A">
                 </ul>
             </li>
-            <li class="column-term threeB-column">
+            <li class="column threeB-column">
                 <div class="column-header">
                     <h4>3B</h4>
                 </div>
                 <ul class="task-list" id="3B">
                 </ul>
             </li>
-            <li class="column-term fourA-column">
+            <li class="column fourA-column">
                 <div class="column-header">
                     <h4>4A</h4>
                 </div>
                 <ul class="task-list" id="4A">
                 </ul>
             </li>
-            <li class="column-term fourB-column">
+            <li class="column fourB-column">
                 <div class="column-header">
                     <h4>4B</h4>
                 </div>

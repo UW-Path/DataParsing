@@ -73,13 +73,13 @@ footer {
   border-radius: 0.2rem;
 }
 
-.column-term {
-  width: 8.4rem;
-  border-right: #000013 0.2rem solid;
-  border-top: #000013 0.2rem solid;
-  border-bottom: #000013 0.2rem solid;
-  border-radius: 0.2rem;
-}
+/*.column-term {*/
+/*  width: 8.4rem;*/
+/*  border-right: #000013 0.2rem solid;*/
+/*  border-top: #000013 0.2rem solid;*/
+/*  border-bottom: #000013 0.2rem solid;*/
+/*  border-radius: 0.2rem;*/
+/*}*/
 
 .column-term-first{
   border-left: #000013 0.2rem solid;
@@ -145,7 +145,7 @@ footer {
 }
 
 .task-list {
-  min-height: 34rem;
+  min-height: 4rem;
   max-height: 34em;
   overflow-y: auto;
 }
@@ -199,6 +199,19 @@ li:first-child {
 
 .add-button:hover {
   background-color: #ffdd6e;
+}
+
+
+.add-term-button {
+  background-color: #91b7d8;
+  padding: 0 1rem;
+  height: 2.8rem;
+  width: 10rem;
+  margin-top: 0.6rem;
+}
+
+.add-term-button:hover {
+  background-color: #6aa7dc;
 }
 
 .task {
