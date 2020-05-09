@@ -60,11 +60,29 @@ footer {
   margin: 1.6rem auto;
 }
 
+.column-table{
+  width: 8.4rem;
+  border: #000013 0.2rem solid;
+  border-radius: 0.2rem;
+}
+
 .column {
   width: 8.4rem;
   margin: 0 0.6rem;
   border: #000013 0.2rem solid;
   border-radius: 0.2rem;
+}
+
+.column-term {
+  width: 8.4rem;
+  border-right: #000013 0.2rem solid;
+  border-top: #000013 0.2rem solid;
+  border-bottom: #000013 0.2rem solid;
+  border-radius: 0.2rem;
+}
+
+.column-term-first{
+  border-left: #000013 0.2rem solid;
 }
 
 .column-header {
@@ -127,7 +145,7 @@ footer {
 }
 
 .task-list {
-  min-height: 3rem;
+  min-height: 34rem;
   max-height: 34em;
   overflow-y: auto;
 }
