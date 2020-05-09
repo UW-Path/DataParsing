@@ -3,9 +3,6 @@ const terms = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]; //Add 5A 5B for 
 
 /* Custom Dragula JS */
 window.onload = function() {
-    var closePopup1 = document.getElementById('close-popup-1');
-    closePopup1.addEventListener('click', () => {closePopup();});
-
     dragger = dragula([
         document.getElementById("required"),
         document.getElementById("1A"),
@@ -330,7 +327,7 @@ function generateCourseHTML(course, isScrollable = false, element = "") {
         html += "<button class='btn btn-primary' id='select-course' style='float: right;'" +
             "onclick='replaceCourse(\"" + element + "\",\"" + course + "\")'>Select</button><div>" + "<h3>" + course + "</h3></div>";
     }
-    else html += "<div class='card-header'><a class=\"close\" id='close-popup-1'>×</a>" + "<h3>" + course + "</h3></div>";
+    else html += "<div class='card-header'><a class=\"close\" id='close-popup-1' onclick=\"closePopup()\">×</a>" + "<h3>" + course + "</h3></div>";
     $.ajax({
         url: 'http://127.0.0.1:8000/api/course-info/get/' + course,
         type: 'get',
@@ -371,7 +368,7 @@ function generateCourseHTML(course, isScrollable = false, element = "") {
 }
 
 function generateScrollHTML(courses, codes, course_text, element) {
-    let html = "<div class='card-header'><a class=\"close\" id='close-popup-1'>×</a>";
+    let html = "<div class='card-header'><a class=\"close\" id='close-popup-1' onclick=\"closePopup()\">×</a>";
     html += "<h3 style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 75ch; padding: 0.1rem;\">" + course_text + "</h3></div>";
     html += "<div class='card-body' style='padding-bottom: 0em'>";
     html += '<div id="container"><div id="left"><div id="wrapper" style="overflow-y: initial"><ul>';
@@ -407,9 +404,4 @@ function popupWindow(str) {
     content.innerHTML = html;
     document.getElementById("popup-1").style.display = "block";
     document.getElementById("popup-1").style.width = "98%";
-
-    let closePopup1 = document.getElementById('close-popup-1');
-    closePopup1.addEventListener('click', () => {
-        closePopup();
-    });
 }
