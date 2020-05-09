@@ -1,11 +1,13 @@
 // TODO - This will be dependent on how many terms the user specifies.
-const terms = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]; //Add 5A 5B for Double Degrees
-
-/* Custom Dragula JS */
-window.onload = function() {
+var terms = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]; //Add 5A 5B for Double Degrees
+var dragger = dragula([]);
+// same as first func
+function initDragula() {
     var closePopup1 = document.getElementById('close-popup-1');
-    closePopup1.addEventListener('click', () => {closePopup();});
-
+    closePopup1.addEventListener('click', () => {
+        closePopup();
+    });
+    dragger.destroy();
     dragger = dragula([
         document.getElementById("required"),
         document.getElementById("1A"),
@@ -40,19 +42,16 @@ window.onload = function() {
         if (term === "trash") {
             emptyTrash();
             checkSchedule(termIndex);
-        }
-        else if (term === "required"){
+        } else if (term === "required") {
             // no operations if courses are dragged back to required courses
             // need to change in future because all course needs to be validated again
             document.getElementById(draggedId).style.color = "darkslateblue"; // back to original color
             checkSchedule(termIndex);
-        }
-        else {
-            if (src === "required"){
+        } else {
+            if (src === "required") {
                 //only check schedule for course after term has been dropped
                 termIndex = terms.indexOf(term);
-            }
-            else{
+            } else {
                 //src is Term Number
                 termIndex = Math.min(terms.indexOf(src), terms.indexOf(term));
             }
@@ -61,6 +60,12 @@ window.onload = function() {
         }
     });
 };
+
+
+/* Custom Dragula JS */
+window.onload = function(){
+    this.initDragula();
+}
 
 
 function checkSchedule(term_index) {
@@ -113,7 +118,7 @@ function checkSchedule(term_index) {
 function addTask() {
     /* Get task text from input */
     const inputTask = document.getElementById("taskText").value.toUpperCase();
-    let id = inputTask + "(" + Math.round(Math.random() * 100 )  +")"; //generate random number to prevent unique id
+    let id = inputTask + "(" + Math.round(Math.random() * 100) + ")"; //generate random number to prevent unique id
     id = id.replace(" ", "");
     // check if inputTask has whitespace
     if (/\S/.test(inputTask)) {
@@ -137,33 +142,31 @@ function addTask() {
 
 /* Vanilla JS to delete tasks in 'Trash' column */
 function emptyTrash() {
-  /* Clear tasks from 'Trash' column */
-  document.getElementById("trash").innerHTML = "";
+    /* Clear tasks from 'Trash' column */
+    document.getElementById("trash").innerHTML = "";
 
 }
 
-function addTerm(){
-    var ul  = document.getElementById("table");
+function addTerm() {
+    var ul = document.getElementById("table");
     var li = document.createElement("li");
     var children = ul.children.length + 1;
     li.classList.add('column');
-    if (children%8 === 2 || children%8 === 3){
+    if (children % 8 === 2 || children % 8 === 3) {
         li.classList.add('oneA-column');
-    }
-    else if (children%8 === 4 || children%8 === 5){
+    } else if (children % 8 === 4 || children % 8 === 5) {
         li.classList.add('twoA-column');
-    }
-    else if (children%8 === 6 || children%8 === 7){
+    } else if (children % 8 === 6 || children % 8 === 7) {
         li.classList.add('threeA-column');
-    }
-    else{
+    } else {
         li.classList.add('fourA-column');
     }
-    debugger
-    var term = (children%2)? "B":"A";
-    term = Math.floor(children/2).toString() + term;
+    var term = (children % 2) ? "B" : "A";
+    term = Math.floor(children / 2).toString() + term;
+    terms = terms.concat(term)
     li.innerHTML = "<div class='column-header'><h4>" + term + "</h4></div><ul class='task-list' id=" + term + "></ul>";
     ul.appendChild(li)
+    initDragula()
 }
 
 function getTaken(term_index) {
@@ -178,7 +181,7 @@ function getTaken(term_index) {
 
 function getCurrent(term_index) {
     let termCourses = document.getElementById(terms[term_index]).getElementsByTagName("li");
-    let termCoursesText = Array.from(termCourses).map(function(c) {
+    let termCoursesText = Array.from(termCourses).map(function (c) {
         return $(c).text().trim().split(", ");
     });
     // merges split arrays into one flattened array
@@ -250,8 +253,7 @@ function getListOfCourses(course_text) {
                     let filtered_courses = filter_courses(start, end, codes[j]);
                     courses = Object.assign({}, courses, filtered_courses);
                 }
-            }
-            else {
+            } else {
                 let filtered_courses = filter_courses(start, end, code);
                 courses = Object.assign({}, courses, filtered_courses);
             }
@@ -271,30 +273,24 @@ function getListOfCourses(course_text) {
         let filtered_courses = ["EMLS 101R", "EMLS 102R", "EMLS 129R", "ENGL 129R", "ENGL 109", "SPCOM 100", "SPCOM 223"];
         filtered_courses = filter_courses(0, 1000, filtered_courses.toString());
         courses = Object.assign({}, courses, filtered_courses);
-    }
-    else if (course_text === "English List II") {
+    } else if (course_text === "English List II") {
         let filtered_courses = ["EMLS 101R", "EMLS 102R", "EMLS 129R", "ENGL 129R", "ENGL 109", "SPCOM 100", "SPCOM 223",
             "EMLS 103R", "EMLS 104R", "EMLS 110R", "ENGL 108B", "ENGL 108D", "ENGL 119", "ENGL 208B", "ENGL 209",
             "ENGL 210E", "ENGL 210F", "ENGL 378", "MTHEL 300", "SPCOM 225", "SPCOM 227", "SPCOM 228"];
         filtered_courses = filter_courses(0, 1000, filtered_courses.toString());
         courses = Object.assign({}, courses, filtered_courses);
-    }
-
-    else if (course_text === "MATH") {
+    } else if (course_text === "MATH") {
         codes = ["ACTSC", "AMATH", "CO", "CS", "MATBUS", "MATH", "PMATH", "STAT"];
         let filtered_courses = filter_courses(100, 1000, codes.toString());
         courses = Object.assign({}, courses, filtered_courses);
-    }
-    else if (course_text === "NON-MATH") {
+    } else if (course_text === "NON-MATH") {
         codes = ["ACTSC", "AMATH", "CO", "CS", "MATBUS", "MATH", "PMATH", "STAT"];
-        let filtered_courses = filter_courses(100, 1000, "~"+codes.toString());
+        let filtered_courses = filter_courses(100, 1000, "~" + codes.toString());
         courses = Object.assign({}, courses, filtered_courses);
-    }
-    else if (course_text === "Elective") {
+    } else if (course_text === "Elective") {
         let filtered_courses = filter_courses(100, 1000, "none");
         courses = Object.assign({}, courses, filtered_courses);
-    }
-    else {
+    } else {
         // Generate courses from code
         let code_courses = course_text.match(code_regex);
         if (code_courses) {
@@ -329,8 +325,7 @@ function generateCourseHTML(course, isScrollable = false, element = "") {
     if (isScrollable) {
         html += "<button class='btn btn-primary' id='select-course' style='float: right;'" +
             "onclick='replaceCourse(\"" + element + "\",\"" + course + "\")'>Select</button><div>" + "<h3>" + course + "</h3></div>";
-    }
-    else html += "<div class='card-header'><a class=\"close\" id='close-popup-1'>×</a>" + "<h3>" + course + "</h3></div>";
+    } else html += "<div class='card-header'><a class=\"close\" id='close-popup-1'>×</a>" + "<h3>" + course + "</h3></div>";
     $.ajax({
         url: 'http://127.0.0.1:8000/api/course-info/get/' + course,
         type: 'get',
@@ -355,9 +350,11 @@ function generateCourseHTML(course, isScrollable = false, element = "") {
             html += "</br>";
             if (prereqs) {
                 html += "</br><b>Prereq: </b>" + prereqs;
-            } if (coreqs) {
+            }
+            if (coreqs) {
                 html += "</br><b>Coreq: </b>" + coreqs;
-            } if (antireqs) {
+            }
+            if (antireqs) {
                 html += "</br><b>Antireq: </b>" + antireqs;
             }
             html += "</div></div>";
@@ -387,7 +384,7 @@ function generateScrollHTML(courses, codes, course_text, element) {
 
 function replaceCourseHTML(course, element) {
     let el = document.getElementById("right");
-    el.innerHTML = generateCourseHTML(course,true, element);
+    el.innerHTML = generateCourseHTML(course, true, element);
 }
 
 function popupWindow(str) {
@@ -400,8 +397,7 @@ function popupWindow(str) {
     let html = "";
     if (codes.length === 1) {
         html = generateCourseHTML(codes[0]);
-    }
-    else {
+    } else {
         html = generateScrollHTML(courses, codes, course_text, str);
     }
     content.innerHTML = html;
