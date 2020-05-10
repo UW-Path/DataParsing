@@ -1,4 +1,3 @@
-<img src="images/UWPathExtraExtended.png?raw=true"/>
 <img src="demo.png?raw=true"/>
 </br>
 
