@@ -188,9 +188,9 @@ class DatabaseSender(DatabaseConnection):
                                                        " coreqs, antireqs) "
         command += "SELECT '" + course.course_code + "', '" + course.course_abbr + "', " + course.course_number + \
                    ", '" + course.id + "', '" + course.name + "', '" + str(course.credit) + "', '" + \
-                   course.info.replace("'", "''") + "', '" + ",".join(course.offering) + "', " + str(course.online) + \
-                   ", '" + course.prereq_text.replace("'", "''") + "', '" + course.coreq_text.replace("'", "''") + \
-                   "', '" + course.antireq_text.replace("'", "''") + "'\n"
+                   course.info.replace("'", '"') + "', '" + ",".join(course.offering) + "', " + str(course.online) + \
+                   ", '" + course.prereq_text.replace("'", '"') + "', '" + course.coreq_text.replace("'", '"') + \
+                   "', '" + course.antireq_text.replace("'", '"') + "'\n"
         command += "WHERE NOT EXISTS (\n" + not_exist + "\n);"
 
         return self.execute(command)

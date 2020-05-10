@@ -18,10 +18,18 @@ def get_course_codes():
 
 
 if __name__ == "__main__":
-    course_codes = get_course_codes()
-    course_codes.remove("BUS")
-    course_codes.remove("NON-MATH")
-    course_codes.remove('Elective')
+    course_codes = {'PACS', 'MATBUS', 'HLTH', 'ME', 'ARBUS', 'MSCI', 'ACTSC', 'CHE', 'CHEM', 'STAT',
+                    'CS', 'CO', 'GENE', 'EMLS', 'FINE', 'AMATH', 'BIOL', 'PMATH', 'LS', 'AFM', 'ENGL', 'KIN',
+                    'SE', 'SPCOM', 'PSYCH', 'SYDE', 'MATH', 'INTEG', 'MTE', 'ECON', 'ECE', 'PHYS',
+                    'MUSIC', 'HRM', 'ASL', 'ANTH', 'AHS', 'APPLS', 'ARABIC', 'AE', 'ARCH', 'ARTS', 'AVIA',
+                    'BME', 'BASE', 'BET', 'CDNST', 'CHINA', 'CMW', 'CIVE', 'CLAS', 'COGSCI', 'COMM', 'COOP',
+                    'CROAT', 'CI', 'DAC', 'DUTCH', 'EARTH', 'EASIA', 'ENBUS', 'ERS', 'ENVE', 'ENVS', 'FR',
+                    'GSJ', 'GEOG', 'GEOE', 'GER', 'GERON', 'GBDA', 'GRK', 'HIST', 'HRTS', 'HUMSC', 'INDG',
+                    'INDEV', 'INTST', 'ITAL', 'ITALST', 'JAPAN', 'JS', 'KIN', 'KOREA', 'LAT', 'LS',
+                    'MGMT', 'MNS', 'MTHEL', 'ME', 'MTE', 'MEDVL', 'MENN', 'MOHAWK', 'NE', 'OPTOM', 'PHARM',
+                    'PHIL', 'PLAN', 'PSCI', 'PORT', 'PD', 'PDARCH', 'PDPHRM', 'REC', 'RS', 'RUSS', 'REES',
+                    'SCI', 'SCBUS', 'SMF', 'SDS', 'SVENT', 'SOCWK', 'SWREN', 'STV', 'SOC', 'SPAN', 'SI',
+                    'THPERF', 'UNIV', 'VCULT'}
 
     dbc = DatabaseSender()
 
@@ -38,18 +46,18 @@ if __name__ == "__main__":
 
         try:
             fp = urllib.request.urlopen("http://www.ucalendar.uwaterloo.ca/2021/COURSE/course-" + code + ".html")
+            mybytes = fp.read()
+            html = mybytes.decode("ISO-8859-1")
+            fp.close()
+
+            parser.load_html(html)
         except Exception as e:
             print(code)
+            print(e)
             continue
-        mybytes = fp.read()
-        html = mybytes.decode("ISO-8859-1")
-        fp.close()
-
-        parser.load_html(html)
 
         dbc.insert_courses(parser.courses)
 
         dbc.commit()
 
     dbc.close()
-    print(course_codes)

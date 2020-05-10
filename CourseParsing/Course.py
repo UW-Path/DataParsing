@@ -135,7 +135,7 @@ class Course:
         :return: string
         """
         # First occurrence always has course code
-        filtered = re.search("(?<=Offered: ).*]", self.info)
+        filtered = re.search("(?<=Offered: )[A-Za-z,]*", self.info)
 
         if filtered:
             # Should parse in F, W, S] string, ending in ]
@@ -148,7 +148,7 @@ class Course:
             for i in all_i:
                 if i and i.string and i.string.strip().startswith("[Note:"):
                     note = i.string.strip().replace("\n", " ")
-                    filtered = re.search("(?<=Offered: ).*]", note)
+                    filtered = re.search("(?<=Offered: )[A-Za-z,]*", note)
 
                     if filtered:
                         # Should parse in F, W, S] string, ending in ]
