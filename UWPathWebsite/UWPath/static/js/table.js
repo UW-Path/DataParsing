@@ -146,7 +146,7 @@ function emptyTrash() {
 function addTerm() {
     var ul = document.getElementById("table");
     var li = document.createElement("li");
-    var children = ul.children.length + 1;
+    var children = ul.children.length + 2;
     li.classList.add('column');
     if (children % 8 === 2 || children % 8 === 3) {
         li.classList.add('oneA-column');
@@ -159,10 +159,10 @@ function addTerm() {
     }
     var term = (children % 2) ? "B" : "A";
     term = Math.floor(children / 2).toString() + term;
-    terms = terms.concat(term)
+    terms = terms.concat(term);
     li.innerHTML = "<div class='column-header'><h4>" + term + "</h4></div><ul class='task-list' id=" + term + "></ul>";
-    ul.appendChild(li)
-    initDragula()
+    ul.appendChild(li);
+    initDragula();
 }
 
 function getTaken(term_index) {

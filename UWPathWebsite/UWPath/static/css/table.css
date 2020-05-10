@@ -68,6 +68,7 @@ footer {
 
 .column {
   width: 8.4rem;
+  min-width: 7rem;
   margin: 0 0.6rem;
   border: #000013 0.2rem solid;
   border-radius: 0.2rem;

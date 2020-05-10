@@ -22,55 +22,54 @@
         </div>
     </div>
     <main class="main-container">
-        <ul class="columns" id="table">
-            <li class="column required-column" style="width: 16.8rem">
-                <div class="column-header">
-                    <h4>Required Courses</h4>
-                </div>
-                <ul class="task-list" id="required">
-                    {% if "Table I" in requirements.0.additional_requirements or "Communication Skills Requirement" in requirements.0.additional_requirements %}
-                        <li class="task" id="engl1"
-                            onclick="popupWindow('engl1')">
-{#                            <a class="close" id='close-popup-1' onclick="closePopup()">×</a>#}
-                            <p>English List I</p>
-                        </li>
-                        <li class="task" id="engl2"
-                            onclick="popupWindow('engl2')">
-                            <p>English List II</p>
-                        </li>
-                    {% endif %}
-                    {% if "Table II" in requirements.0.additional_requirements %}
-                        {% for req in table2 %}
-                            {% for i in req.number_of_courses|times %}
-                                <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
-                                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})')">
-                                    <p>{{ req.course_codes }}</p>
-                                    {#                        <i class="material-icons list-icon">info</i>#}
-                                </li>
-                            {% endfor %}
-                        {% endfor %}
-                    {% endif %}
-                    {% for req in requirements %}
-                        {% for i in req.number_of_courses|times %}
-                            <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
-                                onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})')">
-                                <p>{{ req.course_codes }}</p>
-                                {#                       <i class="material-icons list-icon">info</i>#}
-                            </li>
-                        {% endfor %}
-                    {% endfor %}
-                    {% for req in minor_requirements %}
-                        {% for i in req.number_of_courses|times %}
-                            <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
-                                onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})')">
-                                <p>{{ req.course_codes }} </p>
-                                {#                       <i class="material-icons list-icon">info</i>#}
-                            </li>
-                        {% endfor %}
-                    {% endfor %}
-                </ul>
-            </li>
-
+        <li class="column required-column" style="width: 16.8rem;margin: 1.6rem auto;">
+            <div class="column-header">
+                <h4>Required Courses</h4>
+            </div>
+            <ul class="task-list" id="required">
+                {% if "Table I" in requirements.0.additional_requirements or "Communication Skills Requirement" in requirements.0.additional_requirements %}
+                <li class="task" id="engl1"
+                    onclick="popupWindow('engl1')">
+                    {#                            <a class="close" id='close-popup-1' onclick="closePopup()">×</a>#}
+                    <p>English List I</p>
+                </li>
+                <li class="task" id="engl2"
+                    onclick="popupWindow('engl2')">
+                    <p>English List II</p>
+                </li>
+                {% endif %}
+                {% if "Table II" in requirements.0.additional_requirements %}
+                {% for req in table2 %}
+                {% for i in req.number_of_courses|times %}
+                <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
+                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})')">
+                    <p>{{ req.course_codes }}</p>
+                    {#                        <i class="material-icons list-icon">info</i>#}
+                </li>
+                {% endfor %}
+                {% endfor %}
+                {% endif %}
+                {% for req in requirements %}
+                {% for i in req.number_of_courses|times %}
+                <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
+                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})')">
+                    <p>{{ req.course_codes }}</p>
+                    {#                       <i class="material-icons list-icon">info</i>#}
+                </li>
+                {% endfor %}
+                {% endfor %}
+                {% for req in minor_requirements %}
+                {% for i in req.number_of_courses|times %}
+                <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
+                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})')">
+                    <p>{{ req.course_codes }} </p>
+                    {#                       <i class="material-icons list-icon">info</i>#}
+                </li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </li>
+        <ul class="columns" id="table" style="overflow-x: scroll; width:75%">
             <li class="column oneA-column">
                 <div class="column-header">
                     <h4>1A</h4>
