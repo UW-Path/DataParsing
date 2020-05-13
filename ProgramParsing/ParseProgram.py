@@ -10,10 +10,10 @@ if __name__ == "__main__":
 
     #Need to Investigate
     filesToIgnore = ["ENG-Software-Engineering.html", "MATH-Math-or-Fin-Analysis-Risk-Mgt-Degree-Reqmnt.html",
-                     "MATH-Mathematical-Optimization1.html",]
+                     "MATH-Mathematical-Optimization1.html", "MATH-Math-or-Chartered-Professional-Accountancy-co.html"]
     filesToIgnore = ["/ProgramSpecs/" + f for f in filesToIgnore]
 
-    # files = ["/ProgramSpecs/MATH-Computer-Sci-Business-Spec.html"] #use this for single files
+    #files = ["/ProgramSpecs/MATH-Combinatorics-and-Optimization-Minor2.html"] #use this for single files
 
     #TODO parse which specialization is under which major
 

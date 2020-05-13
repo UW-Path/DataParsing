@@ -107,16 +107,32 @@ class MajorParser:
         list = []
         while i < len(info):
 
-            line = info[i].strip()
+            line = info[i].strip().replace(" to ", "-")
 
             #Table II exception a bit hardcoded (info[i] == " ")
             if line.startswith("Note") or line.startswith("(") or info[i] == "        ":
                 i += 1
                 continue
+
+            #check if line is additional course
+            # and list make sure theres at least one item in the 1,2,3, of
+            if len(line.split(" ")) >= 2 and line.split(" ")[1] == "additional" and list:
+                break
+
+            rangeCourse = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
+                                 line)
             courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
+
+            if rangeCourse:
+                #TODO: Account for range CS 123-CS 345, excluding CS XXX
+                list.append(" or ".join(rangeCourse))
+                i += 1
+                continue
+
             if not courses and list:
                 # List has ended
                 break
+
             if courses:
                 list.append(" or ".join(courses))
             i += 1
