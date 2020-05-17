@@ -118,6 +118,10 @@ class ValidationCheckAPI:
             if any(c in anti_req for c in list_of_courses_taken + current_term_courses):
                 return False
 
+        # Course cannot be repeated
+        if course in list_of_courses_taken:
+            return False
+
         # PREREQ & COREQ
         prereq_logic = self.prereq_logic
         for i in range(len(self.prereq_courses)):

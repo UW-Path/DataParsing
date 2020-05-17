@@ -55,14 +55,13 @@ function initDragula() {
             checkSchedule(termIndex);
         }
     });
-};
+}
 
 
 /* Custom Dragula JS */
 window.onload = function(){
     this.initDragula();
-}
-
+};
 
 function checkSchedule(term_index) {
     const numTerms = terms.length;
@@ -90,9 +89,9 @@ function checkSchedule(term_index) {
                         },
                         async: false,
                         success: function (data) {
-                            let canTake = data.can_take;
+                            let can_take = data.can_take;
                             // Do something
-                            if (canTake) {
+                            if (can_take) {
                                 document.getElementById(draggedId).style.color = "green";
                             } else {
                                 document.getElementById(draggedId).style.color = "red";
@@ -124,11 +123,11 @@ function addTask() {
             type: 'get', // This is the default though, you don't actually need to always mention it
             success: function (data) {
                 document.getElementById("required").innerHTML +=
-                    "<li class='task' id='" + id + "' onclick='popupWindow(\"" + id + "\")'>" + "<p>" + inputTask + "</p></li>";
+                    "<li class='task' id='" + id + "' onclick='popupWindow(\"" + id + "\",-1)'>" + "<p>" + inputTask + "</p></li>";
             },
             error: function (data) {
                 document.getElementById("required").innerHTML +=
-                    "<li class='task' id='" + id + "' onclick='popupWindow(\"" + id + "\")'>" + "<p>" + inputTask + " *</p></li>";
+                    "<li class='task' id='" + id + "' onclick='popupWindow(\"" + id + "\",-1)'>" + "<p>" + inputTask + " *</p></li>";
             }
         });
         /* Clear task text from input after adding task */
@@ -176,8 +175,11 @@ function getTaken(term_index) {
 }
 
 function getCurrent(term_index) {
-    let termCourses = document.getElementById(terms[term_index]).getElementsByTagName("li");
+    let el = document.getElementById(terms[term_index]);
+    let termCourses = el.getElementsByTagName("li");
     let termCoursesText = Array.from(termCourses).map(function (c) {
+        let id = c.id;
+        c.onclick = function() {popupWindow(id, term_index);};
         return $(c).text().trim().split(", ");
     });
     // merges split arrays into one flattened array
@@ -313,16 +315,56 @@ function replaceCourse(element, course) {
     closePopup();
 }
 
-function generateCourseHTML(course, isScrollable = false, element = "") {
+function changeHeaderColor(can_take) {
+    let header = document.getElementsByClassName("card-header");
+    if (header.length) {
+        if (can_take > 0) {
+            header[0].style.backgroundColor = "#c8e6c9";
+        } else if (!can_take) {
+            header[0].style.backgroundColor = "#ffccbc";
+        }
+    }
+}
+
+function generateCourseHTML(course, term_index, isScrollable = false, element = "", codes = []) {
+    let can_take = -1;
+    if (term_index >= 0) {
+        let listOfCoursesTaken = getTaken(term_index);
+        let currentTermCoursesText = getCurrent(term_index)[1];
+        if (codes.length){
+            currentTermCoursesText = currentTermCoursesText.filter( function( el ) {
+                return !codes.includes( el );
+            } );
+        }
+        $.ajax({
+            url: 'http://127.0.0.1:8000/api/meets_prereqs/get/' + course,
+            type: 'get',
+            data: {
+                list_of_courses_taken: listOfCoursesTaken,
+                current_term_courses: currentTermCoursesText
+            },
+            async: false,
+            success: function (data) {
+                if (data.can_take) {
+                    can_take = 1;
+                } else {
+                    can_take = 0;
+                }
+            }
+        });
+    }
+
     let uwFlowLink = "https://uwflow.com/course/" + course.replace(" ", "");
     // isScrollable check if the course is within a list of courses to choose from
     // for single courses
     let html = "";
     if (isScrollable) {
         html += "<button class='btn btn-primary' id='select-course' style='float: right;'" +
-            "onclick='replaceCourse(\"" + element + "\",\"" + course + "\")'>Select</button><div>" + "<h3>" + course + "</h3></div>";
+            "onclick='replaceCourse(\"" + element + "\",\"" + course + "\")'>Select</button><div>";
     }
-    else html += "<div class='card-header'><a class=\"close\" id='close-popup-1' onclick=\"closePopup()\">×</a>" + "<h3>" + course + "</h3></div>";
+    else html += "<div class='card-header'><a class=\"close\" id='close-popup-1' onclick=\"closePopup()\">×</a>";
+    html += "<h3>" + course + "</h3></div>";
+
     $.ajax({
         url: 'http://127.0.0.1:8000/api/course-info/get/' + course,
         type: 'get',
@@ -339,7 +381,7 @@ function generateCourseHTML(course, isScrollable = false, element = "") {
             if (isScrollable) html += "<div>";
             else html += "<div class='card-body'><div id=\"container\" style='overflow-y: scroll; min-height: 44vh;'>";
             html += "<br style='font-size: 14px'><b>" + name + "</b> (" + credit + ") ID:" + id + " "
-                + "</br><a href='" + uwFlowLink + "'target='_blank'>Course Schedule</a>";
+                + "</br><a href='" + uwFlowLink + "'target='_blank'>UWFlow</a>";
             html += "</p><div id='wrapper' style='max-height: 170px; overflow-y: initial'>" + info;
             if (online) {
                 html += "<br><i>Available online.</i>";
@@ -359,30 +401,36 @@ function generateCourseHTML(course, isScrollable = false, element = "") {
             html += "<large-p>ERROR</large-p>";
         }
     });
-    return html;
+    return [html, can_take];
 }
 
-function generateScrollHTML(courses, codes, course_text, element) {
+function generateScrollHTML(courses, codes, course_text, term_index, element) {
     let html = "<div class='card-header'><a class=\"close\" id='close-popup-1' onclick=\"closePopup()\">×</a>";
     html += "<h3 style=\"white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 75ch; padding: 0.1rem;\">" + course_text + "</h3></div>";
     html += "<div class='card-body' style='padding-bottom: 0em'>";
     html += '<div id="container"><div id="left"><div id="wrapper" style="overflow-y: initial"><ul>';
     for (let i = 0; i < codes.length; i++) {
         html += '<li style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 45ch;cursor: pointer" class="bold" onclick="replaceCourseHTML(\'' +
-            codes[i] + "','" + element + '\')"><a style="color: #007bff">' + codes[i] + "</a>: " + courses[codes[i]] + '</li>';
+            codes[i] + "','" + element + '\',' + term_index.toString() + ',[\'' + codes.join("', '") + '\'])"><a style="color: #007bff">' + codes[i] + "</a>: " + courses[codes[i]] + '</li>';
     }
     html += '</ul></div></div>';
-    html += '<div id="right">' + generateCourseHTML(codes[0], true, element) + '</div></div><br>';
+    let response = generateCourseHTML(codes[0], term_index,true, element, codes);
+    let inner = response[0];
+    let can_take = response[1];
+    html += '<div id="right">' + inner + '</div></div><br>';
     html += "</div>";
-    return html;
+    return [html, can_take];
 }
 
-function replaceCourseHTML(course, element) {
+function replaceCourseHTML(course, element, term_index, codes=[]) {
     let el = document.getElementById("right");
-    el.innerHTML = generateCourseHTML(course,true, element);
+    let response = generateCourseHTML(course, term_index, true, element, codes);
+
+    el.innerHTML = response[0];
+    changeHeaderColor(response[1]);
 }
 
-function popupWindow(str) {
+function popupWindow(str, term_index) {
     let el = document.getElementById(str);
     let course_text = el.innerText;
     let courses = getListOfCourses(course_text);
@@ -390,13 +438,19 @@ function popupWindow(str) {
 
     let content = document.getElementsByClassName("popup-content")[0];
     let html = "";
+    let can_take = -1;
     if (codes.length === 1) {
-        html = generateCourseHTML(codes[0]);
+        let response = generateCourseHTML(codes[0], term_index);
+        html = response[0];
+        can_take = response[1];
     }
     else {
-        html = generateScrollHTML(courses, codes, course_text, str);
+        let response = generateScrollHTML(courses, codes, course_text, term_index, str);
+        html = response[0];
+        can_take = response[1];
     }
     content.innerHTML = html;
+    changeHeaderColor(can_take);
     document.getElementById("popup-1").style.display = "block";
     document.getElementById("popup-1").style.width = "98%";
 }

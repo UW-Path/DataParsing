@@ -29,12 +29,12 @@
             <ul class="task-list" id="required">
                 {% if "Table I" in requirements.0.additional_requirements or "Communication Skills Requirement" in requirements.0.additional_requirements %}
                 <li class="task" id="engl1"
-                    onclick="popupWindow('engl1')">
+                    onclick="popupWindow('engl1',-1)">
                     {#                            <a class="close" id='close-popup-1' onclick="closePopup()">×</a>#}
                     <p>English List I</p>
                 </li>
                 <li class="task" id="engl2"
-                    onclick="popupWindow('engl2')">
+                    onclick="popupWindow('engl2',-1)">
                     <p>English List II</p>
                 </li>
                 {% endif %}
@@ -42,7 +42,7 @@
                 {% for req in table2 %}
                 {% for i in req.number_of_courses|times %}
                 <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
-                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})')">
+                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})',-1)">
                     <p>{{ req.course_codes }}</p>
                     {#                        <i class="material-icons list-icon">info</i>#}
                 </li>
@@ -52,7 +52,7 @@
                 {% for req in requirements %}
                 {% for i in req.number_of_courses|times %}
                 <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
-                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})')">
+                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})',-1)">
                     <p>{{ req.course_codes }}</p>
                     {#                       <i class="material-icons list-icon">info</i>#}
                 </li>
@@ -61,7 +61,7 @@
                 {% for req in minor_requirements %}
                 {% for i in req.number_of_courses|times %}
                 <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
-                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})')">
+                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})',-1)">
                     <p>{{ req.course_codes }} </p>
                     {#                       <i class="material-icons list-icon">info</i>#}
                 </li>
