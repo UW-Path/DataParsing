@@ -14,17 +14,17 @@
         {{ major }}
     </div>
     <h3>
-        {{ minor }}
+        {{ option }}
     </h3>
-    {% if not minor and programs %}
+    {% if not option and programs %}
      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Select Your Minor
+            Select Your Option, Specialization, or Joint Plan
         </button>
         <div class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButton">
             {% for program in programs %}
                 <li>
 {#                    {% if program.plan_type != "Major" and program.plan_type != "Table" %}#}
-                    <a class="dropdown-item" value="{% get_degree_major program.program_name as minor_selected %}" href="{{ request.path }}minor/{{ program.program_name }}/">
+                    <a class="dropdown-item" value="{% get_degree_major program.program_name as option_selected %}" href="{{ request.path }}option/{{ program.program_name }}/">
                         {{ program.program_name }}
                     </a>
 {#                   {%  endif %}#}
@@ -93,10 +93,10 @@
         </div>
 
         <div class="col-6" style="margin-top: 0.5em;">
-            {% if minor_requirements %}
-                <b>You need to meet the following {{minor_requirements.0.plan_type}} requirements: </b>
+            {% if option_requirements %}
+                <b>You need to meet the following {{option_requirements.0.plan_type}} requirements: </b>
                 <br>
-                {% for req in minor_requirements %}
+                {% for req in option_requirements %}
                     <div class="course-req-color">
                         {{ req.number_of_courses }} of {{ req.course_codes }}
                     </div>

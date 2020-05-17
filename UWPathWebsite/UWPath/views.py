@@ -23,7 +23,9 @@ def index(request):
     return render(request, 'index.html', {'programs': programs})
 
 
-def requirements(request, major, majorExtended= "", minor = "", minorExtended = ""):
+def requirements(request, major, majorExtended= "", option ="", optionExtended =""):
+    # Note option includes requirement
+
     #Renders the requiremnts + table for major/minor requested for
 
     #communications for math
@@ -70,20 +72,21 @@ def requirements(request, major, majorExtended= "", minor = "", minorExtended = 
 
     #filter minor returned
     majorName = requirements.first()['major_name']
-    programs = programs.filter(Q(major_name = majorName) | Q(plan_type = "Joint")).exclude(plan_type = "Major")
+    programs = programs.filter(Q(major_name = majorName) | Q(plan_type = "Joint") | Q(plan_type = "Minor")).exclude(plan_type = "Major")
+    programs = programs.order_by('plan_type', 'program_name')
 
-    # minor and options
-    if minor:
-        if minorExtended:
+    # specializations and options
+    if option:
+        if optionExtended:
             # this is to solve bug where Degree Name includes '/'
-            minor = minor + "/" + minorExtended
-        minor_requirements = Requirements_List().get_minor_requirement(minor)
+            option = option + "/" + optionExtended
+        option_requirements = Requirements_List().get_minor_requirement(option)
         requirements_course_codes_list = [r["course_codes"] for r in requirements]
-        minor_requirements = minor_requirements.filter(Q(major_name = majorName) | Q(plan_type = "Joint"))
-        minor_requirements = minor_requirements.exclude(course_codes__in = requirements_course_codes_list)
-        if not minor_requirements:
+        option_requirements = option_requirements.filter(Q(major_name = majorName) | Q(plan_type = "Joint"))
+        option_requirements = option_requirements.exclude(course_codes__in = requirements_course_codes_list)
+        if not option_requirements:
             return HttpResponseNotFound('<h1>404 Not Found: Minor not valid</h1>')
-        return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'minor': minor, 'minor_requirements': minor_requirements, 'table1':table1, 'table2':table2})
+        return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'option': option, 'option_requirements': option_requirements, 'table1':table1, 'table2':table2})
     return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'table1':table1, 'table2':table2})
 
 
