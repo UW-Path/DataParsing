@@ -56,6 +56,13 @@ urlpatterns = [
     path(r'major/<str:major>/option/<str:option>/minor/<str:minor>/', uwPath.requirements, name='requirements'),
     path(r'major/<str:major>/option/<str:option>/<str:optionExtended>/minor/<str:minor>/', uwPath.requirements, name='requirements'),
 
+    path(r'major/<str:major>/<str:majorExtended>/minor/<str:minor>/option/<str:option>/', uwPath.requirements, name='requirements'),
+    path(r'major/<str:major>/<str:majorExtended>/minor/<str:minor>/option/<str:option>/<str:optionExtended>/', uwPath.requirements,
+         name='requirements'),
+    path(r'major/<str:major>/minor/<str:minor>/option/<str:option>/', uwPath.requirements, name='requirements'),
+    path(r'major/<str:major>/minor/<str:minor>/option/<str:option>/<str:optionExtended>/', uwPath.requirements, name='requirements'),
+
+
 
     path(r'contact', uwPath.contact, name='contact'),
     re_path(r'(?P<pk>\d+)', uwPath.AppView.as_view()),

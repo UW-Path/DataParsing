@@ -23,7 +23,7 @@ def index(request):
     return render(request, 'index.html', {'programs': programs})
 
 
-def requirements(request, major, majorExtended= "", option ="", optionExtended =""):
+def requirements(request, major, majorExtended="", option ="", optionExtended ="", minor=""):
     # Note option includes requirement
 
     #Renders the requiremnts + table for major/minor requested for
@@ -40,7 +40,7 @@ def requirements(request, major, majorExtended= "", option ="", optionExtended =
     if majorExtended:
         # this is to solve bug where Degree Name includes '/'
         major = major + "/" + majorExtended
-    programs = Requirements_List().get_unique_major()
+    option_list = Requirements_List().get_unique_major()
     #Prevent duplicate courses in table II and major
     requirements = Requirements_List().get_major_requirement(major).exclude(course_codes__in = table2_course_codes)
 
@@ -70,10 +70,14 @@ def requirements(request, major, majorExtended= "", option ="", optionExtended =
     if not requirements:
         return HttpResponseNotFound('<h1>404 Not Found: Major not valid</h1>')
 
-    #filter minor returned
+    #filter options returned
     majorName = requirements.first()['major_name']
-    programs = programs.filter(Q(major_name = majorName) | Q(plan_type = "Joint") | Q(plan_type = "Minor")).exclude(plan_type = "Major")
-    programs = programs.order_by('plan_type', 'program_name')
+    option_list = option_list.filter(Q(major_name = majorName) | Q(plan_type = "Joint")).exclude(Q(plan_type = "Major") | Q(plan_type = "Minor"))
+    option_list = option_list.order_by('plan_type', 'program_name')
+
+    #filter minor returned
+    minor_list = Requirements_List().get_unique_major().filter(plan_type="Minor")
+    minor_list = minor_list.order_by('program_name')
 
     # specializations and options
     if option:
@@ -86,8 +90,35 @@ def requirements(request, major, majorExtended= "", option ="", optionExtended =
         option_requirements = option_requirements.exclude(course_codes__in = requirements_course_codes_list)
         if not option_requirements:
             return HttpResponseNotFound('<h1>404 Not Found: Minor not valid</h1>')
-        return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'option': option, 'option_requirements': option_requirements, 'table1':table1, 'table2':table2})
-    return render(request, 'table.html', {'programs': programs, 'major': major, 'requirements': requirements, 'table1':table1, 'table2':table2})
+
+    if minor:
+        minor_requirements = Requirements_List().get_minor_requirement(minor)
+        requirements_course_codes_list = [r["course_codes"] for r in requirements]
+        if option:
+            option_course_codes_list = [r["course_codes"] for r in option_requirements]
+
+        minor_requirements = minor_requirements.exclude(course_codes__in=requirements_course_codes_list)
+
+        if option:
+            minor_requirements = minor_requirements.exclude(course_codes__in=option_course_codes_list)
+        if not minor_requirements:
+            return HttpResponseNotFound('<h1>404 Not Found: Option not valid</h1>')
+        print("fetch minor req")
+
+    if option and minor:
+        return render(request, 'table.html',
+                      {'option_list': option_list, 'minor_list': minor_list, 'major': major, 'requirements': requirements, 'option': option,
+                       'option_requirements': option_requirements, 'minor': minor, 'minor_requirements': minor_requirements,
+                           'table1': table1, 'table2': table2})
+
+    elif option:
+        return render(request, 'table.html', {'option_list': option_list, 'minor_list': minor_list,  'major': major, 'requirements': requirements, 'option': option, 'option_requirements': option_requirements, 'table1':table1, 'table2':table2})
+    elif minor:
+        return render(request, 'table.html',
+                      {'option_list': option_list, 'minor_list': minor_list, 'major': major, 'requirements': requirements, 'minor': minor,
+                       'minor_requirements': minor_requirements, 'table1': table1, 'table2': table2})
+
+    else: return render(request, 'table.html', {'option_list': option_list, 'minor_list': minor_list, 'major': major, 'requirements': requirements, 'table1':table1, 'table2':table2})
 
 
 def contact(request):

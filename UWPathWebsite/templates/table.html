@@ -44,7 +44,6 @@
                 <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
                     onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})',-1)">
                     <p>{{ req.course_codes }}</p>
-                    {#                        <i class="material-icons list-icon">info</i>#}
                 </li>
                 {% endfor %}
                 {% endfor %}
@@ -54,16 +53,25 @@
                 <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
                     onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})',-1)">
                     <p>{{ req.course_codes }}</p>
-                    {#                       <i class="material-icons list-icon">info</i>#}
                 </li>
                 {% endfor %}
                 {% endfor %}
+
+
+                {% for req in option_requirements %}
+                {% for i in req.number_of_courses|times %}
+                <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
+                    onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})',-1)">
+                    <p>{{ req.course_codes }} </p>
+                </li>
+                {% endfor %}
+                {% endfor %}
+
                 {% for req in minor_requirements %}
                 {% for i in req.number_of_courses|times %}
                 <li class="task" id="{{ req.course_codes | strip_spaces }}({{ i }})"
                     onclick="popupWindow('{{ req.course_codes | strip_spaces }}({{ i }})',-1)">
                     <p>{{ req.course_codes }} </p>
-                    {#                       <i class="material-icons list-icon">info</i>#}
                 </li>
                 {% endfor %}
                 {% endfor %}
