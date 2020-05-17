@@ -103,7 +103,7 @@ class MajorParser:
         else:
             return relatedMajor
 
-    def __course_list(self, info, i):
+    def __course_list(self, info, i, oneOf = False):
         list = []
         while i < len(info):
 
@@ -125,7 +125,10 @@ class MajorParser:
 
             if rangeCourse:
                 #TODO: Account for range CS 123-CS 345, excluding CS XXX
-                list.append(" or ".join(rangeCourse))
+                if oneOf:
+                    for c in rangeCourse:
+                        list.append(c)
+                else: list.append(" or ".join(rangeCourse))
                 i += 1
                 continue
 
@@ -134,7 +137,10 @@ class MajorParser:
                 break
 
             if courses:
-                list.append(" or ".join(courses))
+                if oneOf:
+                    for c in courses:
+                        list.append(c)
+                else: list.append(" or ".join(courses))
             i += 1
         return i, list
 
@@ -300,7 +306,7 @@ class MajorParser:
         i = 0
         while i < len(information):
             if information[i].strip().lower().startswith("one of"):
-                i, list = self.__course_list(information, i)
+                i, list = self.__course_list(information, i, True)
                 self.requirement.append(MajorReq(list, "One of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("two of"):
                 i, list = self.__course_list(information, i)
@@ -327,7 +333,7 @@ class MajorParser:
                 i, list = self.__course_list(information, i)
                 self.requirement.append(MajorReq(list, "Nine of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("all of"):
-                i, list = self.__course_list(information, i)
+                i, list = self.__course_list(information, i, True)
                 self.require_all(list, program, relatedMajor)
             elif (self.is_additional(information[i]) or self.__stringIsNumber(information[i])) \
                     and "excluding the following" not in information[i]: #Three 400- Level courses
