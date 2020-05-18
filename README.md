@@ -16,9 +16,10 @@ Refer to requirements.txt for all the Python modules needed. Project is built wi
         'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '8888'
-2. Run the following script to load all parse tables
+2. Run the following script to load all parse tables (in order)
     - CommunicationParsing/CommunicationScript.py
     - CourseParsing/CourseParser.py
+    - ProgramParsing/UpdateDegreeRequirment.py
     - ProgramParsing/ParseProgram.py
 
 ## Django ##
@@ -31,5 +32,8 @@ python manage.py migrate
 
 Run below command to start the webpage:
 python manage.py runserver
+
+To set up email notification: 
+- Setup env variable for under variable name UWPath_Email_Account and UWPath_Email_Password
 
 
