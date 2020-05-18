@@ -10239,6 +10239,7 @@ a.text-dark:hover, a.text-dark:focus {
   max-height: inherit;
   top: 5vh;
   border:2px black solid;
+  z-index: 1;
 }
 
 #wrapper {
@@ -10276,6 +10277,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .close:hover {
+  cursor: pointer;
   color: orange;
 }
 /*# sourceMappingURL=bootstrap.css.map */
