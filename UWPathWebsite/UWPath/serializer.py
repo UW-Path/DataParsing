@@ -23,6 +23,11 @@ class PrereqsSerializer(serializers.ModelSerializer):
         model = Prereqs
         fields =  '__all__'
 
+class BreathSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Breath
+        fields =  '__all__'
+
 class RequirementsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Requirements

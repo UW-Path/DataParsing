@@ -200,3 +200,15 @@ class ContactForm(forms.Form):
      subject = forms.CharField(max_length=100)
      message = forms.CharField(widget=forms.Textarea)
 
+
+class Breath(models.Model):
+    subject = models.CharField(max_length=255, primary_key=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    humanities = models.BooleanField(blank=True, null=True)
+    social_science = models.BooleanField(blank=True, null=True)
+    pure_science = models.BooleanField(blank=True, null=True)
+    applied_science = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'breadth_table'

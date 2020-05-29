@@ -454,3 +454,27 @@ function popupWindow(str, term_index) {
     document.getElementById("popup-1").style.display = "block";
     document.getElementById("popup-1").style.width = "98%";
 }
+
+function breathCheck() {
+    const numTerms = terms.length;
+    let taken = getTaken(numTerms);
+    $.ajax({
+        url: 'http://127.0.0.1:8000/api/breath_met/',
+        type: 'get',
+        data: {
+            list_of_courses_taken: taken
+        },
+        async: false,
+        success: function (data) {
+            let breadth = document.getElementById("breadth");
+            if (data.breadth_met) {
+                breadth.style.backgroundColor = "green";
+            } else {
+                breadth.style.backgroundColor = "red";
+            }
+        },
+        error: function () {
+            debugger;
+        }
+    });
+}

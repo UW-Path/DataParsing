@@ -112,6 +112,7 @@ class ValidationCheckAPI:
         :param course: str
         :return: Bool
         """
+        print(list_of_courses_taken)
 
         # ANTIREQ
         for anti_req in self.antireqs:
