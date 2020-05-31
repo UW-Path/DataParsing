@@ -43,7 +43,7 @@
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonMinor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Select additional Minor Plan
         </button>
-        <div class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButtonMinor" id="dropdownMenuButtonMinor">
+        <div class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownMenuButtonMinor">
             {% for program in minor_list %}
                 <li>
                     <a class="dropdown-item" value="{% get_degree_major program.program_name as minor_selected %}" href="{{ request.path }}minor/{{ program.program_name }}/">
