@@ -19,8 +19,9 @@ Refer to requirements.txt for all the Python modules needed. Project is built wi
 2. Run the following script to load all parse tables (in order)
     - CommunicationParsing/CommunicationScript.py
     - CourseParsing/CourseParser.py
-    - ProgramParsing/UpdateDegreeRequirment.py
+    - ProgramParsing/UpdateDegreeRequirement.py
     - ProgramParsing/ParseProgram.py
+    - BreadthDepthParsing/BreadthScript.py
 
 ## Django ##
 Make sure local database is setup under django_projects/settings.py under var DATABASES (Verify localhost, port, username password is correct)
