@@ -23,18 +23,5 @@ Refer to requirements.txt for all the Python modules needed. Project is built wi
     - ProgramParsing/ParseProgram.py
     - BreadthDepthParsing/BreadthScript.py
 
-## Django ##
-Make sure local database is setup under django_projects/settings.py under var DATABASES (Verify localhost, port, username password is correct)
-
-open UWPathWebsite on cmd and run the following commands:
-
-python manage.py makemigrations
-python manage.py migrate
-
-Run below command to start the webpage:
-python manage.py runserver
-
-To set up email notification: 
-- Setup env variable for under variable name UWPath_Email_Account and UWPath_Email_Password
 
 
