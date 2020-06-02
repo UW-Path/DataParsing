@@ -41,7 +41,7 @@ class Course:
         # First occurrence always has course code
         course = self.html.find("a").get("name")
         code = re.findall("[A-Z]+", course)[0]
-        num = course.strip(code)
+        num = course.replace(code, "")
         self.course_code = code + " " + num
         self.course_number = num
         self.course_abbr = code
