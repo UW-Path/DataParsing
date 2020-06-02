@@ -32,10 +32,12 @@ if __name__ == "__main__":
                     'THPERF', 'UNIV', 'VCULT'}
 
     dbc = DatabaseSender()
-
-    dbc.execute("DROP TABLE " + dbc.course_table + " CASCADE;")
-    dbc.execute("DROP TABLE " + dbc.prereqs_table + ";")
-    dbc.execute("DROP TABLE " + dbc.antireqs_table + ";")
+    try:
+        dbc.execute("DROP TABLE " + dbc.course_table + " CASCADE;")
+        dbc.execute("DROP TABLE " + dbc.prereqs_table + ";")
+        dbc.execute("DROP TABLE " + dbc.antireqs_table + ";")
+    except:
+        pass
 
     dbc.create_courses()
     dbc.create_prereqs()
