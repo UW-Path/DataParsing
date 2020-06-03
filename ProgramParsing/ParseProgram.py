@@ -31,7 +31,7 @@ if __name__ == "__main__":
         print(parser)
 
         # Parser requirement is a list of MajorReq Object
-        dbc.insert_requirements(parser.requirement)
+        dbc.insert_requirements(parser.requirement, "Math")
         dbc.commit()
 
     dbc.close()
