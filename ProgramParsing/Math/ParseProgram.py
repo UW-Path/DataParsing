@@ -1,5 +1,5 @@
 from Database.DatabaseSender import DatabaseSender
-from ProgramParsing.MajorParser import MajorParser
+from ProgramParsing.Math.MajorParser import MajorParser
 import os
 
 if __name__ == "__main__":

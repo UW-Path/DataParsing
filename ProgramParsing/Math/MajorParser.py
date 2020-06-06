@@ -7,7 +7,7 @@ Hao Wei Huang
 
 import urllib3
 from bs4 import BeautifulSoup
-from ProgramParsing.MajorReq import MajorReq
+from ProgramParsing.Math.MajorReq import MajorReq
 from StringToNumber import StringToNumber
 import re
 import pkg_resources
