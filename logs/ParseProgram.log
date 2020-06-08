@@ -1,0 +1,2180 @@
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Bachelor-of-Computer-Science-Data-Science.html
+[<a href="/page/MATH-Bachelor-of-Computer-Science-1">BCS</a>]
+Requirement for: Bachelor of Computer Science (Data Science) (Major)
+	Course (One of) : MATH 235, MATH 245
+
+Requirement for: Bachelor of Computer Science (Data Science) (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Bachelor of Computer Science (Data Science) (Major)
+	Course (All of) : CS 348
+
+Requirement for: Bachelor of Computer Science (Data Science) (Major)
+	Course (All of) : CS 451
+
+Requirement for: Bachelor of Computer Science (Data Science) (Major)
+	Course (All of) : STAT 330
+
+Requirement for: Bachelor of Computer Science (Data Science) (Major)
+	Course (All of) : STAT 331
+
+Requirement for: Bachelor of Computer Science (Data Science) (Major)
+	Course (All of) : STAT 341
+
+Requirement for: Bachelor of Computer Science (Data Science) (Major)
+	Course (One of) : CS 480, CS 485, CS 486
+
+Requirement for: Bachelor of Computer Science (Data Science) (Major)
+	Course (Additional 1) : CS 448, CS 454, CS 480, CS 485, CS 486
+
+Requirement for: Bachelor of Computer Science (Data Science) (Major)
+	Course (Two of) : STAT 431, STAT 440, STAT 441, STAT 442, STAT 443, STAT 444
+
+
+2020-06-08 00:45:28,484 - root - INFO - Successfully inserted: 10 rows
+2020-06-08 00:45:28,485 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Statistics-Minor.html
+Requirement for: Statistics Minor (Minor)
+	Course (All of) : MATH 237
+
+Requirement for: Statistics Minor (Minor)
+	Course (All of) : MATH 247
+
+Requirement for: Statistics Minor (Minor)
+	Course (Three of) : STAT 330, STAT 331, STAT 332, STAT 333
+
+Requirement for: Statistics Minor (Minor)
+	Course (Additional 2) : STAT 300-, STAT 400-
+
+
+2020-06-08 00:45:28,522 - root - INFO - Successfully inserted: 4 rows
+2020-06-08 00:45:28,522 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Degree-Requirements-Joint-Applied-Math.html
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (All of) : AMATH 231
+
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (All of) : AMATH 242
+
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (All of) : CS 371
+
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (All of) : AMATH 251
+
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (All of) : AMATH 332
+
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (All of) : PMATH 332
+
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (All of) : AMATH 351
+
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (All of) : AMATH 353
+
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (All of) : PHYS 121
+
+Requirement for: Joint Applied Mathematics (Joint)
+	Course (Additional 3) : AMATH 400-
+
+
+2020-06-08 00:45:28,563 - root - INFO - Successfully inserted: 11 rows
+2020-06-08 00:45:28,564 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Physics-Specialization.html
+[]
+
+2020-06-08 00:45:28,602 - root - INFO - Successfully inserted: 0 rows
+2020-06-08 00:45:28,602 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Software-Engineering-Spec.html
+[<a href="/page/MATH-Bachelor-of-Computer-Science-1">Bachelor of Computer Science (BCS)</a>, <a href="/page/MATH-Bachelor-of-Mathematics-Computer-Science-1">Bachelor of Mathematics (Computer Science) (BMath)</a>]
+Requirement for: Software Engineering Specialization (Specialization)
+	Course (All of) : CS 445
+
+Requirement for: Software Engineering Specialization (Specialization)
+	Course (All of) : ECE 451
+
+Requirement for: Software Engineering Specialization (Specialization)
+	Course (All of) : CS 446
+
+Requirement for: Software Engineering Specialization (Specialization)
+	Course (All of) : ECE 452
+
+Requirement for: Software Engineering Specialization (Specialization)
+	Course (All of) : CS 447
+
+Requirement for: Software Engineering Specialization (Specialization)
+	Course (All of) : ECE 453
+
+Requirement for: Software Engineering Specialization (Specialization)
+	Course (All of) : CS 492
+
+Requirement for: Software Engineering Specialization (Specialization)
+	Course (Two of) : CS 343, CS 348, CS 349
+
+Requirement for: Software Engineering Specialization (Specialization)
+	Course (Two of) : CS 444, CS 448, CS 449, CS 450, CS 452, CS 454, CS 456, CS 457, CS 458, CS 484, CS 485, CS 486, CS 488
+
+
+2020-06-08 00:45:28,643 - root - INFO - Successfully inserted: 9 rows
+2020-06-08 00:45:28,643 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-MS-Business-Specialization.html
+[<a href="/page/MATH-MS-Degree-Requirements-Mathematical-Studies">Honours Mathematical Studies</a>]
+Requirement for: Business Specialization (Specialization)
+	Course (One of) : AFM 272, ACTSC 291, ACTSC 221, ACTSC 231, ACTSC 371
+
+Requirement for: Business Specialization (Specialization)
+	Course (All of) : AFM 101
+
+Requirement for: Business Specialization (Specialization)
+	Course (All of) : AFM 102
+
+Requirement for: Business Specialization (Specialization)
+	Course (All of) : BUS 121W
+
+Requirement for: Business Specialization (Specialization)
+	Course (All of) : ECON 101
+
+Requirement for: Business Specialization (Specialization)
+	Course (All of) : ECON 102
+
+Requirement for: Business Specialization (Specialization)
+	Course (One of) : AFM 131, ARBUS 101, BUS 111W
+
+Requirement for: Business Specialization (Specialization)
+	Course (One of) : ARBUS 302, MGMT 244, BUS 352W
+
+Requirement for: Business Specialization (Specialization)
+	Course (One of) : CO 227, CO 250, CO 255
+
+Requirement for: Business Specialization (Specialization)
+	Course (One of) : CO 327, CO 370
+
+Requirement for: Business Specialization (Specialization)
+	Course (Two of) : CS 200, CS 338, CS 430, STAT 340
+
+Requirement for: Business Specialization (Specialization)
+	Course (All of) : CS 330
+
+Requirement for: Business Specialization (Specialization)
+	Course (Additional 3) : LS 271, PACS 202
+
+Requirement for: Business Specialization (Specialization)
+	Course (One of) : STAT 321, STAT 322
+
+
+2020-06-08 00:45:28,691 - root - INFO - Successfully inserted: 14 rows
+2020-06-08 00:45:28,692 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AS-Finance-Specialization.html
+[<a href="/page/MATH-Actuarial-Science1">Honours Actuarial Science</a>]
+Requirement for: Finance Specialization (Specialization)
+	Course (One of) : AFM 424, ACTSC 471, AFM 476
+
+Requirement for: Finance Specialization (Specialization)
+	Course (One of) : AMATH 242, CS 371, CS 370
+
+Requirement for: Finance Specialization (Specialization)
+	Course (All of) : AFM 102
+
+Requirement for: Finance Specialization (Specialization)
+	Course (All of) : ACTSC 372
+
+Requirement for: Finance Specialization (Specialization)
+	Course (All of) : ACTSC 445
+
+Requirement for: Finance Specialization (Specialization)
+	Course (All of) : CS 476
+
+Requirement for: Finance Specialization (Specialization)
+	Course (All of) : STAT 340
+
+
+2020-06-08 00:45:28,740 - root - INFO - Successfully inserted: 7 rows
+2020-06-08 00:45:28,741 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Applied-Mathematics-Minor1.html
+Requirement for: Applied Mathematics Minor (Minor)
+	Course (All of) : MATH 237
+
+Requirement for: Applied Mathematics Minor (Minor)
+	Course (All of) : MATH 247
+
+Requirement for: Applied Mathematics Minor (Minor)
+	Course (All of) : AMATH 231
+
+Requirement for: Applied Mathematics Minor (Minor)
+	Course (All of) : AMATH 251
+
+Requirement for: Applied Mathematics Minor (Minor)
+	Course (All of) : AMATH 351
+
+Requirement for: Applied Mathematics Minor (Minor)
+	Course (All of) : AMATH 353
+
+Requirement for: Applied Mathematics Minor (Minor)
+	Course (Additional 3) : AMATH 300-, AMATH 400-
+
+
+2020-06-08 00:45:28,789 - root - INFO - Successfully inserted: 7 rows
+2020-06-08 00:45:28,790 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Actuarial-Science-Mathematical-Finance1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Mathematical Finance (Major)
+	Course (One of) : MATH 247, MATH 237
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : AFM 101
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : BUS 127W
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : AFM 102
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : BUS 247W
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : AFM 131
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ARBUS 101
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : BUS 111W
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ACTSC 231
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ACTSC 371
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ACTSC 372
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ACTSC 445
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ACTSC 446
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : AMATH 242
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : CS 371
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : CS 335
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : AMATH 250
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : AMATH 350
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ECON 101
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ECON 120W
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ECON 102
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ECON 140W
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ECON 201
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : ECON 260W
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : PMATH 351
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : PMATH 450
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : PMATH 451
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : STAT 330
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : STAT 331
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : STAT 333
+
+Requirement for: Mathematical Finance (Major)
+	Course (All of) : STAT 443
+
+Requirement for: Mathematical Finance (Major)
+	Course (One of) : AMATH 351, CO 250, PMATH 352
+
+Requirement for: Mathematical Finance (Major)
+	Course (One of) : AMATH 353, CO 372, CS 476, PMATH 453
+
+
+2020-06-08 00:45:28,855 - root - INFO - Successfully inserted: 33 rows
+2020-06-08 00:45:28,855 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Mathematics-Teaching-co-op.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : ACTSC 221
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : CO 250
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : CS 234
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : AMATH 250, AMATH 251, AMATH 343
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : AMATH 331, PMATH 331, AMATH 332, PMATH 332, PMATH 333
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : CO 380, CO 480
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : CS 230, CS 330, CS 338, CS 370, CS 430, CS 436
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : PMATH 320, PMATH 321, PMATH 330, PMATH 340
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : PMATH 334, PMATH 336, PMATH 347
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : STAT 331, STAT 332, STAT 333
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : MTHEL 206A
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : PSYCH 101
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : PSYCH 101R
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : PSYCH 211, PSYCH 212, PSYCH 212R
+
+Requirement for: Mathematics/Teaching (co-op only) (Major)
+	Course (Additional 8) : MATH 300-, MATH 400-
+
+
+2020-06-08 00:45:28,907 - root - INFO - Successfully inserted: 17 rows
+2020-06-08 00:45:28,908 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Science-Minor-2.html
+Requirement for: Computer Science Minor (Minor)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Computer Science Minor (Minor)
+	Course (One of) : CS 115, CS 135, CS 145
+
+Requirement for: Computer Science Minor (Minor)
+	Course (One of) : CS 136, CS 146
+
+Requirement for: Computer Science Minor (Minor)
+	Course (Additional 1) : CS 340-CS 398, CS 440-CS 498
+
+Requirement for: Computer Science Minor (Minor)
+	Course (Additional 5) : CS 240-CS 299, CS 340-CS 398, CS 440-CS 498
+
+
+2020-06-08 00:45:28,945 - root - INFO - Successfully inserted: 5 rows
+2020-06-08 00:45:28,946 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computational-Mathematics1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Computational Mathematics (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Computational Mathematics (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Computational Mathematics (Major)
+	Course (All of) : AMATH 242
+
+Requirement for: Computational Mathematics (Major)
+	Course (All of) : CS 371
+
+Requirement for: Computational Mathematics (Major)
+	Course (One of) : CS 230, CS 241
+
+Requirement for: Computational Mathematics (Major)
+	Course (One of) : CS 234, CS 240, CS 240, CS 245, CS 246, CS 241, CS 246, CS 240, CS 241
+
+Requirement for: Computational Mathematics (Major)
+	Course (Four of) : AMATH 342, CO 250 or CO 255, CS 245 or PMATH 330, CS 246, CS 475, STAT 340 or STAT 341
+
+Requirement for: Computational Mathematics (Major)
+	Course (Additional 4) : AMATH 382, BIOL 382, AMATH 442, CO 351, CO 353, CO 367, CO 370, CO 372, CO 450, CO 452, CO 454, CO 456, CO 485, CO 487, CS 341, CS 451, CS 466, CS 476, CS 480, CS 482, CS 485, CS 487, PMATH 370, STAT 440, STAT 441, STAT 442, STAT 444
+
+Requirement for: Computational Mathematics (Major)
+	Course (Additional 3) : NON-MATH
+
+
+2020-06-08 00:45:29,003 - root - INFO - Successfully inserted: 9 rows
+2020-06-08 00:45:29,004 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Pure-Mathematics-Teaching-co-op.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : AMATH 231
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : AMATH 242
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : CS 371
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : AMATH 250, AMATH 251
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : PMATH 320, PMATH 321
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : PMATH 334, PMATH 347
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : AMATH 331, PMATH 331, PMATH 333, PMATH 351
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (Additional 2) : AMATH 332, PMATH 332, PMATH 352, PMATH 320, PMATH 321, PMATH 330, PMATH 336, PMATH 347, PMATH 348, PMATH 340
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : CO 380, CO 480
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (Additional 1) : PMATH
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (Additional 3) : MATH 300-, MATH 400-
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : MTHEL 206A
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : PSYCH 101
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (All of) : PSYCH 101R
+
+Requirement for: Pure Mathematics/Teaching (co-op only) (Major)
+	Course (One of) : PSYCH 211, PSYCH 212, PSYCH 212R
+
+
+2020-06-08 00:45:29,062 - root - INFO - Successfully inserted: 17 rows
+2020-06-08 00:45:29,062 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Bachelor-of-Mathematics-Computer-Science-1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (All of) : CS 240
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (All of) : CS 241
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (All of) : CS 245
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (All of) : CS 246
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (All of) : CS 251
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (All of) : CS 341
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (All of) : CS 350
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (One of) : AMATH 242, CS 371, CS 370
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (One of) : CS 360, CS 365
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (Additional 1) : CS 340-CS 398, CS 440-CS 489
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (Additional 2) : CS 440-CS 489
+
+Requirement for: Bachelor of Mathematics (Computer Science) (Major)
+	Course (Additional 1) : CO 487, CS 440-CS 498, CS 499T, STAT 440, CS 600-, CS 700-
+
+
+2020-06-08 00:45:29,109 - root - INFO - Successfully inserted: 14 rows
+2020-06-08 00:45:29,109 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Combinatorics-and-Optimization2.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Combinatorics and Optimization (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Combinatorics and Optimization (Major)
+	Course (One of) : CO 250, CO 255
+
+Requirement for: Combinatorics and Optimization (Major)
+	Course (One of) : CO 330, CO 342
+
+Requirement for: Combinatorics and Optimization (Major)
+	Course (One of) : CO 351, CO 353, CO 367
+
+Requirement for: Combinatorics and Optimization (Major)
+	Course (Additional 3) : CO 330, CO 331, CO 342, CO 351, CO 353, CO 367, CO 430-CO 487
+
+Requirement for: Combinatorics and Optimization (Major)
+	Course (All of) : PMATH 336
+
+Requirement for: Combinatorics and Optimization (Major)
+	Course (All of) : PMATH 347
+
+Requirement for: Combinatorics and Optimization (Major)
+	Course (Three of) : MATH 237 or MATH 247, AMATH 331 or PMATH 331, AMATH 332 or PMATH 332, CS 462, CS 466, CS 487, PMATH 334 or PMATH 348, PMATH 340
+
+Requirement for: Combinatorics and Optimization (Major)
+	Course (Additional 2) : MATH 300-, MATH 400-
+
+Requirement for: Combinatorics and Optimization (Major)
+	Course (Additional 1) : MATH 300-, MATH 400-
+
+Requirement for: Combinatorics and Optimization (Major)
+	Course (Additional 3) : MATH
+
+
+2020-06-08 00:45:29,173 - root - INFO - Successfully inserted: 11 rows
+2020-06-08 00:45:29,174 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Actuarial-Science-Minor.html
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : ACTSC 231
+
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : ACTSC 232
+
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : ACTSC 331
+
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : ACTSC 363
+
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : ACTSC 371
+
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : AFM 101
+
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : MATH 237
+
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : MATH 247
+
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : MTHEL 131
+
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : STAT 330
+
+Requirement for: Actuarial Science Minor (Minor)
+	Course (All of) : STAT 333
+
+
+2020-06-08 00:45:29,212 - root - INFO - Successfully inserted: 11 rows
+2020-06-08 00:45:29,213 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Computational-Fine-Art-Spec.html
+[<a href="/page/MATH-Bachelor-of-Computer-Science-1">Bachelor of Computer Science (BCS)</a>, <a href="/page/MATH-Bachelor-of-Mathematics-Computer-Science-1">Bachelor of Mathematics (BMath) (Computer Science)</a>, <a href="/page/MATH-Software-Engineering">Bachelor of Software Engineering (BSE)</a>]
+Requirement for: Computational Fine Art Specialization (Specialization)
+	Course (All of) : CS 349
+
+Requirement for: Computational Fine Art Specialization (Specialization)
+	Course (All of) : CS 383
+
+Requirement for: Computational Fine Art Specialization (Specialization)
+	Course (All of) : FINE 383
+
+Requirement for: Computational Fine Art Specialization (Specialization)
+	Course (All of) : CS 488
+
+Requirement for: Computational Fine Art Specialization (Specialization)
+	Course (All of) : FINE 100
+
+Requirement for: Computational Fine Art Specialization (Specialization)
+	Course (All of) : FINE 101
+
+Requirement for: Computational Fine Art Specialization (Specialization)
+	Course (All of) : VCULT 101
+
+Requirement for: Computational Fine Art Specialization (Specialization)
+	Course (All of) : FINE 229
+
+Requirement for: Computational Fine Art Specialization (Specialization)
+	Course (All of) : FINE 257
+
+
+2020-06-08 00:45:29,256 - root - INFO - Successfully inserted: 9 rows
+2020-06-08 00:45:29,256 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Digital-Hardware-Spec.html
+Requirement for: Digital Hardware Specialization (Specialization)
+	Course (Two of) : CS 452, CS 454, CS 456, CS 457
+
+Requirement for: Digital Hardware Specialization (Specialization)
+	Course (One of) : ECE 224, MTE 325
+
+Requirement for: Digital Hardware Specialization (Specialization)
+	Course (One of) : ECE 429, CS 450
+
+Requirement for: Digital Hardware Specialization (Specialization)
+	Course (One of) : GENE 123, MTE 120
+
+Requirement for: Digital Hardware Specialization (Specialization)
+	Course (All of) : ECE 124
+
+Requirement for: Digital Hardware Specialization (Specialization)
+	Course (All of) : ECE 327
+
+Requirement for: Digital Hardware Specialization (Specialization)
+	Course (All of) : ECE 423
+
+
+2020-06-08 00:45:29,297 - root - INFO - Successfully inserted: 7 rows
+2020-06-08 00:45:29,298 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Biostatistics1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Biostatistics (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Biostatistics (Major)
+	Course (All of) : ENGL 378
+
+Requirement for: Biostatistics (Major)
+	Course (All of) : MTHEL 300
+
+Requirement for: Biostatistics (Major)
+	Course (All of) : STAT 330
+
+Requirement for: Biostatistics (Major)
+	Course (All of) : STAT 331
+
+Requirement for: Biostatistics (Major)
+	Course (All of) : STAT 332
+
+Requirement for: Biostatistics (Major)
+	Course (All of) : STAT 333
+
+Requirement for: Biostatistics (Major)
+	Course (All of) : STAT 337
+
+Requirement for: Biostatistics (Major)
+	Course (All of) : STAT 431
+
+Requirement for: Biostatistics (Major)
+	Course (All of) : STAT 437
+
+Requirement for: Biostatistics (Major)
+	Course (All of) : STAT 438
+
+Requirement for: Biostatistics (Major)
+	Course (One of) : AMATH 231, AMATH 242, CS 371, AMATH 250, MATH 239, MATH 249
+
+Requirement for: Biostatistics (Major)
+	Course (One of) : BIOL 239, HLTH 101
+
+Requirement for: Biostatistics (Major)
+	Course (Additional 2) : STAT 300-, STAT 400-
+
+Requirement for: Biostatistics (Major)
+	Course (Additional 2) : MATH 300-, MATH 400-
+
+
+2020-06-08 00:45:29,347 - root - INFO - Successfully inserted: 15 rows
+2020-06-08 00:45:29,348 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Human-Computer-Interaction-Spec.html
+[<a href="/page/MATH-Bachelor-of-Computer-Science-1">Bachelor of Computer Science (BCS)</a>, <a href="/page/MATH-Bachelor-of-Mathematics-Computer-Science-1">Bachelor of Mathematics (Computer Science) (BMath)</a>, <a href="/page/MATH-Software-Engineering">Bachelor of Software Engineering (BSE)</a>]
+Requirement for: Human-Computer Interaction Specialization (Specialization)
+	Course (All of) : CS 349
+
+Requirement for: Human-Computer Interaction Specialization (Specialization)
+	Course (All of) : CS 449
+
+Requirement for: Human-Computer Interaction Specialization (Specialization)
+	Course (All of) : CS 492
+
+Requirement for: Human-Computer Interaction Specialization (Specialization)
+	Course (Two of) : CS 445 or ECE 451, CS 446 or ECE 452, CS 447 or ECE 453, CS 454, CS 458, CS 484, CS 485, CS 488
+
+Requirement for: Human-Computer Interaction Specialization (Specialization)
+	Course (Two of) : ENGL 108D, ENGL 293, ENGL 295, FINE 150, FINE 257, INTEG 251, KIN 320, PSYCH 207, PSYCH 261, STAT 332, STAT 430
+
+
+2020-06-08 00:45:29,389 - root - INFO - Successfully inserted: 5 rows
+2020-06-08 00:45:29,390 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computing-Minor.html
+Requirement for: Computing Minor (Minor)
+	Course (One of) : CS 115, CS 135, CS 145
+
+Requirement for: Computing Minor (Minor)
+	Course (One of) : CS 116, CS 136, CS 146
+
+Requirement for: Computing Minor (Minor)
+	Course (Additional 1) : CS 100-CS 146, CS 200-CS 299, CS 300-CS 398, CS 400-CS 498
+
+Requirement for: Computing Minor (Minor)
+	Course (Additional 4) : CS 200-CS 299, CS 300-CS 398, CS 400-CS 498, COMM 432
+
+Requirement for: Computing Minor (Minor)
+	Course (Additional 1) : CS 300-CS 398, CS 400-CS 498
+
+
+2020-06-08 00:45:29,423 - root - INFO - Successfully inserted: 5 rows
+2020-06-08 00:45:29,424 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computational-Mathematics-Minor.html
+Requirement for: Computational Mathematics Minor (Minor)
+	Course (One of) : AMATH 242, CS 371, CS 370
+
+Requirement for: Computational Mathematics Minor (Minor)
+	Course (Three of) : AMATH 342, CO 250, CS 245 or PMATH 330, CS 246, CS 475, STAT 340 or STAT 341
+
+Requirement for: Computational Mathematics Minor (Minor)
+	Course (Additional 3) : AMATH 382, BIOL 382, AMATH 442, CO 351, CO 353, CO 367, CO 370, CO 372, CO 450, CO 452, CO 454, CO 456, CO 485, CO 487, CS 341, CS 451, CS 466, CS 476, CS 480, CS 482, CS 485, CS 487, PMATH 370, STAT 440, STAT 441, STAT 442, STAT 444
+
+
+2020-06-08 00:45:29,463 - root - INFO - Successfully inserted: 3 rows
+2020-06-08 00:45:29,464 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Statistics1.html
+Requirement for: Joint Statistics (Joint)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Joint Statistics (Joint)
+	Course (All of) : ENGL 378
+
+Requirement for: Joint Statistics (Joint)
+	Course (All of) : MTHEL 300
+
+Requirement for: Joint Statistics (Joint)
+	Course (All of) : STAT 330
+
+Requirement for: Joint Statistics (Joint)
+	Course (All of) : STAT 331
+
+Requirement for: Joint Statistics (Joint)
+	Course (All of) : STAT 333
+
+Requirement for: Joint Statistics (Joint)
+	Course (Additional 2) : STAT 400-
+
+Requirement for: Joint Statistics (Joint)
+	Course (Additional 1) : STAT 300-, STAT 400-
+
+
+2020-06-08 00:45:29,503 - root - INFO - Successfully inserted: 8 rows
+2020-06-08 00:45:29,504 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Information-Techn-Mgt-Degree-Requirements.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Information Technology Management (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Information Technology Management (Major)
+	Course (One of) : CO 250, CO 255
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : CS 230
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : CS 330
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : CS 338
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : CS 430
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : CS 436
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : STAT 371
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : STAT 372
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : AFM 101
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : AFM 102
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : BUS 111W
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : BUS 121W
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : BUS 352W
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : BUS 481W
+
+Requirement for: Information Technology Management (Major)
+	Course (All of) : COMM 231
+
+Requirement for: Information Technology Management (Major)
+	Course (One of) : MSCI 421
+
+Requirement for: Information Technology Management (Major)
+	Course (Additional 1) : ACTSC
+
+Requirement for: Information Technology Management (Major)
+	Course (Additional 1) : MATH 300-, MATH 400-
+
+Requirement for: Information Technology Management (Major)
+	Course (Additional 3) : Elective
+
+
+2020-06-08 00:45:29,552 - root - INFO - Successfully inserted: 20 rows
+2020-06-08 00:45:29,552 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Combinatorics-and-Optimization-Minor2.html
+Requirement for: Combinatorics and Optimization Minor (Minor)
+	Course (One of) : MATH 103, MATH 106, MATH 114, MATH 115, MATH 136, MATH 146
+
+Requirement for: Combinatorics and Optimization Minor (Minor)
+	Course (One of) : ECE 103, MATH 135, MATH 145, PMATH 340
+
+Requirement for: Combinatorics and Optimization Minor (Minor)
+	Course (One of) : MATH 104, MATH 116, MATH 117, MATH 127, MATH 137, MATH 147
+
+Requirement for: Combinatorics and Optimization Minor (Minor)
+	Course (All of) : CO 250
+
+Requirement for: Combinatorics and Optimization Minor (Minor)
+	Course (All of) : CO 255
+
+Requirement for: Combinatorics and Optimization Minor (Minor)
+	Course (All of) : MATH 239
+
+Requirement for: Combinatorics and Optimization Minor (Minor)
+	Course (All of) : MATH 249
+
+Requirement for: Combinatorics and Optimization Minor (Minor)
+	Course (Three of) : CO 330, CO 331, CO 342, CO 351, CO 353, CO 367, CO 370, CO 372, CO 430-CO 487
+
+
+2020-06-08 00:45:29,591 - root - INFO - Successfully inserted: 8 rows
+2020-06-08 00:45:29,592 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Pure-Mathematics1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Pure Mathematics (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Pure Mathematics (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Pure Mathematics (Major)
+	Course (All of) : PMATH 347
+
+Requirement for: Pure Mathematics (Major)
+	Course (All of) : PMATH 348
+
+Requirement for: Pure Mathematics (Major)
+	Course (All of) : PMATH 351
+
+Requirement for: Pure Mathematics (Major)
+	Course (All of) : PMATH 352
+
+Requirement for: Pure Mathematics (Major)
+	Course (All of) : PMATH 365
+
+Requirement for: Pure Mathematics (Major)
+	Course (All of) : PMATH 450
+
+Requirement for: Pure Mathematics (Major)
+	Course (Additional 3) : PMATH 400-
+
+Requirement for: Pure Mathematics (Major)
+	Course (Additional 2) : MATH 400-
+
+
+2020-06-08 00:45:29,634 - root - INFO - Successfully inserted: 10 rows
+2020-06-08 00:45:29,635 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Biology-Specialization.html
+[<a href="/page/MATH-AM-Degree-Requirements-Applied-Mathematics">Honours Applied Mathematics</a>]
+
+2020-06-08 00:45:29,672 - root - INFO - Successfully inserted: 0 rows
+2020-06-08 00:45:29,672 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Economics-Specialization.html
+[<a href="/page/MATH-AM-Degree-Requirements-Applied-Mathematics">Honours Applied Mathematics</a>]
+
+2020-06-08 00:45:29,707 - root - INFO - Successfully inserted: 0 rows
+2020-06-08 00:45:29,707 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AS-Predictive-Analytics-Specialization.html
+[<a href="/page/MATH-Actuarial-Science1">Honours Actuarial Science</a>]
+Requirement for: Predictive Analytics Specialization (Specialization)
+	Course (All of) : CS 330
+
+Requirement for: Predictive Analytics Specialization (Specialization)
+	Course (All of) : STAT 341
+
+Requirement for: Predictive Analytics Specialization (Specialization)
+	Course (All of) : STAT 431
+
+Requirement for: Predictive Analytics Specialization (Specialization)
+	Course (All of) : STAT 441
+
+Requirement for: Predictive Analytics Specialization (Specialization)
+	Course (All of) : STAT 443
+
+Requirement for: Predictive Analytics Specialization (Specialization)
+	Course (One of) : ACTSC 454, STAT 437
+
+Requirement for: Predictive Analytics Specialization (Specialization)
+	Course (One of) : STAT 440, STAT 442
+
+
+2020-06-08 00:45:29,747 - root - INFO - Successfully inserted: 7 rows
+2020-06-08 00:45:29,747 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Actuarial-Science1.html
+Requirement for: Joint Actuarial Science (Joint)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : AFM 101
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : ACTSC 231
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : ACTSC 232
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : ACTSC 331
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : ACTSC 363
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : ACTSC 431
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : ACTSC 446
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : ENGL 378
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : MTHEL 300
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : MTHEL 131
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : STAT 330
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (All of) : STAT 333
+
+Requirement for: Joint Actuarial Science (Joint)
+	Course (Additional 2) : ACTSC 300-, ACTSC 400-, AFM 424
+
+
+2020-06-08 00:45:29,791 - root - INFO - Successfully inserted: 14 rows
+2020-06-08 00:45:29,792 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Eng-Specialization-Heat-and-Mass-Transfer.html
+[<a href="/page/MATH-AM-Degree-Requirements-Applied-Mathematics">Honours Applied Mathematics</a>]
+Requirement for: Engineering Specialization: Heat and Mass Transfer (Specialization)
+	Course (All of) : AMATH 361
+
+Requirement for: Engineering Specialization: Heat and Mass Transfer (Specialization)
+	Course (All of) : AMATH 463
+
+Requirement for: Engineering Specialization: Heat and Mass Transfer (Specialization)
+	Course (All of) : CHE 230
+
+Requirement for: Engineering Specialization: Heat and Mass Transfer (Specialization)
+	Course (All of) : CHE 231
+
+Requirement for: Engineering Specialization: Heat and Mass Transfer (Specialization)
+	Course (All of) : CHE 312
+
+Requirement for: Engineering Specialization: Heat and Mass Transfer (Specialization)
+	Course (All of) : CHE 313
+
+Requirement for: Engineering Specialization: Heat and Mass Transfer (Specialization)
+	Course (All of) : CHE 330
+
+Requirement for: Engineering Specialization: Heat and Mass Transfer (Specialization)
+	Course (Two of) : CHE 314, CHE 331, CHE 341, CHE 361, CHE 522
+
+
+2020-06-08 00:45:29,834 - root - INFO - Successfully inserted: 8 rows
+2020-06-08 00:45:29,835 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Bachelor-of-Computer-Science-1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>]
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (One of) : CS 115, CS 135, CS 145
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (One of) : CS 136, CS 146
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (One of) : MATH 127, MATH 137, MATH 147
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (One of) : MATH 128, MATH 138, MATH 148
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (One of) : MATH 135, MATH 145
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (One of) : MATH 136, MATH 146
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (One of) : STAT 230, STAT 240
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (One of) : STAT 231, STAT 241
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (All of) : CS 240
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (All of) : CS 241
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (All of) : CS 245
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (All of) : CS 246
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (All of) : CS 251
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (All of) : CS 341
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (All of) : CS 350
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (Additional 1) : CS 340-CS 398, CS 440-CS 489
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (Additional 2) : CS 440-CS 489, CS 499T
+
+Requirement for: Joint Bachelor of Computer Science (Joint)
+	Course (Additional 10) : NON-MATH
+
+
+2020-06-08 00:45:29,888 - root - INFO - Successfully inserted: 19 rows
+2020-06-08 00:45:29,889 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Eng-Specializ-Communication-and-Control.html
+[<a href="/page/MATH-AM-Degree-Requirements-Applied-Mathematics">Honours Applied Mathematics</a>]
+Requirement for: Engineering Specialization: Communication and Control (Specialization)
+	Course (All of) : AMATH 455
+
+Requirement for: Engineering Specialization: Communication and Control (Specialization)
+	Course (All of) : PHYS 122
+
+Requirement for: Engineering Specialization: Communication and Control (Specialization)
+	Course (One of) : CO 250, CO 255, CS 475, STAT 331, STAT 340
+
+Requirement for: Engineering Specialization: Communication and Control (Specialization)
+	Course (All of) : ECE 207
+
+Requirement for: Engineering Specialization: Communication and Control (Specialization)
+	Course (All of) : ECE 240
+
+Requirement for: Engineering Specialization: Communication and Control (Specialization)
+	Course (All of) : ECE 318
+
+Requirement for: Engineering Specialization: Communication and Control (Specialization)
+	Course (All of) : ECE 380
+
+Requirement for: Engineering Specialization: Communication and Control (Specialization)
+	Course (All of) : GENE 123
+
+Requirement for: Engineering Specialization: Communication and Control (Specialization)
+	Course (Two of) : ECE 413, ECE 484, ECE 486, SYDE 544, SYDE 572
+
+
+2020-06-08 00:45:29,932 - root - INFO - Successfully inserted: 9 rows
+2020-06-08 00:45:29,933 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Combinatorics-and-Optimization1.html
+Requirement for: Joint Combinatorics and Optimization (Joint)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Joint Combinatorics and Optimization (Joint)
+	Course (One of) : CO 250, CO 255
+
+Requirement for: Joint Combinatorics and Optimization (Joint)
+	Course (Additional 4) : CO 330, CO 331, CO 342, CO 351, CO 353, CO 367, CO 430-CO 487
+
+Requirement for: Joint Combinatorics and Optimization (Joint)
+	Course (All of) : PMATH 336
+
+Requirement for: Joint Combinatorics and Optimization (Joint)
+	Course (All of) : PMATH 347
+
+Requirement for: Joint Combinatorics and Optimization (Joint)
+	Course (Three of) : AMATH 331 or PMATH 331, AMATH 332 or PMATH 332, CS 341, CS 360, CS 466, MATH 237 or MATH 247, PMATH 334 or PMATH 348, PMATH 340
+
+
+2020-06-08 00:45:29,976 - root - INFO - Successfully inserted: 6 rows
+2020-06-08 00:45:29,976 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Degree-Requirements-Applied-Math-Sci-Comp.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (All of) : AMATH 231
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (All of) : AMATH 242
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (All of) : CS 371
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (All of) : AMATH 251
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (All of) : AMATH 342
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (All of) : AMATH 442
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (All of) : CS 230
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (All of) : CS 234
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (All of) : CS 475
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (All of) : STAT 341
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (One of) : CO 250, CO 255
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (Additional 2) : AMATH 400-
+
+Requirement for: Applied Mathematics with Scientific Computing (Major)
+	Course (Additional 2) : AMATH 300-, AMATH 400-
+
+
+2020-06-08 00:45:30,024 - root - INFO - Successfully inserted: 14 rows
+2020-06-08 00:45:30,025 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Data-Science1.html
+[<a href="/page/MATH-Statistics1">Honours Statistics</a>]
+Requirement for: Data Science (Major)
+	Course (One of) : CS 136, CS 146
+
+Requirement for: Data Science (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Data Science (Major)
+	Course (All of) : CS 240
+
+Requirement for: Data Science (Major)
+	Course (All of) : CS 241
+
+Requirement for: Data Science (Major)
+	Course (All of) : CS 245
+
+Requirement for: Data Science (Major)
+	Course (All of) : CS 246
+
+Requirement for: Data Science (Major)
+	Course (All of) : CS 251
+
+Requirement for: Data Science (Major)
+	Course (All of) : CS 341
+
+Requirement for: Data Science (Major)
+	Course (All of) : CS 348
+
+Requirement for: Data Science (Major)
+	Course (All of) : STAT 341
+
+Requirement for: Data Science (Major)
+	Course (One of) : CS 431, CS 451
+
+Requirement for: Data Science (Major)
+	Course (One of) : CS 480, CS 485, CS 486, STAT 441
+
+Requirement for: Data Science (Major)
+	Course (Additional 2) : CS 480, CS 485, CS 486, STAT 431, STAT 440, STAT 441, STAT 442, STAT 443, STAT 444
+
+
+2020-06-08 00:45:30,071 - root - INFO - Successfully inserted: 13 rows
+2020-06-08 00:45:30,072 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Pure-Mathematics1.html
+Requirement for: Joint Pure Mathematics (Joint)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Joint Pure Mathematics (Joint)
+	Course (One of) : AMATH 331, PMATH 331, PMATH 333, PMATH 351
+
+Requirement for: Joint Pure Mathematics (Joint)
+	Course (One of) : AMATH 332, PMATH 332, PMATH 352
+
+Requirement for: Joint Pure Mathematics (Joint)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Joint Pure Mathematics (Joint)
+	Course (Additional 1) : PMATH 334, PMATH 336, PMATH 347, PMATH 348
+
+Requirement for: Joint Pure Mathematics (Joint)
+	Course (Additional 3) : PMATH
+
+
+2020-06-08 00:45:30,113 - root - INFO - Successfully inserted: 6 rows
+2020-06-08 00:45:30,114 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Degree-Requirements-Applied-Mathematics.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Applied Mathematics (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Applied Mathematics (Major)
+	Course (All of) : AMATH 231
+
+Requirement for: Applied Mathematics (Major)
+	Course (All of) : AMATH 242
+
+Requirement for: Applied Mathematics (Major)
+	Course (All of) : CS 371
+
+Requirement for: Applied Mathematics (Major)
+	Course (All of) : AMATH 251
+
+Requirement for: Applied Mathematics (Major)
+	Course (All of) : AMATH 332
+
+Requirement for: Applied Mathematics (Major)
+	Course (All of) : PMATH 332
+
+Requirement for: Applied Mathematics (Major)
+	Course (All of) : AMATH 342
+
+Requirement for: Applied Mathematics (Major)
+	Course (All of) : AMATH 351
+
+Requirement for: Applied Mathematics (Major)
+	Course (All of) : AMATH 353
+
+Requirement for: Applied Mathematics (Major)
+	Course (All of) : PHYS 121
+
+Requirement for: Applied Mathematics (Major)
+	Course (Additional 3) : AMATH 400-
+
+Requirement for: Applied Mathematics (Major)
+	Course (Additional 1) : AMATH 300-, AMATH 400-
+
+Requirement for: Applied Mathematics (Major)
+	Course (Additional 5) : MATH 239, MATH 249, CO 250, CO 255, CS 475, PMATH 334, PMATH 336, PMATH 365, STAT 331, STAT 333
+
+
+2020-06-08 00:45:30,163 - root - INFO - Successfully inserted: 14 rows
+2020-06-08 00:45:30,164 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Computer-Science-Bach-of-Math.html
+
+2020-06-08 00:45:30,195 - root - INFO - Successfully inserted: 0 rows
+2020-06-08 00:45:30,196 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-MS-Degree-Requirements-Mathematical-Studies.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>]
+Requirement for: Mathematical Studies (Major)
+	Course (One of) : CS 115, CS 135, CS 145
+
+Requirement for: Mathematical Studies (Major)
+	Course (One of) : CS 116, CS 136, CS 146
+
+Requirement for: Mathematical Studies (Major)
+	Course (One of) : MATH 135, MATH 145
+
+Requirement for: Mathematical Studies (Major)
+	Course (One of) : MATH 106, MATH 136, MATH 146
+
+Requirement for: Mathematical Studies (Major)
+	Course (One of) : MATH 127, MATH 137, MATH 147
+
+Requirement for: Mathematical Studies (Major)
+	Course (One of) : MATH 128, MATH 138, MATH 148
+
+Requirement for: Mathematical Studies (Major)
+	Course (One of) : MATH 207, MATH 229, MATH 237, MATH 247, MATH 239, MATH 249
+
+Requirement for: Mathematical Studies (Major)
+	Course (One of) : MATH 225, MATH 235, MATH 245
+
+Requirement for: Mathematical Studies (Major)
+	Course (One of) : STAT 220, STAT 230, STAT 240
+
+Requirement for: Mathematical Studies (Major)
+	Course (One of) : STAT 221, STAT 231, STAT 241
+
+Requirement for: Mathematical Studies (Major)
+	Course (Additional 10) : MATH 300-, MATH 400-
+
+
+2020-06-08 00:45:30,240 - root - INFO - Successfully inserted: 11 rows
+2020-06-08 00:45:30,241 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Pure-Mathematics-Minor1.html
+Requirement for: Pure Mathematics Minor (Minor)
+	Course (One of) : MATH 103, MATH 106, MATH 114, MATH 115, MATH 136, MATH 146
+
+Requirement for: Pure Mathematics Minor (Minor)
+	Course (One of) : MATH 104, MATH 116, MATH 117, MATH 127, MATH 137, MATH 147
+
+Requirement for: Pure Mathematics Minor (Minor)
+	Course (One of) : MATH 118, MATH 119, MATH 128, MATH 138, MATH 148
+
+Requirement for: Pure Mathematics Minor (Minor)
+	Course (Additional 6) : PMATH, MATH 212, ECE 206, MATH 217, MATH 227, MATH 237, MATH 247
+
+
+2020-06-08 00:45:30,275 - root - INFO - Successfully inserted: 4 rows
+2020-06-08 00:45:30,276 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Bus-Admin-Computer-Sci-Double-Degree-Reqmnt-1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>]
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (One of) : CS 115, CS 135, CS 145
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (One of) : CS 136, CS 146
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (One of) : MATH 127, MATH 137, MATH 147
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (One of) : MATH 128, MATH 138, MATH 148
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (One of) : MATH 135, MATH 145
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (One of) : MATH 136, MATH 146
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (One of) : STAT 230, STAT 240
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (One of) : STAT 231, STAT 241
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : CO 250
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : CS 240
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : CS 241
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : CS 245
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : CS 246
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : CS 251
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : CS 341
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : CS 350
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : CS 490
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : CS 492
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (Additional 4) : CS 340-CS 398, CS 440-CS 489, CS 440-CS 489
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 111W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 121W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 127W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 231W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 247W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 283W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 288W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 352W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 354W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 362W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 375W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 393W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 398W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 481W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : BUS 491W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : ECON 120W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (All of) : ECON 140W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (One of) : ECON 250W, ECON 260W
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (Additional 6) : BUS 300-, BUS 400-
+
+Requirement for: Business Administration & Computer Science Double Degree (Major)
+	Course (Additional 4) : Elective
+
+
+2020-06-08 00:45:30,345 - root - INFO - Successfully inserted: 40 rows
+2020-06-08 00:45:30,346 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Artificial-Intelligence-Spec.html
+Requirement for: Artificial Intelligence Specialization (Specialization)
+	Course (All of) : CS 486
+
+Requirement for: Artificial Intelligence Specialization (Specialization)
+	Course (All of) : CS 492
+
+Requirement for: Artificial Intelligence Specialization (Specialization)
+	Course (One of) : CS 480, CS 485
+
+Requirement for: Artificial Intelligence Specialization (Specialization)
+	Course (One of) : ECE 380, SE 380
+
+Requirement for: Artificial Intelligence Specialization (Specialization)
+	Course (Additional 3) : CO 367, CO 456, CO 463, CO 466, CS 452, CS 480, CS 484, CS 485, STAT 341, STAT 440, STAT 441, STAT 444, ECE 423, ECE 481, ECE 486, ECE 488, MSCI 446, MTE 544, SYDE 522, SYDE 556, SYDE 572
+
+
+2020-06-08 00:45:30,415 - root - INFO - Successfully inserted: 5 rows
+2020-06-08 00:45:30,416 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Mathematics-or-Business-Administration.html
+
+2020-06-08 00:45:30,446 - root - INFO - Successfully inserted: 0 rows
+2020-06-08 00:45:30,447 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Bachelor-of-Computer-Science-1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>]
+Requirement for: Bachelor of Computer Science (Major)
+	Course (One of) : CS 115, CS 135, CS 145
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (One of) : CS 136, CS 146
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (One of) : MATH 127, MATH 137, MATH 147
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (One of) : MATH 128, MATH 138, MATH 148
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (One of) : MATH 135, MATH 145
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (One of) : MATH 136, MATH 146
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (One of) : STAT 230, STAT 240
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (One of) : STAT 231, STAT 241
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (All of) : CS 240
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (All of) : CS 241
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (All of) : CS 245
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (All of) : CS 246
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (All of) : CS 251
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (All of) : CS 341
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (All of) : CS 350
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (Additional 3) : CS 340-CS 398, CS 440-CS 489
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (Additional 2) : CS 440-CS 489
+
+Requirement for: Bachelor of Computer Science (Major)
+	Course (Additional 1) : CO 487, CS 440-CS 498, CS 499T, STAT 440, CS 600-, CS 700-
+
+
+2020-06-08 00:45:30,499 - root - INFO - Successfully inserted: 19 rows
+2020-06-08 00:45:30,500 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Engineering-Specialization-Fluid-and-Heat.html
+[<a href="/page/MATH-AM-Degree-Requirements-Applied-Mathematics">Honours Applied Mathematics</a>]
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (All of) : AMATH 271
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (All of) : AMATH 361
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (All of) : AMATH 463
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (All of) : PHYS 122
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (One of) : CO 250, CO 255, STAT 331, STAT 340
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (All of) : GENE 123
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (All of) : ME 219
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (All of) : ME 250
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (All of) : ME 353
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (All of) : ME 354
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (All of) : ME 456
+
+Requirement for: Engineering Specialization: Fluids and Heat (Specialization)
+	Course (One of) : ME 557, ME 564, ME 571
+
+
+2020-06-08 00:45:30,544 - root - INFO - Successfully inserted: 12 rows
+2020-06-08 00:45:30,545 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Actuarial-Science1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Actuarial Science (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : AFM 101
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : ACTSC 231
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : ACTSC 232
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : ACTSC 331
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : ACTSC 363
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : ACTSC 371
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : ACTSC 431
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : ACTSC 446
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : AMATH 250
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : ECON 101
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : ECON 102
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : ENGL 378
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : MTHEL 300
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : MTHEL 131
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : STAT 330
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : STAT 331
+
+Requirement for: Actuarial Science (Major)
+	Course (All of) : STAT 333
+
+Requirement for: Actuarial Science (Major)
+	Course (One of) : STAT 340, STAT 341
+
+Requirement for: Actuarial Science (Major)
+	Course (Additional 2) : ACTSC 400-
+
+Requirement for: Actuarial Science (Major)
+	Course (Additional 2) : ACTSC 300-, ACTSC 400-, AFM 424, STAT 431, STAT 433, STAT 441, STAT 443
+
+Requirement for: Actuarial Science (Major)
+	Course (Additional 1) : MATH 300-, MATH 400-
+
+
+2020-06-08 00:45:30,600 - root - INFO - Successfully inserted: 22 rows
+2020-06-08 00:45:30,601 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Statistics1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Statistics (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Statistics (Major)
+	Course (All of) : ENGL 378
+
+Requirement for: Statistics (Major)
+	Course (All of) : MTHEL 300
+
+Requirement for: Statistics (Major)
+	Course (All of) : STAT 330
+
+Requirement for: Statistics (Major)
+	Course (All of) : STAT 331
+
+Requirement for: Statistics (Major)
+	Course (All of) : STAT 332
+
+Requirement for: Statistics (Major)
+	Course (All of) : STAT 333
+
+Requirement for: Statistics (Major)
+	Course (One of) : MATH 239, MATH 249, AMATH 231, AMATH 242, CS 371, AMATH 250
+
+Requirement for: Statistics (Major)
+	Course (Additional 2) : STAT 400-
+
+Requirement for: Statistics (Major)
+	Course (Additional 1) : STAT 300-, STAT 400-
+
+Requirement for: Statistics (Major)
+	Course (One of) : CS 457, CS 485, CS 486
+
+Requirement for: Statistics (Major)
+	Course (Additional 4) : MATH 300-, MATH 400-
+
+
+2020-06-08 00:45:30,646 - root - INFO - Successfully inserted: 12 rows
+2020-06-08 00:45:30,647 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Mathematical-Economics-Degree-Requirements.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : ECON 101
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : ECON 102
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : ECON 290
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : ECON 306
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : ECON 391
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : ECON 393
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : ECON 472
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : ECON 491
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : ECON 496
+
+Requirement for: Mathematical Economics (Major)
+	Course (One of) : ECON 406, ECON 407, ECON 408, ECON 409
+
+Requirement for: Mathematical Economics (Major)
+	Course (Additional 4) : ECON 300-, ECON 400-
+
+Requirement for: Mathematical Economics (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Mathematical Economics (Major)
+	Course (One of) : CO 250, CO 255
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : AMATH 331
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : PMATH 331
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : AMATH 350
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : STAT 331
+
+Requirement for: Mathematical Economics (Major)
+	Course (All of) : STAT 443
+
+Requirement for: Mathematical Economics (Major)
+	Course (Additional 7) : MATH
+
+Requirement for: Mathematical Economics (Major)
+	Course (Additional 2) : Elective
+
+
+2020-06-08 00:45:30,701 - root - INFO - Successfully inserted: 20 rows
+2020-06-08 00:45:30,702 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Chart-Prof-Accounting-Finance-Spec-Coop.html
+[<a href="/page/MATH-Math-or-Chart-Prof-Accounting-co-Requirements">Honours Mathematics/Chartered Professional Accountancy</a>]
+Requirement for: Mathematics/Chartered Professional Accountancy (co-op only) (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Mathematics/Chartered Professional Accountancy (co-op only) (Major)
+	Course (All of) : ACTSC 231
+
+Requirement for: Mathematics/Chartered Professional Accountancy (co-op only) (Major)
+	Course (All of) : AFM 205
+
+Requirement for: Mathematics/Chartered Professional Accountancy (co-op only) (Major)
+	Course (Two of) : ACTSC 371, CS 335, MATBUS 471, MATBUS 472, STAT 334
+
+Requirement for: Mathematics/Chartered Professional Accountancy (co-op only) (Major)
+	Course (Two of) : AFM 321, AFM 322, AFM 328 or AFM 329 or AFM 328 or AFM 428 or AFM 329 or AFM 429, AFM 415 or AFM 416, AFM 423, AFM 434, AFM 477, AFM 478, AFM 492
+
+Requirement for: Mathematics/Chartered Professional Accountancy (co-op only) (Major)
+	Course (Additional 2) : MATH
+
+
+2020-06-08 00:45:30,742 - root - INFO - Successfully inserted: 6 rows
+2020-06-08 00:45:30,743 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computing-Financial-Mngt-Overview-Degree-Req.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="/page/MATH-Degree-Requirements-for-Math-students">Communication Skills Requirement</a>]
+Requirement for: Computing and Financial Management (Major)
+	Course (One of) : CS 115, CS 135, CS 145
+
+Requirement for: Computing and Financial Management (Major)
+	Course (One of) : CS 136, CS 146
+
+Requirement for: Computing and Financial Management (Major)
+	Course (One of) : MATH 135, MATH 145
+
+Requirement for: Computing and Financial Management (Major)
+	Course (One of) : MATH 136, MATH 146
+
+Requirement for: Computing and Financial Management (Major)
+	Course (One of) : MATH 127, MATH 137, MATH 147
+
+Requirement for: Computing and Financial Management (Major)
+	Course (One of) : MATH 128, MATH 138, MATH 148
+
+Requirement for: Computing and Financial Management (Major)
+	Course (One of) : MATH 239, MATH 249
+
+Requirement for: Computing and Financial Management (Major)
+	Course (One of) : STAT 230, STAT 240
+
+Requirement for: Computing and Financial Management (Major)
+	Course (One of) : STAT 231, STAT 241
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : AFM 101
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : AFM 102
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : AFM 121
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : AFM 131
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : AFM 231
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : AFM 272
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : ACTSC 291
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : AFM 322
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : AFM 372
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : ACTSC 391
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : AFM 424
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : AFM 425
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : CS 240
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : CS 241
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : CS 245
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : CS 246
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : CS 341
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : ECON 101
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : ECON 102
+
+Requirement for: Computing and Financial Management (Major)
+	Course (All of) : STAT 373
+
+Requirement for: Computing and Financial Management (Major)
+	Course (Two of) : AFM 291
+
+Requirement for: Computing and Financial Management (Major)
+	Course (Additional 2) : AFM 300-, AFM 400-
+
+Requirement for: Computing and Financial Management (Major)
+	Course (Additional 1) : CS 440-CS 498, CO 487
+
+Requirement for: Computing and Financial Management (Major)
+	Course (Additional 2) : CS 340-CS 398, CS 440-CS 498, CS 251, CO 487
+
+Requirement for: Computing and Financial Management (Major)
+	Course (Two of) : ENGL 109, ENGL 119, EMLS 129R or ENGL 129R, SPCOM 223
+
+Requirement for: Computing and Financial Management (Major)
+	Course (Additional 4) : Elective
+
+
+2020-06-08 00:45:30,811 - root - INFO - Successfully inserted: 35 rows
+2020-06-08 00:45:30,812 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Bioinformatics-Spec.html
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : BIOL 130
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : BIOL 130L
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : BIOL 239
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : BIOL 240
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : BIOL 240L
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : BIOL 309
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : BIOL 365
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : BIOL 465
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : CHEM 120
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : CHEM 120L
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : CHEM 123
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : CHEM 123L
+
+Requirement for: Bioinformatics Specialization (Specialization)
+	Course (All of) : CS 482
+
+
+2020-06-08 00:45:30,863 - root - INFO - Successfully inserted: 13 rows
+2020-06-08 00:45:30,864 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Business-Spec.html
+Requirement for: Business Specialization (Specialization)
+	Course (Two of) : CS 348, CS 454, CS 490
+
+Requirement for: Business Specialization (Specialization)
+	Course (Six of) : ACTSC 231, ACTSC 371, ACTSC 372, AFM 101 or AFM 123 or ARBUS 102, AFM 102, AFM 131 or ARBUS 101 or BUS 111W, ARBUS 302 or MGMT 244, BUS 121W, BUS 362W, BUS 481W, BUS 491W, COMM 400, ECON 101, ECON 102, HRM 200, MGMT 220, MSCI 211 or PSYCH 238, MSCI 311, MSCI 452
+
+
+2020-06-08 00:45:30,903 - root - INFO - Successfully inserted: 2 rows
+2020-06-08 00:45:30,904 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Degree-Requirements-Mathematical-Physics.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Mathematical Physics (Major)
+	Course (One of) : MATH 237, MATH 247
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 231
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 242
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : CS 371
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 251
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 271
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 331
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : PMATH 331
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 332
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : PMATH 332
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 351
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 353
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 361
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 373
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 473
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : PHYS 454
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : AMATH 475
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : PHYS 476
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : PHYS 121
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : PHYS 122
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : PHYS 234
+
+Requirement for: Mathematical Physics (Major)
+	Course (All of) : PHYS 242
+
+Requirement for: Mathematical Physics (Major)
+	Course (Two of) : PHYS 342, PHYS 358 or ECE 403, PHYS 359, PHYS 363
+
+
+2020-06-08 00:45:30,959 - root - INFO - Successfully inserted: 23 rows
+2020-06-08 00:45:30,959 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Bus-Admin-and-Math-Double-Degree-Requirements.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (One of) : CO 250, CO 255
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : ACTSC 231
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : CO 370
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : CS 330
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : STAT 371
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : STAT 372
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (Additional 7) : MATH 200-, MATH 300-, MATH 400-
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 111W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 121W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 127W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 231W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 247W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 283W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 288W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 352W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 354W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 362W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 375W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 393W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 398W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 481W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : BUS 491W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : ECON 120W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (All of) : ECON 140W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (One of) : ECON 250W, ECON 260W
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (Additional 6) : BUS 300-, BUS 400-
+
+Requirement for: Business Administration and Mathematics Double Degree (Major)
+	Course (Additional 4) : Elective
+
+
+2020-06-08 00:45:31,011 - root - INFO - Successfully inserted: 27 rows
+2020-06-08 00:45:31,012 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : TableII.html
+Requirement for: Table II (Table)
+	Course (One of) : CS 115, CS 135, CS 145
+
+Requirement for: Table II (Table)
+	Course (One of) : CS 116, CS 136, CS 146
+
+Requirement for: Table II (Table)
+	Course (One of) : MATH 135, MATH 145
+
+Requirement for: Table II (Table)
+	Course (One of) : MATH 106, MATH 136, MATH 146
+
+Requirement for: Table II (Table)
+	Course (One of) : MATH 127, MATH 137, MATH 147
+
+Requirement for: Table II (Table)
+	Course (One of) : MATH 128, MATH 138, MATH 148
+
+Requirement for: Table II (Table)
+	Course (One of) : MATH 235, MATH 245
+
+Requirement for: Table II (Table)
+	Course (One of) : MATH 237, MATH 239, MATH 247, MATH 249
+
+Requirement for: Table II (Table)
+	Course (One of) : STAT 230, STAT 240
+
+Requirement for: Table II (Table)
+	Course (One of) : STAT 231, STAT 241
+
+
+2020-06-08 00:45:31,039 - root - INFO - Successfully inserted: 10 rows
+2020-06-08 00:45:31,040 - root - INFO - Failed to insert: 0 rows

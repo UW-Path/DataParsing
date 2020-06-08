@@ -13,7 +13,7 @@ import sys
 
 
 class DatabaseConnection(object):
-    def __init__(self, user="postgres", password="1234", host="localhost", port="8888", database="postgres",
+    def __init__(self, user="postgres", password="1234", host="db", port="5432", database="postgres",
                  course_table="course_info", prereqs_table="prereqs", antireqs_table="antireqs",
                  requirements_table = "requirements", communications_table="communications",
                  breadth_table="breadth_table"):

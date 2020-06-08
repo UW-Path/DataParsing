@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+  populate:
+    build: .
+    command: /bin/bash PopulateDatabase.sh
+    volumes:
+      - .:/code
+    depends_on:
+      - db
