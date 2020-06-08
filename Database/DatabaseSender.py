@@ -23,6 +23,7 @@ class DatabaseSender(DatabaseConnection):
             plan_type VARCHAR(255),
             course_codes VARCHAR(510),
             number_of_courses int,
+            credits_required DECIMAL(4,2),
             additional_requirements VARCHAR(255), 
             major_name VARCHAR(255),
             faculty VARCHAR(50)
@@ -224,8 +225,8 @@ class DatabaseSender(DatabaseConnection):
         not_exist = "SELECT 1 FROM " + self.requirements_table + "\n"
         not_exist += "WHERE course_codes = '" + requirement.courseCodes + "' AND program_name = '" + requirement.programName + "' AND major_name = '" + requirement.majorName + "'"
 
-        command = "INSERT INTO " + self.requirements_table + " (program_name, plan_type, course_codes, number_of_courses, additional_requirements, major_name, faculty) "
-        command += "SELECT '" + requirement.programName + "', '" + requirement.planType + "', '" + requirement.courseCodes + "', " + str(requirement.numberOfCourses)
+        command = "INSERT INTO " + self.requirements_table + " (program_name, plan_type, course_codes, number_of_courses, credits_required, additional_requirements, major_name, faculty) "
+        command += "SELECT '" + requirement.programName + "', '" + requirement.planType + "', '" + requirement.courseCodes + "', " + str(requirement.numberOfCourses) + ", " + str(requirement.credits)
         command += ", '" + requirement.additionalRequirement + "', '" + requirement.majorName + "', '" + faculty + "'"
         command += " WHERE NOT EXISTS (\n" + not_exist + "\n);"
 

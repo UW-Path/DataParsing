@@ -10,17 +10,16 @@ from StringToNumber import StringToNumber
 
 
 class MajorReq:
-    def __init__(self, list, req, program, relatedMajor, additionalRequirement, additional = 0):
+    def __init__(self, list, req, program, relatedMajor, additionalRequirement, credits):
         self.list = list
         self.programName = program
         self.majorName = relatedMajor  # self._get_related(relatedMajor)
         self.req = req
         self.planType = self.__plan_type()
-        self.additional = additional
         self.courseCodes = self.__course_codes()
-        self.numberOfCourses = self.__number_of_courses()
+        self.numberOfCourses = req
         self.additionalRequirement = additionalRequirement
-        self.credits = 0.5
+        self.credits = credits
 
 
     def __has_numbers(self, input_string):
@@ -46,20 +45,6 @@ class MajorReq:
         """
         return self.__require()
 
-    def __number_of_courses(self):
-        """
-                Returns courses needed for the group of course_codes
-
-                :return: int
-        """
-        if self.req == "All of":
-            length = len(self.courseCodes.split(","))
-            return length
-        elif self.req == "Additional":
-            return self.additional
-        else:
-            return StringToNumber[str(self.req).lower().split(' ')[0]].value[0]
-
     def __plan_type(self):
         """
                 Returns the type of plan (Major, Minor, Specialization, Optimization)
@@ -82,8 +67,6 @@ class MajorReq:
     def __str__(self):
         output = "Requirement for: " + self.programName + " (" + self.planType + ")"
         output += "\n"
-        if self.req == "Additional":
-            output += "\tCourse (" + self.req + " " + str(self.additional) + ") : " + self.courseCodes + "\n"
-        else:
-            output += "\tCourse (" + self.req + ") : " + self.courseCodes + "\n"
+        output += "\tCourse (" + str(self.req) + ") : " + self.courseCodes + "\n"
+        output += "\tCredits: " + str(self.credits)
         return output

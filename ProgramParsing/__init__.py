@@ -1,3 +1,3 @@
 # __all__ = ["MajorParser", "MajorReq"]
-# from ProgramParsing import *
+from ProgramParsing.Math import *
 __all__ = []

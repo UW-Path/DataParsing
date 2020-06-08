@@ -22,7 +22,7 @@ then
 
   echo "===================================================="
   echo "Parsing programs..."
-  python ProgramParsing/ParseProgram.py > logs/ParseProgram.log
+  python ProgramParsing/Math/ParseProgram.py > logs/ParseProgram.log
   echo "DONE"
 
   echo "===================================================="

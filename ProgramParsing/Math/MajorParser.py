@@ -123,6 +123,7 @@ class MajorParser:
                                  line)
             courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
 
+
             if rangeCourse:
                 #TODO: Account for range CS 123-CS 345, excluding CS XXX
                 if oneOf:
