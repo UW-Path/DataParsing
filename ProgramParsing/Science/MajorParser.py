@@ -15,7 +15,7 @@ from math import ceil
 
 
 class ScienceMajorParser(MajorParser):
-    def __get_program(self):
+    def _get_program(self):
         program = self.data.find_all("span", id="ctl00_contentMain_lblBottomTitle")
 
         if program:
@@ -31,7 +31,7 @@ class ScienceMajorParser(MajorParser):
         return program
         # TODO: Need a case where this tile area is Degree Requirements
 
-    def __course_list(self, line, credit, oneOf = False):
+    def _course_list(self, line, credit, oneOf = False):
         list = []
         line = line.strip().replace(" to ", "-")
 
@@ -68,7 +68,7 @@ class ScienceMajorParser(MajorParser):
                     list.append(c)
 
         if not list:
-            r = self.__getLevelCourses(line)
+            r = self._getLevelCourses(line)
             if r:
                 #assume only 200- for now
                 maj = ""
@@ -81,14 +81,14 @@ class ScienceMajorParser(MajorParser):
                     print("ERROR more than one match 200- found")
 
         if list:
-            c = self.__count_credits(list)
+            c = self._count_credits(list)
             if credit == c or len(list) == 1:
                 #Note: 1 is coded as a special case. Not perfect accuracy in terms of credit count
                 return list, True
 
         return list, False
 
-    def __count_credits(self,list):
+    def _count_credits(self,list):
         count = 0
         for course in list:
             courseNum = course.split(" ")[1]
@@ -98,7 +98,7 @@ class ScienceMajorParser(MajorParser):
                 count += 0.5
         return float(count)
 
-    def __require_all(self, list, major, relatedMajor, additionalRequirement):
+    def _require_all(self, list, major, relatedMajor, additionalRequirement):
         #TODO: Match with database credits
         #TODO: Dafault as 0.5 credits
         for course in list:
@@ -114,10 +114,10 @@ class ScienceMajorParser(MajorParser):
         # html = open(file, encoding="utf8")
         self.data = BeautifulSoup(html, 'html.parser')
 
-        program = self.__get_program()
+        program = self._get_program()
 
         # find the major related to specializations and options
-        relatedMajor = self.__get_relatedMajor(program)
+        relatedMajor = self._get_relatedMajor(program)
 
         # Find all additional requirement
         self.additionalRequirement = self.getAdditionalRequirement()
@@ -137,10 +137,10 @@ class ScienceMajorParser(MajorParser):
                 continue
 
             try:
-                list, insertAll = self.__course_list(line, credits)
+                list, insertAll = self._course_list(line, credits)
                 if list:
                     if insertAll:
-                        self.__require_all(list, program, relatedMajor, self.additionalRequirement)
+                        self._require_all(list, program, relatedMajor, self.additionalRequirement)
                     else:
                         self.requirement.append(ScienceMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
                 elif "elective" in line.split(' ')[1]:

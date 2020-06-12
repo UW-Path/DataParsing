@@ -12,8 +12,6 @@ def main(majorParser, files):
         parser = majorParser()
         parser.load_file(file)
 
-        print(parser)
-
         # Parser requirement is a list of MajorReq Object
         dbc.insert_requirements(parser.requirement, "Math")
         dbc.commit()

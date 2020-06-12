@@ -2,15 +2,15 @@
 Major is an object class that stores information for major requirements
 
 Contributors:
-Hao Wei Huang
+Calder Lund
 """
 
 from ProgramParsing.ProgramParser.MajorReq import MajorReq
 from StringToNumber import StringToNumber
 
 
-class MathMajorReq(MajorReq):
-    def _number_of_courses(self):
+class ArtsMajorReq(MajorReq):
+    def __number_of_courses(self):
         """
                 Returns courses needed for the group of course_codes
 

@@ -24,17 +24,17 @@ class MajorParser:
         response = self.http.request('GET', url)
         self.data = BeautifulSoup(response.data, 'html.parser')
 
-    def __has_numbers(self, input_string):
+    def _has_numbers(self, input_string):
         """
                 Check if input_string has numbers (0-9)
                 :return: bool
         """
         return bool(re.search(r'\d', input_string))
 
-    def __get_program(self):
+    def _get_program(self):
         pass
 
-    def __stringIsNumber(self, s):
+    def _stringIsNumber(self, s):
         s = str(s).split(" ")[0].lower()
         if "one" in s or "two" in s or "three" in s or "four" in s or "five" in s \
                 or "six" in s or "seven" in s or "eight" in s or "nine" in s or "ten" in s:
@@ -42,10 +42,10 @@ class MajorParser:
         else:
             return False
 
-    def __getLevelCourses(self, string):
+    def _getLevelCourses(self, string):
         return re.findall(r"[1-9][0-9][0-9]-", string)
 
-    def __require_all(self, list, major, relatedMajor, additionalRequirement=None):
+    def _require_all(self, list, major, relatedMajor, additionalRequirement=None):
         pass
 
     def getAdditionalRequirement(self):
@@ -58,11 +58,11 @@ class MajorParser:
                 print(reqs)
                 for req in reqs:
                     # span added for special case for  PMATH additional req #does not work
-                    if(not self.__has_numbers(req.contents[0])):
+                    if(not self._has_numbers(req.contents[0])):
                         additionalRequirment.append(req.contents[0])
         return ", ".join(additionalRequirment)
 
-    def __get_relatedMajor(self, program):
+    def _get_relatedMajor(self, program):
         relatedMajor = self.data.find_all("span", id="ctl00_contentMain_lblTopTitle")
         if relatedMajor:
             relatedMajor = relatedMajor[0].contents[0].string
@@ -77,10 +77,10 @@ class MajorParser:
         else:
             return relatedMajor
 
-    def __course_list(self, info, i, oneOf = False):
+    def _course_list(self, info, i, oneOf = False):
         pass
 
-    def __additional_list(self, info, i, multiLine):
+    def _additional_list(self, info, i, multiLine):
         pass
 
     def is_additional(self, string):
