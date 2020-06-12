@@ -21,8 +21,13 @@ then
   echo "DONE"
 
   echo "===================================================="
-  echo "Parsing programs..."
-  python ProgramParsing/Math/ParseProgram.py > logs/ParseProgram.log
+  echo "Parsing MATH programs..."
+  python ProgramParsing/Math/ParseProgram.py > logs/ParseProgramMATH.log
+  echo "DONE"
+
+  echo "===================================================="
+  echo "Parsing SCIENCE programs..."
+  python ProgramParsing/Science/ParseProgram.py > logs/ParseProgramSCIENCE.log
   echo "DONE"
 
   echo "===================================================="
@@ -52,8 +57,13 @@ else
   echo "DONE"
 
   echo "===================================================="
-  echo "Parsing programs..."
-  python3 ProgramParsing/ParseProgram.py > logs/ParseProgram.log
+  echo "Parsing MATH programs..."
+  python3 ProgramParsing/ParseProgram.py > logs/ParseProgramMATH.log
+  echo "DONE"
+
+  echo "===================================================="
+  echo "Parsing SCIENCE programs..."
+  python3 ProgramParsing/Science/ParseProgram.py > logs/ParseProgramSCIENCE.log
   echo "DONE"
 
   echo "===================================================="

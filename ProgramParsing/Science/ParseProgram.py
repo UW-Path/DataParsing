@@ -1,35 +1,10 @@
-from Database.DatabaseSender import DatabaseSender
-from ProgramParsing.Science.MajorParser import MajorParser
+from ProgramParsing.Science.MajorParser import ScienceMajorParser
+from ProgramParsing.ProgramParser.ParseProgram import main
 import os
 
 if __name__ == "__main__":
     dir = os.path.dirname(__file__)
     path = os.path.join(dir, 'ProgramSpecs')
-    files = ["/ProgramSpecs/" + f for f in os.listdir(path) if f.endswith(".html")]
+    files = set(["/ProgramSpecs/" + f for f in os.listdir(path) if f.endswith(".html")])
 
-    #Need to Investigate
-    filesToIgnore = []
-    filesToIgnore = ["/ProgramSpecs/" + f for f in filesToIgnore]
-
-    #files = ["/ProgramSpecs/MATH-Combinatorics-and-Optimization-Minor2.html"] #use this for single files
-
-    #TODO parse which specialization is under which major
-
-    dbc = DatabaseSender()
-
-    dbc.execute("DROP TABLE" + " IF EXISTS " + dbc.requirements_table +" ;")
-    dbc.create_requirements()
-
-    for file in files:
-        if (file in filesToIgnore): continue
-        print("CURRENT FILE PARSING : " + file)
-        parser = MajorParser()
-        parser.load_file(file)
-
-        print(parser)
-
-        # Parser requirement is a list of MajorReq Object
-        dbc.insert_requirements(parser.requirement, "Science")
-        dbc.commit()
-
-    dbc.close()
+    main(ScienceMajorParser, files)

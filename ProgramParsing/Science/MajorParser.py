@@ -3,35 +3,18 @@ CourseParser.py is a library built to receive information on Major Requirements
 
 Contributors:
 Hao Wei Huang
+Calder Lund
 """
 
-import urllib3
 from bs4 import BeautifulSoup
-from ProgramParsing.Science.MajorReq import MajorReq
-from StringToNumber import StringToNumber
+from ProgramParsing.Science.MajorReq import ScienceMajorReq
+from ProgramParsing.ProgramParser.MajorParser import MajorParser
 import re
 import pkg_resources
 from math import ceil
 
 
-class MajorParser:
-    def __init__(self):
-        self.http = urllib3.PoolManager()
-        self.data = None
-        self.requirement = []
-        self.additionalRequirement = ""
-
-    def load_url(self, url):
-        response = self.http.request('GET', url)
-        self.data = BeautifulSoup(response.data, 'html.parser')
-
-    def __has_numbers(self, input_string):
-        """
-                Check if input_string has numbers (0-9)
-                :return: bool
-        """
-        return bool(re.search(r'\d', input_string))
-
+class ScienceMajorParser(MajorParser):
     def __get_program(self):
         program = self.data.find_all("span", id="ctl00_contentMain_lblBottomTitle")
 
@@ -47,38 +30,6 @@ class MajorParser:
 
         return program
         # TODO: Need a case where this tile area is Degree Requirements
-
-    def __getLevelCourses(self, string):
-        return re.findall(r"[1-9][0-9][0-9]-", string)
-
-    def getAdditionalRequirement(self):
-        additionalRequirment = []
-        paragraphs = self.data.find_all(["p"]) # cant use span because will get everything else
-        for p in paragraphs:
-            # a bit hardcoded
-            if ("all the requirements" in str(p) or "course requirements" in str(p) or "all requirements" in str(p)) and "plan" in str(p):
-                reqs = p.find_all("a")
-                print(reqs)
-                for req in reqs:
-                    # span added for special case for  PMATH additional req #does not work
-                    if(not self.__has_numbers(req.contents[0])):
-                        additionalRequirment.append(req.contents[0])
-        return ", ".join(additionalRequirment)
-
-    def __get_relatedMajor(self, program):
-        relatedMajor = self.data.find_all("span", id="ctl00_contentMain_lblBottomTitle")
-        if relatedMajor:
-            relatedMajor = relatedMajor[0].contents[0].string
-        else:
-            return ""
-
-        if "Academic Plans and Requirements" in relatedMajor:
-            #check if program is minor
-            if "minor" in program.lower():
-                program = program.replace(" Minor", "")
-            return program
-        else:
-            return relatedMajor
 
     def __course_list(self, line, credit, oneOf = False):
         list = []
@@ -151,7 +102,7 @@ class MajorParser:
         #TODO: Match with database credits
         #TODO: Dafault as 0.5 credits
         for course in list:
-            self.requirement.append(MajorReq([course], 1, major, relatedMajor, additionalRequirement, 0.5))
+            self.requirement.append(ScienceMajorReq([course], 1, major, relatedMajor, additionalRequirement, 0.5))
 
     def load_file(self, file):
         """
@@ -191,10 +142,10 @@ class MajorParser:
                     if insertAll:
                         self.__require_all(list, program, relatedMajor, self.additionalRequirement)
                     else:
-                        self.requirement.append(MajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
+                        self.requirement.append(ScienceMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
                 elif "elective" in line.split(' ')[1]:
                     list.append("Elective")
-                    self.requirement.append(MajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
+                    self.requirement.append(ScienceMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
 
             except (RuntimeError):
                 print(RuntimeError)
@@ -202,9 +153,4 @@ class MajorParser:
                 #not parsable
             i += 1
 
-    def __str__(self):
-        output = ""
-        for req in self.requirement:
-            output += str(req) + "\n"
-        return output
 

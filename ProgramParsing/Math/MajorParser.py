@@ -3,34 +3,18 @@ CourseParser.py is a library built to receive information on Major Requirements
 
 Contributors:
 Hao Wei Huang
+Calder Lund
 """
 
-import urllib3
 from bs4 import BeautifulSoup
-from ProgramParsing.Math.MajorReq import MajorReq
+from ProgramParsing.Math.MajorReq import MathMajorReq
+from ProgramParsing.ProgramParser.MajorParser import MajorParser
 from StringToNumber import StringToNumber
 import re
 import pkg_resources
 
 
-class MajorParser:
-    def __init__(self):
-        self.http = urllib3.PoolManager()
-        self.data = None
-        self.requirement = []
-        self.additionalRequirement = ""
-
-    def load_url(self, url):
-        response = self.http.request('GET', url)
-        self.data = BeautifulSoup(response.data, 'html.parser')
-
-    def __has_numbers(self, input_string):
-        """
-                Check if input_string has numbers (0-9)
-                :return: bool
-        """
-        return bool(re.search(r'\d', input_string))
-
+class MathMajorParser(MajorParser):
     def __get_program(self):
         program = self.data.find_all("span", id="ctl00_contentMain_lblBottomTitle")
 
@@ -59,49 +43,9 @@ class MajorParser:
         return program
         # TODO: Need a case where this tile area is Degree Requirements
 
-    def __stringIsNumber(self, s):
-        s = str(s).split(" ")[0].lower()
-        if "one" in s or "two" in s or "three" in s or "four" in s or "five" in s \
-                or "six" in s or "seven" in s or "eight" in s or "nine" in s or "ten" in s:
-            return True
-        else:
-            return False
-
-    def __getLevelCourses(self, string):
-        return re.findall(r"[1-9][0-9][0-9]-", string)
-
-    def require_all(self, list, major, relatedMajor):
+    def __require_all(self, list, major, relatedMajor, additional=None):
         for l in list:
-            self.requirement.append(MajorReq([l], "All of", major, relatedMajor, self.additionalRequirement, 0))
-
-    def getAdditionalRequirement(self):
-        additionalRequirment = []
-        paragraphs = self.data.find_all(["p"]) # cant use span because will get everything else
-        for p in paragraphs:
-            # a bit hardcoded
-            if ("all the requirements" in str(p) or "course requirements" in str(p) or "all requirements" in str(p)) and "plan" in str(p):
-                reqs = p.find_all("a")
-                print(reqs)
-                for req in reqs:
-                    # span added for special case for  PMATH additional req #does not work
-                    if(not self.__has_numbers(req.contents[0])):
-                        additionalRequirment.append(req.contents[0])
-        return ", ".join(additionalRequirment)
-
-    def __get_relatedMajor(self, program):
-        relatedMajor = self.data.find_all("span", id="ctl00_contentMain_lblTopTitle")
-        if relatedMajor:
-            relatedMajor = relatedMajor[0].contents[0].string
-        else:
-            return ""
-
-        if "Academic Plans and Requirements" in relatedMajor:
-            #check if program is minor
-            if "minor" in program.lower():
-                program = program.replace(" Minor", "")
-            return program
-        else:
-            return relatedMajor
+            self.requirement.append(MathMajorReq([l], "All of", major, relatedMajor, self.additionalRequirement, 0))
 
     def __course_list(self, info, i, oneOf = False):
         list = []
@@ -278,7 +222,8 @@ class MajorParser:
             return False
         if "additional" == secondWord:
             return True
-        else: return False
+        else: 
+            return False
 
     def load_file(self, file):
         """
@@ -308,34 +253,34 @@ class MajorParser:
         while i < len(information):
             if information[i].strip().lower().startswith("one of"):
                 i, list = self.__course_list(information, i, True)
-                self.requirement.append(MajorReq(list, "One of", program, relatedMajor, self.additionalRequirement))
+                self.requirement.append(MathMajorReq(list, "One of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("two of"):
                 i, list = self.__course_list(information, i)
-                self.requirement.append(MajorReq(list, "Two of", program, relatedMajor, self.additionalRequirement))
+                self.requirement.append(MathMajorReq(list, "Two of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("three of"):
                 i, list = self.__course_list(information, i)
-                self.requirement.append(MajorReq(list, "Three of", program, relatedMajor, self.additionalRequirement))
+                self.requirement.append(MathMajorReq(list, "Three of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("four of"):
                 i, list = self.__course_list(information, i)
-                self.requirement.append(MajorReq(list, "Four of", program, relatedMajor, self.additionalRequirement))
+                self.requirement.append(MathMajorReq(list, "Four of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("five of"):
                 i, list = self.__course_list(information, i)
-                self.requirement.append(MajorReq(list, "Five of", program, relatedMajor, self.additionalRequirement))
+                self.requirement.append(MathMajorReq(list, "Five of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("six of"):
                 i, list = self.__course_list(information, i)
-                self.requirement.append(MajorReq(list, "Six of", program, relatedMajor, self.additionalRequirement))
+                self.requirement.append(MathMajorReq(list, "Six of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("seven of"):
                 i, list = self.__course_list(information, i)
-                self.requirement.append(MajorReq(list, "Seven of", program, relatedMajor, self.additionalRequirement))
+                self.requirement.append(MathMajorReq(list, "Seven of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("eight of"):
                 i, list = self.__course_list(information, i)
-                self.requirement.append(MajorReq(list, "Eight of", program, relatedMajor, self.additionalRequirement))
+                self.requirement.append(MathMajorReq(list, "Eight of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("nine of"):
                 i, list = self.__course_list(information, i)
-                self.requirement.append(MajorReq(list, "Nine of", program, relatedMajor, self.additionalRequirement))
+                self.requirement.append(MathMajorReq(list, "Nine of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("all of"):
                 i, list = self.__course_list(information, i, True)
-                self.require_all(list, program, relatedMajor)
+                self.__require_all(list, program, relatedMajor)
             elif (self.is_additional(information[i]) or self.__stringIsNumber(information[i])) \
                     and "excluding the following" not in information[i]: #Three 400- Level courses
                 number_additional_string = information[i].lower().split(' ')[0]
@@ -348,13 +293,6 @@ class MajorParser:
                 else:
                     i, list = self.__additional_list(information, i, True)
                 # need to check if number_additional is an INT
-                self.requirement.append(MajorReq(list, "Additional", program, relatedMajor, self.additionalRequirement, number_additional))
+                self.requirement.append(MathMajorReq(list, "Additional", program, relatedMajor, self.additionalRequirement, number_additional))
             else:
                 i += 1
-
-    def __str__(self):
-        output = ""
-        for req in self.requirement:
-            output += str(req) + "\n"
-        return output
-
