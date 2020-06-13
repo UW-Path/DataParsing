@@ -1,4 +1,4 @@
-version: '3'
+version: '2.1'
 
 services:
   db:
@@ -7,10 +7,18 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
-  populate:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  parsing:
     build: .
     command: /bin/bash PopulateDatabase.sh
     volumes:
       - .:/code
     depends_on:
+      db:
+        condition: service_healthy
+    links:
       - db
