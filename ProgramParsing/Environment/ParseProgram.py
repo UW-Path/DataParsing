@@ -1,4 +1,4 @@
-from ProgramParsing.Science.MajorParser import ScienceMajorParser
+from ProgramParsing.Environment.MajorParser import EnvironmentMajorParser
 from ProgramParsing.ProgramParser.ParseProgram import main
 import os
 
@@ -7,4 +7,8 @@ if __name__ == "__main__":
     path = os.path.join(dir, 'Specs')
     files = set(["/Specs/" + f for f in os.listdir(path) if f.endswith(".html")])
 
-    main(ScienceMajorParser, files)
+    filesToIgnore = []
+    filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
+    files = files - filesToIgnore
+
+    main(EnvironmentMajorParser, files)

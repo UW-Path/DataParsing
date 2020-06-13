@@ -8,7 +8,7 @@ Calder Lund
 from ProgramParsing.ProgramParser.MajorReq import MajorReq
 
 
-class ArtsMajorReq(MajorReq):
+class EnvironmentMajorReq(MajorReq):
     def __str__(self):
         output = ""
         return output
