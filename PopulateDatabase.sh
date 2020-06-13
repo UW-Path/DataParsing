@@ -1,65 +1,82 @@
 #!/bin/bash
-if [ -z "$1" ] || [ "$1" != "--python3" ]
+
+py="python"
+courses=true
+degree=true
+
+while test $# -gt 0; do
+  case "$1" in
+    -h|--help)
+      echo "$package - attempt to capture frames"
+      echo " "
+      echo "$package [options] application [arguments]"
+      echo " "
+      echo "options:"
+      echo "--python3     use python3"
+      echo "--python      use python (default)"
+      echo "--courses     only parse courses"
+      echo "--degree      only parse degree"
+      exit 0
+      ;;
+    --python3)
+      shift
+      py="python3"
+      shift
+      ;;
+    --courses)
+      shift
+      degree=false
+      shift
+      ;;
+    --degree)
+      shift
+      courses=false
+      shift
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+echo "Using python"
+if $courses ;
 then
-  echo "Using python"
   echo "===================================================="
   echo "Parsing courses..."
   export PYTHONPATH=$PYTHONPATH:$DATAPARSING/CourseParsing
-  python CourseParsing/ParseScript.py > logs/ParseScript.log
+  eval "${py} CourseParsing/ParseScript.py > logs/ParseScript.log"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing communication tables..."
   export PYTHONPATH=$PYTHONPATH:$DATAPARSING/CommunicationParsing
-  python CommunicationParsing/CommunicationScript.py > logs/CommunicationParsing.log
+  eval "${py} CommunicationParsing/CommunicationScript.py > logs/CommunicationParsing.log"
   echo "DONE"
+fi
 
+if $degree ;
+then
   echo "===================================================="
   echo "Parsing degree requirements..."
   export PYTHONPATH=$PYTHONPATH:$DATAPARSING/ProgramParsing
-  python ProgramParsing/UpdateDegreeRequirement.py > logs/UpdateDegreeRequirement.log
+  eval "${py} ProgramParsing/Math/UpdateDegreeRequirement.py > logs/UpdateDegreeRequirementMATH.log"
   echo "DONE"
 
   echo "===================================================="
-  echo "Parsing programs..."
-  python ProgramParsing/ParseProgram.py > logs/ParseProgram.log
+  echo "Parsing MATH programs..."
+  eval "${py} ProgramParsing/Math/ParseProgram.py > logs/ParseProgramMATH.log"
+  echo "DONE"
+
+  echo "===================================================="
+  echo "Parsing SCIENCE programs..."
+  #eval "${py} ProgramParsing/Science/ParseProgram.py > logs/ParseProgramSCIENCE.log"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing breadth and depth..."
   export PYTHONPATH=$PYTHONPATH:$DATAPARSING/BreadthDepthParsing
-  python BreadthDepthParsing/BreadthScript.py > logs/BreadthScript.log
-  echo "DONE"
-
-else
-  echo "Using python3"
-  echo "===================================================="
-  echo "Parsing courses..."
-  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/CourseParsing
-  python3 CourseParsing/ParseScript.py > logs/ParseScript.log
-  echo "DONE"
-
-  echo "===================================================="
-  echo "Parsing communication tables..."
-  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/CommunicationParsing
-  python3 CommunicationParsing/CommunicationScript.py > logs/CommunicationParsing.log
-  echo "DONE"
-
-  echo "===================================================="
-  echo "Parsing degree requirements..."
-  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/ProgramParsing
-  python3 ProgramParsing/UpdateDegreeRequirement.py > logs/UpdateDegreeRequirement.log
-  echo "DONE"
-
-  echo "===================================================="
-  echo "Parsing programs..."
-  python3 ProgramParsing/ParseProgram.py > logs/ParseProgram.log
-  echo "DONE"
-
-  echo "===================================================="
-  echo "Parsing breadth and depth..."
-  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/BreadthDepthParsing
-  python3 BreadthDepthParsing/BreadthScript.py > logs/BreadthScript.log
+  eval "${py} BreadthDepthParsing/BreadthScript.py > logs/BreadthScript.log"
   echo "DONE"
 fi
 

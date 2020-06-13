@@ -15,21 +15,21 @@ class MajorReq:
         self.programName = program
         self.majorName = relatedMajor  # self._get_related(relatedMajor)
         self.req = req
-        self.planType = self.__plan_type()
+        self.planType = self._plan_type()
         self.additional = additional
-        self.courseCodes = self.__course_codes()
-        self.numberOfCourses = self.__number_of_courses()
+        self.courseCodes = self._course_codes()
+        self.numberOfCourses = self._number_of_courses()
         self.additionalRequirement = additionalRequirement
+        self.credits = 0.5
 
-
-    def __has_numbers(self, input_string):
+    def _has_numbers(self, input_string):
         """
                 Check if input_string has numbers (0-9)
                 :return: bool
         """
         return bool(re.search(r'\d', input_string))
 
-    def __require(self):
+    def _require(self):
         """
                 Return course appended together (for one of)
                 Note: Append list at the end with comma
@@ -37,29 +37,23 @@ class MajorReq:
         """
         return ", ".join(self.list)
 
-    def __course_codes(self):
+    def _course_codes(self):
         """
         Returns course code of a block of requirement (either One of/All of/Additional)
 
         :return: string
         """
-        return self.__require()
+        return self._require()
 
-    def __number_of_courses(self):
+    def _number_of_courses(self):
         """
                 Returns courses needed for the group of course_codes
 
                 :return: int
         """
-        if self.req == "All of":
-            length = len(self.courseCodes.split(","))
-            return length
-        elif self.req == "Additional":
-            return self.additional
-        else:
-            return StringToNumber[str(self.req).lower().split(' ')[0]].value[0]
+        pass
 
-    def __plan_type(self):
+    def _plan_type(self):
         """
                 Returns the type of plan (Major, Minor, Specialization, Optimization)
                 :return: int
@@ -79,10 +73,4 @@ class MajorReq:
             return "Major"
 
     def __str__(self):
-        output = "Requirement for: " + self.programName + " (" + self.planType + ")"
-        output += "\n"
-        if self.req == "Additional":
-            output += "\tCourse (" + self.req + " " + str(self.additional) + ") : " + self.courseCodes + "\n"
-        else:
-            output += "\tCourse (" + self.req + ") : " + self.courseCodes + "\n"
-        return output
+        pass

@@ -1,0 +1,638 @@
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Degree-Requirements-Mathematical-Physics.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:47,960 - root - INFO - Successfully inserted: 23 rows
+2020-06-12 16:59:47,961 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Degree-Requirements-Joint-Applied-Math.html
+2020-06-12 16:59:48,029 - root - INFO - Successfully inserted: 11 rows
+2020-06-12 16:59:48,029 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Pure-Mathematics1.html
+2020-06-12 16:59:48,097 - root - INFO - Successfully inserted: 6 rows
+2020-06-12 16:59:48,097 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Economics-Specialization.html
+[<a href="/page/MATH-AM-Degree-Requirements-Applied-Mathematics">Honours Applied Mathematics</a>]
+2020-06-12 16:59:48,143 - root - INFO - Successfully inserted: 0 rows
+2020-06-12 16:59:48,143 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Pure-Mathematics1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:48,193 - root - INFO - Successfully inserted: 10 rows
+2020-06-12 16:59:48,193 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Physics-Specialization.html
+[]
+2020-06-12 16:59:48,227 - root - INFO - Successfully inserted: 0 rows
+2020-06-12 16:59:48,227 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Science-Minor-2.html
+2020-06-12 16:59:48,704 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 35559
+2020-06-12 16:59:48,923 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 35559
+2020-06-12 16:59:49,006 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 35559
+2020-06-12 16:59:49,125 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 35560
+2020-06-12 16:59:49,204 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 35559
+2020-06-12 16:59:49,374 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - GB2312 Chinese confidence = 0.01
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 16:59:49,375 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.0
+2020-06-12 16:59:49,376 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.0
+2020-06-12 16:59:49,376 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 16:59:49,376 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 16:59:49,376 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 16:59:49,376 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.34238511118591225
+2020-06-12 16:59:49,376 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:49,376 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:49,376 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:49,405 - root - INFO - Successfully inserted: 5 rows
+2020-06-12 16:59:49,405 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Mathematics-Teaching-co-op.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:49,451 - root - INFO - Successfully inserted: 17 rows
+2020-06-12 16:59:49,451 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Computational-Fine-Art-Spec.html
+[<a href="/page/MATH-Bachelor-of-Computer-Science-1">Bachelor of Computer Science (BCS)</a>, <a href="/page/MATH-Bachelor-of-Mathematics-Computer-Science-1">Bachelor of Mathematics (BMath) (Computer Science)</a>, <a href="/page/MATH-Software-Engineering">Bachelor of Software Engineering (BSE)</a>]
+2020-06-12 16:59:49,488 - root - INFO - Successfully inserted: 9 rows
+2020-06-12 16:59:49,488 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Actuarial-Science-Mathematical-Finance1.html
+2020-06-12 16:59:49,710 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese prober hit error at byte 38918
+2020-06-12 16:59:49,861 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 38916
+2020-06-12 16:59:49,951 - chardet.charsetprober - DEBUG - GB2312 Chinese prober hit error at byte 38918
+2020-06-12 16:59:50,038 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 38916
+2020-06-12 16:59:50,125 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 38916
+2020-06-12 16:59:50,215 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 38917
+2020-06-12 16:59:50,302 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 38916
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 16:59:50,481 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.01
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.01
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.3555526828975148
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+2020-06-12 16:59:50,482 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:50,528 - root - INFO - Successfully inserted: 33 rows
+2020-06-12 16:59:50,528 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computational-Mathematics-Minor.html
+2020-06-12 16:59:50,875 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 35382
+2020-06-12 16:59:51,064 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 35382
+2020-06-12 16:59:51,151 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 35382
+2020-06-12 16:59:51,231 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 35383
+2020-06-12 16:59:51,332 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 35382
+2020-06-12 16:59:51,494 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 16:59:51,494 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+2020-06-12 16:59:51,494 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:51,494 - chardet.charsetprober - DEBUG - GB2312 Chinese confidence = 0.01
+2020-06-12 16:59:51,494 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:51,494 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:51,494 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:51,494 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 16:59:51,494 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 16:59:51,494 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.0
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.0
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.34755919921913364
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:51,495 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:51,523 - root - INFO - Successfully inserted: 3 rows
+2020-06-12 16:59:51,523 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AS-Predictive-Analytics-Specialization.html
+[<a href="/page/MATH-Actuarial-Science1">Honours Actuarial Science</a>]
+2020-06-12 16:59:51,554 - root - INFO - Successfully inserted: 7 rows
+2020-06-12 16:59:51,554 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Statistics-Minor.html
+2020-06-12 16:59:51,771 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese prober hit error at byte 32831
+2020-06-12 16:59:51,893 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 32829
+2020-06-12 16:59:51,967 - chardet.charsetprober - DEBUG - GB2312 Chinese prober hit error at byte 32831
+2020-06-12 16:59:52,041 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 32829
+2020-06-12 16:59:52,115 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 32829
+2020-06-12 16:59:52,188 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 32830
+2020-06-12 16:59:52,261 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 32829
+2020-06-12 16:59:52,412 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 16:59:52,413 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.01
+2020-06-12 16:59:52,414 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.01
+2020-06-12 16:59:52,414 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 16:59:52,414 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 16:59:52,414 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 16:59:52,414 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.3402446939728298
+2020-06-12 16:59:52,414 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:52,414 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+2020-06-12 16:59:52,414 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+2020-06-12 16:59:52,436 - root - INFO - Successfully inserted: 4 rows
+2020-06-12 16:59:52,437 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Data-Science1.html
+[<a href="/page/MATH-Statistics1">Honours Statistics</a>]
+2020-06-12 16:59:52,475 - root - INFO - Successfully inserted: 13 rows
+2020-06-12 16:59:52,475 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Information-Techn-Mgt-Degree-Requirements.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:52,519 - root - INFO - Successfully inserted: 20 rows
+2020-06-12 16:59:52,519 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Biostatistics1.html
+2020-06-12 16:59:52,728 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese prober hit error at byte 36523
+2020-06-12 16:59:52,869 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 36521
+2020-06-12 16:59:52,950 - chardet.charsetprober - DEBUG - GB2312 Chinese prober hit error at byte 36523
+2020-06-12 16:59:53,034 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 36521
+2020-06-12 16:59:53,118 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 36521
+2020-06-12 16:59:53,200 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 36522
+2020-06-12 16:59:53,282 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 36521
+2020-06-12 16:59:53,448 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 16:59:53,448 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.01
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.01
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 16:59:53,449 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 16:59:53,450 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 16:59:53,450 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.3418407016408009
+2020-06-12 16:59:53,450 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:53,450 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+2020-06-12 16:59:53,450 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:53,489 - root - INFO - Successfully inserted: 15 rows
+2020-06-12 16:59:53,489 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Bachelor-of-Computer-Science-Data-Science.html
+2020-06-12 16:59:53,714 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese prober hit error at byte 37710
+2020-06-12 16:59:53,857 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 37672
+2020-06-12 16:59:53,943 - chardet.charsetprober - DEBUG - GB2312 Chinese prober hit error at byte 37710
+2020-06-12 16:59:54,030 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 37672
+2020-06-12 16:59:54,116 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 37672
+2020-06-12 16:59:54,199 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 37673
+2020-06-12 16:59:54,283 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 37672
+2020-06-12 16:59:54,475 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.7525
+2020-06-12 16:59:54,475 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 16:59:54,475 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:54,475 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 16:59:54,475 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:54,475 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:54,475 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.01
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.01
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.35474465549360684
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:54,476 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:54,477 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.7525
+2020-06-12 16:59:54,477 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 16:59:54,477 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:54,477 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 16:59:54,477 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:54,477 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:54,477 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:54,477 - chardet.charsetprober - DEBUG - EUC-TW not active
+[<a href="/page/MATH-Bachelor-of-Computer-Science-1">BCS</a>]
+2020-06-12 16:59:54,511 - root - INFO - Successfully inserted: 10 rows
+2020-06-12 16:59:54,511 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Combinatorics-and-Optimization1.html
+2020-06-12 16:59:54,545 - root - INFO - Successfully inserted: 6 rows
+2020-06-12 16:59:54,545 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Digital-Hardware-Spec.html
+2020-06-12 16:59:54,579 - root - INFO - Successfully inserted: 7 rows
+2020-06-12 16:59:54,580 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computing-Minor.html
+2020-06-12 16:59:54,933 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 35196
+2020-06-12 16:59:55,096 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 35196
+2020-06-12 16:59:55,192 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 35196
+2020-06-12 16:59:55,293 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 35197
+2020-06-12 16:59:55,397 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 35196
+2020-06-12 16:59:55,668 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 16:59:55,670 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+2020-06-12 16:59:55,670 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:55,670 - chardet.charsetprober - DEBUG - GB2312 Chinese confidence = 0.01
+2020-06-12 16:59:55,670 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:55,670 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:55,670 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:55,671 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 16:59:55,671 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 16:59:55,671 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 16:59:55,671 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 16:59:55,671 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 16:59:55,671 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 16:59:55,671 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 16:59:55,671 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.0
+2020-06-12 16:59:55,671 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.0
+2020-06-12 16:59:55,671 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 16:59:55,672 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 16:59:55,672 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 16:59:55,672 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.3415105590898787
+2020-06-12 16:59:55,672 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:55,672 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:55,672 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:55,714 - root - INFO - Successfully inserted: 5 rows
+2020-06-12 16:59:55,714 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Software-Engineering-Spec.html
+[<a href="/page/MATH-Bachelor-of-Computer-Science-1">Bachelor of Computer Science (BCS)</a>, <a href="/page/MATH-Bachelor-of-Mathematics-Computer-Science-1">Bachelor of Mathematics (Computer Science) (BMath)</a>]
+2020-06-12 16:59:55,779 - root - INFO - Successfully inserted: 9 rows
+2020-06-12 16:59:55,779 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Pure-Mathematics-Teaching-co-op.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:55,852 - root - INFO - Successfully inserted: 17 rows
+2020-06-12 16:59:55,852 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Pure-Mathematics-Minor1.html
+2020-06-12 16:59:55,895 - root - INFO - Successfully inserted: 4 rows
+2020-06-12 16:59:55,896 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Degree-Requirements-Applied-Mathematics.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:55,950 - root - INFO - Successfully inserted: 14 rows
+2020-06-12 16:59:55,950 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Applied-Mathematics-Minor1.html
+2020-06-12 16:59:56,007 - root - INFO - Successfully inserted: 7 rows
+2020-06-12 16:59:56,008 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Biology-Specialization.html
+[<a href="/page/MATH-AM-Degree-Requirements-Applied-Mathematics">Honours Applied Mathematics</a>]
+2020-06-12 16:59:56,052 - root - INFO - Successfully inserted: 0 rows
+2020-06-12 16:59:56,052 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Human-Computer-Interaction-Spec.html
+[<a href="/page/MATH-Bachelor-of-Computer-Science-1">Bachelor of Computer Science (BCS)</a>, <a href="/page/MATH-Bachelor-of-Mathematics-Computer-Science-1">Bachelor of Mathematics (Computer Science) (BMath)</a>, <a href="/page/MATH-Software-Engineering">Bachelor of Software Engineering (BSE)</a>]
+2020-06-12 16:59:56,084 - root - INFO - Successfully inserted: 5 rows
+2020-06-12 16:59:56,084 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AS-Finance-Specialization.html
+[<a href="/page/MATH-Actuarial-Science1">Honours Actuarial Science</a>]
+2020-06-12 16:59:56,116 - root - INFO - Successfully inserted: 7 rows
+2020-06-12 16:59:56,116 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Chart-Prof-Accounting-Finance-Spec-Coop.html
+[<a href="/page/MATH-Math-or-Chart-Prof-Accounting-co-Requirements">Honours Mathematics/Chartered Professional Accountancy</a>]
+2020-06-12 16:59:56,148 - root - INFO - Successfully inserted: 6 rows
+2020-06-12 16:59:56,149 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computational-Mathematics1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:56,219 - root - INFO - Successfully inserted: 9 rows
+2020-06-12 16:59:56,219 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Eng-Specialization-Heat-and-Mass-Transfer.html
+[<a href="/page/MATH-AM-Degree-Requirements-Applied-Mathematics">Honours Applied Mathematics</a>]
+2020-06-12 16:59:56,253 - root - INFO - Successfully inserted: 8 rows
+2020-06-12 16:59:56,253 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Bachelor-of-Computer-Science-1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>]
+2020-06-12 16:59:56,295 - root - INFO - Successfully inserted: 19 rows
+2020-06-12 16:59:56,295 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Statistics1.html
+2020-06-12 16:59:56,505 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese prober hit error at byte 36434
+2020-06-12 16:59:56,647 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 36432
+2020-06-12 16:59:56,727 - chardet.charsetprober - DEBUG - GB2312 Chinese prober hit error at byte 36434
+2020-06-12 16:59:56,808 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 36432
+2020-06-12 16:59:56,899 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 36432
+2020-06-12 16:59:56,995 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 36433
+2020-06-12 16:59:57,086 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 36432
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 16:59:57,254 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 16:59:57,255 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 16:59:57,255 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.01
+2020-06-12 16:59:57,255 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.01
+2020-06-12 16:59:57,255 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 16:59:57,255 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 16:59:57,255 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 16:59:57,255 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.341950009587141
+2020-06-12 16:59:57,255 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:57,255 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+2020-06-12 16:59:57,255 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:57,288 - root - INFO - Successfully inserted: 12 rows
+2020-06-12 16:59:57,289 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Mathematical-Economics-Degree-Requirements.html
+2020-06-12 16:59:57,665 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 38423
+2020-06-12 16:59:57,845 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 38423
+2020-06-12 16:59:57,929 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 38423
+2020-06-12 16:59:58,017 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 38424
+2020-06-12 16:59:58,104 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 38423
+2020-06-12 16:59:58,280 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.7525
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - GB2312 Chinese confidence = 0.01
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 16:59:58,281 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.0
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.0
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.34558764978645423
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:58,282 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:58,283 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.7525
+2020-06-12 16:59:58,283 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+2020-06-12 16:59:58,283 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:58,283 - chardet.charsetprober - DEBUG - GB2312 Chinese confidence = 0.01
+2020-06-12 16:59:58,283 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:58,283 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:58,283 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:58,283 - chardet.charsetprober - DEBUG - EUC-TW not active
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 16:59:58,321 - root - INFO - Successfully inserted: 20 rows
+2020-06-12 16:59:58,321 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Statistics1.html
+2020-06-12 16:59:58,524 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese prober hit error at byte 35259
+2020-06-12 16:59:58,658 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 35257
+2020-06-12 16:59:58,736 - chardet.charsetprober - DEBUG - GB2312 Chinese prober hit error at byte 35259
+2020-06-12 16:59:58,816 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 35257
+2020-06-12 16:59:58,905 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 35257
+2020-06-12 16:59:58,984 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 35258
+2020-06-12 16:59:59,065 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 35257
+2020-06-12 16:59:59,227 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 16:59:59,227 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 16:59:59,227 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 16:59:59,227 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 16:59:59,227 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 16:59:59,227 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 16:59:59,227 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.01
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.01
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.33952908457483955
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+2020-06-12 16:59:59,228 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+2020-06-12 16:59:59,257 - root - INFO - Successfully inserted: 8 rows
+2020-06-12 16:59:59,258 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Actuarial-Science1.html
+2020-06-12 16:59:59,479 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese prober hit error at byte 36655
+2020-06-12 16:59:59,628 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 36653
+2020-06-12 16:59:59,717 - chardet.charsetprober - DEBUG - GB2312 Chinese prober hit error at byte 36655
+2020-06-12 16:59:59,797 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 36653
+2020-06-12 16:59:59,903 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 36653
+2020-06-12 17:00:00,022 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 36654
+2020-06-12 17:00:00,147 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 36653
+2020-06-12 17:00:00,397 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 17:00:00,398 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 17:00:00,399 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.01
+2020-06-12 17:00:00,399 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.01
+2020-06-12 17:00:00,399 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 17:00:00,399 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 17:00:00,399 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 17:00:00,399 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.3435103611697739
+2020-06-12 17:00:00,399 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 17:00:00,399 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+2020-06-12 17:00:00,399 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+2020-06-12 17:00:00,441 - root - INFO - Successfully inserted: 14 rows
+2020-06-12 17:00:00,441 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Joint-Computer-Science-Bach-of-Math.html
+2020-06-12 17:00:00,482 - root - INFO - Successfully inserted: 0 rows
+2020-06-12 17:00:00,482 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Combinatorics-and-Optimization-Minor2.html
+2020-06-12 17:00:00,537 - root - INFO - Successfully inserted: 8 rows
+2020-06-12 17:00:00,537 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computing-Financial-Mngt-Overview-Degree-Req.html
+2020-06-12 17:00:01,082 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 32971
+2020-06-12 17:00:01,348 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 32971
+2020-06-12 17:00:01,462 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 32971
+2020-06-12 17:00:01,571 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 32972
+2020-06-12 17:00:01,676 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 32971
+2020-06-12 17:00:01,952 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 17:00:01,953 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese confidence = 0.01
+2020-06-12 17:00:01,953 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 17:00:01,953 - chardet.charsetprober - DEBUG - GB2312 Chinese confidence = 0.01
+2020-06-12 17:00:01,953 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 17:00:01,953 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 17:00:01,953 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 17:00:01,953 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 17:00:01,953 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 17:00:01,953 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 17:00:01,953 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.0
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.0
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.3824981165870133
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 17:00:01,954 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="/page/MATH-Degree-Requirements-for-Math-students">Communication Skills Requirement</a>]
+2020-06-12 17:00:02,043 - root - INFO - Successfully inserted: 35 rows
+2020-06-12 17:00:02,043 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Business-Spec.html
+2020-06-12 17:00:02,098 - root - INFO - Successfully inserted: 2 rows
+2020-06-12 17:00:02,098 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Bus-Admin-and-Math-Double-Degree-Requirements.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 17:00:02,160 - root - INFO - Successfully inserted: 27 rows
+2020-06-12 17:00:02,160 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Actuarial-Science1.html
+2020-06-12 17:00:02,482 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese prober hit error at byte 37913
+2020-06-12 17:00:02,696 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 37911
+2020-06-12 17:00:02,816 - chardet.charsetprober - DEBUG - GB2312 Chinese prober hit error at byte 37913
+2020-06-12 17:00:02,939 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 37911
+2020-06-12 17:00:03,052 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 37911
+2020-06-12 17:00:03,165 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 37912
+2020-06-12 17:00:03,298 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 37911
+2020-06-12 17:00:03,560 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.505
+2020-06-12 17:00:03,560 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 17:00:03,560 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 17:00:03,560 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 17:00:03,560 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 17:00:03,560 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 17:00:03,560 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 17:00:03,560 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 17:00:03,560 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 17:00:03,560 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.01
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.01
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.01
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.01
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.3515113732805673
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+2020-06-12 17:00:03,561 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.01
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 17:00:03,632 - root - INFO - Successfully inserted: 22 rows
+2020-06-12 17:00:03,632 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Bioinformatics-Spec.html
+2020-06-12 17:00:03,684 - root - INFO - Successfully inserted: 13 rows
+2020-06-12 17:00:03,684 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-MS-Business-Specialization.html
+[<a href="/page/MATH-MS-Degree-Requirements-Mathematical-Studies">Honours Mathematical Studies</a>]
+2020-06-12 17:00:03,740 - root - INFO - Successfully inserted: 14 rows
+2020-06-12 17:00:03,741 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Computer-Sci-Artificial-Intelligence-Spec.html
+2020-06-12 17:00:04,118 - chardet.charsetprober - DEBUG - SHIFT_JIS Japanese prober hit error at byte 41801
+2020-06-12 17:00:04,342 - chardet.charsetprober - DEBUG - EUC-JP Japanese prober hit error at byte 41772
+2020-06-12 17:00:04,491 - chardet.charsetprober - DEBUG - GB2312 Chinese prober hit error at byte 41801
+2020-06-12 17:00:04,626 - chardet.charsetprober - DEBUG - EUC-KR Korean prober hit error at byte 41772
+2020-06-12 17:00:04,767 - chardet.charsetprober - DEBUG - CP949 Korean prober hit error at byte 41772
+2020-06-12 17:00:04,920 - chardet.charsetprober - DEBUG - Big5 Chinese prober hit error at byte 41773
+2020-06-12 17:00:05,060 - chardet.charsetprober - DEBUG - EUC-TW Taiwan prober hit error at byte 41772
+2020-06-12 17:00:05,336 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.7525
+2020-06-12 17:00:05,336 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 17:00:05,336 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 17:00:05,336 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 17:00:05,337 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 17:00:05,337 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 17:00:05,337 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 17:00:05,337 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 17:00:05,337 - chardet.charsetprober - DEBUG - windows-1251 Russian confidence = 0.01
+2020-06-12 17:00:05,337 - chardet.charsetprober - DEBUG - KOI8-R Russian confidence = 0.01
+2020-06-12 17:00:05,337 - chardet.charsetprober - DEBUG - ISO-8859-5 Russian confidence = 0.01
+2020-06-12 17:00:05,337 - chardet.charsetprober - DEBUG - MacCyrillic Russian confidence = 0.0
+2020-06-12 17:00:05,338 - chardet.charsetprober - DEBUG - IBM866 Russian confidence = 0.0
+2020-06-12 17:00:05,338 - chardet.charsetprober - DEBUG - IBM855 Russian confidence = 0.01
+2020-06-12 17:00:05,338 - chardet.charsetprober - DEBUG - ISO-8859-7 Greek confidence = 0.0
+2020-06-12 17:00:05,338 - chardet.charsetprober - DEBUG - windows-1253 Greek confidence = 0.0
+2020-06-12 17:00:05,338 - chardet.charsetprober - DEBUG - ISO-8859-5 Bulgairan confidence = 0.0
+2020-06-12 17:00:05,338 - chardet.charsetprober - DEBUG - windows-1251 Bulgarian confidence = 0.0
+2020-06-12 17:00:05,338 - chardet.charsetprober - DEBUG - TIS-620 Thai confidence = 0.01
+2020-06-12 17:00:05,338 - chardet.charsetprober - DEBUG - ISO-8859-9 Turkish confidence = 0.3476870846804848
+2020-06-12 17:00:05,338 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 17:00:05,339 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 17:00:05,339 - chardet.charsetprober - DEBUG - windows-1255 Hebrew confidence = 0.0
+2020-06-12 17:00:05,339 - chardet.charsetprober - DEBUG - utf-8  confidence = 0.7525
+2020-06-12 17:00:05,339 - chardet.charsetprober - DEBUG - SHIFT_JIS not active
+2020-06-12 17:00:05,339 - chardet.charsetprober - DEBUG - EUC-JP not active
+2020-06-12 17:00:05,339 - chardet.charsetprober - DEBUG - GB2312 not active
+2020-06-12 17:00:05,339 - chardet.charsetprober - DEBUG - EUC-KR not active
+2020-06-12 17:00:05,339 - chardet.charsetprober - DEBUG - CP949 not active
+2020-06-12 17:00:05,339 - chardet.charsetprober - DEBUG - Big5 not active
+2020-06-12 17:00:05,339 - chardet.charsetprober - DEBUG - EUC-TW not active
+2020-06-12 17:00:05,386 - root - INFO - Successfully inserted: 5 rows
+2020-06-12 17:00:05,386 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Bachelor-of-Mathematics-Computer-Science-1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 17:00:05,443 - root - INFO - Successfully inserted: 14 rows
+2020-06-12 17:00:05,444 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Actuarial-Science-Minor.html
+2020-06-12 17:00:05,491 - root - INFO - Successfully inserted: 11 rows
+2020-06-12 17:00:05,491 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Mathematics-or-Business-Administration.html
+2020-06-12 17:00:05,526 - root - INFO - Successfully inserted: 0 rows
+2020-06-12 17:00:05,526 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Engineering-Specialization-Fluid-and-Heat.html
+[<a href="/page/MATH-AM-Degree-Requirements-Applied-Mathematics">Honours Applied Mathematics</a>]
+2020-06-12 17:00:05,584 - root - INFO - Successfully inserted: 12 rows
+2020-06-12 17:00:05,584 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-MS-Degree-Requirements-Mathematical-Studies.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>]
+2020-06-12 17:00:05,642 - root - INFO - Successfully inserted: 11 rows
+2020-06-12 17:00:05,642 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : TableII.html
+2020-06-12 17:00:05,678 - root - INFO - Successfully inserted: 10 rows
+2020-06-12 17:00:05,678 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Bachelor-of-Computer-Science-1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>]
+2020-06-12 17:00:05,751 - root - INFO - Successfully inserted: 19 rows
+2020-06-12 17:00:05,751 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Eng-Specializ-Communication-and-Control.html
+[<a href="/page/MATH-AM-Degree-Requirements-Applied-Mathematics">Honours Applied Mathematics</a>]
+2020-06-12 17:00:05,804 - root - INFO - Successfully inserted: 9 rows
+2020-06-12 17:00:05,804 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-AM-Degree-Requirements-Applied-Math-Sci-Comp.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 17:00:05,867 - root - INFO - Successfully inserted: 14 rows
+2020-06-12 17:00:05,868 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Combinatorics-and-Optimization2.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>, <a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20II">Table II</a>]
+2020-06-12 17:00:05,940 - root - INFO - Successfully inserted: 11 rows
+2020-06-12 17:00:05,940 - root - INFO - Failed to insert: 0 rows
+CURRENT FILE PARSING : /ProgramSpecs/MATH-Bus-Admin-Computer-Sci-Double-Degree-Reqmnt-1.html
+[<a href="http://ugradcalendar.uwaterloo.ca/page/MATH-Degree-Requirements-for-Math-students#Table%20I">Table I</a>]
+2020-06-12 17:00:06,069 - root - INFO - Successfully inserted: 40 rows
+2020-06-12 17:00:06,071 - root - INFO - Failed to insert: 0 rows
