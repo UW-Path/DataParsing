@@ -43,7 +43,7 @@ def fetch_degree_req(path):
         with open(path + fileName, 'wb') as fOut:
             fOut.write(resp.content)
 
-def fetch_math_faculty_minor(path):
+def fetch_faculty_minor(path):
     """
              path: str
              Script to download all html pages for minors in Faculty of Math
@@ -79,7 +79,7 @@ def fetch_math_faculty_minor(path):
 
 if __name__ == '__main__':
     dir = os.path.dirname(__file__)
-    path = os.path.join(dir, 'ProgramSpecs')
+    path = os.path.join(dir, 'Specs')
 
     # check if folder exist
     if os.path.isdir(path):
@@ -92,4 +92,4 @@ if __name__ == '__main__':
         os.mkdir(path)
 
     fetch_degree_req(path)
-    fetch_math_faculty_minor(path)
+    fetch_faculty_minor(path)

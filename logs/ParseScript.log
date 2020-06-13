@@ -1,236 +1,236 @@
-2020-06-12 16:47:17,554 - root - INFO - Successfully inserted: 2 rows
-2020-06-12 16:47:17,554 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:17,872 - root - INFO - Successfully inserted: 60 rows
-2020-06-12 16:47:17,872 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:17,973 - root - INFO - Successfully inserted: 6 rows
-2020-06-12 16:47:17,973 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:18,234 - root - INFO - Successfully inserted: 42 rows
-2020-06-12 16:47:18,234 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:18,330 - root - INFO - Successfully inserted: 4 rows
-2020-06-12 16:47:18,330 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:18,473 - root - INFO - Successfully inserted: 14 rows
-2020-06-12 16:47:18,473 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:18,559 - root - INFO - Successfully inserted: 3 rows
-2020-06-12 16:47:18,559 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:19,009 - root - INFO - Successfully inserted: 99 rows
-2020-06-12 16:47:19,009 - root - INFO - Failed to insert: 0 rows
-CLAS
-list index out of range
-2020-06-12 16:47:19,478 - root - INFO - Successfully inserted: 49 rows
-2020-06-12 16:47:19,479 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:19,727 - root - INFO - Successfully inserted: 42 rows
-2020-06-12 16:47:19,727 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:19,893 - root - INFO - Successfully inserted: 16 rows
-2020-06-12 16:47:19,893 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:20,145 - root - INFO - Successfully inserted: 33 rows
-2020-06-12 16:47:20,145 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:20,255 - root - INFO - Successfully inserted: 8 rows
-2020-06-12 16:47:20,256 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:20,365 - root - INFO - Successfully inserted: 8 rows
-2020-06-12 16:47:20,365 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:20,583 - root - INFO - Successfully inserted: 31 rows
-2020-06-12 16:47:20,584 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:20,881 - root - INFO - Successfully inserted: 55 rows
-2020-06-12 16:47:20,881 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:21,147 - root - INFO - Successfully inserted: 40 rows
-2020-06-12 16:47:21,148 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:21,325 - root - INFO - Successfully inserted: 22 rows
-2020-06-12 16:47:21,325 - root - INFO - Failed to insert: 0 rows
-SWREN
-list index out of range
-2020-06-12 16:47:21,626 - root - INFO - Successfully inserted: 8 rows
-2020-06-12 16:47:21,626 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:21,733 - root - INFO - Successfully inserted: 7 rows
-2020-06-12 16:47:21,733 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:21,883 - root - INFO - Successfully inserted: 16 rows
-2020-06-12 16:47:21,883 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:53,627 - root - INFO - Successfully inserted: 166 rows
+2020-06-13 19:15:53,628 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:53,730 - root - INFO - Successfully inserted: 2 rows
+2020-06-13 19:15:53,730 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:53,978 - root - INFO - Successfully inserted: 31 rows
+2020-06-13 19:15:53,979 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:54,250 - root - INFO - Successfully inserted: 40 rows
+2020-06-13 19:15:54,257 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:54,374 - root - INFO - Successfully inserted: 7 rows
+2020-06-13 19:15:54,375 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:54,558 - root - INFO - Successfully inserted: 16 rows
+2020-06-13 19:15:54,559 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:54,891 - root - INFO - Successfully inserted: 55 rows
+2020-06-13 19:15:54,892 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:55,411 - root - INFO - Successfully inserted: 78 rows
+2020-06-13 19:15:55,422 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:55,530 - root - INFO - Successfully inserted: 1 rows
+2020-06-13 19:15:55,535 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:55,766 - root - INFO - Successfully inserted: 24 rows
+2020-06-13 19:15:55,773 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:55,937 - root - INFO - Successfully inserted: 10 rows
+2020-06-13 19:15:55,939 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:56,113 - root - INFO - Successfully inserted: 15 rows
+2020-06-13 19:15:56,114 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:56,602 - root - INFO - Successfully inserted: 84 rows
+2020-06-13 19:15:56,616 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:56,925 - root - INFO - Successfully inserted: 31 rows
+2020-06-13 19:15:56,938 - root - INFO - Failed to insert: 0 rows
 SDS
 list index out of range
-2020-06-12 16:47:22,393 - root - INFO - Successfully inserted: 58 rows
-2020-06-12 16:47:22,394 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:22,486 - root - INFO - Successfully inserted: 2 rows
-2020-06-12 16:47:22,487 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:22,598 - root - INFO - Successfully inserted: 6 rows
-2020-06-12 16:47:22,598 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:22,865 - root - INFO - Successfully inserted: 41 rows
-2020-06-12 16:47:22,865 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:23,153 - root - INFO - Successfully inserted: 50 rows
-2020-06-12 16:47:23,153 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:23,261 - root - INFO - Successfully inserted: 7 rows
-2020-06-12 16:47:23,261 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:23,424 - root - INFO - Successfully inserted: 17 rows
-2020-06-12 16:47:23,424 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:23,522 - root - INFO - Successfully inserted: 4 rows
-2020-06-12 16:47:23,522 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:23,905 - root - INFO - Successfully inserted: 73 rows
-2020-06-12 16:47:23,906 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:24,149 - root - INFO - Successfully inserted: 37 rows
-2020-06-12 16:47:24,149 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:24,310 - root - INFO - Successfully inserted: 19 rows
-2020-06-12 16:47:24,311 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:24,395 - root - INFO - Successfully inserted: 1 rows
-2020-06-12 16:47:24,395 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:24,654 - root - INFO - Successfully inserted: 49 rows
-2020-06-12 16:47:24,655 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:24,976 - root - INFO - Successfully inserted: 59 rows
-2020-06-12 16:47:24,976 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:25,102 - root - INFO - Successfully inserted: 9 rows
-2020-06-12 16:47:25,103 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:25,255 - root - INFO - Successfully inserted: 15 rows
-2020-06-12 16:47:25,255 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:25,666 - root - INFO - Successfully inserted: 76 rows
-2020-06-12 16:47:25,666 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:25,901 - root - INFO - Successfully inserted: 33 rows
-2020-06-12 16:47:25,901 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:26,235 - root - INFO - Successfully inserted: 60 rows
-2020-06-12 16:47:26,235 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:26,634 - root - INFO - Successfully inserted: 84 rows
-2020-06-12 16:47:26,634 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:26,803 - root - INFO - Successfully inserted: 20 rows
-2020-06-12 16:47:26,804 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:26,903 - root - INFO - Successfully inserted: 4 rows
-2020-06-12 16:47:26,903 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:27,248 - root - INFO - Successfully inserted: 69 rows
-2020-06-12 16:47:27,248 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:27,426 - root - INFO - Successfully inserted: 9 rows
-2020-06-12 16:47:27,428 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:27,534 - root - INFO - Successfully inserted: 6 rows
-2020-06-12 16:47:27,534 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:27,735 - root - INFO - Successfully inserted: 23 rows
-2020-06-12 16:47:27,735 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:27,934 - root - INFO - Successfully inserted: 19 rows
-2020-06-12 16:47:27,934 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:28,120 - root - INFO - Successfully inserted: 22 rows
-2020-06-12 16:47:28,120 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:28,251 - root - INFO - Successfully inserted: 9 rows
-2020-06-12 16:47:28,251 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:28,680 - root - INFO - Successfully inserted: 62 rows
-2020-06-12 16:47:28,680 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:28,948 - root - INFO - Successfully inserted: 42 rows
-2020-06-12 16:47:28,948 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:29,053 - root - INFO - Successfully inserted: 7 rows
-2020-06-12 16:47:29,053 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:29,201 - root - INFO - Successfully inserted: 15 rows
-2020-06-12 16:47:29,201 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:29,588 - root - INFO - Successfully inserted: 60 rows
-2020-06-12 16:47:29,588 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:29,858 - root - INFO - Successfully inserted: 31 rows
-2020-06-12 16:47:29,858 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:30,133 - root - INFO - Successfully inserted: 29 rows
-2020-06-12 16:47:30,133 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:30,372 - root - INFO - Successfully inserted: 37 rows
-2020-06-12 16:47:30,372 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:30,701 - root - INFO - Successfully inserted: 42 rows
-2020-06-12 16:47:30,701 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:30,783 - root - INFO - Successfully inserted: 1 rows
-2020-06-12 16:47:30,784 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:30,875 - root - INFO - Successfully inserted: 5 rows
-2020-06-12 16:47:30,875 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:31,008 - root - INFO - Successfully inserted: 8 rows
-2020-06-12 16:47:31,008 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:31,213 - root - INFO - Successfully inserted: 15 rows
-2020-06-12 16:47:31,214 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:31,651 - root - INFO - Successfully inserted: 60 rows
-2020-06-12 16:47:31,651 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:31,856 - root - INFO - Successfully inserted: 14 rows
-2020-06-12 16:47:31,856 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:32,442 - root - INFO - Successfully inserted: 72 rows
-2020-06-12 16:47:32,442 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:32,693 - root - INFO - Successfully inserted: 44 rows
-2020-06-12 16:47:32,693 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:33,181 - root - INFO - Successfully inserted: 107 rows
-2020-06-12 16:47:33,181 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:33,682 - root - INFO - Successfully inserted: 96 rows
-2020-06-12 16:47:33,682 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:33,795 - root - INFO - Successfully inserted: 5 rows
-2020-06-12 16:47:33,795 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:33,873 - root - INFO - Successfully inserted: 1 rows
-2020-06-12 16:47:33,873 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:34,218 - root - INFO - Successfully inserted: 49 rows
-2020-06-12 16:47:34,218 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:34,306 - root - INFO - Successfully inserted: 2 rows
-2020-06-12 16:47:34,306 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:35,495 - root - INFO - Successfully inserted: 166 rows
-2020-06-12 16:47:35,495 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:35,667 - root - INFO - Successfully inserted: 15 rows
-2020-06-12 16:47:35,667 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:36,122 - root - INFO - Successfully inserted: 73 rows
-2020-06-12 16:47:36,123 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:36,445 - root - INFO - Successfully inserted: 53 rows
-2020-06-12 16:47:36,445 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:37,004 - root - INFO - Successfully inserted: 83 rows
-2020-06-12 16:47:37,004 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:37,362 - root - INFO - Successfully inserted: 64 rows
-2020-06-12 16:47:37,362 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:37,917 - root - INFO - Successfully inserted: 110 rows
-2020-06-12 16:47:37,917 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:38,065 - root - INFO - Successfully inserted: 10 rows
-2020-06-12 16:47:38,065 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:38,220 - root - INFO - Successfully inserted: 14 rows
-2020-06-12 16:47:38,220 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:38,807 - root - INFO - Successfully inserted: 110 rows
-2020-06-12 16:47:38,807 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:39,108 - root - INFO - Successfully inserted: 46 rows
-2020-06-12 16:47:39,108 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:39,207 - root - INFO - Successfully inserted: 4 rows
-2020-06-12 16:47:39,207 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:39,640 - root - INFO - Successfully inserted: 87 rows
-2020-06-12 16:47:39,640 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:39,823 - root - INFO - Successfully inserted: 24 rows
-2020-06-12 16:47:39,824 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:40,021 - root - INFO - Successfully inserted: 10 rows
-2020-06-12 16:47:40,022 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:40,234 - root - INFO - Successfully inserted: 21 rows
-2020-06-12 16:47:40,234 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:40,549 - root - INFO - Successfully inserted: 57 rows
-2020-06-12 16:47:40,549 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:40,639 - root - INFO - Successfully inserted: 3 rows
-2020-06-12 16:47:40,640 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:41,054 - root - INFO - Successfully inserted: 68 rows
-2020-06-12 16:47:41,054 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:41,186 - root - INFO - Successfully inserted: 7 rows
-2020-06-12 16:47:41,187 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:41,336 - root - INFO - Successfully inserted: 11 rows
-2020-06-12 16:47:41,337 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:41,874 - root - INFO - Successfully inserted: 99 rows
-2020-06-12 16:47:41,874 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:42,310 - root - INFO - Successfully inserted: 78 rows
-2020-06-12 16:47:42,311 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:43,389 - root - INFO - Successfully inserted: 106 rows
-2020-06-12 16:47:43,390 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:43,491 - root - INFO - Successfully inserted: 3 rows
-2020-06-12 16:47:43,491 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:43,586 - root - INFO - Successfully inserted: 2 rows
-2020-06-12 16:47:43,586 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:43,718 - root - INFO - Successfully inserted: 11 rows
-2020-06-12 16:47:43,718 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:43,849 - root - INFO - Successfully inserted: 9 rows
-2020-06-12 16:47:43,849 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:44,021 - root - INFO - Successfully inserted: 23 rows
-2020-06-12 16:47:44,021 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:44,120 - root - INFO - Successfully inserted: 4 rows
-2020-06-12 16:47:44,120 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:44,326 - root - INFO - Successfully inserted: 17 rows
-2020-06-12 16:47:44,327 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:44,615 - root - INFO - Successfully inserted: 40 rows
-2020-06-12 16:47:44,615 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:44,705 - root - INFO - Successfully inserted: 4 rows
-2020-06-12 16:47:44,705 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:45,232 - root - INFO - Successfully inserted: 66 rows
-2020-06-12 16:47:45,232 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:45,365 - root - INFO - Successfully inserted: 7 rows
-2020-06-12 16:47:45,365 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:45,507 - root - INFO - Successfully inserted: 12 rows
-2020-06-12 16:47:45,508 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:45,976 - root - INFO - Successfully inserted: 97 rows
-2020-06-12 16:47:45,976 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:46,213 - root - INFO - Successfully inserted: 27 rows
-2020-06-12 16:47:46,213 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:46,387 - root - INFO - Successfully inserted: 16 rows
-2020-06-12 16:47:46,387 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:46,700 - root - INFO - Successfully inserted: 54 rows
-2020-06-12 16:47:46,700 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:46,892 - root - INFO - Successfully inserted: 24 rows
-2020-06-12 16:47:46,892 - root - INFO - Failed to insert: 0 rows
-2020-06-12 16:47:47,130 - root - INFO - Successfully inserted: 29 rows
-2020-06-12 16:47:47,130 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:57,852 - root - INFO - Successfully inserted: 76 rows
+2020-06-13 19:15:57,854 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:58,067 - root - INFO - Successfully inserted: 17 rows
+2020-06-13 19:15:58,068 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:58,372 - root - INFO - Successfully inserted: 41 rows
+2020-06-13 19:15:58,373 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:58,674 - root - INFO - Successfully inserted: 42 rows
+2020-06-13 19:15:58,675 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:58,775 - root - INFO - Successfully inserted: 3 rows
+2020-06-13 19:15:58,776 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:59,271 - root - INFO - Successfully inserted: 73 rows
+2020-06-13 19:15:59,272 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:15:59,483 - root - INFO - Successfully inserted: 22 rows
+2020-06-13 19:15:59,484 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:00,082 - root - INFO - Successfully inserted: 107 rows
+2020-06-13 19:16:00,083 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:00,460 - root - INFO - Successfully inserted: 57 rows
+2020-06-13 19:16:00,461 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:00,657 - root - INFO - Successfully inserted: 15 rows
+2020-06-13 19:16:00,658 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:00,836 - root - INFO - Successfully inserted: 14 rows
+2020-06-13 19:16:00,836 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:00,964 - root - INFO - Successfully inserted: 6 rows
+2020-06-13 19:16:00,965 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:01,079 - root - INFO - Successfully inserted: 6 rows
+2020-06-13 19:16:01,080 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:01,198 - root - INFO - Successfully inserted: 4 rows
+2020-06-13 19:16:01,199 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:01,494 - root - INFO - Successfully inserted: 44 rows
+2020-06-13 19:16:01,496 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:01,689 - root - INFO - Successfully inserted: 22 rows
+2020-06-13 19:16:01,690 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:01,842 - root - INFO - Successfully inserted: 8 rows
+2020-06-13 19:16:01,843 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:02,194 - root - INFO - Successfully inserted: 54 rows
+2020-06-13 19:16:02,195 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:02,438 - root - INFO - Successfully inserted: 29 rows
+2020-06-13 19:16:02,439 - root - INFO - Failed to insert: 0 rows
+CLAS
+list index out of range
+2020-06-13 19:16:02,747 - root - INFO - Successfully inserted: 2 rows
+2020-06-13 19:16:02,748 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:02,842 - root - INFO - Successfully inserted: 2 rows
+2020-06-13 19:16:02,843 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:03,215 - root - INFO - Successfully inserted: 50 rows
+2020-06-13 19:16:03,215 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:03,851 - root - INFO - Successfully inserted: 110 rows
+2020-06-13 19:16:03,852 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:03,965 - root - INFO - Successfully inserted: 4 rows
+2020-06-13 19:16:03,966 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:04,072 - root - INFO - Successfully inserted: 3 rows
+2020-06-13 19:16:04,073 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:04,433 - root - INFO - Successfully inserted: 49 rows
+2020-06-13 19:16:04,434 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:04,550 - root - INFO - Successfully inserted: 5 rows
+2020-06-13 19:16:04,551 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:05,013 - root - INFO - Successfully inserted: 64 rows
+2020-06-13 19:16:05,014 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:05,438 - root - INFO - Successfully inserted: 58 rows
+2020-06-13 19:16:05,445 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:05,966 - root - INFO - Successfully inserted: 62 rows
+2020-06-13 19:16:05,967 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:06,264 - root - INFO - Successfully inserted: 29 rows
+2020-06-13 19:16:06,265 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:06,424 - root - INFO - Successfully inserted: 6 rows
+2020-06-13 19:16:06,425 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:06,511 - root - INFO - Successfully inserted: 1 rows
+2020-06-13 19:16:06,512 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:07,005 - root - INFO - Successfully inserted: 60 rows
+2020-06-13 19:16:07,006 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:07,097 - root - INFO - Successfully inserted: 1 rows
+2020-06-13 19:16:07,097 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:07,437 - root - INFO - Successfully inserted: 42 rows
+2020-06-13 19:16:07,438 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:07,961 - root - INFO - Successfully inserted: 66 rows
+2020-06-13 19:16:07,962 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:08,149 - root - INFO - Successfully inserted: 14 rows
+2020-06-13 19:16:08,150 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:08,374 - root - INFO - Successfully inserted: 19 rows
+2020-06-13 19:16:08,376 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:08,719 - root - INFO - Successfully inserted: 33 rows
+2020-06-13 19:16:08,720 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:08,860 - root - INFO - Successfully inserted: 3 rows
+2020-06-13 19:16:08,861 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:09,086 - root - INFO - Successfully inserted: 16 rows
+2020-06-13 19:16:09,087 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:09,264 - root - INFO - Successfully inserted: 10 rows
+2020-06-13 19:16:09,264 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:09,925 - root - INFO - Successfully inserted: 72 rows
+2020-06-13 19:16:09,925 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:10,087 - root - INFO - Successfully inserted: 7 rows
+2020-06-13 19:16:10,088 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:10,372 - root - INFO - Successfully inserted: 23 rows
+2020-06-13 19:16:10,373 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:10,614 - root - INFO - Successfully inserted: 16 rows
+2020-06-13 19:16:10,615 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:10,751 - root - INFO - Successfully inserted: 7 rows
+2020-06-13 19:16:10,752 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:10,885 - root - INFO - Successfully inserted: 4 rows
+2020-06-13 19:16:10,886 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:11,082 - root - INFO - Successfully inserted: 4 rows
+2020-06-13 19:16:11,083 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:11,938 - root - INFO - Successfully inserted: 110 rows
+2020-06-13 19:16:11,939 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:12,109 - root - INFO - Successfully inserted: 9 rows
+2020-06-13 19:16:12,110 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:12,892 - root - INFO - Successfully inserted: 97 rows
+2020-06-13 19:16:12,893 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:13,329 - root - INFO - Successfully inserted: 46 rows
+2020-06-13 19:16:13,330 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:13,563 - root - INFO - Successfully inserted: 15 rows
+2020-06-13 19:16:13,564 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:13,791 - root - INFO - Successfully inserted: 19 rows
+2020-06-13 19:16:13,791 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:13,973 - root - INFO - Successfully inserted: 11 rows
+2020-06-13 19:16:13,974 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:14,250 - root - INFO - Successfully inserted: 21 rows
+2020-06-13 19:16:14,251 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:14,828 - root - INFO - Successfully inserted: 60 rows
+2020-06-13 19:16:14,833 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:15,650 - root - INFO - Successfully inserted: 99 rows
+2020-06-13 19:16:15,651 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:15,794 - root - INFO - Successfully inserted: 7 rows
+2020-06-13 19:16:15,795 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:16,237 - root - INFO - Successfully inserted: 49 rows
+2020-06-13 19:16:16,238 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:16,362 - root - INFO - Successfully inserted: 4 rows
+2020-06-13 19:16:16,363 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:16,856 - root - INFO - Successfully inserted: 53 rows
+2020-06-13 19:16:16,857 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:17,807 - root - INFO - Successfully inserted: 106 rows
+2020-06-13 19:16:17,808 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:18,013 - root - INFO - Successfully inserted: 9 rows
+2020-06-13 19:16:18,014 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:18,205 - root - INFO - Successfully inserted: 11 rows
+2020-06-13 19:16:18,208 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:18,823 - root - INFO - Successfully inserted: 37 rows
+2020-06-13 19:16:18,846 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:19,995 - root - INFO - Successfully inserted: 73 rows
+2020-06-13 19:16:19,996 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:20,154 - root - INFO - Successfully inserted: 8 rows
+2020-06-13 19:16:20,155 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:20,337 - root - INFO - Successfully inserted: 12 rows
+2020-06-13 19:16:20,339 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:20,912 - root - INFO - Successfully inserted: 40 rows
+2020-06-13 19:16:20,915 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:21,648 - root - INFO - Successfully inserted: 83 rows
+2020-06-13 19:16:21,649 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:22,007 - root - INFO - Successfully inserted: 27 rows
+2020-06-13 19:16:22,008 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:22,226 - root - INFO - Successfully inserted: 14 rows
+2020-06-13 19:16:22,228 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:22,452 - root - INFO - Successfully inserted: 15 rows
+2020-06-13 19:16:22,454 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:23,213 - root - INFO - Successfully inserted: 68 rows
+2020-06-13 19:16:23,214 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:24,254 - root - INFO - Successfully inserted: 69 rows
+2020-06-13 19:16:24,255 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:24,406 - root - INFO - Successfully inserted: 8 rows
+2020-06-13 19:16:24,407 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:24,649 - root - INFO - Successfully inserted: 17 rows
+2020-06-13 19:16:24,650 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:25,194 - root - INFO - Successfully inserted: 59 rows
+2020-06-13 19:16:25,194 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:25,433 - root - INFO - Successfully inserted: 20 rows
+2020-06-13 19:16:25,433 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:26,094 - root - INFO - Successfully inserted: 87 rows
+2020-06-13 19:16:26,095 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:26,607 - root - INFO - Successfully inserted: 42 rows
+2020-06-13 19:16:26,644 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:27,208 - root - INFO - Successfully inserted: 99 rows
+2020-06-13 19:16:27,209 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:27,311 - root - INFO - Successfully inserted: 4 rows
+2020-06-13 19:16:27,312 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:27,511 - root - INFO - Successfully inserted: 24 rows
+2020-06-13 19:16:27,512 - root - INFO - Failed to insert: 0 rows
+SWREN
+list index out of range
+2020-06-13 19:16:28,101 - root - INFO - Successfully inserted: 37 rows
+2020-06-13 19:16:28,102 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:28,247 - root - INFO - Successfully inserted: 9 rows
+2020-06-13 19:16:28,248 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:28,642 - root - INFO - Successfully inserted: 49 rows
+2020-06-13 19:16:28,643 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:29,202 - root - INFO - Successfully inserted: 96 rows
+2020-06-13 19:16:29,203 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:29,545 - root - INFO - Successfully inserted: 42 rows
+2020-06-13 19:16:29,547 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:29,929 - root - INFO - Successfully inserted: 60 rows
+2020-06-13 19:16:29,930 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:30,048 - root - INFO - Successfully inserted: 5 rows
+2020-06-13 19:16:30,050 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:30,567 - root - INFO - Successfully inserted: 60 rows
+2020-06-13 19:16:30,575 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:30,798 - root - INFO - Successfully inserted: 23 rows
+2020-06-13 19:16:30,799 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:31,011 - root - INFO - Successfully inserted: 2 rows
+2020-06-13 19:16:31,014 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:31,178 - root - INFO - Successfully inserted: 7 rows
+2020-06-13 19:16:31,182 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:31,346 - root - INFO - Successfully inserted: 8 rows
+2020-06-13 19:16:31,347 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:31,741 - root - INFO - Successfully inserted: 33 rows
+2020-06-13 19:16:31,742 - root - INFO - Failed to insert: 0 rows
+2020-06-13 19:16:31,896 - root - INFO - Successfully inserted: 9 rows
+2020-06-13 19:16:31,897 - root - INFO - Failed to insert: 0 rows
