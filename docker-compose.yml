@@ -22,3 +22,5 @@ services:
         condition: service_healthy
     links:
       - db
+    environment:
+      - UWPATH_ENVIRONMENT=docker

@@ -10,6 +10,7 @@ Hao Wei Huang
 import psycopg2
 import logging
 import sys
+import os
 
 
 class DatabaseConnection(object):
@@ -17,6 +18,8 @@ class DatabaseConnection(object):
                  course_table="course_info", prereqs_table="prereqs", antireqs_table="antireqs",
                  requirements_table = "requirements", communications_table="communications",
                  breadth_table="breadth_table"):
+        if os.getenv("UWPATH_ENVIRONMENT") is not None and os.getenv("UWPATH_ENVIRONMENT") == "docker":
+            host = "db"
         self.connection = psycopg2.connect(user=user, password=password, host=host, port=port, database=database)
         self.cursor = self.connection.cursor()
         self.course_table = course_table
