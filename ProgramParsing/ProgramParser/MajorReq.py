@@ -20,7 +20,7 @@ class MajorReq:
         self.courseCodes = self._course_codes()
         self.numberOfCourses = self._number_of_courses()
         self.additionalRequirement = additionalRequirement
-        self.credits = 0.5
+        self.credits = 0.5 * self.numberOfCourses
 
     def _has_numbers(self, input_string):
         """

@@ -13,7 +13,6 @@ class MathMajorReq(MajorReq):
     def _number_of_courses(self):
         """
                 Returns courses needed for the group of course_codes
-
                 :return: int
         """
         if self.req == "All of":

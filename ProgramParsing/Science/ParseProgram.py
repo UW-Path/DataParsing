@@ -7,4 +7,6 @@ if __name__ == "__main__":
     path = os.path.join(dir, 'Specs')
     files = set(["/Specs/" + f for f in os.listdir(path) if f.endswith(".html")])
 
-    main(ScienceMajorParser, files)
+    # Debugging purposes
+    # files = set(["/Specs/SCI-Honours-Life-Physics-Medical-Physics-Spec1.html"])
+    main(ScienceMajorParser, files, "Science")

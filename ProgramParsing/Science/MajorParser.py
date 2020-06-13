@@ -16,10 +16,13 @@ from math import ceil
 
 class ScienceMajorParser(MajorParser):
     def _get_program(self):
-        program = self.data.find_all("span", id="ctl00_contentMain_lblBottomTitle")
+        program = self.data.find_all("span", id="ctl00_contentMain_lblPageTitle")
 
         if program:
+            #Honours Biochemistry, Biotechnology Specialization format then take second
             program = program[0].contents[0].string
+            if ", " in program:
+                program = program.split(", ")[1]
 
         #check for minor
         minor = self.data.find_all("span", class_="pageTitle")
@@ -30,6 +33,21 @@ class ScienceMajorParser(MajorParser):
 
         return program
         # TODO: Need a case where this tile area is Degree Requirements
+
+    def _get_relatedMajor(self, program):
+        relatedMajor = self.data.find_all("span", id="ctl00_contentMain_lblBottomTitle")
+        if relatedMajor:
+            relatedMajor = relatedMajor[0].contents[0].string
+        else:
+            return ""
+
+        if "Academic Plans and Requirements" in relatedMajor:
+            # check if program is minor
+            if "minor" in program.lower():
+                program = program.replace(" Minor", "")
+            return program
+        else:
+            return relatedMajor
 
     def _course_list(self, line, credit, oneOf = False):
         list = []

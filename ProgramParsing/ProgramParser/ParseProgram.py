@@ -1,11 +1,12 @@
 from Database.DatabaseSender import DatabaseSender
 
+DropTable = True
 
-def main(majorParser, files):
+def main(majorParser, files, faculty="Math"):
     dbc = DatabaseSender()
-
-    dbc.execute("DROP TABLE" + " IF EXISTS " + dbc.requirements_table + " ;")
-    dbc.create_requirements()
+    if DropTable:
+        dbc.execute("DROP TABLE" + " IF EXISTS " + dbc.requirements_table + " ;")
+        dbc.create_requirements()
 
     for file in files:
         print("CURRENT FILE PARSING : " + file)
@@ -13,7 +14,7 @@ def main(majorParser, files):
         parser.load_file(file)
 
         # Parser requirement is a list of MajorReq Object
-        dbc.insert_requirements(parser.requirement, "Math")
+        dbc.insert_requirements(parser.requirement, faculty)
         dbc.commit()
 
     dbc.close()
