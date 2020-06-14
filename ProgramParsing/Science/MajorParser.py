@@ -91,6 +91,7 @@ class ScienceMajorParser(MajorParser):
             for word in line.split(' '):
                 if word.isupper() or "Science" == word or "Mathematics" == word:
                     maj = word.strip("\n").strip("\r\n").upper()
+                    maj = maj.replace(",", "")
                     break
             if r and maj:
                 list.append(maj + " " + r[0])
