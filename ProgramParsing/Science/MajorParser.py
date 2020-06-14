@@ -12,6 +12,7 @@ from ProgramParsing.ProgramParser.MajorParser import MajorParser
 import re
 import pkg_resources
 from math import ceil
+from Database.DatabaseReceiver import DatabaseReceiver
 
 
 class ScienceMajorParser(MajorParser):
@@ -88,11 +89,14 @@ class ScienceMajorParser(MajorParser):
         if not list:
             r = self._getLevelCourses(line)
             maj = ""
-            for word in line.split(' '):
-                if word.isupper() or "Science" == word or "Mathematics" == word:
-                    maj = word.strip("\n").strip("\r\n").upper()
-                    maj = maj.replace(",", "")
-                    break
+            if "program elective" in line:
+                maj = "Program Elective" #extra case for material nanosci
+            else:
+                for word in line.split(' '):
+                    if word.isupper() or "Science" == word or "Mathematics" == word:
+                        maj = word.strip("\n").strip("\r\n").upper()
+                        maj = maj.replace(",", "")
+                        break
             if r and maj:
                 list.append(maj + " " + r[0])
             elif maj:
@@ -115,6 +119,7 @@ class ScienceMajorParser(MajorParser):
         return list, False
 
     def _count_credits(self,list):
+        dbc = DatabaseReceiver()
         count = 0
         for course in list:
             courseNum = ""
@@ -125,9 +130,14 @@ class ScienceMajorParser(MajorParser):
                 #This means that it is a general course, should never be in All of option
                 return 0
             if "L" in courseNum:
-                count += 0.25
+                try:
+                    count += float(dbc.select_course_credit(course))
+                except:
+                    print(course)
+                    count += 0.25
             else:
                 count += 0.5
+        dbc.close()
         return float(count)
 
     def _require_all(self, list, major, relatedMajor, additionalRequirement):
@@ -159,6 +169,7 @@ class ScienceMajorParser(MajorParser):
         i = 0
         while i < len(information):
             line = information[i]
+            line = line.strip()
             if "must" in line:
                 #Condition for must complete... additional conditions
                 i += 1

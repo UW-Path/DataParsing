@@ -13,6 +13,7 @@ import sys
 import os
 
 
+
 class DatabaseConnection(object):
     def __init__(self, user="postgres", password="1234", host="localhost", port="5432", database="postgres",
                  course_table="course_info", prereqs_table="prereqs", antireqs_table="antireqs",
@@ -29,14 +30,20 @@ class DatabaseConnection(object):
         self.communications_table = communications_table
         self.breadth_table = breadth_table
 
-        self.root = logging.getLogger()
-        self.root.setLevel(logging.DEBUG)
+        self.root = self.__Logger()
 
-        handler = logging.StreamHandler(sys.stdout)
-        handler.setLevel(logging.DEBUG)
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        handler.setFormatter(formatter)
-        self.root.addHandler(handler)
+
+    def __Logger(self):
+
+        self.logger = logging.getLogger()
+        if not len(self.logger.handlers):
+            self.logger.setLevel(logging.DEBUG)
+            handler = logging.StreamHandler(sys.stdout)
+            handler.setLevel(logging.DEBUG)
+            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            handler.setFormatter(formatter)
+            self.logger.addHandler(handler)
+        return self.logger
 
     def execute(self, command):
         try:
@@ -67,3 +74,4 @@ class DatabaseConnection(object):
         command = "SELECT " + what + " FROM " + table + " " + condition + ";"
         self.execute(command)
         return self.cursor.fetchall()
+

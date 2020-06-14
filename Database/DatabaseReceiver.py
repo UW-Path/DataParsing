@@ -50,3 +50,11 @@ class DatabaseReceiver(DatabaseConnection):
         df = pd.DataFrame(data, columns=columns)
         df.set_index("index", inplace=True)
         return df
+
+    def select_course_credit(self, course):
+        """
+        Return credit of a course that ends with L (labs)
+        """
+        command = "SELECT credit FROM course_info WHERE course_code = '" + course + "'"+ ";"
+        self.execute(command)
+        return self.cursor.fetchone()[0]
