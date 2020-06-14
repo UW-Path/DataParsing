@@ -3,8 +3,6 @@ The purpose of this script is to update the HTML of Degree Requirement for a cal
 
 Contributors:
 Hao Wei Huang
-
-Date April 22 2020
 """
 
 import os
