@@ -1,6 +1,9 @@
 from Database.DatabaseSender import DatabaseSender
+import logging
 
-DropTable = True
+logging.disable(logging.DEBUG)
+
+DropTable = False
 
 def main(majorParser, files, faculty="Math"):
     dbc = DatabaseSender()
