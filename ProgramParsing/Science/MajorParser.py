@@ -87,20 +87,27 @@ class ScienceMajorParser(MajorParser):
 
         if not list:
             r = self._getLevelCourses(line)
-            if r:
-                #assume only 200- for now
-                maj = ""
-                for word in line.split(' '):
-                    if word.isupper():
-                        maj = word.strip("\n").strip("\r\n").upper()
-                        break
+            maj = ""
+            for word in line.split(' '):
+                if word.isupper() or "Science" == word or "Mathematics" == word:
+                    maj = word.strip("\n").strip("\r\n").upper()
+                    break
+            if r and maj:
                 list.append(maj + " " + r[0])
-                if len(r) > 1:
-                    print("ERROR more than one match 200- found")
+            elif maj:
+                if maj == "MATHEMATICS": maj = "MATH"
+                #SCIENCE - any level /Math
+                list.append(maj)
+            if len(r) > 1:
+                print("ERROR more than one match 200- found")
 
         if list:
+            for course in list:
+                if "-" in course:
+                    return list, False
             c = self._count_credits(list)
-            if credit == c or len(list) == 1:
+            # if 0 is returned the list has general courses: SCIENCE,MATH
+            if (credit == c or len(list) == 1) and c != 0:
                 #Note: 1 is coded as a special case. Not perfect accuracy in terms of credit count
                 return list, True
 
@@ -109,7 +116,13 @@ class ScienceMajorParser(MajorParser):
     def _count_credits(self,list):
         count = 0
         for course in list:
-            courseNum = course.split(" ")[1]
+            courseNum = ""
+            if len(course.split(" ")) > 1:
+                # Exception for SCIENCE -any level
+                courseNum = course.split(" ")[1]
+            else:
+                #This means that it is a general course, should never be in All of option
+                return 0
             if "L" in courseNum:
                 count += 0.25
             else:
@@ -145,6 +158,10 @@ class ScienceMajorParser(MajorParser):
         i = 0
         while i < len(information):
             line = information[i]
+            if "must" in line:
+                #Condition for must complete... additional conditions
+                i += 1
+                continue
             credits = line.split(' ')[0]
             try:
                 credits = float(credits)
@@ -161,7 +178,7 @@ class ScienceMajorParser(MajorParser):
                         self._require_all(list, program, relatedMajor, self.additionalRequirement)
                     else:
                         self.requirement.append(ScienceMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
-                elif "elective" in line.split(' ')[1]:
+                elif "elective" in line.split(' ')[1] and ":" not in line:
                     list.append("Elective")
                     self.requirement.append(ScienceMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
 
