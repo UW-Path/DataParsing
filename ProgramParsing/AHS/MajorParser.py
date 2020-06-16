@@ -10,9 +10,16 @@ from ProgramParsing.AHS.MajorReq import AHSMajorReq
 from ProgramParsing.ProgramParser.MajorParser import MajorParser
 import pkg_resources
 from bs4 import BeautifulSoup
+from StringToNumber import StringToNumber
 import re
 
 class AHSMajorParser(MajorParser):
+    def __increment(self, i, information):
+        i += 1
+        while i < len(information) and information[i].replace(" ", "") == "":
+            i += 1
+        return i
+
     def _get_program(self):
         program = self.data.find_all("span", id="ctl00_contentMain_lblPageTitle")
 
@@ -23,7 +30,23 @@ class AHSMajorParser(MajorParser):
 
         return program
 
-    def load_file(self, file):
+    def _get_relatedMajor(self, program):
+        relatedMajor = self.data.find_all("span", id="ctl00_contentMain_lblBottomTitle")
+        if relatedMajor:
+            return relatedMajor[0].contents[0].string
+        return ""
+
+    def __get_courses(self, line):
+        # Get courses from line
+        line = line.replace("*", "").replace("/", " or ")
+        coursesA = set(re.findall(r"[A-Z]{2,10}(?:\s[1-9][0-9][0-9][A-Z]?)?(?:\sor\s[A-Z]{2,10}(?:\s[1-9][0-9][0-9][A-Z]?)?){0,10}", line))
+        coursesB = set(re.findall(r"(?:[A-Z]{2,10}\s)?[1-9][0-9][0-9][A-Z]?(?:\sor\s[A-Z]{2,10}(?:\s[1-9][0-9][0-9][A-Z]?)?){0,10}", line))
+        courses = coursesA.union(coursesB)
+        courses = list(courses)
+        return courses
+
+
+    def load_file(self, file, ):
         """
                 Parse html file to gather a list of required courses for the major
 
@@ -34,19 +57,79 @@ class AHSMajorParser(MajorParser):
         self.data = BeautifulSoup(html, 'html.parser')
 
         program = self._get_program()
+        relatedMajor = self._get_relatedMajor(program)
 
         # Find all additional requirement
         self.additionalRequirement = self.getAdditionalRequirement()
 
-        information = self.data.find("span", {'class': 'MainContent'}).get_text().split("\n")
+        text = self.data.find("span", {'class': 'MainContent'}).get_text()
+        text = text.replace("Recreation elective courses", "REC")
+        text = text.replace("Free elective courses", "ELECTIVE")
+        text = text.replace("Restricted elective courses", "RESTRICTED")
+        text = text.replace("seminar", "SEMINAR")
+        text = text.replace("Kinesiology elective courses", "KIN")
+        text = text.replace("HLTH 480 (0.25 unit)", "HLTH 480")
+        text = re.sub(r"[1-9][0-9][0-9]-", "", text)
+        information = text.split("\n")
 
         print(program)
+        print(relatedMajor)
+        print("==============")
 
         i = 0
         while i < len(information):
             line = information[i]
-            if "Course Sequence" in line or "Note" in line or "General" in line:
+            if len(line) and line[0] == "*":
+                i = self.__increment(i, information)
+                continue
+            if line == "Course Sequence" or line == "Note" or line == "Notes" or line == "General":
                 break
             if "equired" in line or "unit" in line or len(re.findall(r"[A-Z]{2,10}", line)):
+                majorReq = AHSMajorReq([], program, relatedMajor, self.additionalRequirement, "")
                 # Create major reqs
-                i += 1
+                if "equired" in line or "unit" in line:
+                    credits = re.findall(r"[0-9]+\.[0-9]+", line)
+                    if len(credits) == 0:
+                        num = line.lower().split()[0]
+                        if num in StringToNumber._value2member_map_:
+                            credits = StringToNumber[num]
+                            majorReq.credits = float(credits/2)
+                    else:
+                        majorReq.credits = float(credits[0])
+                    all_courses = set([])
+                    j = i
+                    if information[i].startswith("Note"):
+                        i = self.__increment(i, information)
+                        continue
+                    while i < len(information) and not ((i > j and ("equired" in information[i] or
+                                                                   "unit" in information[i] or
+                                                                   (len(information[i]) and information[i][0] == "*")))):
+                        courses = self.__get_courses(information[i])
+                        all_courses = all_courses.union(courses)
+                        i = self.__increment(i, information)
+                        if i < len(information) and (information[i] == "Course Sequence" or information[i] == "Notes" or information[i] == "General"):
+                            break
+                    if majorReq.credits and len(all_courses) and (len(all_courses) == 1 or len(all_courses) >= majorReq.credits):
+                        if "RESTRICTED" in all_courses:
+                            all_courses = ["RESTRICTED"]
+                        print(majorReq.credits, list(all_courses))
+                        print(line)
+                        print("==============")
+                    if line == "Course Sequence" or line == "Note" or line == "Notes" or line == "General":
+                        break
+                    continue
+
+                else:
+                    print(line)
+                    # Get courses from line
+                    courses = self.__get_courses(line)
+                    majorReq.list = courses
+                    if majorReq.credits and len(courses):
+                        if "RESTRICTED" in courses:
+                            courses = ["RESTRICTED"]
+                        print(majorReq.credits, courses)
+                        print(line)
+                        print("==============")
+                    i = self.__increment(i, information)
+                    continue
+            i = self.__increment(i, information)
