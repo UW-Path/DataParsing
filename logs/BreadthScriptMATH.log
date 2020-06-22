@@ -1,2 +1,640 @@
+CREATE TABLE IF NOT EXISTS breadth_table (
+            subject VARCHAR(255) PRIMARY KEY,
+            name VARCHAR(255),
+            humanities BOOLEAN,
+            social_science BOOLEAN,
+            pure_science BOOLEAN,
+            applied_science BOOLEAN
+        )
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ACTSC', 'Actuarial Science', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ACTSC'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'AFM', 'Accounting and Financial Management', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'AFM'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'AHS', 'Applied Health Sciences', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'AHS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'AMATH', 'Applied Mathematics', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'AMATH'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ANTH', 'Anthropology', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ANTH'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'APPLS', 'Applied Language Studies', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'APPLS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ARBUS', 'Arts and Business', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ARBUS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ARCH', 'Architecture', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ARCH'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ARTS', 'Arts', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ARTS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'AVIA', 'Aviation', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'AVIA'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'BASE', 'Bridge to Academic Success in English', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'BASE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'BET', 'Business Entrepreneurship and Technology', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'BET'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'BIOL', 'Biology', False, False, True, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'BIOL'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'BME', 'Biomedical Engineering', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'BME'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'BUS', 'Business WLU', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'BUS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'CHEM', 'Chemistry', False, False, True, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'CHEM'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'CHINA', 'Chinese', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'CHINA'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'CIVE', 'Civil Engineering', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'CIVE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'CLAS', 'Classical Studies', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'CLAS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'CM', 'Computational Mathematics', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'CM'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'CMW', 'Church Music and Worship', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'CMW'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'CO', 'Combinatorics and Optimization', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'CO'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'COMM', 'Commerce', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'COMM'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'CROAT', 'Croatian', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'CROAT'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'CS', 'Computer Science', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'CS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'DAC', 'Digital Arts Communication', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'DAC'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'DRAMA', 'Drama', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'DRAMA'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'DUTCH', 'Dutch', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'DUTCH'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'EARTH', 'Earth Sciences', False, False, True, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'EARTH'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'EASIA', 'East Asian Studies', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'EASIA'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ECE', 'Electrical and Computer Engineering', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ECE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ECON', 'Economics', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ECON'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'EFAS', 'English for Academic Success', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'EFAS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'EMLS', 'English for Multilingual Speakers', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'EMLS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ENBUS', 'Environment and Business', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ENBUS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ENGL', 'English', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ENGL'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ENVE', 'Environmental Engineering', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ENVE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ENVS', 'Environmental Studies', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ENVS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ERS', 'Environment and Resource Studies', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ERS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'FINE', 'Fine Arts', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'FINE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'FR', 'French Studies', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'FR'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'GBDA', 'Global Business and Digital Arts', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'GBDA'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'GENE', 'General Engineering', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'GENE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'GEOE', 'Geological Engineering', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'GEOE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'GEOG', 'Geography and Environmental Management', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'GEOG'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'GER', 'German', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'GER'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'GERON', 'Gerontology', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'GERON'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'GRK', 'Greek', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'GRK'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'HIST', 'History', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'HIST'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'HLTH', 'Health', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'HLTH'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'HRM', 'Human Resources Management', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'HRM'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'HUMSC', 'Human Sciences', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'HUMSC'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'INDEV', 'International Development', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'INDEV'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'INTEG', 'Knowledge Integration', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'INTEG'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'INTST', 'International Studies', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'INTST'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'INTTS', 'International Trade', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'INTTS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'IS', 'Independent Studies', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'IS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ISS', 'Interdisciplinary Social Science', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ISS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ITAL', 'Italian', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ITAL'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ITALST', 'Italian Studies', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ITALST'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'JAPAN', 'Japanese', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'JAPAN'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'JS', 'Jewish Studies', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'JS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'KIN', 'Kinesiology', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'KIN'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'KOREA', 'Korean', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'KOREA'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'LAT', 'Latin', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'LAT'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'LS', 'Legal Studies', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'LS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'MATBUS', 'Mathematical Business', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'MATBUS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'MATH', 'Mathematics', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'MATH'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'ME', 'Mechanical Engineering', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'ME'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'MEDVL', 'Medieval Studies', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'MEDVL'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'MNS', 'Materials and NanoSciences', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'MNS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'MSCI', 'Management Sciences', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'MSCI'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'MTE', 'Mechatronics Engineering', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'MTE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'MTHEL', 'Mathematics Electives', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'MTHEL'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'MUSIC', 'Music', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'MUSIC'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'NATST', 'Native Studies', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'NATST'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'NE', 'Nanotechnology Engineering', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'NE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'PACS', 'Peace and Conflict Studies', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'PACS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'PHIL', 'Philosophy', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'PHIL'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'PHYS', 'Physics', False, False, True, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'PHYS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'PLAN', 'Planning', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'PLAN'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'PMATH', 'Pure Mathematics', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'PMATH'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'POLSH', 'Polish', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'POLSH'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'PORT', 'Portuguese', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'PORT'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'PSCI', 'Political Science', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'PSCI'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'PSYCH', 'Psychology', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'PSYCH'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'REC', 'Recreation and Leisure Studies', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'REC'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'REES', 'Russian and East European Studies', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'REES'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'RS', 'Religious Studies', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'RS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'RUSS', 'Russian', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'RUSS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'SCI', 'Science', False, False, True, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'SCI'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'SDS', 'Social Development Studies', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'SDS'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'SE', 'Software Engineering', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'SE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'SI', 'Studies in Islam', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'SI'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'SMF', 'Sexuality Marriage and Family', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'SMF'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'SOC', 'Sociology', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'SOC'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'SOCWK', 'Social Work', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'SOCWK'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'SPAN', 'Spanish', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'SPAN'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'SPCOM', 'Speech Communication', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'SPCOM'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'STAT', 'Statistics', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'STAT'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'STV', 'Society Technology and Values', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'STV'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'SYDE', 'Systems Design Engineering', False, False, False, True
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'SYDE'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'UNIV', 'University', False, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'UNIV'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'VCULT', 'Visual Culture', True, False, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'VCULT'
+);
+INSERT INTO breadth_table (subject, name, humanities, social_science, pure_science, applied_science)
+SELECT 'WS', 'Womens Studies', False, True, False, False
+WHERE NOT EXISTS (
+SELECT 1 FROM breadth_table
+WHERE subject = 'WS'
+);
 Successes: 105
 Failures:  0

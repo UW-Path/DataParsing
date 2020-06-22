@@ -13,4 +13,4 @@ if __name__ == "__main__":
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
     files = files - filesToIgnore
 
-    main(MathMajorParser, files)
+    main(MathMajorParser, files, DropTable=True)

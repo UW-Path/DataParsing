@@ -2,7 +2,6 @@
 MajorParser.py is a library built to receive information on Major Requirements
 
 Contributors:
-Hao Wei Huang
 Calder Lund
 """
 
@@ -45,6 +44,28 @@ class AHSMajorParser(MajorParser):
         courses = list(courses)
         return courses
 
+    def __append_requirement(self, line, majorReq):
+        line = line.lower()
+
+        if "elective" in line or "cluster" in line or \
+            (len(majorReq.courseCodes.split(",")) > 1 and (majorReq.credits == 0.5 or
+                                                           ("from" in line and "required" not in line))):
+            majorReq.courseCodes = majorReq.courseCodes.replace(",", " or")
+
+        codes = majorReq.courseCodes.split(", ")
+        if len(line) > 250:
+            line = line[:250]
+
+        if len(codes) == 1 and majorReq.credits > 0.5:
+            self.requirement.append(AHSMajorReq(codes[0].split(" or "), majorReq.programName, majorReq.majorName,
+                                                line, majorReq.credits))
+            self.requirement[-1].numberOfCourses = int(majorReq.credits * 2)
+
+        else:
+            for code in codes:
+                self.requirement.append(AHSMajorReq(code.split(" or "), majorReq.programName, majorReq.majorName,
+                                                    line, 0.5))
+
 
     def load_file(self, file, ):
         """
@@ -69,12 +90,9 @@ class AHSMajorParser(MajorParser):
         text = text.replace("seminar", "SEMINAR")
         text = text.replace("Kinesiology elective courses", "KIN")
         text = text.replace("HLTH 480 (0.25 unit)", "HLTH 480")
+        text = text.replace(" (see Laurier calendar)", "")
         text = re.sub(r"[1-9][0-9][0-9]-", "", text)
         information = text.split("\n")
-
-        print(program)
-        print(relatedMajor)
-        print("==============")
 
         i = 0
         while i < len(information):
@@ -86,6 +104,8 @@ class AHSMajorParser(MajorParser):
                 break
             if "equired" in line or "unit" in line or len(re.findall(r"[A-Z]{2,10}", line)):
                 majorReq = AHSMajorReq([], program, relatedMajor, self.additionalRequirement, "")
+                if "lective" in line:
+                    majorReq.condition = "or"
                 # Create major reqs
                 if "equired" in line or "unit" in line:
                     credits = re.findall(r"[0-9]+\.[0-9]+", line)
@@ -97,6 +117,8 @@ class AHSMajorParser(MajorParser):
                     else:
                         majorReq.credits = float(credits[0])
                     all_courses = set([])
+                    if "Recreation and Sport Business elective courses" in line:
+                        i += 4
                     j = i
                     if information[i].startswith("Note"):
                         i = self.__increment(i, information)
@@ -106,30 +128,29 @@ class AHSMajorParser(MajorParser):
                                                                    (len(information[i]) and information[i][0] == "*")))):
                         courses = self.__get_courses(information[i])
                         all_courses = all_courses.union(courses)
+
                         i = self.__increment(i, information)
                         if i < len(information) and (information[i] == "Course Sequence" or information[i] == "Notes" or information[i] == "General"):
                             break
                     if majorReq.credits and len(all_courses) and (len(all_courses) == 1 or len(all_courses) >= majorReq.credits):
                         if "RESTRICTED" in all_courses:
                             all_courses = ["RESTRICTED"]
-                        print(majorReq.credits, list(all_courses))
-                        print(line)
-                        print("==============")
+                        majorReq.list = list(all_courses)
+                        majorReq.update()
+                        self.__append_requirement(line, majorReq)
                     if line == "Course Sequence" or line == "Note" or line == "Notes" or line == "General":
                         break
                     continue
 
                 else:
-                    print(line)
                     # Get courses from line
                     courses = self.__get_courses(line)
-                    majorReq.list = courses
                     if majorReq.credits and len(courses):
                         if "RESTRICTED" in courses:
                             courses = ["RESTRICTED"]
-                        print(majorReq.credits, courses)
-                        print(line)
-                        print("==============")
+                        majorReq.list = courses
+                        majorReq.update()
+                        self.__append_requirement(line, majorReq)
                     i = self.__increment(i, information)
                     continue
             i = self.__increment(i, information)

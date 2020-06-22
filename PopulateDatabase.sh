@@ -56,9 +56,11 @@ fi
 
 if $degree ;
 then
+  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/ProgramParsing
+  export PYTHONWARNINGS="ignore:Unverified HTTPS request"
+
   echo "===================================================="
   echo "Parsing MATH degree requirements..."
-  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/ProgramParsing
   eval "${py} ProgramParsing/Math/UpdateDegreeRequirement.py > logs/UpdateDegreeRequirementMATH.log"
   echo "DONE"
 

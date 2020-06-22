@@ -1,14 +1,9 @@
 from Database.DatabaseSender import DatabaseSender
-import logging
 
-logging.disable(logging.DEBUG)
-
-DropTable = False
-
-def main(majorParser, files, faculty="Math"):
+def main(majorParser, files, faculty="Math", DropTable=False):
     dbc = DatabaseSender()
     if DropTable:
-        dbc.execute("DROP TABLE" + " IF EXISTS " + dbc.requirements_table + " ;")
+        dbc.execute("DROP TABLE IF EXISTS " + dbc.requirements_table + ";")
         dbc.create_requirements()
 
     for file in files:

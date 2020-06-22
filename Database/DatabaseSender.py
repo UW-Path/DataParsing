@@ -17,11 +17,11 @@ class DatabaseSender(DatabaseConnection):
         """
         create requirements table for each major
         """
-        command = "CREATE TABLE IF NOT EXISTS "  + self.requirements_table + """ (
+        command = "CREATE TABLE " + self.requirements_table + """ (
             id SERIAL PRIMARY KEY,
             program_name VARCHAR(255),
             plan_type VARCHAR(255),
-            course_codes VARCHAR(510),
+            course_codes VARCHAR(5000),
             number_of_courses int,
             credits_required DECIMAL(4,2),
             additional_requirements VARCHAR(255), 
