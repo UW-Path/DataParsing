@@ -82,7 +82,7 @@ class MathMajorParser(MajorParser):
                 break
 
             if courses:
-                if oneOf:
+                if oneOf and " or " not in line:
                     for c in courses:
                         list.append(c)
                 else: list.append(" or ".join(courses))
