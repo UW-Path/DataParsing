@@ -1,4 +1,5 @@
-# Data Parsing is a repository build to parse data found online and transfer that to UWPath's databases.
+# Data Parsing
+## This repository parse course data found on the University of Waterloo website and transfer that to UWPath's databases.
 
 ## Setup 
 ### Python 3 and PostgreSQL
