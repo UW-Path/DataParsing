@@ -11,4 +11,4 @@ Make sure Postgres is setup: - Currently, only local server is available - Defau
 ## Set up Python
 Go to the top level of the repo and run "pip install -r requirements.txt" on terminal. To populate database run "./PopulateDatabase.sh".
 
-###### Refer to Wiki page for Docker setup
+###### Refer to [wiki page](https://github.com/UW-Path/DataParsing/wiki/Developer:-Set-Up) for Docker setup
