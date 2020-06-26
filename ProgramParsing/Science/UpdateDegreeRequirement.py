@@ -38,8 +38,16 @@ def fetch_degree_req(path):
         major_table = major_data.find_all("a", class_="Level3Group")
         print("Looking for minors in {}...".format(str(major['href'])))
         for l in major_table:
+            #exceptions to programs that only offer coop programs
+            exception = ["Biotechnology/Economics", "Medicinal Chemistry", "Biotechnology/Chartered Professional Accountancy", "Science and Business"]
             if "co-operative" in str(l.text).lower() or "overview" in str(l.text).lower():
-                continue
+                isExcep = False
+                for e in exception:
+                    if e.lower() in str(l.text).lower():
+                        isExcep = True
+                        break
+                if not isExcep:
+                    continue
 
             print("Fetching {}...".format(str(l.text)))
             href = root + l['href']

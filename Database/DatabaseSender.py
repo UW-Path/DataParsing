@@ -223,7 +223,8 @@ class DatabaseSender(DatabaseConnection):
         :return: None
         """
         not_exist = "SELECT 1 FROM " + self.requirements_table + "\n"
-        not_exist += "WHERE course_codes = '" + requirement.courseCodes + "' AND program_name = '" + requirement.programName + "' AND major_name = '" + requirement.majorName + "'"
+        not_exist += "WHERE course_codes = '" + requirement.courseCodes + "' AND program_name = '" + requirement.programName + "' AND major_name = '" + requirement.majorName + \
+        "' and credits_required= " + str(requirement.credits)
 
         command = "INSERT INTO " + self.requirements_table + " (program_name, plan_type, course_codes, number_of_courses, credits_required, additional_requirements, major_name, faculty) "
         command += "SELECT '" + requirement.programName + "', '" + requirement.planType + "', '" + requirement.courseCodes + "', " + str(requirement.numberOfCourses) + ", " + str(requirement.credits)

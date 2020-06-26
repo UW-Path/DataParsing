@@ -92,14 +92,42 @@ class ScienceMajorParser(MajorParser):
             if "program elective" in line:
                 maj = "Program Elective" #extra case for material nanosci
             else:
+                majors = []
                 for word in line.split(' '):
-                    if word.isupper() or "Science" == word or "Mathematics" == word:
+                    if "Science" == word or "Mathematics" == word:
                         maj = word.strip("\n").strip("\r\n").upper()
                         maj = maj.replace(",", "")
                         break
+                    elif word.isupper():
+                        majors.append(word.replace(",", ""))
+                if maj == "":
+                    maj = ", ".join(majors)
             if r and maj:
-                list.append(maj + " " + r[0])
-            elif maj:
+                majors = maj.split(", ")
+                if len(majors) == 1 and "lab" in line:
+                    #PHYSC lab: Special case
+                    majors[0] += " LAB"
+                if "or higher" in line:
+                    for m in majors:
+                        if r[0] == "100-":
+                            list.append(m + " " + r[0])
+                            list.append(m + " 200-")
+                            list.append(m + " 300-")
+                            list.append(m + " 400-")
+                        elif r[0] == "200-":
+                            list.append(m + " " + r[0])
+                            list.append(m + " 300-")
+                            list.append(m + " 400-")
+                        elif r[0] == "300-":
+                            list.append(m + " " + r[0])
+                            list.append(m + " 400-")
+                        elif r[0] == "400-":
+                            list.append(m + " " + r[0]) #don't assume grad courses for now
+                else:
+                    for m in majors:
+                        list.append(m + " " + r[0])
+            elif maj and ":" not in line or len(maj.split(", ")) > 1: #prevent case "with the following conditions:"
+                # allow case chosen from BIOL, CHEM, EARTH, MNS, PHYS, or SCI:
                 if maj == "MATHEMATICS": maj = "MATH"
                 #SCIENCE - any level /Math
                 list.append(maj)
@@ -170,8 +198,10 @@ class ScienceMajorParser(MajorParser):
         while i < len(information):
             line = information[i]
             line = line.strip()
-            if "must" in line:
+            if "must" in line and ":" not in line:
                 #Condition for must complete... additional conditions
+                #Example: '0.5 unit must be 200-level or higher'
+                #However '4.0 units must be chosen from List A: ..."
                 i += 1
                 continue
             credits = line.split(' ')[0]
@@ -190,9 +220,11 @@ class ScienceMajorParser(MajorParser):
                         self._require_all(list, program, relatedMajor, self.additionalRequirement)
                     else:
                         self.requirement.append(ScienceMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
-                elif "elective" in line.split(' ')[1] and ":" not in line:
+                elif "elective" in line.split(' ')[1] and ":" not in line or "chosen from any subject" in line or "chosen from any 0.5 unit courses" in line \
+                        and "from any 0.25 or 0.5 unit courses" in line:
                     list.append("Elective")
                     self.requirement.append(ScienceMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
+
 
             except (RuntimeError):
                 print(RuntimeError)
