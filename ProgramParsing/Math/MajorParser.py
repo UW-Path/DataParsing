@@ -47,7 +47,7 @@ class MathMajorParser(MajorParser):
         for l in list:
             self.requirement.append(MathMajorReq([l], "All of", major, relatedMajor, self.additionalRequirement, 0))
 
-    def _course_list(self, info, i, oneOf = False):
+    def _course_list(self, info, i, oneOf = False, allOf = False):
         list = []
         while i < len(info):
 
@@ -70,7 +70,9 @@ class MathMajorParser(MajorParser):
 
             if rangeCourse:
                 #TODO: Account for range CS 123-CS 345, excluding CS XXX
-                if oneOf:
+                if oneOf or allOf:
+                    if allOf:
+                        print("allof")
                     for c in rangeCourse:
                         list.append(c)
                 else: list.append(" or ".join(rangeCourse))
@@ -279,7 +281,7 @@ class MathMajorParser(MajorParser):
                 i, list = self._course_list(information, i)
                 self.requirement.append(MathMajorReq(list, "Nine of", program, relatedMajor, self.additionalRequirement))
             elif information[i].strip().lower().startswith("all of"):
-                i, list = self._course_list(information, i, True)
+                i, list = self._course_list(information, i, allOf=True)
                 self._require_all(list, program, relatedMajor)
             elif (self.is_additional(information[i]) or self._stringIsNumber(information[i])) \
                     and "excluding the following" not in information[i]: #Three 400- Level courses

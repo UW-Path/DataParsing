@@ -99,7 +99,9 @@ class ScienceMajorParser(MajorParser):
                         maj = maj.replace(",", "")
                         break
                     elif word.isupper():
-                        majors.append(word.replace(",", ""))
+                        temp = word.replace(",", "")
+                        if temp not in majors:
+                            majors.append(temp)
                 if maj == "":
                     maj = ", ".join(majors)
             if r and maj:
