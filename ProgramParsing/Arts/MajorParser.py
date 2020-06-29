@@ -13,6 +13,7 @@ import re
 import pkg_resources
 from math import ceil
 from Database.DatabaseReceiver import DatabaseReceiver
+from StringToNumber import StringToNumber
 
 
 class ArtsMajorParser(MajorParser):
@@ -47,7 +48,7 @@ class ArtsMajorParser(MajorParser):
         else:
             return relatedMajor
 
-    def _course_list(self, line, credit, oneOf = False):
+    def _course_list(self, line, oneOf, additional):
         list = []
         line = line.strip().replace(" to ", "-")
 
@@ -127,45 +128,25 @@ class ArtsMajorParser(MajorParser):
                         list.append(m + " " + r[0])
             elif maj and ":" not in line or len(maj.split(", ")) > 1: #prevent case "with the following conditions:"
                 # allow case chosen from BIOL, CHEM, EARTH, MNS, PHYS, or SCI:
-                if maj == "MATHEMATICS": maj = "MATH"
-                #SCIENCE - any level /Math
                 list.append(maj)
             if len(r) > 1:
                 print("ERROR more than one match 200- found")
 
-        if list:
-            for course in list:
-                if "-" in course:
-                    return list, False
-            c = self._count_credits(list)
-            # if 0 is returned the list has general courses: SCIENCE,MATH
-            if (credit == c or len(list) == 1) and c != 0:
-                #Note: 1 is coded as a special case. Not perfect accuracy in terms of credit count
-                return list, True
-
-        return list, False
-
-    def _count_credits(self,list):
-        dbc = DatabaseReceiver()
-        count = 0
-        for course in list:
-            courseNum = ""
-            if len(course.split(" ")) > 1:
-                # Exception for SCIENCE -any level
-                courseNum = course.split(" ")[1]
-            else:
-                #This means that it is a general course, should never be in All of option
-                return 0
-            if "L" in courseNum:
+        if additional:
+            line = line.split(" ")
+            for word in line:
                 try:
-                    count += float(dbc.select_course_credit(course))
+                    # find first float
+                    credits = float(word)
                 except:
-                    print(course)
-                    count += 0.25
-            else:
-                count += 0.5
-        dbc.close()
-        return float(count)
+                    print("exception")
+        elif oneOf:
+            credits = 0.5
+        else:
+            credits = len(list) * 0.5
+
+        return list, oneOf,credits
+
 
     def _require_all(self, list, major, relatedMajor, additionalRequirement):
         #TODO: Match with database credits
@@ -187,6 +168,8 @@ class ArtsMajorParser(MajorParser):
 
         # find the major related to specializations and options
         relatedMajor = self._get_relatedMajor(program)
+        if program == "Degree Requirements":
+            program = relatedMajor
 
         # Find all additional requirement
         self.additionalRequirement = self.getAdditionalRequirement()
@@ -195,6 +178,11 @@ class ArtsMajorParser(MajorParser):
         #check if arts breadth req
         if program == "Bachelor of Arts":
             rows  = information.find("table").find("tbody").find_all("tr")
+            self.additionalRequirement = "Arts Plan"
+            # Undergrad Comm req, special case
+            self.requirement.append(ArtsMajorReq(["ARTS 130"], 1, program, relatedMajor, self.additionalRequirement, 0.5))
+            self.requirement.append(ArtsMajorReq(["ARTS 140"], 1, program, relatedMajor, self.additionalRequirement, 0.5))
+
             for row in rows:
                 credits = 0
                 numCourse = 0 #initializing ariable
@@ -205,7 +193,7 @@ class ArtsMajorParser(MajorParser):
                     numCourse = credits/0.5
                     courseMajorLink = cells[2].find_all("a")  # condition for breadth
                     list = [c.text for c in courseMajorLink]
-                    self.additionalRequirement = "Arts Plan"
+
                     self.requirement.append(
                         ArtsMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
                 except:
@@ -222,32 +210,43 @@ class ArtsMajorParser(MajorParser):
             while i < len(information):
                 line = information[i]
                 line = line.strip()
-                if "must" in line and ":" not in line:
-                    #Condition for must complete... additional conditions
-                    #Example: '0.5 unit must be 200-level or higher'
-                    #However '4.0 units must be chosen from List A: ..."
-                    i += 1
-                    continue
-                credits = line.split(' ')[0]
-                try:
-                    credits = float(credits)
-                    numCourse = ceil(credits / 0.5)
+                if "Notes" in line:
+                    break
 
-                except:
-                    i+=1
+                if "Successful completion" in line:
+                    i += 1 # special case
                     continue
 
+                elif line.lower() == "undergraduate communication requirement":
+                    # Undergrad Comm req, special case
+                    self.requirement.append(ArtsMajorReq(["ARTS 130"], 1, program, relatedMajor, self.additionalRequirement, 0.5))
+                    self.requirement.append(ArtsMajorReq(["ARTS 140"], 1, program, relatedMajor, self.additionalRequirement, 0.5))
+                    i+= 1
+                    continue
+                elif "language courses" in line and self._stringIsNumber(line):
+                    number_additional_string = line.split(' ')[0].lower()
+                    number_additional = StringToNumber[number_additional_string].value
+                    if not isinstance(number_additional, int):
+                        number_additional = number_additional[0]
+                    credits = number_additional * 0.5
+                    self.requirement.append(
+                        ArtsMajorReq(["LANGUAGE"], number_additional, program, relatedMajor, self.additionalRequirement, credits))
+
+
                 try:
-                    list, insertAll = self._course_list(line, credits)
+                    oneOf = "one of" in line
+                    additional = False
+                    if "additional" in line:
+                        additional = True
+
+                    list, oneOf, credits = self._course_list(line,oneOf, additional)
+                    numCourse = credits/0.5
                     if list:
-                        if insertAll:
-                            self._require_all(list, program, relatedMajor, self.additionalRequirement)
-                        else:
+                        if oneOf:
                             self.requirement.append(ArtsMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
-                    elif "elective" in line.split(' ')[1] and ":" not in line or "chosen from any subject" in line or "chosen from any 0.5 unit courses" in line \
-                            and "from any 0.25 or 0.5 unit courses" in line:
-                        list.append("Elective")
-                        self.requirement.append(ArtsMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
+
+                        else:
+                            self._require_all(list, program, relatedMajor, self.additionalRequirement)
 
 
                 except (RuntimeError):

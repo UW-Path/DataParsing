@@ -11,6 +11,6 @@ if __name__ == "__main__":
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
     files = files - filesToIgnore
 
-    files =["Specs/ARTS-BA-Breadth-Requirements.html"]
+    # files =["Specs/ARTS-BAFM-Degree-Requirements.html"]
 
-    main(ArtsMajorParser, files, "Arts")
+    main(ArtsMajorParser, files, "Arts",1)
