@@ -109,7 +109,7 @@ class ScienceMajorParser(MajorParser):
                 if len(majors) == 1 and "lab" in line:
                     #PHYSC lab: Special case
                     majors[0] += " LAB"
-                if "or higher" in line:
+                if "or higher" or "or above" in line:
                     for m in majors:
                         if r[0] == "100-":
                             list.append(m + " " + r[0])

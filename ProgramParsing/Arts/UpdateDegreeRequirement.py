@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from requests import get
 
 
-url_plans = ""
+url_plans = "https://ugradcalendar.uwaterloo.ca/group/ARTS-Degree-Requirements"
 root = "http://ugradcalendar.uwaterloo.ca/"
 
 url_minor = ""
@@ -20,7 +20,31 @@ def fetch_degree_req(path):
          return:
     """
 
-    pass
+    # fetch programs
+    http = urllib3.PoolManager()
+    response = http.request('GET', url_plans)
+    data = BeautifulSoup(response.data, 'html.parser')
+
+    majors_links = data.find_all("a", class_="Level2Group")
+    for major in majors_links:
+        link = root + major["href"]
+        if "bachelor" not in major.text.lower() or "bachelor of computing and financial management" in major.text.lower():
+            #cfm parsed in math
+            continue
+        major_reponse = http.request('GET', link)
+        major_data = BeautifulSoup(major_reponse.data, 'html.parser')
+        major_table = major_data.find_all("a", class_="Level3Group")
+        print("Looking for majors/minors in {}...".format(str(major['href'])))
+        for l in major_table:
+            if "requirements" in str(l.text).lower() and "co-op" not in str(l.text).lower():
+                print("Fetching {}...".format(str(l.text)))
+                href = root + l['href']
+                fileName = href.split("/")[-1]
+                fileName = "/" + fileName + ".html"
+                resp = get(href)
+                with open(path + fileName, 'wb') as fOut:
+                    fOut.write(resp.content)
+
 
 def fetch_faculty_minor(path):
     """

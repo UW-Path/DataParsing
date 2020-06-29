@@ -7,8 +7,10 @@ if __name__ == "__main__":
     path = os.path.join(dir, 'Specs')
     files = set(["/Specs/" + f for f in os.listdir(path) if f.endswith(".html")])
 
-    filesToIgnore = []
+    filesToIgnore = ["ARTS-BA-Degree-Requirements.html"]
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
     files = files - filesToIgnore
+
+    files =["Specs/ARTS-BA-Breadth-Requirements.html"]
 
     main(ArtsMajorParser, files, "Arts")
