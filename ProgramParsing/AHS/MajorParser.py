@@ -67,7 +67,7 @@ class AHSMajorParser(MajorParser):
                                                     line, 0.5))
 
 
-    def load_file(self, file, ):
+    def load_file(self, file):
         """
                 Parse html file to gather a list of required courses for the major
 

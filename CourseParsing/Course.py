@@ -31,6 +31,7 @@ class Course:
         self.credit = self.__credit()
         self.online = self.__online()
         self.offering = self.__offering()
+        self.info = re.sub(r"\[.*([FWS],)*[FWS]\]", "", self.info)
 
     def __code(self):
         """
@@ -135,27 +136,35 @@ class Course:
         :return: string
         """
         # First occurrence always has course code
-        filtered = re.search("(?<=Offered: )[A-Za-z,]*", self.info)
+        filtered = re.search(r"\[.*([FWS],)*[FWS]\]", self.info)
 
         if filtered:
             # Should parse in F, W, S] string, ending in ]
             filtered = filtered.group()
-            return filtered[:-1].split(",")
+            filtered = re.search(r"([FWS],)*[FWS]\]", filtered)
+            if filtered:
+                # Should parse in F, W, S] string, ending in ]
+                filtered = filtered.group()[:-1]
+                return filtered.split(",")
+            return []
         else:
             # sometime it is in another line
             all_i = self.html.find_all("i")
 
             for i in all_i:
-                if i and i.string and i.string.strip().startswith("[Note:"):
+                if i and i.string and i.string.strip().startswith("["):
                     note = i.string.strip().replace("\n", " ")
-                    filtered = re.search("(?<=Offered: )[A-Za-z,]*", note)
-
+                    filtered = re.search(r"\[.*([FWS],)*[FWS]\]", note)
                     if filtered:
-                        # Should parse in F, W, S] string, ending in ]
                         filtered = filtered.group()
-                        return filtered[:-1].split(",")
-                    else:
+                        filtered = re.search(r"([FWS],)*[FWS]\]", filtered)
+
+                        if filtered:
+                            # Should parse in F, W, S] string, ending in ]
+                            filtered = filtered.group()[:-1]
+                            return filtered.split(",")
                         return []
+                    return []
         return []
 
     def __str__(self):

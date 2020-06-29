@@ -33,6 +33,12 @@ if __name__ == "__main__":
 
     dbc = DatabaseSender()
 
+    dbc.execute("DROP TABLE IF EXISTS " + dbc.antireqs_table + ";")
+    dbc.execute("DROP TABLE IF EXISTS " + dbc.prereqs_table + ";")
+    dbc.execute("DROP TABLE IF EXISTS " + dbc.communications_table + ";")
+    dbc.execute("DROP TABLE IF EXISTS " + dbc.breadth_table + ";")
+    dbc.execute("DROP TABLE IF EXISTS " + dbc.course_table + ";")
+
     dbc.create_courses()
     dbc.create_prereqs()
     dbc.create_antireqs()
