@@ -183,7 +183,7 @@ class MathMajorParser(MajorParser):
                 match = self._getLevelCourses(str(line))
 
                 for word in line.split(' '):
-                    if word.isupper() or "math" in word:  # special case for "One additional 300- or 400-level math course.
+                    if word.isupper() or "math" in word or "non-math" in word:  # special case for "One additional 300- or 400-level math course.
                         maj = word.strip("\n").strip("\r\n").upper()
                         break
 
@@ -256,34 +256,44 @@ class MathMajorParser(MajorParser):
             l = information[i].strip().lower().replace("at least ", "")
             if l.startswith("one of"):
                 i, list = self._course_list(information, i, True)
-                self.requirement.append(MathMajorReq(list, "One of", program, relatedMajor, self.additionalRequirement))
+                if list:
+                    self.requirement.append(MathMajorReq(list, "One of", program, relatedMajor, self.additionalRequirement))
             elif l.startswith("two of"):
                 i, list = self._course_list(information, i)
-                self.requirement.append(MathMajorReq(list, "Two of", program, relatedMajor, self.additionalRequirement))
+                if list:
+                    self.requirement.append(MathMajorReq(list, "Two of", program, relatedMajor, self.additionalRequirement))
             elif l.startswith("three of"):
                 i, list = self._course_list(information, i)
-                self.requirement.append(MathMajorReq(list, "Three of", program, relatedMajor, self.additionalRequirement))
+                if list:
+                    self.requirement.append(MathMajorReq(list, "Three of", program, relatedMajor, self.additionalRequirement))
             elif l.startswith("four of"):
                 i, list = self._course_list(information, i)
-                self.requirement.append(MathMajorReq(list, "Four of", program, relatedMajor, self.additionalRequirement))
+                if list:
+                    self.requirement.append(MathMajorReq(list, "Four of", program, relatedMajor, self.additionalRequirement))
             elif l.startswith("five of"):
                 i, list = self._course_list(information, i)
-                self.requirement.append(MathMajorReq(list, "Five of", program, relatedMajor, self.additionalRequirement))
+                if list:
+                    self.requirement.append(MathMajorReq(list, "Five of", program, relatedMajor, self.additionalRequirement))
             elif l.startswith("six of"):
                 i, list = self._course_list(information, i)
-                self.requirement.append(MathMajorReq(list, "Six of", program, relatedMajor, self.additionalRequirement))
+                if list:
+                    self.requirement.append(MathMajorReq(list, "Six of", program, relatedMajor, self.additionalRequirement))
             elif l.startswith("seven of"):
                 i, list = self._course_list(information, i)
-                self.requirement.append(MathMajorReq(list, "Seven of", program, relatedMajor, self.additionalRequirement))
+                if list:
+                    self.requirement.append(MathMajorReq(list, "Seven of", program, relatedMajor, self.additionalRequirement))
             elif l.startswith("eight of"):
                 i, list = self._course_list(information, i)
-                self.requirement.append(MathMajorReq(list, "Eight of", program, relatedMajor, self.additionalRequirement))
+                if list:
+                    self.requirement.append(MathMajorReq(list, "Eight of", program, relatedMajor, self.additionalRequirement))
             elif l.startswith("nine of"):
                 i, list = self._course_list(information, i)
-                self.requirement.append(MathMajorReq(list, "Nine of", program, relatedMajor, self.additionalRequirement))
+                if list:
+                    self.requirement.append(MathMajorReq(list, "Nine of", program, relatedMajor, self.additionalRequirement))
             elif l.startswith("all of"):
                 i, list = self._course_list(information, i, allOf=True)
-                self._require_all(list, program, relatedMajor)
+                if list:
+                    self._require_all(list, program, relatedMajor)
             elif (self.is_additional(l) or self._stringIsNumber(l)) \
                     and "excluding the following" not in l: #Three 400- Level courses
                 number_additional_string = l.split(' ')[0]
@@ -296,6 +306,25 @@ class MathMajorParser(MajorParser):
                 else:
                     i, list = self._additional_list(information, i, True)
                 # need to check if number_additional is an INT
-                self.requirement.append(MathMajorReq(list, "Additional", program, relatedMajor, self.additionalRequirement, number_additional))
+                if list:
+                    self.requirement.append(MathMajorReq(list, "Additional", program, relatedMajor, self.additionalRequirement, number_additional))
+            elif "non-math" in l:
+                # try to see if the second word is a number, if first is a number then the case before would capture
+                number_additional = 0
+                l = l.split(" ")
+                try:
+                    if "non-math units" in l:
+                        number_additional = float(l[1]) * 2
+                    else:
+                        #assume its courses
+                        number_additional = float(l[1])
+                except:
+                    print("Skip, this does not satisfy non math credits")
+                self.requirement.append(
+                    MathMajorReq(["NON-MATH"], "Additional", program, relatedMajor, self.additionalRequirement,
+                                 number_additional))
+                i+=1
+
+
             else:
                 i += 1
