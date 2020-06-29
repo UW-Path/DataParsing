@@ -13,4 +13,4 @@ if __name__ == "__main__":
 
     # files =["Specs/ARTS-BAFM-Degree-Requirements.html"]
 
-    main(ArtsMajorParser, files, "Arts",1)
+    main(ArtsMajorParser, files, "Arts")

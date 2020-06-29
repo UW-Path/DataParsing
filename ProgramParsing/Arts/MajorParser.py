@@ -58,26 +58,8 @@ class ArtsMajorParser(MajorParser):
             return []
 
 
-        rangeCourse = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
-                             line)
         courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
 
-        orCourse = re.findall(r"\b(?<!\/)[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b or \b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
-
-        if orCourse:
-            # CS 135 or CS XXX
-            for oC in orCourse:
-                c = oC.split(" or ")
-                d[c[0]] = True
-                d[c[1]] = True
-                list.append(oC)
-
-        if rangeCourse:
-            #TODO: Account for range CS 123-CS 345, excluding CS XXX
-            if oneOf:
-                for c in rangeCourse:
-                    list.append(c)
-            else: list.append(" or ".join(rangeCourse))
 
         if courses:
             for c in courses:
@@ -247,7 +229,6 @@ class ArtsMajorParser(MajorParser):
 
                         else:
                             self._require_all(list, program, relatedMajor, self.additionalRequirement)
-
 
                 except (RuntimeError):
                     print(RuntimeError)
