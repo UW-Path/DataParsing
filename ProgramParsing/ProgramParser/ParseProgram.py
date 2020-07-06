@@ -11,8 +11,10 @@ def main(majorParser, files, faculty="Math", DropTable=False):
         parser = majorParser()
         parser.load_file(file)
 
+        file = file.replace("/Specs/", "").replace(".html", "")
+        link = "https://ugradcalendar.uwaterloo.ca/page/" + file
         # Parser requirement is a list of MajorReq Object
-        dbc.insert_requirements(parser.requirement, faculty)
+        dbc.insert_requirements(parser.requirement, faculty, link)
         dbc.commit()
 
     dbc.close()
