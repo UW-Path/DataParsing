@@ -70,12 +70,12 @@ class MathMajorParser(MajorParser):
 
             if rangeCourse:
                 #TODO: Account for range CS 123-CS 345, excluding CS XXX
-                if oneOf or allOf:
-                    if allOf:
-                        print("allof")
-                    for c in rangeCourse:
-                        list.append(c)
-                else: list.append(" or ".join(rangeCourse))
+                # if oneOf or allOf:
+                if allOf:
+                    print("allof")
+                for c in rangeCourse:
+                    list.append(c)
+                # else: list.append(" or ".join(rangeCourse))
                 i += 1
                 continue
 
@@ -84,10 +84,10 @@ class MathMajorParser(MajorParser):
                 break
 
             if courses:
-                if oneOf and " or " not in line:
-                    for c in courses:
-                        list.append(c)
-                else: list.append(" or ".join(courses))
+                # if oneOf and " or " not in line:
+                for c in courses:
+                    list.append(c)
+                # else: list.append(" or ".join(courses))
             i += 1
         return i, list
 

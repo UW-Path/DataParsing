@@ -76,10 +76,10 @@ class ScienceMajorParser(MajorParser):
 
         if rangeCourse:
             #TODO: Account for range CS 123-CS 345, excluding CS XXX
-            if oneOf:
-                for c in rangeCourse:
-                    list.append(c)
-            else: list.append(" or ".join(rangeCourse))
+            # if oneOf:
+            for c in rangeCourse:
+                list.append(c)
+            # else: list.append(" or ".join(rangeCourse))
 
         if courses:
             for c in courses:
