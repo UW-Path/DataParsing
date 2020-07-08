@@ -84,10 +84,11 @@ class MathMajorParser(MajorParser):
                 break
 
             if courses:
-                # if oneOf and " or " not in line:
-                for c in courses:
-                    list.append(c)
-                # else: list.append(" or ".join(courses))
+                if oneOf and " or " not in line:
+                    for c in courses:
+                        list.append(c)
+                else:
+                    list.append(", ".join(courses))
             i += 1
         return i, list
 
@@ -311,15 +312,22 @@ class MathMajorParser(MajorParser):
             elif "non-math" in l:
                 # try to see if the second word is a number, if first is a number then the case before would capture
                 number_additional = 0
+                if "non-math units" in l:
+                    units = True
+                else:
+                    units = False
+
                 l = l.split(" ")
                 try:
-                    if "non-math units" in l:
+                    if units:
                         number_additional = float(l[1]) * 2
                     else:
                         #assume its courses
                         number_additional = float(l[1])
                 except:
                     print("Skip, this does not satisfy non math credits")
+                    i += 1
+                    continue
                 self.requirement.append(
                     MathMajorReq(["NON-MATH"], "Additional", program, relatedMajor, self.additionalRequirement,
                                  number_additional))

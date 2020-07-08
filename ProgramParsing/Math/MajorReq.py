@@ -16,8 +16,7 @@ class MathMajorReq(MajorReq):
                 :return: int
         """
         if self.req == "All of":
-            length = len(self.courseCodes.split(","))
-            return length
+            return 1
         elif self.req == "Additional":
             return self.additional
         else:
