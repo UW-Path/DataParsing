@@ -58,13 +58,13 @@ class AHSMajorParser(MajorParser):
 
         if len(codes) == 1 and majorReq.credits > 0.5:
             self.requirement.append(AHSMajorReq(codes[0].split(" or "), majorReq.programName, majorReq.majorName,
-                                                line, majorReq.credits))
+                                                self.additionalRequirement, majorReq.credits))
             self.requirement[-1].numberOfCourses = int(majorReq.credits * 2)
 
         else:
             for code in codes:
                 self.requirement.append(AHSMajorReq(code.split(" or "), majorReq.programName, majorReq.majorName,
-                                                    line, 0.5))
+                                                    self.additionalRequirement, 0.5))
 
 
     def load_file(self, file):
