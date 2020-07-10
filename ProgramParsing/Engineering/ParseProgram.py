@@ -10,5 +10,10 @@ if __name__ == "__main__":
     filesToIgnore = []
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
     files = files - filesToIgnore
-    files = set(["/Specs/ENG-Electrical-Engineering.html"])
+    # need to fix spicial case
+    #files = set(["/Specs/ENG-Mechanical-Engineering.html"])
+
+    #Multople TE does not display
+    # files = set(["/Specs/ENG-Mechatronics-Engineering.html"])
+
     main(EngineeringMajorParser, files, "Engineering")

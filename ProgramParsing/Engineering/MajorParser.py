@@ -30,7 +30,10 @@ class EngineeringMajorParser(MajorParser):
 
     def _course_list(self, line, oneOf = False):
         list = []
-        line = line.strip().replace(" to ", "-")
+        if "Communication Elective" in line:
+            return ["Communication Elective"]
+        line = line.strip().replace(" to ", "-").replace("Technical Electives", "TE").replace("Technical Elective", "TE")
+        line = line.replace("Complementary Studies Elective", "CSE").replace("Complementary Studies Electives", "CSE")
 
         d = dict() #dictionary to keep track of courses
 
@@ -71,6 +74,12 @@ class EngineeringMajorParser(MajorParser):
             for word in line.split(' '):
                 if word.isupper():
                     temp = word.replace(",", "")
+                    #Avoid weird symbol like ‡
+                    if "CSE" in temp:
+                        temp = "CSE"
+                    elif "TE" in temp:
+                        temp = "TE"
+
                     if temp not in majors:
                         majors.append(temp)
 
@@ -79,6 +88,8 @@ class EngineeringMajorParser(MajorParser):
                 list.append(maj)
 
         if not list:
+            if "Elective" in line:
+                return ["Elective"]
             return []
 
         return list
@@ -113,6 +124,16 @@ class EngineeringMajorParser(MajorParser):
                 return table
         return None
 
+    def get_text(self, td):
+        #filter out subscript
+        INVALID_TAGS = ['sup']
+
+        for tag in td.findAll(True):
+            if tag.name in INVALID_TAGS:
+                tag.replaceWith("")
+        return td.text
+
+
     def load_file(self, file):
         """
                 Parse html file to gather a list of required courses for the major
@@ -144,11 +165,23 @@ class EngineeringMajorParser(MajorParser):
             while i < len(trs):
                 tr = trs[i]
                 tds = tr.find_all("td")
-                t = str(tds[0].text)
+                #special case for management eng
+                th = tr.find("th")
+                if th:
+                    t = th.text
+                else:
+                    t = self.get_text(tds[0])
+
+
                 isTerm = re.findall(r"\b(?:1A|1B|2A|2B|3A|3B|4A|4B)\b", t)
                 if isTerm and isTerm[0] in terms:
                     term = isTerm[0]
-                    list = self._course_list(tds[1].text)
+                    if th:
+                        #special case for management eng
+                        list = self._course_list(self.get_text(tds[0]))
+                    else:
+                        list = self._course_list(self.get_text(tds[1]))
+
                     credits = self._count_credits(list)
                     self.requirement.append(
                         EngineeringMajorReq(list, 1, program, relatedMajor, term, credits))
@@ -180,13 +213,15 @@ class EngineeringMajorParser(MajorParser):
                                 credits = self._count_credits(list)/len(list)*number_additional
                                 self.requirement.append(
                                     EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
+                            i += 1
+                            continue
                         else:
                             line = ""
                             i+=1
                             while i < len(trs):
                                 tr = trs[i]
                                 tds = tr.find_all("td")
-                                t = tds[0].text
+                                t = self.get_text(tds[0])
                                 isTerm = re.findall(r"\b(?:1A|1B|2A|2B|3A|3B|4A|4B)\b", t)
                                 if "Work Term" in t or isTerm:
                                     break
@@ -205,8 +240,6 @@ class EngineeringMajorParser(MajorParser):
                                 self.requirement.append(
                                     EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
                             continue
-
-                        i+=1
                     else:
                         noOfCourse = 1
                         if l.startswith("two"):
@@ -220,8 +253,34 @@ class EngineeringMajorParser(MajorParser):
                         elif l.startswith("six"):
                             noOfCourse = 6
 
+                        #special for nano eng
+                        if "laboratory" in l and "from:" in l:
+                            line = ""
+                            i += 1
+                            while i < len(trs):
+                                tr = trs[i]
+                                tds = tr.find_all("td")
+                                t = self.get_text(tds[0])
+                                isTerm = re.findall(r"\b(?:1A|1B|2A|2B|3A|3B|4A|4B)\b", t)
+                                if "Work Term" in t or isTerm:
+                                    break
+                                elif "Laboratory" not in t:
+                                    # should just be a course code
+                                    break
+                                else:
+                                    line += t + ", "
+                                i += 1
+
+                            list = self._course_list(line)
+                            if list:
+                                credits = self._count_credits(list) / len(list) * noOfCourse
+                                self.requirement.append(
+                                    EngineeringMajorReq(list, noOfCourse, program, relatedMajor, term, credits))
+                            continue
+
+
                         #parse course
-                        list = self._course_list(tds[0].text)
+                        list = self._course_list(self.get_text(tds[0]))
                         if list:
                             credits = self._count_credits(list) / len(list) * noOfCourse
                             self.requirement.append(
