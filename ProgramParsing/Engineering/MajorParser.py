@@ -133,6 +133,21 @@ class EngineeringMajorParser(MajorParser):
                 tag.replaceWith("")
         return td.text
 
+    def insert_mech_eng(self, line, program, relatedMajor, term):
+        line = line.split(",")
+        for req in line:
+            number_additional = 1
+            req = req.lstrip()
+            if str(req.split(" ")[0]).isdigit():
+                number_additional = int(req.split(" ")[0])
+            list = self._course_list(req)
+            if list:
+                credits = self._count_credits(list) / len(list) * number_additional
+                self.requirement.append(
+                    EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
+
+        print(line)
+
 
     def load_file(self, file):
         """
@@ -176,6 +191,12 @@ class EngineeringMajorParser(MajorParser):
                 isTerm = re.findall(r"\b(?:1A|1B|2A|2B|3A|3B|4A|4B)\b", t)
                 if isTerm and isTerm[0] in terms:
                     term = isTerm[0]
+                    #special case mech eng
+                    if program == "Mechanical Engineering":
+                        self.insert_mech_eng(self.get_text(tds[1]), program, relatedMajor, term)
+                        i+=1
+                        continue
+
                     if th:
                         #special case for management eng
                         list = self._course_list(self.get_text(tds[0]))
