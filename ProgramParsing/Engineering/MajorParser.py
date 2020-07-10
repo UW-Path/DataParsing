@@ -146,9 +146,6 @@ class EngineeringMajorParser(MajorParser):
                 self.requirement.append(
                     EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
 
-        print(line)
-
-
     def load_file(self, file):
         """
                 Parse html file to gather a list of required courses for the major
@@ -172,7 +169,7 @@ class EngineeringMajorParser(MajorParser):
 
         if table:
             #search for courses here
-            terms = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
+            # terms = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
             term = ""
             tbody = table.find("tbody")
             trs = tbody.find_all("tr")
@@ -189,7 +186,7 @@ class EngineeringMajorParser(MajorParser):
 
 
                 isTerm = re.findall(r"\b(?:1A|1B|2A|2B|3A|3B|4A|4B)\b", t)
-                if isTerm and isTerm[0] in terms:
+                if isTerm: # and isTerm[0] in terms:
                     term = isTerm[0]
                     #special case mech eng
                     if program == "Mechanical Engineering":
@@ -316,40 +313,48 @@ class EngineeringMajorParser(MajorParser):
 
 
         else:
-            #not table format TODO
             i = 0
+            information = information.text.split("\n")
+            term = ""
+            #terminate after 4B is ran
+
             while i < len(information):
-                line = information[i]
-                line = line.strip()
-                if "must" in line and ":" not in line:
-                    #Condition for must complete... additional conditions
-                    #Example: '0.5 unit must be 200-level or higher'
-                    #However '4.0 units must be chosen from List A: ..."
-                    i += 1
-                    continue
-                credits = line.split(' ')[0]
-                try:
-                    credits = float(credits)
-                    numCourse = ceil(credits / 0.5)
+                line = str(information[i]).lstrip().rstrip()
+                #initialize term
 
-                except:
-                    i+=1
-                    continue
+                isTerm = re.findall(r"(1A|1B|2A|2B|3A|3B|4A|4B) (\((Spring|Winter|Fall)\))", line)
+                if "Technical Elective List" in line:
+                    #special case for geologt
+                    term = ""
+                elif isTerm:
+                    term = isTerm[0][0]
+                    if term == "4B" and  information[i+1].strip() == "":
+                        #if next is empty line we skip
+                        i += 1
 
-                try:
-                    list = self._course_list(line, credits)
+
+                elif term == "4B" and (line=="Electives" or line == ""):
+                    #10 is aprox, Electives case for arch eng
+                    break
+                elif term != "":
+                    number_additional = 1
+                    try:
+                        number_additional_string = line.split(' ')[0].lower()
+                        number_additional = StringToNumber[number_additional_string].value
+                        if not isinstance(number_additional, int):
+                            number_additional = number_additional[0]
+                    except:
+                        #not a number
+                        pass
+
+                    list = self._course_list(line)
                     if list:
-                        self.requirement.append(EngineeringMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
-                    elif "elective" in line.split(' ')[1] and ":" not in line or "chosen from any subject" in line or "chosen from any 0.5 unit courses" in line \
-                            and "from any 0.25 or 0.5 unit courses" in line:
-                        list.append("Elective")
-                        self.requirement.append(EngineeringMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
+                        credits = self._count_credits(list) / len(list) * number_additional
+                        self.requirement.append(
+                            EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
 
 
-                except (RuntimeError):
-                    print(RuntimeError)
-                    pass
-                    #not parsable
+
                 i += 1
 
 
