@@ -10,5 +10,5 @@ if __name__ == "__main__":
     filesToIgnore = []
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
     files = files - filesToIgnore
-
+    files = set(["/Specs/ENG-Electrical-Engineering.html"])
     main(EngineeringMajorParser, files, "Engineering")
