@@ -15,12 +15,18 @@ import os
 
 
 class DatabaseConnection(object):
-    def __init__(self, user="postgres", password="1234", host="localhost", port="5432", database="postgres",
+    def __init__(self, user="postgres", password="1234", host="127.0.0.1", port="5432", database="postgres",
                  course_table="course_info", prereqs_table="prereqs", antireqs_table="antireqs",
                  requirements_table = "requirements", communications_table="communications",
                  breadth_table="breadth_table"):
         if os.getenv("UWPATH_ENVIRONMENT") is not None and os.getenv("UWPATH_ENVIRONMENT") == "docker":
             host = "db"
+        if os.getenv("DB_PASS") is not None:
+            password = os.getenv("DB_PASS")
+        if os.getenv("DB_USER") is not None:
+            user = os.getenv("DB_USER")
+        if os.getenv("DB_NAME") is not None:
+            database = os.getenv("DB_NAME")
         self.connection = psycopg2.connect(user=user, password=password, host=host, port=port, database=database)
         self.cursor = self.connection.cursor()
         self.course_table = course_table
