@@ -14,6 +14,17 @@ plans = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Enterprise-an
          "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Geography-and-Environmental-Mgmt",
          "https://ugradcalendar.uwaterloo.ca/group/ENV-School-of-Planning"]
 
+#for now we are only parsing the plans
+pages = ["https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Co-operative-Planning",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Env-Res-Sus-Env-Res-Stud-Hons-Reg-Co-op",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Bachelor-of-Knowledge-Integration-1",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Environment-Business-Co-op-and-Reg",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-International-Development",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Geography-Environmental-Management-3-Yr-Gen",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Geography-Environmental-Management-4-Yr-Honour",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Geography-and-Aviation-Regular",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Geomatics-Regular-and-Co-op"]
+
 root = "http://ugradcalendar.uwaterloo.ca/"
 
 def fetch_degree_req(path):
@@ -44,6 +55,15 @@ def fetch_degree_req(path):
                     with open(path + fileName, 'wb') as fOut:
                         fOut.write(resp.content)
 
+def fetch_plan(path):
+    for href in pages:
+        fileName = href.split("/")[-1]
+        print("Fetching {}...".format(fileName))
+        fileName = "/" + fileName + ".html"
+        resp = get(href)
+        with open(path + fileName, 'wb') as fOut:
+            fOut.write(resp.content)
+
 
 if __name__ == '__main__':
     dir = os.path.dirname(__file__)
@@ -59,4 +79,4 @@ if __name__ == '__main__':
     else:
         os.mkdir(path)
 
-    fetch_degree_req(path)
+    fetch_plan(path)
