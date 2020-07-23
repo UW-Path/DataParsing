@@ -58,7 +58,7 @@ class ArtsMajorParser(MajorParser):
             return []
 
 
-        courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
+        courses = re.findall(r"\b[A-Z]{2,10}\b[^\s]*[^.]\b[0-9]{1,4}[A-Z]{0,1}\b", line)
 
 
         if courses:
@@ -89,7 +89,7 @@ class ArtsMajorParser(MajorParser):
                 if len(majors) == 1 and "lab" in line:
                     #PHYSC lab: Special case
                     majors[0] += " LAB"
-                if "or higher" or "or above" in line:
+                if "or higher" in line or "or above" in line:
                     for m in majors:
                         if r[0] == "100-":
                             list.append(m + " " + r[0])
@@ -107,7 +107,8 @@ class ArtsMajorParser(MajorParser):
                             list.append(m + " " + r[0]) #don't assume grad courses for now
                 else:
                     for m in majors:
-                        list.append(m + " " + r[0])
+                        for level in r:
+                            list.append(m + " " + level)
             elif maj and ":" not in line or len(maj.split(", ")) > 1: #prevent case "with the following conditions:"
                 # allow case chosen from BIOL, CHEM, EARTH, MNS, PHYS, or SCI:
                 list.append(maj)

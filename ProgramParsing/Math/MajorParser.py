@@ -65,7 +65,7 @@ class MathMajorParser(MajorParser):
 
             rangeCourse = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
                                  line)
-            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
+            courses = re.findall(r"\b[A-Z]{2,10}\b[^\s]*[^.]\b[0-9]{1,4}[A-Z]{0,1}\b", line)
 
 
             if rangeCourse:
@@ -144,7 +144,7 @@ class MathMajorParser(MajorParser):
                             ignoreCourses.append(maj + " " + course)
 
                 # regular CS 135
-                courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
+                courses = re.findall(r"\b[A-Z]{2,10}\b[^\s]*[^.]\b[0-9]{1,4}[A-Z]{0,1}\b", line)
                 #to find courses that says excluding CO 480
                 exclude = re.findall(r"excluding \b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
                 if exclude:
@@ -203,7 +203,7 @@ class MathMajorParser(MajorParser):
                     list.append("Elective")
 
             # regular CS 135
-            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
+            courses = re.findall(r"\b[A-Z]{2,10}\b[^\s]*[^.]\b[0-9]{1,4}[A-Z]{0,1}\b", line)
             # to find courses that says excluding CO 480
             exclude = re.findall(r"excluding \b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
             if exclude:

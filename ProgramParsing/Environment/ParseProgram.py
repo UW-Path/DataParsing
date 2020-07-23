@@ -7,10 +7,11 @@ if __name__ == "__main__":
     path = os.path.join(dir, 'Specs')
     files = set(["/Specs/" + f for f in os.listdir(path) if f.endswith(".html")])
 
-    filesToIgnore = []
+    filesToIgnore = ["ENV-Env-Res-Sus-Env-Res-Stud-Hons-Reg-Co-op.html", "ENV-Honours-Environment-Business-Co-op-and-Reg.html",
+                     "ENV-Honours-Geography-and-Aviation-Regular.html"]
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
     files = files - filesToIgnore
 
-    files = set(["/Specs/ENV-Geography-Environmental-Management-4-Yr-Honour.html"])
+    # files = set(["/Specs/ENV-Honours-International-Development.html"])
 
     main(EnvironmentMajorParser, files, "Environment")

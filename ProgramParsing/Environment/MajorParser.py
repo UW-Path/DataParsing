@@ -52,7 +52,7 @@ class EnvironmentMajorParser(MajorParser):
 
             rangeCourse = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
                                      line)
-            courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
+            courses = re.findall(r"\b[A-Z]{2,10}\b[^\s]*[^.]\b[0-9]{1,4}[A-Z]{0,1}\b", line)
 
             if rangeCourse:
                 # TODO: Account for range CS 123-CS 345, excluding CS XXX
@@ -68,15 +68,14 @@ class EnvironmentMajorParser(MajorParser):
 
             if courses:
                 for c in courses:
-                        list.append(c)
+                    list.append(c)
             i += 1
         return i, list
 
 
     def _course_list(self, line):
         list = []
-        if "elective" in line:
-            return ["Elective"]
+
 
         if "breadth requirement" in line.lower():
             return ["Breadth Requirement"]
@@ -89,12 +88,12 @@ class EnvironmentMajorParser(MajorParser):
 
         rangeCourse = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
                              line)
-        courses = re.findall(r"\b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}", line)
+        courses = re.findall(r"\b[A-Z]{2,10}\b[^\s]*[^.]\b[0-9]{1,4}[A-Z]{0,1}", line)
 
         orCourse = re.findall(r"\b(?<!\/)[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b or \b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
 
         if orCourse:
-            # CS 135 or CS XXX
+            # CS 135 or CS XXX in for 1hour and finally solved. Thanks a l
             for oC in orCourse:
                 c = oC.split(" or ")
                 d[c[0]] = True
@@ -115,26 +114,27 @@ class EnvironmentMajorParser(MajorParser):
         if not list:
             r = self._getLevelCourses(line)
             maj = ""
-            if "program elective" in line:
-                maj = "Program Elective" #extra case for material nanosci
-            else:
-                majors = []
-                for word in line.split(' '):
-                    #specific to env.. GEOG-labelled
-                    word = word.replace("-labelled","")
-                    if "Science" == word or "Mathematics" == word:
-                        maj = word.strip("\n").strip("\r\n").upper()
-                        maj = maj.replace(",", "")
-                        break
-                    elif word.isupper():
-                        temp = word.replace(",", "")
-                        if temp not in majors:
-                            majors.append(temp)
-                if maj == "":
-                    maj = ", ".join(majors)
+
+            majors = []
+            for word in line.split(' '):
+                #specific to env.. GEOG-labelled
+                word = word.replace("-labelled","")
+                if "Science" == word or "Mathematics" == word:
+                    maj = word.strip("\n").strip("\r\n").upper()
+                    maj = maj.replace(",", "")
+                    break
+                elif "elective" in word:
+                    maj = "Elective"
+                    break
+                elif word.isupper():
+                    temp = word.replace(",", "")
+                    if temp not in majors:
+                        majors.append(temp)
+            if maj == "":
+                maj = ", ".join(majors)
             if r and maj:
                 majors = maj.split(", ")
-                if "or higher" or "or above" in line:
+                if "or higher" in line or "or above" in line:
                     for m in majors:
                         if r[0] == "100-":
                             list.append(m + " " + r[0])
@@ -152,7 +152,8 @@ class EnvironmentMajorParser(MajorParser):
                             list.append(m + " " + r[0]) #don't assume grad courses for now
                 else:
                     for m in majors:
-                        list.append(m + " " + r[0])
+                        for level in r:
+                            list.append(m + " " + level)
             elif maj and ":" not in line or len(maj.split(", ")) > 1: #prevent case "with the following conditions:"
                 # allow case chosen from BIOL, CHEM, EARTH, MNS, PHYS, or SCI:
                 if maj == "MATHEMATICS": maj = "MATH"
@@ -175,8 +176,12 @@ class EnvironmentMajorParser(MajorParser):
             if maj:
                 list.append(maj)
 
-        if not list and "course" in line:
-            return ["Program Elective"]
+        if not list:
+            #elective must be checked first
+            if "elective" in line:
+                return ["Elective"]
+            if "course" in line:
+                return ["Program Elective"]
 
 
         return list
@@ -242,9 +247,13 @@ class EnvironmentMajorParser(MajorParser):
 
         while i < len(information):
             line = str(information[i]).lstrip().rstrip()
+            if "Recommended Elective" in line or "Research Specialization" in line:
+                # exception for international develeopment
+                term = ""
             if line == "Notes":
                 #end of file
                 break
+
             #initialize term
 
             isTerm = re.findall(r"Year (One|Two|Three|Four)", line)
@@ -269,7 +278,7 @@ class EnvironmentMajorParser(MajorParser):
                     #not a number
                     pass
 
-                isXof = re.findall(r"(One|Two|Three|Four|Five|Six|Seven|Eight|Nine) of", line)
+                isXof = re.findall(r"(one|two|three|four|five|six|seven|eight|nine) of", line.lower())
                 if isXof:
                     i, list = self._choose_x_course_list(i, information)
                     if list:
@@ -283,11 +292,11 @@ class EnvironmentMajorParser(MajorParser):
                     list = self._course_list(line)
 
                     if list:
-                        hasCredit = re.findall(r"\(.* unit[s]?\)", line)
+                        hasCredit = re.findall(r"\(([A-Z,0-9, .]*?) unit[s]?\)", line)
                         if "Program Elective" not in list or hasCredit:
                             if hasCredit:
-                                credits = float(str(hasCredit[0]).replace("(", "").split(" ")[0])
-                                if number_additional == 1:
+                                credits = float(hasCredit[0])
+                                if number_additional == 1 and (len(list) > 1 or "Elective" in list or "Program Elective" in list)  :
                                     number_additional = credits/0.5 #assume for env
                             else:
                                 credits = self._count_credits(list) / len(list) * number_additional
