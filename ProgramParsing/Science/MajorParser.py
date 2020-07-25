@@ -200,7 +200,13 @@ class ScienceMajorParser(MajorParser):
         i = 0
         while i < len(information):
             line = information[i]
+            if "\r" in line:
+                #fix for Astrophysics Minor where enter key was used to link two courses
+                line += information[i + 1]
+                i += 1
+
             line = line.strip()
+
             if "must" in line and ":" not in line:
                 #Condition for must complete... additional conditions
                 #Example: '0.5 unit must be 200-level or higher'
