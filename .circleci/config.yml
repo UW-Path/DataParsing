@@ -42,6 +42,6 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker login -u ${docker_user} -p ${docker_pass}
-              docker tag parsing "uwpath/parsing:${CIRCLE_SHA1}"
-              docker push "uwpath/parsing:${CIRCLE_SHA1}"
+              docker tag parsing "uwpath/parsing:${CIRCLE_SHA1:0:8}"
+              docker push "uwpath/parsing:${CIRCLE_SHA1:0:8}"
             fi
