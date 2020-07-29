@@ -1,0 +1,47 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: /parsing
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache \
+              py-pip=9.0.0-r1
+            pip install \
+              docker-compose==1.12.0
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - /caches/parsing.tar
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/parsing.tar | true
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build --cache-from=parsing -t parsing .
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/parsing.tar parsing
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/parsing.tar
+      - deploy:
+          name: Push application Docker image
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u ${docker_user} -p ${docker_pass}
+              docker tag parsing "uwpath/parsing:${CIRCLE_SHA1:0:8}"
+              docker push "uwpath/parsing:${CIRCLE_SHA1:0:8}"
+            fi
