@@ -13,6 +13,6 @@ if __name__ == "__main__":
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
     files = files - filesToIgnore
 
-    # files = set(["/Specs/MATH-Computer-Sci-Business-Spec.html"])
+    # files = set(["/Specs/MATH-Computational-Mathematics1.html"])
 
-    main(MathMajorParser, files, DropTable=True)
+    main(MathMajorParser, files, DropTable=False)

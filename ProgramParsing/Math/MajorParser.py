@@ -54,6 +54,11 @@ class MathMajorParser(MajorParser):
             line = info[i].strip().replace(" to ", "-")
 
             #Table II exception a bit hardcoded (info[i] == " ")
+
+            #Computational Math case:
+            if "Notes:" in line:
+                break
+
             if line.startswith("Note") or line.startswith("(") or info[i] == "        ":
                 i += 1
                 continue
@@ -84,9 +89,10 @@ class MathMajorParser(MajorParser):
                 break
 
             if courses:
-                if oneOf and " or " not in line:
+                if (oneOf and " or " not in line) or allOf:
                     for c in courses:
-                        list.append(c)
+                        if c not in list:
+                            list.append(c)
                 else:
                     list.append(", ".join(courses))
             i += 1
