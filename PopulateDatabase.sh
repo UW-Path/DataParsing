@@ -44,13 +44,13 @@ then
   echo "===================================================="
   echo "Parsing courses..."
   export PYTHONPATH=$PYTHONPATH:$DATAPARSING/CourseParsing
-  eval "${py} CourseParsing/ParseScript.py > logs/ParseScript.log"
+  eval "${py} CourseParsing/ParseScript.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing communication tables..."
   export PYTHONPATH=$PYTHONPATH:$DATAPARSING/CommunicationParsing
-  eval "${py} CommunicationParsing/CommunicationScript.py > logs/CommunicationParsing.log"
+  eval "${py} CommunicationParsing/CommunicationScript.py"
   echo "DONE"
 fi
 
@@ -61,71 +61,70 @@ then
 
   echo "===================================================="
   echo "Parsing MATH degree requirements..."
-  eval "${py} ProgramParsing/Math/UpdateDegreeRequirement.py > logs/UpdateDegreeRequirementMATH.log"
+  eval "${py} ProgramParsing/Math/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing MATH programs..."
-  eval "${py} ProgramParsing/Math/ParseProgram.py > logs/ParseProgramMATH.log"
+  eval "${py} ProgramParsing/Math/ParseProgram.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing MATH breadth and depth..."
   export PYTHONPATH=$PYTHONPATH:$DATAPARSING/BreadthDepthParsing
-  eval "${py} BreadthDepthParsing/BreadthScript.py > logs/BreadthScriptMATH.log"
+  eval "${py} BreadthDepthParsing/BreadthScript.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Science degree requirements..."
-  eval "${py} ProgramParsing/Science/UpdateDegreeRequirement.py > logs/UpdateDegreeRequirementSCI.log"
+  eval "${py} ProgramParsing/Science/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Science programs..."
-  eval "${py} ProgramParsing/Science/ParseProgram.py > logs/ParseProgramSCI.log"
+  eval "${py} ProgramParsing/Science/ParseProgram.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing AHS degree requirements..."
-  eval "${py} ProgramParsing/AHS/UpdateDegreeRequirement.py > logs/UpdateDegreeRequirementAHS.log"
+  eval "${py} ProgramParsing/AHS/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing AHS programs..."
-  eval "${py} ProgramParsing/AHS/ParseProgram.py > logs/ParseProgramAHS.log"
+  eval "${py} ProgramParsing/AHS/ParseProgram.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Arts degree requirements..."
-  eval "${py} ProgramParsing/Arts/UpdateDegreeRequirement.py > logs/UpdateDegreeRequirementARTS.log"
+  eval "${py} ProgramParsing/Arts/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Arts programs..."
-  eval "${py} ProgramParsing/Arts/ParseProgram.py > logs/ParseProgramARTS.log"
+  eval "${py} ProgramParsing/Arts/ParseProgram.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Engineering degree requirements..."
-  eval "${py} ProgramParsing/Engineering/UpdateDegreeRequirement.py > logs/UpdateDegreeRequirementENG.log"
+  eval "${py} ProgramParsing/Engineering/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Engineering programs..."
-  eval "${py} ProgramParsing/Engineering/ParseProgram.py > logs/ParseProgramENG.log"
+  eval "${py} ProgramParsing/Engineering/ParseProgram.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Environment degree requirements..."
-  eval "${py} ProgramParsing/Environment/UpdateDegreeRequirement.py > logs/UpdateDegreeRequirementENV.log"
+  eval "${py} ProgramParsing/Environment/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Environment programs..."
-  eval "${py} ProgramParsing/Environment/ParseProgram.py > logs/ParseProgramENV.log"
+  eval "${py} ProgramParsing/Environment/ParseProgram.py"
   echo "DONE"
 fi
 
 echo "===================================================="
-echo ""
-echo "Check logs in Data-Parsing/logs"
+echo "COMPLETED"

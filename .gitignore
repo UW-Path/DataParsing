@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 logs/
+logs/*.log
 *.log
 ProgramParsing/AHS/Specs/
 ProgramParsing/Arts/Specs/
