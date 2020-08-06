@@ -129,7 +129,7 @@ class ScienceMajorParser(MajorParser):
                     for m in majors:
                         for level in r:
                             list.append(m + " " + level)
-            elif maj and ":" not in line or len(maj.split(", ")) > 1: #prevent case "with the following conditions:"
+            elif (maj and "distributed as follows:" not in line) or len(maj.split(", ")) > 1: #prevent case "distrubted as follow:"
                 # allow case chosen from BIOL, CHEM, EARTH, MNS, PHYS, or SCI:
                 if maj == "MATHEMATICS": maj = "MATH"
                 #SCIENCE - any level /Math
