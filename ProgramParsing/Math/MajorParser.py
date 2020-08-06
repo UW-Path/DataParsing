@@ -84,16 +84,65 @@ class MathMajorParser(MajorParser):
                 i += 1
                 continue
 
+            if not courses:
+                r = self._getLevelCourses(line)
+                maj = ""
+
+                majors = []
+                for word in line.split(' '):
+                    if ("Science" == word or "Mathematics" == word) and "Computational Mathematics advisor" not in line:
+                        maj = word.strip("\n").strip("\r\n").upper()
+                        maj = maj.replace(",", "")
+                        break
+                    elif word.isupper():
+                        temp = word.replace(",", "")
+                        if temp not in majors:
+                            majors.append(temp)
+                if maj == "":
+                    maj = ", ".join(majors)
+
+                if r and maj:
+                    majors = maj.split(", ")
+                    if "or higher" in line or "or above" in line:
+                        for m in majors:
+                            if r[0] == "100-":
+                                list.append(m + " " + r[0])
+                                list.append(m + " 200-")
+                                list.append(m + " 300-")
+                                list.append(m + " 400-")
+                            elif r[0] == "200-":
+                                list.append(m + " " + r[0])
+                                list.append(m + " 300-")
+                                list.append(m + " 400-")
+                            elif r[0] == "300-":
+                                list.append(m + " " + r[0])
+                                list.append(m + " 400-")
+                            elif r[0] == "400-":
+                                list.append(m + " " + r[0])  # don't assume grad courses for now
+                    else:
+                        for m in majors:
+                            for level in r:
+                                list.append(m + " " + level)
+                    i+=1
+                    continue
+            # elif (maj and "distributed as follows:" not in line) or len(
+            #         maj.split(", ")) > 1:  # prevent case "distrubted as follow:"
+            #     # allow case chosen from BIOL, CHEM, EARTH, MNS, PHYS, or SCI:
+            #     if maj == "MATHEMATICS": maj = "MATH"
+            #     # SCIENCE - any level /Math
+            #     list.append(maj)
+
             if not courses and list:
                 # List has ended
                 break
 
             if courses:
-                if (oneOf and " or " not in line) or allOf:
+                if (oneOf and " or " not in line):
                     for c in courses:
                         if c not in list:
                             list.append(c)
                 else:
+                    #all of cases
                     list.append(", ".join(courses))
             i += 1
         return i, list
@@ -103,8 +152,23 @@ class MathMajorParser(MajorParser):
         if multiLine:
             #"Two additional courses from"
             i += 1 #skip first line
+
+            #specific for Mathematical Studies business option only
+            isChunk = False
+            #this part was implemnted for Joint PMATH when additional courses go on
+            exception = ["one of", "two of", "three of", "four of", "five of", "six of", "seven of", "eight of", "nine of"]
             while i < len(info):
+                if isChunk and info[i] == "":
+                    #dont end for courses that have new lines in between additional
+                    i += 1
+                    continue
+                if "\r" in info[i]: isChunk = True
+                else: isChunk = False
+
                 line = info[i].strip().replace(" to ", "-")
+                if line.lower() in exception:
+                    break
+
                 foundPattern = False
                 if "additional" in line:
                     break #search is over
@@ -142,12 +206,16 @@ class MathMajorParser(MajorParser):
                     elif match:
                         foundPattern =True
                         for m in match:
-                            course = m.strip("\n")
-                            course = course.strip("\r\n")
-                            list.append(maj + " " + course)
+                            level = m.strip("\n")
+                            level = level.strip("\r\n")
+                            if "/" in maj:
+                                list.append(maj.split("/")[0] + " " + level)
+                                list.append(maj.split("/")[1] + " " + level)
+                            else:
+                                list.append(maj + " " + level)
                             #add CS 300- to ignore list for regex
-                            course = course.replace("-", "")
-                            ignoreCourses.append(maj + " " + course)
+                            level = level.replace("-", "")
+                            ignoreCourses.append(maj + " " + level)
 
                 # regular CS 135
                 courses = re.findall(r"\b[A-Z]{2,10}\b[^\s]*[^.]\b[0-9]{1,4}[A-Z]{0,1}\b", line)
@@ -196,12 +264,16 @@ class MathMajorParser(MajorParser):
 
                 if match:
                     for m in match:
-                        course = m.strip("\n")
-                        course = course.strip("\r\n")
-                        list.append(maj + " " + course)
+                        level = m.strip("\n")
+                        level = level.strip("\r\n")
                         # add CS 300- to ignore list for regex
-                        course = course.replace("-", "")
-                        ignoreCourses.append(maj + " " + course)
+                        if "/" in maj:
+                            list.append(maj.split("/")[0] + " " + level)
+                            list.append(maj.split("/")[1] + " " + level)
+                        else:
+                            list.append(maj + " " + level)
+                        level = level.replace("-", "")
+                        ignoreCourses.append(maj + " " + level)
                 elif maj:
                     list.append(maj)  # Only indicate major but not level
                 else:
@@ -338,6 +410,20 @@ class MathMajorParser(MajorParser):
                     MathMajorReq(["NON-MATH"], "Additional", program, relatedMajor, self.additionalRequirement,
                                  number_additional))
                 i+=1
+
+            elif "units" in l and ":" not in l:
+                try:
+                    #3.5 units of AMATH/PHYS electives, at least 1.0 unit of which are at the 300- or 400-level in Mathematical Physics
+                    number_additional = float(l.split(" ")[0]) * 2
+                    i, list = self._additional_list(information, i, False)
+
+                    if list:
+                        self.requirement.append(
+                            MathMajorReq(list, "Additional", program, relatedMajor, self.additionalRequirement,
+                                         number_additional))
+                except:
+                    #skip
+                    i += 1
 
 
             else:
