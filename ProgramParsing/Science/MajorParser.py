@@ -72,7 +72,7 @@ class ScienceMajorParser(MajorParser):
                 c = oC.split(" or ")
                 d[c[0]] = True
                 d[c[1]] = True
-                list.append(oC)
+                list.append(oC.replace(" or ", ", "))
 
         if rangeCourse:
             #TODO: Account for range CS 123-CS 345, excluding CS XXX
@@ -129,10 +129,17 @@ class ScienceMajorParser(MajorParser):
                     for m in majors:
                         for level in r:
                             list.append(m + " " + level)
+            elif maj and "any level" in line:
+                list.append(maj + " 100-")
+                list.append(maj + " 200-")
+                list.append(maj + " 300-")
+                list.append(maj + " 400-")
             elif (maj and "distributed as follows:" not in line) or len(maj.split(", ")) > 1: #prevent case "distrubted as follow:"
                 # allow case chosen from BIOL, CHEM, EARTH, MNS, PHYS, or SCI:
                 if maj == "MATHEMATICS": maj = "MATH"
                 #SCIENCE - any level /Math
+                elif "lab" in line:
+                    maj += " LAB"
                 list.append(maj)
             if len(r) > 1:
                 print("ERROR more than one match 200- found")
@@ -141,6 +148,9 @@ class ScienceMajorParser(MajorParser):
             for course in list:
                 if "-" in course:
                     return list, False
+                elif "ACTSC, AMATH, CO, CS, MATH, PMATH, STAT" in course:
+                    return list, False #hardcoded to prevent "insertAll"
+
             c = self._count_credits(list)
             # if 0 is returned the list has general courses: SCIENCE,MATH
             if (credit == c or len(list) == 1) and c != 0:
@@ -200,6 +210,8 @@ class ScienceMajorParser(MajorParser):
         i = 0
         while i < len(information):
             line = information[i]
+            if "Recommended Course Sequence" in line:
+                break
             if "\r" in line:
                 #fix for Astrophysics Minor where enter key was used to link two courses
                 line += information[i + 1]
@@ -207,12 +219,22 @@ class ScienceMajorParser(MajorParser):
 
             line = line.strip()
 
+
             if "must" in line and ":" not in line:
                 #Condition for must complete... additional conditions
                 #Example: '0.5 unit must be 200-level or higher'
                 #However '4.0 units must be chosen from List A: ..."
-                i += 1
-                continue
+
+                #special case for 1.5 elective units; must be 0.5 unit lecture courses (we want this)
+                if "elective" in line:
+                    try:
+                        float(line.split(" ")[0])
+                    except:
+                        i += 1
+                        continue
+                else:
+                    i += 1
+                    continue
             credits = line.split(' ')[0]
             try:
                 credits = float(credits)
@@ -230,10 +252,9 @@ class ScienceMajorParser(MajorParser):
                     else:
                         self.requirement.append(ScienceMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
                 elif "elective" in line.split(' ')[1] and ":" not in line or "chosen from any subject" in line or "chosen from any 0.5 unit courses" in line \
-                        and "from any 0.25 or 0.5 unit courses" in line:
+                        or "from any 0.25 or 0.5 unit courses" in line:
                     list.append("Elective")
                     self.requirement.append(ScienceMajorReq(list, numCourse, program, relatedMajor, self.additionalRequirement, credits))
-
 
             except (RuntimeError):
                 print(RuntimeError)

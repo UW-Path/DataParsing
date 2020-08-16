@@ -24,6 +24,6 @@ class EngineeringMajorReq(MajorReq):
     def __str__(self):
         output = "Requirement for: " + self.programName + " (" + self.planType + ")"
         output += "\n"
-        output += "\tCourse (" + str(self.req) + ") : " + self.courseCodes + "\n"
+        output += "\tCourse" + self.courseCodes + "\n"
         output += "\tCredits: " + str(self.credits)
         return output

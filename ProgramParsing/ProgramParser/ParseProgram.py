@@ -19,6 +19,8 @@ def main(majorParser, files, faculty="Math", DropTable=False):
         parser = majorParser()
         parser.load_file(file)
 
+        # print(parser)
+
         link = get_link(file)
         # Parser requirement is a list of MajorReq Object
         dbc.insert_requirements(parser.requirement, faculty, link)
