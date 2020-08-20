@@ -333,6 +333,10 @@ class MathMajorParser(MajorParser):
         i = 0
         while i < len(information):
             l = information[i].strip().lower().replace("at least ", "")
+            #special case to terminate CS
+            if l.lower() == "elective breadth requirements" or l.lower() == "elective depth requirements":
+                break
+
             if l.startswith("one of"):
                 i, list = self._course_list(information, i, True)
                 if list:
