@@ -184,8 +184,19 @@ class ScienceMajorParser(MajorParser):
     def _require_all(self, list, major, relatedMajor, additionalRequirement):
         #TODO: Match with database credits
         #TODO: Dafault as 0.5 credits
+        dbc = DatabaseReceiver()
+
         for course in list:
-            self.requirement.append(ScienceMajorReq([course], 1, major, relatedMajor, additionalRequirement, 0.5))
+            if "L" in course:
+                try:
+                    credit = dbc.select_course_credit(course)
+                except:
+                    print("Course not found. Default is 0.5 credit")
+                    credit = 0.5
+            else: credit = 0.5
+            self.requirement.append(ScienceMajorReq([course], 1, major, relatedMajor, additionalRequirement, credit))
+
+        dbc.close()
 
     def load_file(self, file):
         """
