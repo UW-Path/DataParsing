@@ -79,7 +79,8 @@ class MathMajorParser(MajorParser):
                 if allOf:
                     print("allof")
                 for c in rangeCourse:
-                    list.append(c)
+                    if c not in list:
+                        list.append(c)
                 # else: list.append(" or ".join(rangeCourse))
                 i += 1
                 continue
@@ -185,7 +186,7 @@ class MathMajorParser(MajorParser):
                     foundPattern = True
                     for course in courses:
                         course = course.strip("\n").strip("\r\n")
-                        if not str(course).startswith("("):
+                        if not str(course).startswith("(") and course not in list:
                             list.append(course)
                             c = course.split("-")
                             for item in c:
@@ -226,7 +227,7 @@ class MathMajorParser(MajorParser):
                     ignoreCourses.append(excludeCourse)
                 if courses: foundPattern = True
                 for course in courses:
-                    if course not in ignoreCourses:
+                    if course not in ignoreCourses and course not in list:
                         list.append(course)
 
 
@@ -246,7 +247,7 @@ class MathMajorParser(MajorParser):
             if courses:
                 for course in courses:
                     course = course.strip("\n").strip("\r\n")
-                    if not str(course).startswith("("):
+                    if not str(course).startswith("(") and course not in list:
                         list.append(course)
                         c = course.split("-")
                         for item in c:
@@ -288,7 +289,7 @@ class MathMajorParser(MajorParser):
                 excludeCourse = exclude[0].replace("excluding ", "")  # take course code
                 ignoreCourses.append(excludeCourse)
             for course in courses:
-                if course not in ignoreCourses:
+                if course not in ignoreCourses and course not in list:
                     list.append(course)
 
         return i, list
