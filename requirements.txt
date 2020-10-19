@@ -1,17 +1,9 @@
-asgiref==3.2.3
-beautifulsoup4==4.6.3
-inflection==0.3.1
-numpy==1.17.4
-pandas==0.25.3
-postgres==3.0.0
-psycopg2-binary==2.8.4
-psycopg2-pool==1.1
-python-dateutil==2.8.1
-pytz==2019.3
-pyrebase==3.0.27
-selenium==3.141.0
-six==1.13.0
-sqlparse==0.3.0
-urllib3==1.24.3
-virtualenv==16.7.8
-virtualenvwrapper-win==1.2.5
+beautifulsoup4 == 4.8.2
+block-fund-trading == 1.0
+esandmysqlconnector == 0.1.2
+fndatabase == 0.0.1
+pandas == 0.25.3
+psycopg2_binary == 2.8.4
+requests == 2.23.0
+setuptools == 41.2.0
+urllib3 == 1.25.7
