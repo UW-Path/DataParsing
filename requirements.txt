@@ -2,6 +2,7 @@ beautifulsoup4 == 4.8.2
 block-fund-trading == 1.0
 esandmysqlconnector == 0.1.2
 fndatabase == 0.0.1
+Cython == 0.29.21
 pandas == 0.25.3
 psycopg2_binary == 2.8.4
 requests == 2.23.0
