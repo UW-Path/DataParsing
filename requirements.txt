@@ -1,7 +1,7 @@
 beautifulsoup4 == 4.8.2
 esandmysqlconnector == 0.1.2
 fndatabase == 0.0.1
-pandas == 0.25.3
+pandas == 1.1.3
 postgres == 3.0.0
 psycopg2_binary == 2.8.4
 requests == 2.23.0
