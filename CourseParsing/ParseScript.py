@@ -2,6 +2,7 @@ from Database.DatabaseSender import DatabaseSender
 from Database.DatabaseReceiver import DatabaseReceiver
 from CourseParsing.CourseParser import CourseParser
 import urllib.request
+import traceback
 
 def get_course_codes():
     dbc = DatabaseReceiver()
@@ -55,7 +56,7 @@ if __name__ == "__main__":
             parser.load_html(html)
         except Exception as e:
             print(code)
-            print(e)
+            traceback.print_exc()
             continue
 
         dbc.insert_courses(parser.courses)

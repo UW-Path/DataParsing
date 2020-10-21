@@ -64,6 +64,12 @@ class Prereqs:
             # Remove all numbers longer than 3 digits
             prereqs = re.sub("[0-9][0-9][0-9][0-9]+", "", prereqs)
 
+            # <year> year ABC becomes ABC 1000
+            prereqs = re.sub("first year ([A-Z][A-Z]+)", r"\1 1000", prereqs)
+            prereqs = re.sub("second year ([A-Z][A-Z]+)", r"\1 2000", prereqs)
+            prereqs = re.sub("third year ([A-Z][A-Z]+)", r"\1 3000", prereqs)
+            prereqs = re.sub("fourth year ([A-Z][A-Z]+)", r"\1 4000", prereqs)
+
             # Remove all words that are separated with / that aren't part of courses
             prereqs = re.sub(" [a-zA-Z\\-]*[a-z][a-zA-Z\\-]*/[a-zA-Z\\-]+", "", prereqs)
             prereqs = re.sub(" [a-zA-Z\\-]+/[a-zA-Z\\-]*[a-z][a-zA-Z\\-]*", "", prereqs)
