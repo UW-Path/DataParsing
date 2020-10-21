@@ -6,7 +6,7 @@ Hao Wei Huang
 """
 
 import re
-from StringToNumber import StringToNumber
+from Database.DatabaseReceiver import DatabaseReceiver
 
 
 class MajorReq:
@@ -35,7 +35,15 @@ class MajorReq:
                 Note: Append list at the end with comma
                 :return: str
         """
-        return ", ".join(self.list)
+        required = []
+        for course in self.list:
+            courses = DatabaseReceiver().get_course_info("WHERE course_code = '" + str(course) + "' OR course_code = '" + str(course) + "E'")
+            if len(courses):
+                for c in sorted(courses["course_code"].tolist()):
+                    required.append(c)
+            else:
+                required.append(course)
+        return ", ".join(required)
 
     def _course_codes(self):
         """
