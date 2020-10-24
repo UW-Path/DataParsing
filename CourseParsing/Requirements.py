@@ -161,9 +161,10 @@ class Prereqs:
                     prereqs = new_prereqs
 
             # Find all courses and their indexes
-            courses = re.findall("[A-Z]+ /\\||(?:[A-Z]+[ ]?)?[0-9][0-9][0-9][A-Z0]?", prereqs)
+            grep = "[A-Z]+ /\\||(?:[A-Z]+[ ]?)?[0-9][0-9][0-9][A-Z0]?|[A-Z][A-Z]+"
+            courses = re.findall(grep, prereqs)
             indexes = [(m.start(0), m.end(0)) for m in
-                       re.finditer("[A-Z]+ /\\||(?:[A-Z]+[ ]?)?[0-9][0-9][0-9][A-Z0]?", prereqs)]
+                       re.finditer(grep, prereqs)]
 
             # Generate new course codes by turning ["CS 135", "145"] into ["CS 135", "CS 145"]
             new_courses = []
@@ -187,7 +188,10 @@ class Prereqs:
 
                 # If course had no number, use the number from lookahead
                 if courses[i].endswith(" "):
-                    courses[i] += re.findall("[0-9][0-9][0-9][A-Z0]?", courses[i+1])[0]
+                    if i < len(courses)-1:
+                        courses[i] += re.findall("[0-9][0-9][0-9][A-Z0]?", courses[i+1])[0]
+                    else:
+                        courses[i] += "0000"
 
                 # If the course ahead ends with a letter, the current does not and they have different codes, add the
                 # letter from lookahead to the end if the current course.
