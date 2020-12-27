@@ -20,11 +20,10 @@ class DatabaseReceiver(DatabaseConnection):
 
         :return: pandas.DataFrame
         """
-        columns = ["index", "course_code", "course_abbr", "course_number", "course_id", "course_name", "credit",
+        columns = ["course_code", "course_abbr", "course_number", "course_id", "course_name", "credit",
                    "info", "offering", "online", "prereqs", "coreqs", "antireqs"]
         data = self.select("*", self.course_table, condition)
         df = pd.DataFrame(data, columns=columns)
-        df.set_index("index", inplace=True)
         return df
 
     def get_prereqs(self, condition = ""):
@@ -33,10 +32,9 @@ class DatabaseReceiver(DatabaseConnection):
 
         :return: pandas.DataFrame
         """
-        columns = ["index", "course_code", "logic", "courses", "grades", "not_open", "only_from", "min_level"]
+        columns = ["course_code", "logic", "courses", "grades", "not_open", "only_from", "min_level"]
         data = self.select("*", self.prereqs_table, condition)
         df = pd.DataFrame(data, columns=columns)
-        df.set_index("index", inplace=True)
         return df
 
     def get_antireqs(self, condition = ""):
@@ -45,10 +43,9 @@ class DatabaseReceiver(DatabaseConnection):
 
         :return: pandas.DataFrame
         """
-        columns = ["index", "course_code", "antireq", "extra_info"]
+        columns = ["course_code", "antireq", "extra_info"]
         data = self.select("*", self.antireqs_table, condition)
         df = pd.DataFrame(data, columns=columns)
-        df.set_index("index", inplace=True)
         return df
 
     def select_course_credit(self, course):

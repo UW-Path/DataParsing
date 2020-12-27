@@ -6,6 +6,8 @@ if __name__ == "__main__":
     com.load_file("MathReq.html")
 
     dbc = DatabaseSender()
+
+    dbc.execute("DROP TABLE IF EXISTS " + dbc.communications_table + ";")
     dbc.create_communications()
 
     list1 = com.get_list1()
