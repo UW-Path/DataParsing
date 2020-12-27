@@ -8,11 +8,11 @@ if __name__ == "__main__":
     files = set(["/Specs/" + f for f in os.listdir(path) if f.endswith(".html")])
     files.add("TableII.html")
 
-    filesToIgnore = ["ENG-Software-Engineering.html", "MATH-Math-or-Fin-Analysis-Risk-Mgt-Degree-Reqmnt.html",
+    filesToIgnore = ["ENG-Software-Engineering.html",
                      "MATH-Mathematical-Optimization1.html", "MATH-Math-or-Chartered-Professional-Accountancy-co.html"]
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
     files = files - filesToIgnore
 
-    # files = set(["/Specs/MATH-Computational-Mathematics1.html"])
+    # files = set(["/Specs/MATH-Math-or-Fin-Analysis-Risk-Mgt-Degree-Reqmnt.html"])
 
-    main(MathMajorParser, files, DropTable=True)
+    main(MathMajorParser, files, DropTable=False)

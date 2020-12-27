@@ -135,6 +135,30 @@ class MathMajorParser(MajorParser):
 
             if not courses and list:
                 # List has ended
+
+                #this is to check if the parsing accidently have space unintentionally (the html is messed up)
+                # for example:
+                # All of:
+                # CS 135
+                # EMPTY LINE
+                # CS 136
+
+                if re.findall(r"(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|All) (of|additional)", line) or i+1 == len(info):
+                    #index out of range or it's one of /all of/ additional course (keyword that indicates new line)
+                    break
+
+                ## We want to capture CS 136 as well
+                next_line = info[i+1].strip().replace(" to ", "-")
+
+                if re.findall(r"^(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|All)", next_line):
+                    #index out of range or it's one of /all of/ additional course (keyword that indicates new line)
+                    break
+
+                courses = re.findall(r"\b[A-Z]{2,10}\b[^\s]*[^.]\b[0-9]{1,4}[A-Z]{0,1}\b", next_line)
+                if courses:
+                    #Next line is also course code so we don't break
+                    i += 1
+                    continue
                 break
 
             if courses:
@@ -337,6 +361,11 @@ class MathMajorParser(MajorParser):
             #special case to terminate CS
             if l.lower() == "elective breadth requirements" or l.lower() == "elective depth requirements":
                 break
+
+            if program == "Mathematics/Financial Analysis and Risk Management" and "specialization" in l:
+                #We don't parse specialization for FARM
+                break
+
 
             if l.startswith("one of"):
                 i, list = self._course_list(information, i, True)
