@@ -7,6 +7,7 @@ Hao Wei Huang
 """
 
 from Database.DatabaseConnection import DatabaseConnection
+import re
 
 
 class DatabaseSender(DatabaseConnection):
@@ -189,7 +190,7 @@ class DatabaseSender(DatabaseConnection):
         command = "INSERT INTO " + self.course_table + " (course_code, course_abbr, course_number, course_id, " \
                                                        "course_name, credit, info, offering, online, prereqs," \
                                                        " coreqs, antireqs) "
-        command += "SELECT '" + course.course_code + "', '" + course.course_abbr + "', " + course.course_number + \
+        command += "SELECT '" + course.course_code + "', '" + course.course_abbr + "', " + re.sub("[^0-9]", "", course.course_number) + \
                    ", '" + course.id + "', '" + course.name + "', '" + str(course.credit) + "', '" + \
                    course.info.replace("'", '"') + "', '" + ",".join(course.offering) + "', " + str(course.online) + \
                    ", '" + course.prereq_text.replace("'", '"') + "', '" + course.coreq_text.replace("'", '"') + \
