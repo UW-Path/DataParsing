@@ -53,8 +53,10 @@ class Course:
 
         :return: list(str)
         """
-        all_i = self.html.find_all("i")
+
         prereqs = Prereqs()
+
+        all_i = self.html.find_all("i")
         for i in all_i:
             if i and i.string:
                 string = i.string.replace("\n", " ").strip()
@@ -64,6 +66,18 @@ class Course:
                 elif string.startswith("Coreq:"):
                     prereqs.load_prereqs(string, re.findall("[A-Z][A-Z]+", self.course_code)[0])
                     self.coreq_text = string.replace("Coreq:", "")
+
+        all_em = self.html.find_all("em")
+        for em in all_em:
+            if em and em.string:
+                string = em.string.replace("\n", " ").strip()
+                if string.startswith("Prereq:"):
+                    prereqs.load_prereqs(string, re.findall("[A-Z][A-Z]+", self.course_code)[0])
+                    self.prereq_text = string.replace("Prereq:", "")
+                elif string.startswith("Coreq:"):
+                    prereqs.load_prereqs(string, re.findall("[A-Z][A-Z]+", self.course_code)[0])
+                    self.coreq_text = string.replace("Coreq:", "")
+
         return prereqs
 
     def __antireqs(self):
@@ -72,14 +86,25 @@ class Course:
 
         :return: list(str)
         """
-        all_i = self.html.find_all("i")
+
         antireqs = Antireqs()
+
+        all_i = self.html.find_all("i")
         for i in all_i:
             if i and i.string and i.string.strip().startswith("Antireq:"):
                 string = i.string.strip().replace("\n", " ")
                 antireqs.load_antireqs(string)
                 self.antireq_text = string.replace("Antireq:", "")
                 break
+
+        all_em = self.html.find_all("em")
+        for em in all_em:
+            if em and em.string and em.string.strip().startswith("Antireq:"):
+                string = em.string.strip().replace("\n", " ")
+                antireqs.load_antireqs(string)
+                self.antireq_text = string.replace("Antireq:", "")
+                break
+
         return antireqs
 
     def __info(self):
@@ -88,7 +113,13 @@ class Course:
 
         :return: string
         """
-        return self.html.find_all("td")[3].string.strip("\n ").replace("'", "")
+        try:
+            return self.html.find_all("td")[3].string.strip("\n ").replace("'", "")
+        except IndexError:
+            pass
+
+        return self.html.find_all("div", "divTableCell colspan-2")[1].string.strip("\n ").replace("'", "")
+
 
     def __name(self):
         """
@@ -97,7 +128,12 @@ class Course:
         :return: string
         """
         # Course name is always second occurrence
-        return self.html.find_all("b")[1].string.replace("'", "")
+        try:
+            return self.html.find_all("b")[1].string.replace("'", "")
+        except IndexError:
+            pass
+
+        return self.html.find_all("div", "divTableCell colspan-2")[0].find_all("strong")[0].string.strip("\n ").replace("'", "")
 
     def __id(self):
         """
@@ -106,7 +142,12 @@ class Course:
         :return: string
         """
         # self.html.find_all("td")[1] --> <td align="right">Course ID: XXXXXX</td>
-        return self.html.find_all("td")[1].string.strip("Course ID: ").replace("'", "")
+        try:
+            return self.html.find_all("td")[1].string.strip("Course ID: ").replace("'", "")
+        except IndexError:
+            pass
+
+        return self.html.find("div", "divTableCell crseid").string.strip("Course ID: ").replace("'", "")
 
     def __credit(self):
         """
@@ -117,7 +158,12 @@ class Course:
         # Note:
         # str(self.html.find("b")) --> "<b><a name = "CS 123"></a>CS 123 LEC 0.50</b>"
         # str(self.html.find("b")).strip("</b>")[-4:] --> "0.50"
-        return float(str(self.html.find("b")).strip("</b>")[-4:])
+        try:
+            return float(str(self.html.find("b")).strip("</b>")[-4:])
+        except:
+            pass
+
+        return float(str(self.html.find("div", "divTableCell").find("strong")).strip("</strong>")[-4:])
 
     def __online(self):
         """
@@ -150,10 +196,25 @@ class Course:
         else:
             # sometime it is in another line
             all_i = self.html.find_all("i")
-
             for i in all_i:
                 if i and i.string and i.string.strip().startswith("["):
                     note = i.string.strip().replace("\n", " ")
+                    filtered = re.search(r"\[.*([FWS],)*[FWS]\]", note)
+                    if filtered:
+                        filtered = filtered.group()
+                        filtered = re.search(r"([FWS],)*[FWS]\]", filtered)
+
+                        if filtered:
+                            # Should parse in F, W, S] string, ending in ]
+                            filtered = filtered.group()[:-1]
+                            return filtered.split(",")
+                        return []
+                    return []
+
+            all_em = self.html.find_all("em")
+            for em in all_em:
+                if em and em.string and em.string.strip().startswith("["):
+                    note = em.string.strip().replace("\n", " ")
                     filtered = re.search(r"\[.*([FWS],)*[FWS]\]", note)
                     if filtered:
                         filtered = filtered.group()
