@@ -15,4 +15,4 @@ if __name__ == "__main__":
 
     # files = set(["/Specs/MATH-Math-or-Fin-Analysis-Risk-Mgt-Degree-Reqmnt.html"])
 
-    main(MathMajorParser, files, DropTable=False)
+    main(MathMajorParser, files, DropTable=True)
