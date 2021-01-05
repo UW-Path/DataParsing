@@ -8,6 +8,6 @@ if __name__ == "__main__":
     files = set(["/Specs/" + f for f in os.listdir(path) if f.endswith(".html")])
 
     # Debugging purposes
-    # files = set(["/Specs/SCI-Honours-Earth-Sciences-Hydrogeology-Spec1.html"])
+    # files = set(["/Specs/SCI-Honours-Science5.html"])
     main(ScienceMajorParser, files, "Science")
 
