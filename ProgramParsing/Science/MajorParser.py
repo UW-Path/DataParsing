@@ -94,7 +94,7 @@ class ScienceMajorParser(MajorParser):
             else:
                 majors = []
                 for word in line.split(' '):
-                    if "Science" == word or "Mathematics" == word:
+                    if "Science" == word or "Mathematics" == word or "Arts" == word or "Environment" ==word:
                         maj = word.strip("\n").strip("\r\n").upper()
                         maj = maj.replace(",", "")
                         break
@@ -104,9 +104,15 @@ class ScienceMajorParser(MajorParser):
                             majors.append(temp)
                 if maj == "":
                     maj = ", ".join(majors)
+
+            if maj == "" and  "lecture" in line: #case for chemistry and more where we need to include lecture as electives
+                if self._get_program() != "Honours Science and Aviation":
+                    #Don't want to include Aviation special case (refer to the page)
+                    maj ="Elective"
+
             if r and maj:
                 majors = maj.split(", ")
-                if len(majors) == 1 and "lab" in line:
+                if len(majors) == 1 and "lab" and majors[0] != "Elective" in line:
                     #PHYSC lab: Special case
                     majors[0] += " LAB"
                 if "or higher" in line or "or above" in line:
@@ -138,7 +144,7 @@ class ScienceMajorParser(MajorParser):
                 # allow case chosen from BIOL, CHEM, EARTH, MNS, PHYS, or SCI:
                 if maj == "MATHEMATICS": maj = "MATH"
                 #SCIENCE - any level /Math
-                elif "lab" in line:
+                elif "lab" in line and maj != "Elective":
                     maj += " LAB"
                 list.append(maj)
             if len(r) > 1:
@@ -220,7 +226,8 @@ class ScienceMajorParser(MajorParser):
 
         i = 0
         while i < len(information):
-            line = information[i]
+            line = information[i].replace("a minimum of", "")
+
             if "Recommended Course Sequence" in line:
                 break
             if "\r" in line:
