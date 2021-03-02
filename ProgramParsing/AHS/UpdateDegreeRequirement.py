@@ -8,9 +8,14 @@ from bs4 import BeautifulSoup
 from requests import get
 
 
-plans = ["https://ugradcalendar.uwaterloo.ca/group/AHS-Department-of-Kinesiology",
+plans_2020_2021 = ["https://ugradcalendar.uwaterloo.ca/group/AHS-Department-of-Kinesiology",
          "https://ugradcalendar.uwaterloo.ca/group/AHS-Department-of-Recreation-and-Leisure-Studies",
          "https://ugradcalendar.uwaterloo.ca/group/AHS-School-of-Public-Health-and-Health-Systems"]
+
+#current plan
+plans = ["https://ugradcalendar.uwaterloo.ca/group/HEA-Department-of-Kinesiology",
+         "https://ugradcalendar.uwaterloo.ca/group/HEA-Department-of-Recreation-and-Leisure-Studies",
+         "https://ugradcalendar.uwaterloo.ca/group/HEA-School-of-Public-Health-and-Health-Systems"]
 
 root = "http://ugradcalendar.uwaterloo.ca/"
 

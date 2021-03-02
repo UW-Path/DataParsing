@@ -1,5 +1,8 @@
 from Database.DatabaseSender import DatabaseSender
 
+#TODO Make this dynamic
+CALENDAR_YEAR = "2021-2022" #This needs to be updated manually every school year
+
 def get_link(file):
     #clean up
     file = file.replace("/Specs/", "").replace(".html", "")
@@ -11,8 +14,10 @@ def get_link(file):
 def main(majorParser, files, faculty="Math", DropTable=False):
     dbc = DatabaseSender()
     if DropTable:
-        dbc.execute("DROP TABLE IF EXISTS " + dbc.requirements_table + ";")
-        dbc.create_requirements()
+        #instead of dropping table, doing a delete command for the calander year parsing only
+        a= "DELETE FROM {req} WHERE YEAR='{year}'".format(req=dbc.requirements_table, year=CALENDAR_YEAR)
+        dbc.execute("DELETE FROM {req} WHERE YEAR='{year}'".format(req=dbc.requirements_table, year=CALENDAR_YEAR))
+        # dbc.create_requirements()
 
     for file in files:
         print("CURRENT FILE PARSING : " + file)
@@ -23,7 +28,7 @@ def main(majorParser, files, faculty="Math", DropTable=False):
 
         link = get_link(file)
         # Parser requirement is a list of MajorReq Object
-        dbc.insert_requirements(parser.requirement, faculty, link)
+        dbc.insert_requirements(parser.requirement, faculty, link, CALENDAR_YEAR)
         dbc.commit()
 
     dbc.close()

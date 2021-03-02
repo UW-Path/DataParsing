@@ -8,7 +8,11 @@ from bs4 import BeautifulSoup
 from requests import get
 
 
-plans = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Academic-Plans"]
+plans = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Enterprise-and-Development",
+         "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Knowledge-Integration",
+         "https://ugradcalendar.uwaterloo.ca/group/ENV-School-Environment-Resources-Sustainability",
+         "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Geography-and-Environmental-Mgmt",
+         "https://ugradcalendar.uwaterloo.ca/group/ENV-School-of-Planning"]
 
 #for now we are only parsing the plans
 pages = ["https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Co-operative-Planning",
@@ -37,18 +41,11 @@ def fetch_degree_req(path):
         response = http.request('GET', plan)
         data = BeautifulSoup(response.data, 'html.parser')
 
-        subpages = data.find_all("a", class_="Level2Group")
+        tables = [data.find_all("a", class_="Level2Group"),  data.find_all("a", class_="Level3Group")]
 
-        for subpage in subpages:
-            group_link = root + subpage['href']
-            response = http.request('GET', group_link)
-            data = BeautifulSoup(response.data, 'html.parser')
-            table = data.find_all("a", class_="Level3Group")
-
+        for table in tables:
             for program in table:
                 prog_text = str(program.text)
-                if "diploma" in prog_text.lower():
-                    continue
                 if prog_text not in link_to_ignore:
                     print("Fetching {}...".format(prog_text))
                     href = root + program['href']
@@ -82,4 +79,4 @@ if __name__ == '__main__':
     else:
         os.mkdir(path)
 
-    fetch_degree_req(path)
+    fetch_plan(path)
