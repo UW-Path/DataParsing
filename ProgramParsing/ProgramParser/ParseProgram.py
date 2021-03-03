@@ -15,7 +15,15 @@ def main(majorParser, files, faculty="Math", DropTable=False):
     dbc = DatabaseSender()
     if DropTable:
         #instead of dropping table, doing a delete command for the calander year parsing only
-        a= "DELETE FROM {req} WHERE YEAR='{year}'".format(req=dbc.requirements_table, year=CALENDAR_YEAR)
+        # TODO: Calder run it once on docker then delete
+        oneTimeUpdate = """ALTER TABLE requirements
+                        ADD year varchar(20);
+                        
+                        UPDATE requirements
+                        SET year = '2020-2021';"""
+        dbc.execute(oneTimeUpdate)
+        ## REMOVE UP TO THIS LINE
+
         dbc.execute("DELETE FROM {req} WHERE YEAR='{year}'".format(req=dbc.requirements_table, year=CALENDAR_YEAR))
         # dbc.create_requirements()
 
