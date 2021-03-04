@@ -28,7 +28,8 @@ class DatabaseSender(DatabaseConnection):
             additional_requirements VARCHAR(255), 
             major_name VARCHAR(255),
             faculty VARCHAR(50),
-            link VARCHAR(255)
+            link VARCHAR(255),
+            year VARCHAR(20),
         );
         """
         self.execute(command)
@@ -218,7 +219,7 @@ class DatabaseSender(DatabaseConnection):
         self.root.info("Successfully inserted: %d rows", success)
         self.root.info("Failed to insert: %d rows", fail)
 
-    def insert_requirement(self, requirement, faculty, link):
+    def insert_requirement(self, requirement, faculty, link, year):
         """
 
         :param requirement: MajorReq
@@ -226,16 +227,16 @@ class DatabaseSender(DatabaseConnection):
         """
         not_exist = "SELECT 1 FROM " + self.requirements_table + "\n"
         not_exist += "WHERE course_codes = '" + requirement.courseCodes + "' AND program_name = '" + requirement.programName + "' AND major_name = '" + requirement.majorName + \
-        "' AND credits_required= " + str(requirement.credits) + " AND additional_requirements= '" + requirement.additionalRequirement + "'"
+        "' AND credits_required= " + str(requirement.credits) + " AND additional_requirements= '" + requirement.additionalRequirement + "' AND year= '" + year + "'"
 
-        command = "INSERT INTO " + self.requirements_table + " (program_name, plan_type, course_codes, number_of_courses, credits_required, additional_requirements, major_name, faculty, link) "
+        command = "INSERT INTO " + self.requirements_table + " (program_name, plan_type, course_codes, number_of_courses, credits_required, additional_requirements, major_name, faculty, link, year) "
         command += "SELECT '" + requirement.programName + "', '" + requirement.planType + "', '" + requirement.courseCodes + "', " + str(requirement.numberOfCourses) + ", " + str(requirement.credits)
-        command += ", '" + requirement.additionalRequirement + "', '" + requirement.majorName + "', '" + faculty + "', " + "'" + link + "'"
+        command += ", '" + requirement.additionalRequirement + "', '" + requirement.majorName + "', '" + faculty + "', " + "'" + link + "', '" + year + "'"
         command += " WHERE NOT EXISTS (\n" + not_exist + "\n);"
 
         return self.execute(command)
 
-    def insert_requirements(self, requirements, faculty, link):
+    def insert_requirements(self, requirements, faculty, link, year):
         """
         Inserts requirements into requirements table.
 
@@ -246,7 +247,7 @@ class DatabaseSender(DatabaseConnection):
         fail = 0
 
         for req in requirements:
-            if self.insert_requirement(req, faculty, link):
+            if self.insert_requirement(req, faculty, link, year):
                 success += 1
             else:
                 fail += 1
