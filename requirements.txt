@@ -7,4 +7,4 @@ psycopg2_binary == 2.8.4
 requests == 2.23.0
 setuptools == 41.2.0
 sqlparse==0.3.0
-urllib3 == 1.25.7
+urllib3 == 1.26.5
