@@ -29,8 +29,8 @@ class DatabaseSender(DatabaseConnection):
             major_name VARCHAR(255),
             faculty VARCHAR(50),
             link VARCHAR(255),
-            year VARCHAR(20),
-        );
+            year VARCHAR(20)
+        )
         """
         self.execute(command)
 
