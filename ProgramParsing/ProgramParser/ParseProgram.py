@@ -1,7 +1,10 @@
 from Database.DatabaseSender import DatabaseSender
+import re
 
 # Must be in this format
-CALENDAR_YEARS = ["2018-2019", "2019-2020", "2020-2021"]
+CALENDAR_YEARS = ["2019-2020", "2020-2021", "2021-2022"]
+DEFAULT_YEAR = "2020-2021"
+
 
 def get_link(file):
     #clean up
@@ -9,24 +12,50 @@ def get_link(file):
     if "table" in file.lower():
         # special case for table 1/table 2 in math
         file = "MATH-Degree-Requirements-for-Math-students"
+
+    #note: frontend takes care of the year param - just need root link here
     return "https://ugradcalendar.uwaterloo.ca/page/" + file
 
-def main(majorParser, files, faculty="Math", DropTable=False):
+
+def getMajorParser(parsers, year):
+    year = year.replace("-", "_") #syntax
+
+    if "MajorParser" + year in parsers:
+        return parsers["MajorParser" + year]
+    else:
+        #default parser
+        return parsers["MajorParser"]
+
+
+def get_calendar_year(file):
+    # get year from file: regex matching 20xx-20xx
+    res = re.findall(r"20[0-9]{2}-20[0-9]{2}", file)
+    if res:
+        return res[0]
+    else:
+        print("Warning: This file does not have a year")
+        return DEFAULT_YEAR
+
+# majorParsers is a dict with different class instances of a parser
+def main(majorParsers, files, faculty="Math", DropTable=False):
     dbc = DatabaseSender()
     if DropTable:
         dbc.execute("DROP TABLE IF EXISTS " + dbc.requirements_table + ";")
         dbc.create_requirements()
 
     for file in files:
-        print("CURRENT FILE PARSING : " + file)
-        parser = majorParser()
-        parser.load_file(file)
-
-        # print(parser)
-
-        link = get_link(file)
-        # Parser requirement is a list of MajorReq Object
         calendar_year = get_calendar_year(file) # must implement this after implementing UpdateDegreeRequirement properly
+
+        # Info: the following block of code is for debugging purposes. Feel free to change CALENDAR_YEARS
+        if calendar_year not in CALENDAR_YEARS: continue
+
+        print("CURRENT FILE PARSING : " + file)
+
+        parser = getMajorParser(majorParsers, calendar_year)
+        parser.load_file(file, calendar_year)
+        link = get_link(file)
+
+        # Parser requirement is a list of MajorReq Object
         dbc.insert_requirements(parser.requirement, faculty, link, calendar_year)
         dbc.commit()
 

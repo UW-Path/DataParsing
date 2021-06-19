@@ -13,4 +13,8 @@ if __name__ == "__main__":
 
     # files =["Specs/ARTS-BAFM-Degree-Requirements.html"]
 
-    main(ArtsMajorParser, files, "Arts")
+    parsers = {
+        'MajorParser': ArtsMajorParser,
+    }
+
+    main(parsers, files, "Arts")
