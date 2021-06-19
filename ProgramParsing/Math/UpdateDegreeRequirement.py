@@ -11,14 +11,15 @@ import os
 import urllib3
 from bs4 import BeautifulSoup
 from requests import get
+from datetime import datetime
 
 
-url_plans = "http://ugradcalendar.uwaterloo.ca/page/MATH-List-of-Academic-Programs-or-Plans"
+url_plans = "https://ugradcalendar.uwaterloo.ca/page/MATH-List-of-Academic-Programs-or-Plans/?ActiveDate=9/1/"
 root = "http://ugradcalendar.uwaterloo.ca/"
 
-url_minor = "https://ugradcalendar.uwaterloo.ca/group/MATH-Academic-Plans-and-Requirements"
+url_minor = "https://ugradcalendar.uwaterloo.ca/group/MATH-Academic-Plans-and-Requirements/?ActiveDate=9/1/"
 
-def fetch_degree_req(path):
+def fetch_degree_req(path, year):
     """
          path: str
          Script to download all html pages for degree req
@@ -26,8 +27,8 @@ def fetch_degree_req(path):
     """
 
     #fetch programs
-    http = urllib3.PoolManager()
-    response = http.request('GET', url_plans)
+    http = urllib3.PoolManager(cert_reqs='CERT_NONE')
+    response = http.request('GET', url_plans + str(year))
     data = BeautifulSoup(response.data, 'html.parser')
 
     table = data.find("span", class_="MainContent")
@@ -35,15 +36,16 @@ def fetch_degree_req(path):
     for link in links:
         href = link['href']
         fileName = href.split("/")[-1]
-        fileName = "/" + fileName + ".html"
-        if "http" not in href:
-            href = root + href
+        # undergrad calendar year
+        a_year = str(year % 1000) + '-' + str(year % 1000 + 1)
+        fileName = "/" + a_year + '-' + fileName + ".html"
+        href = root + href + '/?ActiveDate=9/1/' + str(year)
         print("Fetching " + href + "...")
         resp = get(href)
         with open(path + fileName, 'wb') as fOut:
             fOut.write(resp.content)
 
-def fetch_faculty_minor(path):
+def fetch_faculty_minor(path, year):
     """
              path: str
              Script to download all html pages for minors in Faculty of Math
@@ -53,15 +55,15 @@ def fetch_faculty_minor(path):
                       "Plans for Students outside the Mathematics Faculty", "Software Engineering"]
 
     # fetch programs
-    http = urllib3.PoolManager()
-    response = http.request('GET', url_minor)
+    http = urllib3.PoolManager(cert_reqs='CERT_NONE')
+    response = http.request('GET', url_minor + str(year))
     data = BeautifulSoup(response.data, 'html.parser')
 
     table = data.find_all("a", class_="Level3")
 
     for major in table:
         if str(major.text) not in link_to_ignore:
-            link = root + major["href"]
+            link = root + major["href"] + '/?ActiveDate=9/1/' + str(year)
             major_reponse = http.request('GET', link)
             major_data = BeautifulSoup(major_reponse.data, 'html.parser')
             major_table = major_data.find_all("a", class_="Level3Group")
@@ -69,9 +71,11 @@ def fetch_faculty_minor(path):
             for l in major_table:
                 if "minor" in str(l.text).lower():
                     print("Fetching {}...".format(str(l.text)))
-                    href = root + l['href']
-                    fileName = href.split("/")[-1]
-                    fileName = "/" + fileName + ".html"
+                    href = root + l['href'] + '/?ActiveDate=9/1/' + str(year)
+                    fileName = href.split("/")[-4]
+                    # undergrad calendar year
+                    a_year = str(year % 1000) + '-' + str(year % 1000 + 1)
+                    fileName = "/" + a_year + '-' + fileName + ".html"
                     resp = get(href)
                     with open(path + fileName, 'wb') as fOut:
                         fOut.write(resp.content)
@@ -91,5 +95,8 @@ if __name__ == '__main__':
     else:
         os.mkdir(path)
 
-    fetch_degree_req(path)
-    fetch_faculty_minor(path)
+    cur_year = datetime.today().year
+    #for year in range(cur_year - 4, cur_year + 1):
+    for year in range(2018, 2019):
+        fetch_degree_req(path, year)
+        fetch_faculty_minor(path, year)
