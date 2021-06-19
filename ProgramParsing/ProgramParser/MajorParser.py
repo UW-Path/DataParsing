@@ -86,13 +86,13 @@ class MajorParser:
     def is_additional(self, string):
         pass
 
-    def load_file(self, file):
+    def load_file(self, file, year):
         """
                 Parse html file to gather a list of required courses for the major
 
                 :return:
         """
-        pass
+        return pkg_resources.resource_string(__name__, str(year)+"_"+file)
 
     def __str__(self):
         output = ""

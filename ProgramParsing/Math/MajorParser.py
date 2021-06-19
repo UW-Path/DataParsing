@@ -331,13 +331,13 @@ class MathMajorParser(MajorParser):
         else: 
             return False
 
-    def load_file(self, file):
+    def load_file(self, file, year):
         """
                 Parse html file to gather a list of required courses for the major
 
                 :return:
         """
-        html = pkg_resources.resource_string(__name__, file)
+        html = MajorParser.load_file(self, file, year)
         # html = open(file, encoding="utf8")
         self.data = BeautifulSoup(html, 'html.parser')
 

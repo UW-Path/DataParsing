@@ -1,7 +1,7 @@
 from Database.DatabaseSender import DatabaseSender
 
-#TODO Make this dynamic
-CALENDAR_YEAR = "2021-2022" #This needs to be updated manually every school year
+# Must be in this format
+CALENDAR_YEARS = ["2018-2019", "2019-2020", "2020-2021"]
 
 def get_link(file):
     #clean up
@@ -14,18 +14,8 @@ def get_link(file):
 def main(majorParser, files, faculty="Math", DropTable=False):
     dbc = DatabaseSender()
     if DropTable:
-        #instead of dropping table, doing a delete command for the calander year parsing only
-        # TODO: Calder run it once on docker then delete
-        oneTimeUpdate = """ALTER TABLE requirements
-                        ADD year varchar(20);
-                        
-                        UPDATE requirements
-                        SET year = '2020-2021';"""
-        dbc.execute(oneTimeUpdate)
-        ## REMOVE UP TO THIS LINE
-
-        dbc.execute("DELETE FROM {req} WHERE YEAR='{year}'".format(req=dbc.requirements_table, year=CALENDAR_YEAR))
-        # dbc.create_requirements()
+        dbc.execute("DROP TABLE IF EXISTS " + dbc.requirements_table + ";")
+        dbc.create_requirements()
 
     for file in files:
         print("CURRENT FILE PARSING : " + file)
@@ -36,7 +26,8 @@ def main(majorParser, files, faculty="Math", DropTable=False):
 
         link = get_link(file)
         # Parser requirement is a list of MajorReq Object
-        dbc.insert_requirements(parser.requirement, faculty, link, CALENDAR_YEAR)
+        calendar_year = get_calendar_year(file) # must implement this after implementing UpdateDegreeRequirement properly
+        dbc.insert_requirements(parser.requirement, faculty, link, calendar_year)
         dbc.commit()
 
     dbc.close()
