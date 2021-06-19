@@ -14,4 +14,8 @@ if __name__ == "__main__":
 
     # files = set(["/Specs/ENV-Honours-International-Development.html"])
 
-    main(EnvironmentMajorParser, files, "Environment")
+    parsers = {
+        'MajorParser': EnvironmentMajorParser,
+    }
+
+    main(parsers, files, "Environment")

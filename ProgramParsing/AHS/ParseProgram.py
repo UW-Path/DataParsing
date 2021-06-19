@@ -11,4 +11,8 @@ if __name__ == "__main__":
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
     files = files - filesToIgnore
 
-    main(AHSMajorParser, files, "Applied Health Science")
+    parsers = {
+        'MajorParser': AHSMajorParser,
+    }
+
+    main(parsers, files, "Applied Health Science")
