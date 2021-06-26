@@ -14,7 +14,7 @@ import re
 import pkg_resources
 
 
-class MathMajorParser2021_2022(MajorParser):
+class MathMajorParser(MajorParser):
     def _get_program(self):
         program = self.data.find_all("span", id="ctl00_contentMain_lblBottomTitle")
 
@@ -328,7 +328,7 @@ class MathMajorParser2021_2022(MajorParser):
             return False
         if "additional" == secondWord:
             return True
-        else: 
+        else:
             return False
 
     def load_file(self, file, year):
@@ -337,8 +337,8 @@ class MathMajorParser2021_2022(MajorParser):
 
                 :return:
         """
-        html = MajorParser.load_file(self, file, year)
-        # html = open(file, encoding="utf8")
+        html = pkg_resources.resource_string(__name__, file)
+
         self.data = BeautifulSoup(html, 'html.parser')
 
         program = self._get_program()
