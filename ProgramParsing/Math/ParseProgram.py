@@ -17,7 +17,7 @@ if __name__ == "__main__":
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
     files = files - filesToIgnore
 
-    files = set(["/Specs/MATH-Actuarial-Science1.html"])
+    # files = set(["/Specs/MATH-Actuarial-Science1.html"])
 
     # put parsers into a dictionary
     parsers = {

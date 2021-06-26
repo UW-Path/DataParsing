@@ -52,6 +52,7 @@ def main(majorParsers, files, faculty="Math", DropTable=False):
         print("CURRENT FILE PARSING : " + file)
 
         parser = getMajorParser(majorParsers, calendar_year)
+        parser = parser()
         parser.load_file(file, calendar_year)
         link = get_link(file)
 
