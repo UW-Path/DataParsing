@@ -49,7 +49,7 @@ def fetch_degree_req(path, year):
                     print("Fetching {}...".format(prog_text))
                     href = root + program['href'] + '/?ActiveDate=9/1/' + str(year)
                     fileName = href.split("/")[-4]
-                    a_year = str(year % 1000) + '-' + str(year % 1000 + 1)
+                    a_year = str(year) + '-' + str(year + 1)
                     fileName = "/" + a_year + '-' + fileName + ".html"
                     resp = get(href)
                     with open(path + fileName, 'wb') as fOut:
@@ -71,6 +71,5 @@ if __name__ == '__main__':
         os.mkdir(path)
 
     cur_year = datetime.today().year
-    for year in range(2019, 2022):
-    #for year in range(cur_year - 4, cur_year + 1):
+    for year in range(cur_year - 1, cur_year + 0):
         fetch_degree_req(path, year)
