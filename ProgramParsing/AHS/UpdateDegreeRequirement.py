@@ -6,20 +6,21 @@ import os
 import urllib3
 from bs4 import BeautifulSoup
 from requests import get
+from datetime import datetime
 
+# pre 2021-2022
+plans_old = ["https://ugradcalendar.uwaterloo.ca/group/AHS-Department-of-Kinesiology/?ActiveDate=9/1/",
+         "https://ugradcalendar.uwaterloo.ca/group/AHS-Department-of-Recreation-and-Leisure-Studies/?ActiveDate=9/1/",
+         "https://ugradcalendar.uwaterloo.ca/group/AHS-School-of-Public-Health-and-Health-Systems/?ActiveDate=9/1/"]
 
-plans_2020_2021 = ["https://ugradcalendar.uwaterloo.ca/group/AHS-Department-of-Kinesiology",
-         "https://ugradcalendar.uwaterloo.ca/group/AHS-Department-of-Recreation-and-Leisure-Studies",
-         "https://ugradcalendar.uwaterloo.ca/group/AHS-School-of-Public-Health-and-Health-Systems"]
-
-#current plan
-plans = ["https://ugradcalendar.uwaterloo.ca/group/HEA-Department-of-Kinesiology",
-         "https://ugradcalendar.uwaterloo.ca/group/HEA-Department-of-Recreation-and-Leisure-Studies",
-         "https://ugradcalendar.uwaterloo.ca/group/HEA-School-of-Public-Health-and-Health-Systems"]
+# 2021-2022 onwards
+plans_new = ["https://ugradcalendar.uwaterloo.ca/group/HEA-Department-of-Kinesiology/?ActiveDate=9/1/",
+             "https://ugradcalendar.uwaterloo.ca/group/HEA-Department-of-Recreation-and-Leisure-Studies/?ActiveDate=9/1/",
+             "https://ugradcalendar.uwaterloo.ca/group/HEA-School-of-Public-Health-and-Health-Systems/?ActiveDate=9/1/"]
 
 root = "http://ugradcalendar.uwaterloo.ca/"
 
-def fetch_degree_req(path):
+def fetch_degree_req(path, year):
     """
          path: str
          Script to download all html pages for degree req
@@ -28,10 +29,15 @@ def fetch_degree_req(path):
     link_to_ignore = ["Overview", "Joint Honours Degree", "Joint Honours Degrees", "Minors", "Accelerated Master's Program",
                       "Gerontology", "The Area of Gerontology"]
 
+    if year >= 2021:
+        plans = plans_new
+    else:
+        plans = plans_old
+
     # fetch programs
-    http = urllib3.PoolManager()
+    http = urllib3.PoolManager(cert_reqs='CERT_NONE')
     for plan in plans:
-        response = http.request('GET', plan)
+        response = http.request('GET', plan + str(year))
         data = BeautifulSoup(response.data, 'html.parser')
 
         tables = [data.find_all("a", class_="Level2Group"),  data.find_all("a", class_="Level3Group")]
@@ -41,9 +47,10 @@ def fetch_degree_req(path):
                 prog_text = str(program.text)
                 if prog_text not in link_to_ignore:
                     print("Fetching {}...".format(prog_text))
-                    href = root + program['href']
-                    fileName = href.split("/")[-1]
-                    fileName = "/" + fileName + ".html"
+                    href = root + program['href'] + '/?ActiveDate=9/1/' + str(year)
+                    fileName = href.split("/")[-4]
+                    a_year = str(year) + '-' + str(year + 1)
+                    fileName = "/" + a_year + '-' + fileName + ".html"
                     resp = get(href)
                     with open(path + fileName, 'wb') as fOut:
                         fOut.write(resp.content)
@@ -63,4 +70,6 @@ if __name__ == '__main__':
     else:
         os.mkdir(path)
 
-    fetch_degree_req(path)
+    cur_year = datetime.today().year
+    for year in range(cur_year - 1, cur_year + 0):
+        fetch_degree_req(path, year)
