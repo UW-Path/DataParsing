@@ -15,6 +15,9 @@ def main(majorParser, files, faculty="Math", DropTable=False):
     dbc = DatabaseSender()
     if DropTable:
         dbc.execute("DELETE FROM {req} WHERE YEAR='{year}'".format(req=dbc.requirements_table, year=CALENDAR_YEAR))
+
+        # TODO: FOR PERSONAL RUN UNCOMMENT THESE LINES
+        # dbc.execute("DROP TABLE IF EXISTS " + dbc.requirements_table + ";")
         # dbc.create_requirements()
 
     for file in files:
