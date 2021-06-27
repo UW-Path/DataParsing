@@ -39,7 +39,11 @@ def fetch_degree_req(path, year):
         # undergrad calendar year
         a_year = str(year) + '-' + str(year + 1)
         fileName = "/" + a_year + '-' + fileName + ".html"
-        href = root + href + '/?ActiveDate=9/1/' + str(year)
+        # cases where href contains a full URL already
+        if "ugradcalendar" in href:
+            href = href + '/?ActiveDate=9/1/' + str(year)
+        else:
+            href = root + href + '/?ActiveDate=9/1/' + str(year)
         print("Fetching " + href + "...")
         resp = get(href)
         with open(path + fileName, 'wb') as fOut:
