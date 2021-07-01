@@ -11,7 +11,7 @@ import os
 import urllib3
 from bs4 import BeautifulSoup
 from requests import get
-from datetime import datetime
+from ProgramParsing.CONSTANTS.Constants import PARSE_YEAR_BEG, PARSE_YEAR_END
 
 
 url_plans = "https://ugradcalendar.uwaterloo.ca/page/MATH-List-of-Academic-Programs-or-Plans/?ActiveDate=9/1/"
@@ -99,7 +99,6 @@ if __name__ == '__main__':
     else:
         os.mkdir(path)
 
-    cur_year = datetime.today().year
-    for year in range(cur_year - 1, cur_year + 0):
+    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END):
         fetch_degree_req(path, year)
         fetch_faculty_minor(path, year)
