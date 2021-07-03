@@ -77,12 +77,10 @@ def main(majorParsers, files, faculty="Math", DropTable=False):
         link = get_link(file, calendar_year)
 
         total += len(parser.requirement)
-        print("parsed " + str(len(parser.requirement)))
 
         # Parser requirement is a list of MajorReq Object
-        # dbc.insert_requirements(parser.requirement, faculty, link, calendar_year)
-        # dbc.commit()
+        dbc.insert_requirements(parser.requirement, faculty, link, calendar_year)
+        dbc.commit()
 
-    print("total parsed: " + str(total))
 
     dbc.close()
