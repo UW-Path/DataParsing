@@ -21,7 +21,6 @@ if __name__ == "__main__":
     files = set(["/Specs/2021-2022-MATH-Bachelor-of-Mathematics-Computer-Science-1.html"])
 
     # put parsers into a dictionary
-
     parsers = {
             'MajorParser': MathMajorParser,
             'MajorParser2021_2022': MathMajorParser2021_2022

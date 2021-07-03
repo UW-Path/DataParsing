@@ -1,5 +1,6 @@
 """
 CourseParser.py is a library built to receive information on Major Requirements
+
 Contributors:
 Hao Wei Huang
 Calder Lund
@@ -139,6 +140,10 @@ class ArtsMajorParser2021_2022(MajorParser):
     def load_file(self, file, year):
         """
                 Parse html file to gather a list of required courses for the major
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/multi-year-programs
                 :return:
         """
         html = pkg_resources.resource_string(__name__, file)
@@ -234,3 +239,7 @@ class ArtsMajorParser2021_2022(MajorParser):
                     #not parsable
                 i += 1
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/multi-year-programs

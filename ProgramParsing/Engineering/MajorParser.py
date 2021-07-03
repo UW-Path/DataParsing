@@ -152,7 +152,7 @@ class EngineeringMajorParser(MajorParser):
 
                 :return:
         """
-        html = pkg_resources.resource_string(__name__, file)
+        html = MajorParser.load_file(self, file, year)
         self.data = BeautifulSoup(html, 'html.parser')
 
         program = self._get_program()
@@ -165,7 +165,6 @@ class EngineeringMajorParser(MajorParser):
         information = self.data.find("span", {'class': 'MainContent'})
 
         table = self.get_table(information)
-
         # Environment Engineering 2019-2020 had a table for some reason
         ENV = "ENG-Environmental-Engineering"
         if table and ENV not in file:
@@ -180,8 +179,9 @@ class EngineeringMajorParser(MajorParser):
                 tds = tr.find_all("td")
                 #special case for management eng
                 th = tr.find("th")
+
                 if file == "/Specs/2019-2020-ENG-Environmental-Engineering.html":
-                    a = 123
+                    a =123
 
                 if th:
                     t = th.text
