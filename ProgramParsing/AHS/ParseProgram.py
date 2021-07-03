@@ -1,4 +1,5 @@
 from ProgramParsing.AHS.MajorParser import AHSMajorParser
+from ProgramParsing.AHS.MajorParser2021_2022 import AHSMajorParser2021_2022
 from ProgramParsing.ProgramParser.ParseProgram import main, filterFiles
 import os
 
@@ -12,6 +13,7 @@ if __name__ == "__main__":
 
     parsers = {
         'MajorParser': AHSMajorParser,
+        'MajorParser2021_2022': AHSMajorParser2021_2022
     }
 
     main(parsers, files, "Applied Health Science")

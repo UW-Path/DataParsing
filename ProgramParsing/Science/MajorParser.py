@@ -210,8 +210,8 @@ class ScienceMajorParser(MajorParser):
 
                 :return:
         """
-        html = MajorParser.load_file(self, file, year)
-        # html = open(file, encoding="utf8")
+
+        html = pkg_resources.resource_string(__name__, file)
         self.data = BeautifulSoup(html, 'html.parser')
 
         program = self._get_program()

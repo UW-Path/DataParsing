@@ -1,4 +1,5 @@
 from ProgramParsing.Engineering.MajorParser import EngineeringMajorParser
+from ProgramParsing.Engineering.MajorParser2021_2022 import EngineeringMajorParser2021_2022
 from ProgramParsing.ProgramParser.ParseProgram import main, filterFiles
 import os
 
@@ -17,6 +18,7 @@ if __name__ == "__main__":
 
     parsers = {
         'MajorParser': EngineeringMajorParser,
+        'MajorParser2021_2022': EngineeringMajorParser2021_2022
     }
 
     main(parsers, files, "Engineering")

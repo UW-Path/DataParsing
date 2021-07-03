@@ -95,4 +95,5 @@ if __name__ == '__main__':
 
     for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END + 1):
         fetch_degree_req(path, year)
-        fetch_faculty_minor(path, year)
+        # Ignore minor for now
+        # fetch_faculty_minor(path, year)
