@@ -1,7 +1,6 @@
 from ProgramParsing.Math.MajorParser import MathMajorParser
 from ProgramParsing.Math.MajorParser2021_2022 import MathMajorParser2021_2022
-from ProgramParsing.ProgramParser.ParseProgram import main
-from ProgramParsing.CONSTANTS.Constants import PARSE_YEAR_BEG, PARSE_YEAR_END
+from ProgramParsing.ProgramParser.ParseProgram import main, add_year_ignore
 import os
 
 # For now, we should have a default MathMajorParser and a parser for every year
@@ -17,11 +16,8 @@ if __name__ == "__main__":
                      "MATH-Mathematical-Optimization1.html", "MATH-Math-or-Chartered-Professional-Accountancy-co.html"]
     # adds the academic year in front of strings in filesToIgnore
     filesToIgnoreYear = []
-    # make sure this for loops aligns with the files in the Specs folder
-    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END):
-        for fti in filesToIgnore:
-            year_range = str(year) + "-" + str(year + 1) + "-"
-            filesToIgnoreYear.append(year_range+fti)
+    # adds year in front of files in filesToIgnore
+    filesToIgnoreYear = add_year_ignore(filesToIgnore)
 
     filesToIgnore = set(["/Specs/" + f for f in filesToIgnoreYear])
     print(filesToIgnore)
