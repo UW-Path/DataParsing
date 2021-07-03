@@ -1,5 +1,5 @@
 from ProgramParsing.Environment.MajorParser import EnvironmentMajorParser
-from ProgramParsing.ProgramParser.ParseProgram import main
+from ProgramParsing.ProgramParser.ParseProgram import main, filterFiles
 import os
 
 if __name__ == "__main__":
@@ -9,8 +9,8 @@ if __name__ == "__main__":
 
     filesToIgnore = ["ENV-Env-Res-Sus-Env-Res-Stud-Hons-Reg-Co-op.html", "ENV-Honours-Environment-Business-Co-op-and-Reg.html",
                      "ENV-Honours-Geography-and-Aviation-Regular.html"]
-    filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
-    files = files - filesToIgnore
+
+    files = filterFiles(files, filesToIgnore)
 
     # files = set(["/Specs/ENV-Honours-International-Development.html"])
 

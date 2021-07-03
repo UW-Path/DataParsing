@@ -1,4 +1,5 @@
 from Database.DatabaseSender import DatabaseSender
+from ProgramParsing.ENV_VARIABLES.parse_years import PARSE_YEAR_BEG, PARSE_YEAR_END
 import re
 
 # Must be in this format
@@ -6,9 +7,25 @@ CALENDAR_YEARS = ["2019-2020", "2020-2021", "2021-2022"]
 DEFAULT_YEAR = "2020-2021"
 
 
-def get_link(file):
+def filterFiles(files, filesToIgnore):
+    # adds the academic year in front of strings in filesToIgnore
+    filesToIgnoreYear = []
+    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END + 1):
+        for fti in filesToIgnore:
+            year_range = str(year) + "-" + str(year + 1) + "-"
+            filesToIgnoreYear.append(year_range + fti)
+    filesToIgnore = set(["/Specs/" + f for f in filesToIgnoreYear])
+    files = files - filesToIgnore
+
+    return files
+
+
+def get_link(file, calendar_year):
     #clean up
     file = file.replace("/Specs/", "").replace(".html", "")
+    # removes the calendar_year from the file name
+    if calendar_year in file:
+        file = file.replace(calendar_year + "-", "")
     if "table" in file.lower():
         # special case for table 1/table 2 in math
         file = "MATH-Degree-Requirements-for-Math-students"
@@ -54,7 +71,7 @@ def main(majorParsers, files, faculty="Math", DropTable=False):
         parser = getMajorParser(majorParsers, calendar_year)
         parser = parser()
         parser.load_file(file, calendar_year)
-        link = get_link(file)
+        link = get_link(file, calendar_year)
 
         # Parser requirement is a list of MajorReq Object
         dbc.insert_requirements(parser.requirement, faculty, link, calendar_year)

@@ -1,5 +1,5 @@
 from ProgramParsing.AHS.MajorParser import AHSMajorParser
-from ProgramParsing.ProgramParser.ParseProgram import main
+from ProgramParsing.ProgramParser.ParseProgram import main, filterFiles
 import os
 
 if __name__ == "__main__":
@@ -8,8 +8,7 @@ if __name__ == "__main__":
     files = set(["/Specs/" + f for f in os.listdir(path) if f.endswith(".html")])
 
     filesToIgnore = []
-    filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
-    files = files - filesToIgnore
+    files = filterFiles(files, filesToIgnore)
 
     parsers = {
         'MajorParser': AHSMajorParser,
