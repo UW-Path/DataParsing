@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 from StringToNumber import StringToNumber
 import re
 
-class AHSMajorParser(MajorParser):
+class AHSMajorParser2021_2022(MajorParser):
     def __increment(self, i, information):
         i += 1
         while i < len(information) and information[i].replace(" ", "") == "":

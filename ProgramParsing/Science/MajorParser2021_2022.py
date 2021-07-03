@@ -15,7 +15,7 @@ from math import ceil
 from Database.DatabaseReceiver import DatabaseReceiver
 
 
-class ScienceMajorParser(MajorParser):
+class ScienceMajorParser2021_2022(MajorParser):
     def _get_program(self):
         program = self.data.find_all("span", id="ctl00_contentMain_lblPageTitle")
 
