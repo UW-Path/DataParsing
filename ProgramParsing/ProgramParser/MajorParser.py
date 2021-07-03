@@ -89,6 +89,7 @@ class MajorParser:
     def load_file(self, file, year):
         """
                 Parse html file to gather a list of required courses for the major
+                Note: This function is deprecated: no longer needed as file convention has changed
 
                 :return:
         """

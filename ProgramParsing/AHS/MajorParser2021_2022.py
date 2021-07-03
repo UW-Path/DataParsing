@@ -1,6 +1,5 @@
 """
 MajorParser.py is a library built to receive information on Major Requirements
-
 Contributors:
 Calder Lund
 """
@@ -12,7 +11,7 @@ from bs4 import BeautifulSoup
 from StringToNumber import StringToNumber
 import re
 
-class AHSMajorParser(MajorParser):
+class AHSMajorParser2021_2022(MajorParser):
     def __increment(self, i, information):
         i += 1
         while i < len(information) and information[i].replace(" ", "") == "":
@@ -70,7 +69,6 @@ class AHSMajorParser(MajorParser):
     def load_file(self, file, year):
         """
                 Parse html file to gather a list of required courses for the major
-
                 :return:
         """
 

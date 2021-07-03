@@ -1,6 +1,5 @@
 """
 CourseParser.py is a library built to receive information on Major Requirements
-
 Contributors:
 Hao Wei Huang
 """
@@ -15,7 +14,7 @@ from Database.DatabaseReceiver import DatabaseReceiver
 from StringToNumber import StringToNumber
 
 
-class EngineeringMajorParser(MajorParser):
+class EngineeringMajorParser2021_2022(MajorParser):
     def _get_program(self):
         program = self.data.find_all("span", id="ctl00_contentMain_lblPageTitle")
 
@@ -149,9 +148,9 @@ class EngineeringMajorParser(MajorParser):
     def load_file(self, file, year):
         """
                 Parse html file to gather a list of required courses for the major
-
                 :return:
         """
+
         html = pkg_resources.resource_string(__name__, file)
         self.data = BeautifulSoup(html, 'html.parser')
 
@@ -166,9 +165,7 @@ class EngineeringMajorParser(MajorParser):
 
         table = self.get_table(information)
 
-        # Environment Engineering 2019-2020 had a table for some reason
-        ENV = "ENG-Environmental-Engineering"
-        if table and ENV not in file:
+        if table:
             #search for courses here
             # terms = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
             term = ""
@@ -180,9 +177,6 @@ class EngineeringMajorParser(MajorParser):
                 tds = tr.find_all("td")
                 #special case for management eng
                 th = tr.find("th")
-                if file == "/Specs/2019-2020-ENG-Environmental-Engineering.html":
-                    a = 123
-
                 if th:
                     t = th.text
                 else:
@@ -360,5 +354,4 @@ class EngineeringMajorParser(MajorParser):
 
 
                 i += 1
-
 
