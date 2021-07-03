@@ -9,7 +9,7 @@ import os
 import urllib3
 from bs4 import BeautifulSoup
 from requests import get
-from ProgramParsing.CONSTANTS.Constants import PARSE_YEAR_BEG, PARSE_YEAR_END
+from ProgramParsing.ENV_VARIABLES.parse_years import PARSE_YEAR_BEG, PARSE_YEAR_END
 
 # pre 2019
 url_plans1 = "https://ugradcalendar.uwaterloo.ca/group/SCI-Science-Academic-Plans/?ActiveDate=9/1/"
@@ -115,7 +115,7 @@ if __name__ == '__main__':
     else:
         os.mkdir(path)
 
-    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END):
+    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END + 1):
         fetch_degree_req(path, year)
         # pre 2019 is pulled in with fetch_degree_req
         if year >= 2019:

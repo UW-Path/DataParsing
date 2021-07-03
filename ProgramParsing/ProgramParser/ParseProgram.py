@@ -1,5 +1,5 @@
 from Database.DatabaseSender import DatabaseSender
-from ProgramParsing.CONSTANTS.Constants import PARSE_YEAR_BEG, PARSE_YEAR_END
+from ProgramParsing.ENV_VARIABLES.parse_years import PARSE_YEAR_BEG, PARSE_YEAR_END
 import re
 
 # Must be in this format
@@ -7,13 +7,17 @@ CALENDAR_YEARS = ["2019-2020", "2020-2021", "2021-2022"]
 DEFAULT_YEAR = "2020-2021"
 
 
-def add_year_ignore(filesToIgnore):
+def filterFiles(files, filesToIgnore):
+    # adds the academic year in front of strings in filesToIgnore
     filesToIgnoreYear = []
-    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END):
+    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END + 1):
         for fti in filesToIgnore:
             year_range = str(year) + "-" + str(year + 1) + "-"
-            filesToIgnoreYear.append(year_range+fti)
-    return filesToIgnoreYear
+            filesToIgnoreYear.append(year_range + fti)
+    filesToIgnore = set(["/Specs/" + f for f in filesToIgnoreYear])
+    files = files - filesToIgnore
+
+    return files
 
 
 def get_link(file, calendar_year):

@@ -6,7 +6,7 @@ import os
 import urllib3
 from bs4 import BeautifulSoup
 from requests import get
-from ProgramParsing.CONSTANTS.Constants import PARSE_YEAR_BEG, PARSE_YEAR_END
+from ProgramParsing.ENV_VARIABLES.parse_years import PARSE_YEAR_BEG, PARSE_YEAR_END
 
 url_plans = "https://ugradcalendar.uwaterloo.ca/group/ENG-BASc-and-BSE-Specific-Degree-Requirements/?ActiveDate=9/1/"
 root = "http://ugradcalendar.uwaterloo.ca/"
@@ -60,5 +60,5 @@ if __name__ == '__main__':
     else:
         os.mkdir(path)
 
-    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END):
+    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END + 1):
         fetch_degree_req(path, year)
