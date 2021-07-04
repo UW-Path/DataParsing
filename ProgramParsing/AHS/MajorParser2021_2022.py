@@ -153,4 +153,6 @@ class AHSMajorParser2021_2022(MajorParser):
                         self.__append_requirement(line, majorReq)
                     i = self.__increment(i, information)
                     continue
+
             i = self.__increment(i, information)
+

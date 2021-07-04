@@ -18,7 +18,7 @@ if __name__ == "__main__":
     # adds year in front of files in filesToIgnore
     files = filterFiles(files, filesToIgnore)
 
-    #files = set(["/Specs/2020-2021-MATH-Actuarial-Science1.html"])
+    # files = set(["/Specs/2021-2022-MATH-Bachelor-of-Mathematics-Computer-Science-1.html"])
 
     # put parsers into a dictionary
     parsers = {
@@ -26,4 +26,4 @@ if __name__ == "__main__":
             'MajorParser2021_2022': MathMajorParser2021_2022
             }
 
-    main(parsers, files, DropTable=False)
+    main(parsers, files, DropTable=True)

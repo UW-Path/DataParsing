@@ -236,4 +236,3 @@ class ArtsMajorParser2021_2022(MajorParser):
                     #not parsable
                 i += 1
 
-
