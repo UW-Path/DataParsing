@@ -421,6 +421,8 @@ class MathMajorParser2021_2022(MajorParser):
                 # need to check if number_additional is an INT
                 if list:
                     self.requirement.append(MathMajorReq(list, "Additional", program, relatedMajor, self.additionalRequirement, number_additional))
+
+            # TODO: Need to fix case for Math CS
             elif self.is_additional(l) and "excluding the following" in l:
                 number_additional_string = l.split(' ')[0]
                 number_additional = StringToNumber[number_additional_string].value
