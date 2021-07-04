@@ -9,13 +9,13 @@ from requests import get
 from ProgramParsing.ProgramParser.ENV_VARIABLES.parse_years import PARSE_YEAR_BEG, PARSE_YEAR_END
 
 
-plans_2021_newer = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Academic-Plans/?ActiveDate=9/1/"]
+plans_2021_newer = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Academic-Plans"]
 
-plans_2020_older = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Enterprise-and-Development/?ActiveDate=9/1/",
-                    "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Knowledge-Integration/?ActiveDate=9/1/",
-                    "https://ugradcalendar.uwaterloo.ca/group/ENV-School-Environment-Resources-Sustainability/?ActiveDate=9/1/",
-                    "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Geography-and-Environmental-Mgmt/?ActiveDate=9/1/",
-                    "https://ugradcalendar.uwaterloo.ca/group/ENV-School-of-Planning/?ActiveDate=9/1/"]
+plans_2020_older = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Enterprise-and-Development",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Knowledge-Integration",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-School-Environment-Resources-Sustainability",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Geography-and-Environmental-Mgmt",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-School-of-Planning"]
 
 #for now we are only parsing the plans
 pages = ["https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Co-operative-Planning/?ActiveDate=9/1/",
@@ -46,7 +46,7 @@ def fetch_plan(path, year):
     # fetch programs
     http = urllib3.PoolManager(cert_reqs='CERT_NONE')
     for plan in plans:
-        response = http.request('GET', plan + str(year))
+        response = http.request('GET', plan + "/?ActiveDate=9/1/" + str(year))
         data = BeautifulSoup(response.data, 'html.parser')
 
         subpages = data.find_all("a", class_="Level2Group")
