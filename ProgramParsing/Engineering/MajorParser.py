@@ -1,6 +1,5 @@
 """
 CourseParser.py is a library built to receive information on Major Requirements
-
 Contributors:
 Hao Wei Huang
 """
@@ -149,10 +148,9 @@ class EngineeringMajorParser(MajorParser):
     def load_file(self, file, year):
         """
                 Parse html file to gather a list of required courses for the major
-
                 :return:
         """
-        html = MajorParser.load_file(self, file, year)
+        html = pkg_resources.resource_string(__name__, file)
         self.data = BeautifulSoup(html, 'html.parser')
 
         program = self._get_program()
@@ -360,5 +358,3 @@ class EngineeringMajorParser(MajorParser):
 
 
                 i += 1
-
-

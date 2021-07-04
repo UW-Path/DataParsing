@@ -1,4 +1,5 @@
 from ProgramParsing.Environment.MajorParser import EnvironmentMajorParser
+from ProgramParsing.Environment.MajorParser2021_2022 import EnvironmentMajorParser2021_2022
 from ProgramParsing.ProgramParser.ParseProgram import main, filterFiles
 import os
 
@@ -17,6 +18,7 @@ if __name__ == "__main__":
 
     parsers = {
         'MajorParser': EnvironmentMajorParser,
+        'MajorParser2021_2022': EnvironmentMajorParser2021_2022
     }
 
     main(parsers, files, "Environment")

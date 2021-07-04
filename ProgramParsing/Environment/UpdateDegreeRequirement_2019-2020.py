@@ -36,7 +36,7 @@ def fetch_degree_req(path):
     link_to_ignore = ["Overview", "Accelerated Master's"]
 
     # fetch programs
-    http = urllib3.PoolManager()
+    http = urllib3.PoolManager(cert_reqs='CERT_NONE')
     for plan in plans:
         response = http.request('GET', plan)
         data = BeautifulSoup(response.data, 'html.parser')
