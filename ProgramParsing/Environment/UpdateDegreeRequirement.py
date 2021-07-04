@@ -6,35 +6,47 @@ import os
 import urllib3
 from bs4 import BeautifulSoup
 from requests import get
+from ProgramParsing.ProgramParser.ENV_VARIABLES.parse_years import PARSE_YEAR_BEG, PARSE_YEAR_END
 
 
-plans = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Academic-Plans"]
+plans_2021_newer = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Academic-Plans/?ActiveDate=9/1/"]
+
+plans_2020_older = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Enterprise-and-Development/?ActiveDate=9/1/",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Knowledge-Integration/?ActiveDate=9/1/",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-School-Environment-Resources-Sustainability/?ActiveDate=9/1/",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Geography-and-Environmental-Mgmt/?ActiveDate=9/1/",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-School-of-Planning/?ActiveDate=9/1/"]
 
 #for now we are only parsing the plans
-pages = ["https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Co-operative-Planning",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Env-Res-Sus-Env-Res-Stud-Hons-Reg-Co-op",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Bachelor-of-Knowledge-Integration-1",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Environment-Business-Co-op-and-Reg",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-International-Development",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Geography-Environmental-Management-3-Yr-Gen",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Geography-Environmental-Management-4-Yr-Honour",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Geography-and-Aviation-Regular",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Geomatics-Regular-and-Co-op"]
+pages = ["https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Co-operative-Planning/?ActiveDate=9/1/",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Env-Res-Sus-Env-Res-Stud-Hons-Reg-Co-op/?ActiveDate=9/1/",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Bachelor-of-Knowledge-Integration-1/?ActiveDate=9/1/",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Environment-Business-Co-op-and-Reg/?ActiveDate=9/1/",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-International-Development/?ActiveDate=9/1/",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Geography-Environmental-Management-3-Yr-Gen/?ActiveDate=9/1/",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Geography-Environmental-Management-4-Yr-Honour/?ActiveDate=9/1/",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Geography-and-Aviation-Regular/?ActiveDate=9/1/",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Geomatics-Regular-and-Co-op/?ActiveDate=9/1/"]
 
 root = "http://ugradcalendar.uwaterloo.ca/"
 
-def fetch_degree_req(path):
+def fetch_plan(path, year):
     """
          path: str
          Script to download all html pages for degree req
          return:
     """
     link_to_ignore = ["Overview", "Accelerated Master's"]
+    # uses the correct set of plans depending on the year
+    if year >= 2021:
+        plans = plans_2021_newer
+    else:
+        plans = plans_2021_newer
 
     # fetch programs
-    http = urllib3.PoolManager()
+    http = urllib3.PoolManager(cert_reqs='CERT_NONE')
     for plan in plans:
-        response = http.request('GET', plan)
+        response = http.request('GET', plan + str(year))
         data = BeautifulSoup(response.data, 'html.parser')
 
         subpages = data.find_all("a", class_="Level2Group")
@@ -51,18 +63,22 @@ def fetch_degree_req(path):
                     continue
                 if prog_text not in link_to_ignore:
                     print("Fetching {}...".format(prog_text))
-                    href = root + program['href']
-                    fileName = href.split("/")[-1]
-                    fileName = "/" + fileName + ".html"
+                    href = root + program['href'] + '/?ActiveDate=9/1/' + str(year)
+                    fileName = href.split("/")[-4]
+                    # undergrad calendar year
+                    a_year = str(year) + '-' + str(year + 1)
+                    fileName = "/" + a_year + '-' + fileName + ".html"
                     resp = get(href)
                     with open(path + fileName, 'wb') as fOut:
                         fOut.write(resp.content)
 
-def fetch_plan(path):
+def fetch_pages(path, year):
     for href in pages:
-        fileName = href.split("/")[-1]
+        fileName = href.split("/")[-4]
         print("Fetching {}...".format(fileName))
-        fileName = "/" + fileName + ".html"
+        # undergrad calendar year
+        a_year = str(year) + '-' + str(year + 1)
+        fileName = "/" + a_year + '-' + fileName + ".html"
         resp = get(href)
         with open(path + fileName, 'wb') as fOut:
             fOut.write(resp.content)
@@ -81,5 +97,7 @@ if __name__ == '__main__':
             os.remove(os.path.join(path, f))
     else:
         os.mkdir(path)
+    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END + 1):
+        if year >= 2021:
+            fetch_plan(path, year)
 
-    fetch_degree_req(path)

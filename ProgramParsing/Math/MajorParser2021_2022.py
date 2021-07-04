@@ -421,6 +421,12 @@ class MathMajorParser2021_2022(MajorParser):
                 # need to check if number_additional is an INT
                 if list:
                     self.requirement.append(MathMajorReq(list, "Additional", program, relatedMajor, self.additionalRequirement, number_additional))
+            elif self.is_additional(l) and "excluding the following" in l:
+                number_additional_string = l.split(' ')[0]
+                number_additional = StringToNumber[number_additional_string].value
+                if not isinstance(number_additional, int):
+                    number_additional = number_additional[0]
+                i += 1
             elif "non-math" in l:
                 # try to see if the second word is a number, if first is a number then the case before would capture
                 number_additional = 0

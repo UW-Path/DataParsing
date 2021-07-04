@@ -70,10 +70,7 @@ class AHSMajorParser2021_2022(MajorParser):
     def load_file(self, file, year):
         """
                 Parse html file to gather a list of required courses for the major
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/multi-year-programs
                 :return:
         """
 
@@ -156,8 +153,6 @@ class AHSMajorParser2021_2022(MajorParser):
                         self.__append_requirement(line, majorReq)
                     i = self.__increment(i, information)
                     continue
-<<<<<<< HEAD
+
             i = self.__increment(i, information)
-=======
-            i = self.__increment(i, information)
->>>>>>> origin/multi-year-programs
+

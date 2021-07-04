@@ -15,7 +15,7 @@ from Database.DatabaseReceiver import DatabaseReceiver
 from StringToNumber import StringToNumber
 
 
-class EnvironmentMajorParser(MajorParser):
+class EnvironmentMajorParser2021_2022(MajorParser):
     def _get_program(self):
         program = self.data.find_all("span", id="ctl00_contentMain_lblPageTitle")
         # didn't account for minor
@@ -225,7 +225,7 @@ class EnvironmentMajorParser(MajorParser):
                 :return:
         """
 
-        html = MajorParser.load_file(self, file, year)
+        html = pkg_resources.resource_string(__name__, file)
         self.data = BeautifulSoup(html, 'html.parser')
 
         program = self._get_program()
