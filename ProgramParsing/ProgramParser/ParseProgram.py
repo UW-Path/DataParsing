@@ -57,6 +57,7 @@ def main(majorParsers, files, faculty="Math", DropTable=False):
         dbc.execute("DROP TABLE IF EXISTS " + dbc.requirements_table + ";")
         dbc.create_requirements()
 
+    total = 0
     for file in files:
         calendar_year = get_calendar_year(file) # must implement this after implementing UpdateDegreeRequirement properly
 
@@ -70,8 +71,11 @@ def main(majorParsers, files, faculty="Math", DropTable=False):
         parser.load_file(file, calendar_year)
         link = get_link(file, calendar_year)
 
+        total += len(parser.requirement)
+
         # Parser requirement is a list of MajorReq Object
         dbc.insert_requirements(parser.requirement, faculty, link, calendar_year)
         dbc.commit()
+
 
     dbc.close()

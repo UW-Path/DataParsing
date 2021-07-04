@@ -225,7 +225,7 @@ class EnvironmentMajorParser(MajorParser):
                 :return:
         """
 
-        html = MajorParser.load_file(self, file, year)
+        html = pkg_resources.resource_string(__name__, file)
         self.data = BeautifulSoup(html, 'html.parser')
 
         program = self._get_program()

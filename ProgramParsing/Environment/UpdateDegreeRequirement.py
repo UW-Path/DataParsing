@@ -18,15 +18,15 @@ plans_2020_older = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-En
                     "https://ugradcalendar.uwaterloo.ca/group/ENV-School-of-Planning"]
 
 #for now we are only parsing the plans
-pages = ["https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Co-operative-Planning/?ActiveDate=9/1/",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Env-Res-Sus-Env-Res-Stud-Hons-Reg-Co-op/?ActiveDate=9/1/",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Bachelor-of-Knowledge-Integration-1/?ActiveDate=9/1/",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Environment-Business-Co-op-and-Reg/?ActiveDate=9/1/",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-International-Development/?ActiveDate=9/1/",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Geography-Environmental-Management-3-Yr-Gen/?ActiveDate=9/1/",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Geography-Environmental-Management-4-Yr-Honour/?ActiveDate=9/1/",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Geography-and-Aviation-Regular/?ActiveDate=9/1/",
-         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Geomatics-Regular-and-Co-op/?ActiveDate=9/1/"]
+pages = ["https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Co-operative-Planning",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Env-Res-Sus-Env-Res-Stud-Hons-Reg-Co-op",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Bachelor-of-Knowledge-Integration-1",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Environment-Business-Co-op-and-Reg",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-International-Development",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Geography-Environmental-Management-3-Yr-Gen",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Geography-Environmental-Management-4-Yr-Honour",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Geography-and-Aviation-Regular",
+         "https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Geomatics-Regular-and-Co-op"]
 
 root = "http://ugradcalendar.uwaterloo.ca/"
 
@@ -74,11 +74,12 @@ def fetch_plan(path, year):
 
 def fetch_pages(path, year):
     for href in pages:
-        fileName = href.split("/")[-4]
+        fileName = href.split("/")[-1]
         print("Fetching {}...".format(fileName))
         # undergrad calendar year
         a_year = str(year) + '-' + str(year + 1)
         fileName = "/" + a_year + '-' + fileName + ".html"
+        href = href + "/?ActiveDate=9/1/" + str(year)
         resp = get(href)
         with open(path + fileName, 'wb') as fOut:
             fOut.write(resp.content)
