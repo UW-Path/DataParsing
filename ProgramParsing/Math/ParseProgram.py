@@ -26,4 +26,4 @@ if __name__ == "__main__":
             'MajorParser2021_2022': MathMajorParser2021_2022
             }
 
-    main(parsers, files, DropTable=True)
+    main(parsers, files, DropTable=False)
