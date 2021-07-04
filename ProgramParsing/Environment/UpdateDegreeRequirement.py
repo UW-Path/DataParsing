@@ -41,7 +41,7 @@ def fetch_plan(path, year):
     if year >= 2021:
         plans = plans_2021_newer
     else:
-        plans = plans_2021_newer
+        plans = plans_2020_older
 
     # fetch programs
     http = urllib3.PoolManager(cert_reqs='CERT_NONE')
@@ -100,4 +100,6 @@ if __name__ == '__main__':
     for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END + 1):
         if year >= 2021:
             fetch_plan(path, year)
+        else:
+            fetch_pages(path, year)
 
