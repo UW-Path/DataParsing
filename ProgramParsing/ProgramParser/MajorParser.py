@@ -11,6 +11,7 @@ from ProgramParsing.Math.MajorReq import MajorReq
 from StringToNumber import StringToNumber
 import re
 import pkg_resources
+from collections import defaultdict
 
 
 class MajorParser:
@@ -19,6 +20,9 @@ class MajorParser:
         self.data = None
         self.requirement = []
         self.additionalRequirement = ""
+
+        # for eng factulty to catch duplcates
+        self.requirement_dict = defaultdict(int)
 
     def load_url(self, url):
         response = self.http.request('GET', url)
@@ -94,6 +98,14 @@ class MajorParser:
                 :return:
         """
         return pkg_resources.resource_string(__name__, str(year)+"_"+file)
+
+    def convert_dict_to_list(self, majorRequirements):
+        # If you use self.requirement_dict = defaultdict(int) to keep track of duplicated courses, you can use this function to convert into
+        # the standard list of reqs
+        self.requirement = []
+        for key in self.requirement_dict:
+            duplicate = self.requirement_dict[key]
+            self.requirement.append(majorRequirements(key[0], key[1] * duplicate, key[2], key[3], key[4], key[5] * duplicate))
 
     def __str__(self):
         output = ""

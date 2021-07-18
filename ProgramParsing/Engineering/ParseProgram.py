@@ -14,7 +14,7 @@ if __name__ == "__main__":
     # files = set(["/Specs//ENG-Environmental-Engineering.html"])
 
     #Multople TE does not display
-    # files = set(["/Specs/ENG-Mechatronics-Engineering.html"])
+    # files = set(["/Specs/2021-2022-ENG-Electrical-Engineering.html"])
 
     parsers = {
         'MajorParser': EngineeringMajorParser,
