@@ -40,6 +40,8 @@ class EngineeringMajorParser2021_2022(MajorParser):
         if line.startswith("Note") or line.startswith("("):
             return []
 
+        if "WKRPT" in line or "ECE 101" in line:
+            return []
 
         rangeCourse = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
                              line)
@@ -88,7 +90,7 @@ class EngineeringMajorParser2021_2022(MajorParser):
                 list.append(maj)
 
         if not list:
-            if "Elective" in line:
+            if "Elective" in line or "electives" in line:
                 return ["Elective"]
             return []
 
@@ -113,7 +115,7 @@ class EngineeringMajorParser2021_2022(MajorParser):
         #TODO: Match with database credits
         #TODO: Dafault as 0.5 credits
         for course in list:
-            self.requirement.append(EngineeringMajorReq([course], 1, major, relatedMajor, additionalRequirement, 0.5))
+            self.requirement_dict[((course), 1, major, relatedMajor, additionalRequirement, 0.5)] += 1
 
     def get_table(self, data):
         tables = data.find_all("table")
@@ -143,8 +145,7 @@ class EngineeringMajorParser2021_2022(MajorParser):
             list = self._course_list(req)
             if list:
                 credits = self._count_credits(list) / len(list) * number_additional
-                self.requirement.append(
-                    EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
+                self.requirement_dict[(tuple(list), number_additional, program, relatedMajor, term, credits)] += 1
 
     def load_file(self, file, year):
         """
@@ -201,8 +202,7 @@ class EngineeringMajorParser2021_2022(MajorParser):
                         list = self._course_list(self.get_text(tds[1]))
 
                     credits = self._count_credits(list)
-                    self.requirement.append(
-                        EngineeringMajorReq(list, 1, program, relatedMajor, term, credits))
+                    self.requirement_dict[(tuple(list), 1, program, relatedMajor, term, credits)] += 1
                     i+= 1
                     continue
                 elif "Work Term" in t:
@@ -229,8 +229,7 @@ class EngineeringMajorParser2021_2022(MajorParser):
                             list = self._course_list(t)
                             if list:
                                 credits = self._count_credits(list)/len(list)*number_additional
-                                self.requirement.append(
-                                    EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
+                                self.requirement_dict[(tuple(list), number_additional, program, relatedMajor, term, credits)] += 1
                             i += 1
                             continue
                         else:
@@ -255,8 +254,7 @@ class EngineeringMajorParser2021_2022(MajorParser):
                             list = self._course_list(line)
                             if list:
                                 credits = self._count_credits(list) / len(list) * number_additional
-                                self.requirement.append(
-                                    EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
+                                self.requirement_dict[(tuple(list), number_additional, program, relatedMajor, term, credits)] += 1
                             continue
                     else:
                         noOfCourse = 1
@@ -292,8 +290,7 @@ class EngineeringMajorParser2021_2022(MajorParser):
                             list = self._course_list(line)
                             if list:
                                 credits = self._count_credits(list) / len(list) * noOfCourse
-                                self.requirement.append(
-                                    EngineeringMajorReq(list, noOfCourse, program, relatedMajor, term, credits))
+                                self.requirement_dict[(tuple(list), noOfCourse, program, relatedMajor, term, credits)] += 1
                             continue
 
 
@@ -301,16 +298,8 @@ class EngineeringMajorParser2021_2022(MajorParser):
                         list = self._course_list(self.get_text(tds[0]))
                         if list:
                             credits = self._count_credits(list) / len(list) * noOfCourse
-                            self.requirement.append(
-                                EngineeringMajorReq(list, noOfCourse, program, relatedMajor, term, credits))
+                            self.requirement_dict[(tuple(list), noOfCourse, program, relatedMajor, term, credits)] += 1
                         i += 1
-
-
-
-
-
-
-
 
         else:
             i = 0
@@ -350,11 +339,7 @@ class EngineeringMajorParser2021_2022(MajorParser):
                     list = self._course_list(line)
                     if list:
                         credits = self._count_credits(list) / len(list) * number_additional
-                        self.requirement.append(
-                            EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
-
-
-
+                        self.requirement_dict[(tuple(list), number_additional, program, relatedMajor, term, credits)] += 1
                 i += 1
 
-
+        self.convert_dict_to_list(EngineeringMajorReq)
