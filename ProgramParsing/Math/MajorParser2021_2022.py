@@ -4,6 +4,7 @@ CourseParser.py is a library built to receive information on Major Requirements
 Contributors:
 Hao Wei Huang
 Calder Lund
+Brent Huang
 """
 
 from bs4 import BeautifulSoup
@@ -52,10 +53,9 @@ class MathMajorParser2021_2022(MajorParser):
         while i < len(info):
 
             line = info[i].strip().replace(" to ", "-")
-
             #Table II exception a bit hardcoded (info[i] == " ")
 
-            #Computational Math case:
+            #Computational Math cases:
             if "Notes:" in line:
                 break
 
@@ -191,7 +191,12 @@ class MathMajorParser2021_2022(MajorParser):
                 else: isChunk = False
 
                 line = info[i].strip().replace(" to ", "-")
+
                 if line.lower() in exception:
+                    break
+
+                # special computational math case
+                if "Computational Mathematics advisor" in line:
                     break
 
                 foundPattern = False
@@ -422,12 +427,17 @@ class MathMajorParser2021_2022(MajorParser):
                 if list:
                     self.requirement.append(MathMajorReq(list, "Additional", program, relatedMajor, self.additionalRequirement, number_additional))
 
-            # TODO: Need to fix case for Math CS
+            # TODO: Need to fix case for Math CS, need to ask how to fill it into the table
+            #   set to math for now
             elif self.is_additional(l) and "excluding the following" in l:
                 number_additional_string = l.split(' ')[0]
                 number_additional = StringToNumber[number_additional_string].value
                 if not isinstance(number_additional, int):
                     number_additional = number_additional[0]
+                self.requirement.append(
+                    MathMajorReq(["MATH"], "Additional", program,
+                                 relatedMajor, self.additionalRequirement,
+                                 number_additional))
                 i += 1
             elif "non-math" in l:
                 # try to see if the second word is a number, if first is a number then the case before would capture
