@@ -3,6 +3,7 @@ CourseParser.py is a library built to receive information on Major Requirements
 
 Contributors:
 Hao Wei Huang
+Brent Huang
 """
 
 import urllib3
@@ -53,13 +54,17 @@ class MajorParser:
         paragraphs = self.data.find_all(["p"]) # cant use span because will get everything else
         for p in paragraphs:
             # a bit hardcoded
-            if ("all the requirements" in str(p) or "course requirements" in str(p) or "all requirements" in str(p)) and "plan" in str(p):
+            if ("all the requirements" in str(p) or "course requirements" in str(p) or
+                "all requirements" in str(p) or "same requirements" in str(p)) and "plan" in str(p):
                 reqs = p.find_all("a")
-                print(reqs)
                 for req in reqs:
                     # span added for special case for  PMATH additional req #does not work
                     if(not self._has_numbers(req.contents[0])):
                         additionalRequirment.append(req.contents[0])
+                    elif "Table 1" in req.contents[0]:
+                        additionalRequirment.append("Table I")
+                    elif "Table 2" in req.contents[0]:
+                        additionalRequirment.append("Table II")
         return ", ".join(additionalRequirment)
 
     def _get_relatedMajor(self, program):
