@@ -201,8 +201,10 @@ class EngineeringMajorParser2021_2022(MajorParser):
                     else:
                         list = self._course_list(self.get_text(tds[1]))
 
-                    credits = self._count_credits(list)
-                    self.requirement_dict[(tuple(list), 1, program, relatedMajor, term, credits)] += 1
+                    # ECE 101A/B/C/D or WRKT has empty list
+                    if list:
+                        credits = self._count_credits(list)
+                        self.requirement_dict[(tuple(list), 1, program, relatedMajor, term, credits)] += 1
                     i+= 1
                     continue
                 elif "Work Term" in t:
