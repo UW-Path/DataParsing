@@ -13,4 +13,4 @@ CALENDAR_YEARS = ["2019-2020", "2020-2021", "2021-2022"]
 DEFAULT_YEAR = "2020-2021" # Refers to dict
 
 # For debuggin purposes:
-# CALENDAR_YEARS = ["2020-2021"]
+# CALENDAR_YEARS = ["2021-2022"]
