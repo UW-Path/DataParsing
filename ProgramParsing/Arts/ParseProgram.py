@@ -1,4 +1,5 @@
 from ProgramParsing.Arts.MajorParser import ArtsMajorParser
+from ProgramParsing.Arts.MajorParser2021_2022 import ArtsMajorParser2021_2022
 from ProgramParsing.ProgramParser.ParseProgram import main, filterFiles
 import os
 
@@ -14,6 +15,7 @@ if __name__ == "__main__":
 
     parsers = {
         'MajorParser': ArtsMajorParser,
+        'MajorParser2021_2022': ArtsMajorParser2021_2022
     }
 
     main(parsers, files, "Arts")
