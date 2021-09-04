@@ -11,9 +11,12 @@ if __name__ == "__main__":
     filesToIgnore = []
     files = filterFiles(files, filesToIgnore)
 
+    # for testing purposes
+    # files = set(["/Specs/2021-2022-HEA-Health-Informatics-Option.html"])
+
     parsers = {
         'MajorParser': AHSMajorParser,
         'MajorParser2021_2022': AHSMajorParser2021_2022
     }
 
-    main(parsers, files, "Applied Health Science")
+    main(parsers, files, "Applied Health Science", True)

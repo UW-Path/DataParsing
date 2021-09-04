@@ -24,7 +24,7 @@ class AHSMajorParser2021_2022(MajorParser):
 
         if program:
             program = program[0].contents[0].string
-            if ", " in program:
+            if ", " in program and "Mental Health" not in program:
                 program = program.split(", ")[1]
 
         return program
@@ -38,10 +38,16 @@ class AHSMajorParser2021_2022(MajorParser):
     def __get_courses(self, line):
         # Get courses from line
         line = line.replace("*", "").replace("/", " or ")
+
         coursesA = set(re.findall(r"[A-Z]{2,10}(?:\s[1-9][0-9][0-9][A-Z]?)?(?:\sor\s[A-Z]{2,10}(?:\s[1-9][0-9][0-9][A-Z]?)?){0,10}", line))
         coursesB = set(re.findall(r"(?:[A-Z]{2,10}\s)?[1-9][0-9][0-9][A-Z]?(?:\sor\s[A-Z]{2,10}(?:\s[1-9][0-9][0-9][A-Z]?)?){0,10}", line))
         courses = coursesA.union(coursesB)
         courses = list(courses)
+
+        if ("One" in line and "from the following list" in line) or \
+                "One of" in line or "Two of" in line:
+            courses = [" or ".join(courses)]
+
         return courses
 
     def __append_requirement(self, line, majorReq):
@@ -73,7 +79,6 @@ class AHSMajorParser2021_2022(MajorParser):
 
                 :return:
         """
-
         html = pkg_resources.resource_string(__name__, file)
         self.data = BeautifulSoup(html, 'html.parser')
 
@@ -97,6 +102,7 @@ class AHSMajorParser2021_2022(MajorParser):
         i = 0
         while i < len(information):
             line = information[i]
+            print(line)
             if len(line) and line[0] == "*":
                 i = self.__increment(i, information)
                 continue
@@ -127,7 +133,11 @@ class AHSMajorParser2021_2022(MajorParser):
                                                                    "unit" in information[i] or
                                                                    (len(information[i]) and information[i][0] == "*")))):
                         courses = self.__get_courses(information[i])
+                        print(courses)
                         all_courses = all_courses.union(courses)
+
+                        if "Two of" in information[i]:
+                            majorReq.credits = 1.0
 
                         i = self.__increment(i, information)
                         if i < len(information) and (information[i] == "Course Sequence" or information[i] == "Notes" or information[i] == "General"):
@@ -155,4 +165,3 @@ class AHSMajorParser2021_2022(MajorParser):
                     continue
 
             i = self.__increment(i, information)
-
