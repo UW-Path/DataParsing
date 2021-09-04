@@ -102,7 +102,6 @@ class AHSMajorParser2021_2022(MajorParser):
         i = 0
         while i < len(information):
             line = information[i]
-            print(line)
             if len(line) and line[0] == "*":
                 i = self.__increment(i, information)
                 continue
@@ -133,7 +132,6 @@ class AHSMajorParser2021_2022(MajorParser):
                                                                    "unit" in information[i] or
                                                                    (len(information[i]) and information[i][0] == "*")))):
                         courses = self.__get_courses(information[i])
-                        print(courses)
                         all_courses = all_courses.union(courses)
 
                         if "Two of" in information[i]:
