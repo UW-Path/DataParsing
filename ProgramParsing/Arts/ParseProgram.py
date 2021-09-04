@@ -11,11 +11,11 @@ if __name__ == "__main__":
     filesToIgnore = ["ARTS-BA-Degree-Requirements.html"]
     files = filterFiles(files, filesToIgnore)
 
-    # files =["Specs/ARTS-BAFM-Degree-Requirements.html"]
+    #files =["Specs/2021-2022-ARTS-BGBDA-Degree-Requirements.html"]
 
     parsers = {
         'MajorParser': ArtsMajorParser,
         'MajorParser2021_2022': ArtsMajorParser2021_2022
     }
 
-    main(parsers, files, "Arts")
+    main(parsers, files, "Arts", True)
