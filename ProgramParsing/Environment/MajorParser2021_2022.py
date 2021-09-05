@@ -75,6 +75,52 @@ class EnvironmentMajorParser2021_2022(MajorParser):
             i += 1
         return i, list
 
+    def _choose_option(self, i, info, program, relatedMajor, term):
+        option_num = 0
+        number_additional = 1
+        space_count = 0
+        while i < len(info):
+            line = info[i].strip().replace(" to ", "-")
+            # gets the option number
+            if line.split(" ")[0] == "Option":
+                option_num += 1
+                space_count = 0
+
+            # counts the empty lines
+            if line == "":
+                space_count += 1
+                if space_count == 5:
+                    break
+
+            if "two courses" in line.lower():
+                if option_num == 1:
+                    i, list = self._choose_x_course_list(i, info)
+                    number_additional = 2
+                    credits = number_additional * 0.5
+                    if list:
+                        self.requirement.append(
+                            EnvironmentMajorReq(list, number_additional, program,
+                                                relatedMajor, term, credits))
+                else:
+                    self._choose_x_course_list(i, info)
+            else:
+                if option_num == 1:
+                    hasCredit = re.findall(r"\(([A-Z,0-9, .]*?) unit[s]?\)", line)
+                    if not hasCredit:
+                        hasCredit = 0.5
+                    else:
+                        hasCredit = float(hasCredit[0])
+                    list = self._course_list(line)
+                    if list:
+                        self.requirement.append(
+                            EnvironmentMajorReq(list, number_additional, program,
+                                                relatedMajor, term, hasCredit))
+                else:
+                    self._course_list(line)
+                i += 1
+
+        return i
+
 
     def _course_list(self, line):
         list = []
@@ -272,6 +318,7 @@ class EnvironmentMajorParser2021_2022(MajorParser):
                     term = "4"
             elif term != "":
                 number_additional = 1
+                list = []
                 try:
                     number_additional_string = line.split(' ')[0].lower()
                     number_additional = StringToNumber[number_additional_string].value
@@ -282,16 +329,30 @@ class EnvironmentMajorParser2021_2022(MajorParser):
                     pass
 
                 isXof = re.findall(r"(one|two|three|four|five|six|seven|eight|nine) of", line.lower())
-                if "One" in line and "following" in line:
+                if "option" in line.lower():
+                    isXof = []
+                    i = self._choose_option(i, information, program, relatedMajor, term)
+                    continue
+                elif "One course" in line and "following" in line:
                     isXof = ['one']
-                if isXof:
+                    number_additional = 1
+                elif "Two courses" in line and "following" in line:
+                    isXof = ['two']
+                    number_additional = 2
+
+                if list:
+                    credits = number_additional * 0.5
+                    self.requirement.append(
+                        EnvironmentMajorReq(list, number_additional, program,
+                                            relatedMajor, term, credits))
+                    continue
+                elif isXof and "Note" not in line:
                     i, list = self._choose_x_course_list(i, information)
                     if list:
                         credits = self._count_credits(list) / len(list) * number_additional
                         self.requirement.append(
                             EnvironmentMajorReq(list, number_additional, program, relatedMajor, term, credits))
                         continue #electives does not have space between
-
                 else:
 
                     list = self._course_list(line)
