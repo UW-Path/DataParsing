@@ -33,11 +33,14 @@ class EnvironmentMajorParser2021_2022(MajorParser):
 
     def _choose_x_course_list(self, i, info):
         list = []
+        count_spaces = 0
         while i < len(info):
 
             line = info[i].strip().replace(" to ", "-")
-
-            if line == "": break
+            if line == "":
+                count_spaces += 1
+                if count_spaces == 3:
+                    break
 
             # Table II exception a bit hardcoded (info[i] == " ")
             if line.startswith("Note") or line.startswith("(") or info[i] == "        ":
@@ -178,7 +181,7 @@ class EnvironmentMajorParser2021_2022(MajorParser):
 
         if not list:
             #elective must be checked first
-            if "elective" in line:
+            if "elective" in line.lower():
                 return ["Elective"]
             if "course" in line:
                 return ["Program Elective"]
@@ -279,6 +282,8 @@ class EnvironmentMajorParser2021_2022(MajorParser):
                     pass
 
                 isXof = re.findall(r"(one|two|three|four|five|six|seven|eight|nine) of", line.lower())
+                if "One" in line and "following" in line:
+                    isXof = ['one']
                 if isXof:
                     i, list = self._choose_x_course_list(i, information)
                     if list:
@@ -298,6 +303,11 @@ class EnvironmentMajorParser2021_2022(MajorParser):
                                 credits = float(hasCredit[0])
                                 if number_additional == 1 and (len(list) > 1 or "Elective" in list or "Program Elective" in list)  :
                                     number_additional = credits/0.5 #assume for env
+                            elif "Elective" in list:
+                                elective_credits = re.findall(r"([0-9,.]*?) unit[s]?", line)
+                                if elective_credits:
+                                    credits = float(elective_credits[0])
+                                    number_additional = credits / 0.5
                             else:
                                 credits = self._count_credits(list) / len(list) * number_additional
                             self.requirement.append(
