@@ -18,4 +18,4 @@ if __name__ == "__main__":
         'MajorParser2021_2022': ArtsMajorParser2021_2022
     }
 
-    main(parsers, files, "Arts", True)
+    main(parsers, files, "Arts")
