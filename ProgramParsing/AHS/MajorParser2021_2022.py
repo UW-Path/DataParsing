@@ -45,7 +45,7 @@ class AHSMajorParser2021_2022(MajorParser):
         courses = list(courses)
 
         if ("One" in line and "from the following list" in line) or \
-                "One of" in line or "Two of" in line:
+                re.findall(r"(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|All) of", line):
             courses = [" or ".join(courses)]
 
         return courses
@@ -134,8 +134,10 @@ class AHSMajorParser2021_2022(MajorParser):
                         courses = self.__get_courses(information[i])
                         all_courses = all_courses.union(courses)
 
-                        if "Two of" in information[i]:
-                            majorReq.credits = 1.0
+                        isXof = re.findall(r"(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|All) of", information[i])
+                        if isXof:
+                            if isXof[0].lower() in StringToNumber._value2member_map_:
+                                majorReq.credits = 0.5 * StringToNumber(isXof[0].lower())
 
                         i = self.__increment(i, information)
                         if i < len(information) and (information[i] == "Course Sequence" or information[i] == "Notes" or information[i] == "General"):

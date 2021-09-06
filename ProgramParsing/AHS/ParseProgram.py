@@ -12,7 +12,7 @@ if __name__ == "__main__":
     files = filterFiles(files, filesToIgnore)
 
     # for testing purposes
-    # files = set(["/Specs/2021-2022-HEA-Health-Informatics-Option.html"])
+    # files = set(["/Specs/2021-2022-HEA-Honours-Health-Studies.html"])
 
     parsers = {
         'MajorParser': AHSMajorParser,
