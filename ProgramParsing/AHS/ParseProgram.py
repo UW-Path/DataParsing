@@ -19,4 +19,4 @@ if __name__ == "__main__":
         'MajorParser2021_2022': AHSMajorParser2021_2022
     }
 
-    main(parsers, files, "Applied Health Science", True)
+    main(parsers, files, "Applied Health Science")
