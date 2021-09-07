@@ -130,7 +130,7 @@ class EnvironmentMajorParser2021_2022(MajorParser):
 
     def _course_list(self, line):
         list = []
-
+        print(line)
 
         if "breadth requirement" in line.lower():
             return ["Breadth Requirement"]
@@ -147,6 +147,9 @@ class EnvironmentMajorParser2021_2022(MajorParser):
 
         orCourse = re.findall(r"\b(?<!\/)[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b or \b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
 
+        print(rangeCourse)
+        print(courses)
+        print(orCourse)
         if orCourse:
             # CS 135 or CS XXX in for 1hour and finally solved. Thanks a l
             for oC in orCourse:
@@ -165,6 +168,11 @@ class EnvironmentMajorParser2021_2022(MajorParser):
             for c in courses:
                 if c not in d:
                     list.append(c)
+
+        # handles a case similar to ERS 300- and 400-, where ERS 300 is being picked up
+        if list:
+            if list[0] + "-" in line:
+                list.pop(0)
 
         if not list:
             r = self._getLevelCourses(line)
