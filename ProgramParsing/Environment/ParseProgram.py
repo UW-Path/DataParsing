@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     files = filterFiles(files, filesToIgnore)
 
-    # files = set(["/Specs/ENV-Honours-International-Development.html"])
+    #files = set(["/Specs/" + "2021-2022-ENV-Honours-Environment-Resources-Sustainability.html"])
     #needs to be done
 
     parsers = {

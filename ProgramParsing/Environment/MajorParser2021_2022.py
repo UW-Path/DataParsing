@@ -37,6 +37,10 @@ class EnvironmentMajorParser2021_2022(MajorParser):
         while i < len(info):
 
             line = info[i].strip().replace(" to ", "-")
+
+            if line.split(" ")[0].lower() == "option":
+                return i - 1, []
+
             if line == "":
                 count_spaces += 1
                 if count_spaces == 3:
@@ -82,11 +86,12 @@ class EnvironmentMajorParser2021_2022(MajorParser):
         while i < len(info):
             line = info[i].strip().replace(" to ", "-")
             # gets the option number
-            if line.split(" ")[0] == "Option":
+            if line.split(" ")[0].lower() == "option":
                 option_num += 1
                 space_count = 0
 
-            # counts the empty lines
+            # counts the empty lines, if 5 empty lines are counted after the
+            # most recent option, the list of options is done
             if line == "":
                 space_count += 1
                 if space_count == 5:
@@ -94,7 +99,7 @@ class EnvironmentMajorParser2021_2022(MajorParser):
 
             if "two courses" in line.lower():
                 if option_num == 1:
-                    i, list = self._choose_x_course_list(i, info)
+                    i, list = self._choose_x_course_list(i + 1, info)
                     number_additional = 2
                     credits = number_additional * 0.5
                     if list:
@@ -110,6 +115,8 @@ class EnvironmentMajorParser2021_2022(MajorParser):
                         hasCredit = 0.5
                     else:
                         hasCredit = float(hasCredit[0])
+                    print("here")
+                    print(line)
                     list = self._course_list(line)
                     if list:
                         self.requirement.append(
@@ -141,6 +148,9 @@ class EnvironmentMajorParser2021_2022(MajorParser):
 
         orCourse = re.findall(r"\b(?<!\/)[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b or \b[A-Z]{2,10}\b \b[0-9]{1,4}[A-Z]{0,1}\b", line)
 
+        print(rangeCourse)
+        print(courses)
+        print(orCourse)
         if orCourse:
             # CS 135 or CS XXX in for 1hour and finally solved. Thanks a l
             for oC in orCourse:
@@ -286,9 +296,6 @@ class EnvironmentMajorParser2021_2022(MajorParser):
 
         information = self.data.find("span", {'class': 'MainContent'})
 
-
-
-
         i = 0
         information = information.text.split("\n")
         term = ""
@@ -297,7 +304,7 @@ class EnvironmentMajorParser2021_2022(MajorParser):
         while i < len(information):
             line = str(information[i]).lstrip().rstrip()
             if "Recommended Elective" in line or "Research Specialization" in line:
-                # exception for international develeopment
+                # exception for international development
                 term = ""
             if line == "Notes":
                 #end of file
@@ -333,6 +340,8 @@ class EnvironmentMajorParser2021_2022(MajorParser):
                     isXof = []
                     i = self._choose_option(i, information, program, relatedMajor, term)
                     continue
+                elif "one of the specializations" in line:
+                    isXof = []
                 elif "One course" in line and "following" in line:
                     isXof = ['one']
                     number_additional = 1
@@ -353,6 +362,15 @@ class EnvironmentMajorParser2021_2022(MajorParser):
                         self.requirement.append(
                             EnvironmentMajorReq(list, number_additional, program, relatedMajor, term, credits))
                         continue #electives does not have space between
+                elif "units to fulfil degree requirements" in line.lower():
+                    hasCredit = re.findall(r"([0-9,.]*?) unit[s]?", line)
+                    if hasCredit:
+                        credits = float(hasCredit[0])
+                        number_additional = credits / 0.5
+                        list = ['Elective']
+                        self.requirement.append(EnvironmentMajorReq(list, number_additional,
+                                                program, relatedMajor, term,
+                                                credits))
                 else:
 
                     list = self._course_list(line)
