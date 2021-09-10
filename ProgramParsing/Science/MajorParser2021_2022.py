@@ -53,7 +53,8 @@ class ScienceMajorParser2021_2022(MajorParser):
     def _course_list(self, line, credit, oneOf = False):
         list = []
         line = line.strip().replace(" to ", "-")
-
+        program_name = self._get_program()
+        major_name = self._get_relatedMajor(program_name)
         d = dict() #dictionary to keep track of courses
 
         if line.startswith("Note") or line.startswith("("):
@@ -85,6 +86,18 @@ class ScienceMajorParser2021_2022(MajorParser):
             for c in courses:
                 if c not in d:
                     list.append(c)
+        
+        # handles: 1.25 BIOL units including BIOL 130, BIOL 130L, and 0.5 BIOL unit at 100- or 200-level (exclusive of BIOL 225 and BIOL 280)
+        if ("Psychology" in program_name and ("BIOL 225" in list or "BIOL 280" in list)):
+            list.remove("BIOL 280")
+            list.remove("BIOL 225")
+            list += ["BIOL 100-", "BIOL 200-"]
+
+        if ("Earth Sciences" in major_name or "Geoscience Specialization" in program_name):
+            try: # the EARTH 436B is just a "suggestion" that is incorrectly parsed, instead it is all "EARTH 300-"
+                list[list.index("EARTH 436B")] = "EARTH 300-"
+            except:
+                pass   
 
         if not list:
             r = self._getLevelCourses(line)
@@ -140,7 +153,9 @@ class ScienceMajorParser2021_2022(MajorParser):
                 list.append(maj + " 200-")
                 list.append(maj + " 300-")
                 list.append(maj + " 400-")
-            elif (maj and "distributed as follows:" not in line) or len(maj.split(", ")) > 1: #prevent case "distrubted as follow:"
+            # prevent case "distrubted as follow:"
+            # "which include" is used as "distributed as follows" but for General Sceinces
+            elif (maj and "distributed as follows:" not in line and "which include" not in line) or len(maj.split(", ")) > 1: 
                 # allow case chosen from BIOL, CHEM, EARTH, MNS, PHYS, or SCI:
                 if maj == "MATHEMATICS": maj = "MATH"
                 #SCIENCE - any level /Math
@@ -162,7 +177,6 @@ class ScienceMajorParser2021_2022(MajorParser):
             if (credit == c or len(list) == 1) and c != 0:
                 #Note: 1 is coded as a special case. Not perfect accuracy in terms of credit count
                 return list, True
-
         return list, False
 
     def _count_credits(self,list):
@@ -237,6 +251,10 @@ class ScienceMajorParser2021_2022(MajorParser):
 
             line = line.strip()
 
+            # hard coded for scibus because it double counts
+            if program == "Honours Science and Business" and "1.0 unit of 100- or 200-level BIOL" in line:
+                i+=1
+                continue
 
             if "must" in line and ":" not in line:
                 #Condition for must complete... additional conditions
