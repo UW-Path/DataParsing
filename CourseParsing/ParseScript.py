@@ -3,6 +3,7 @@ from Database.DatabaseReceiver import DatabaseReceiver
 from CourseParsing.CourseParser import CourseParser
 import urllib.request
 import traceback
+from ProgramParsing.ProgramParser.ENV_VARIABLES.PARSE_YEAR import CALENDAR_YEARS
 
 def get_course_codes():
     dbc = DatabaseReceiver()
@@ -43,24 +44,25 @@ if __name__ == "__main__":
     dbc.create_courses()
     dbc.create_prereqs()
     dbc.create_antireqs()
+    for year in CALENDAR_YEARS:
+        #parse 20XX-20YY s.t year_str = XXYY, Parse from the most current years because it has the most accurate prereqs, etc..
+        year_str = year[2:4] + year[7: 9]
+        for code in reversed(course_codes):
+            parser = CourseParser()
+            try:
+                fp = urllib.request.urlopen(f"http://www.ucalendar.uwaterloo.ca/{year_str}/COURSE/course-{code}.html")
+                mybytes = fp.read()
+                html = mybytes.decode("ISO-8859-1")
+                fp.close()
 
-    for code in course_codes:
-        parser = CourseParser()
+                parser.load_html(html)
+            except Exception as e:
+                print(code)
+                traceback.print_exc()
+                continue
 
-        try:
-            fp = urllib.request.urlopen("http://www.ucalendar.uwaterloo.ca/2021/COURSE/course-" + code + ".html")
-            mybytes = fp.read()
-            html = mybytes.decode("ISO-8859-1")
-            fp.close()
+            dbc.insert_courses(parser.courses)
 
-            parser.load_html(html)
-        except Exception as e:
-            print(code)
-            traceback.print_exc()
-            continue
-
-        dbc.insert_courses(parser.courses)
-
-        dbc.commit()
+            dbc.commit()
 
     dbc.close()
