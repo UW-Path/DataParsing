@@ -6,7 +6,7 @@ import os
 import urllib3
 from bs4 import BeautifulSoup
 from requests import get
-from ProgramParsing.ProgramParser.ENV_VARIABLES.parse_years import PARSE_YEAR_BEG, PARSE_YEAR_END
+from ProgramParsing.ProgramParser.ENV_VARIABLES.PARSE_YEAR import PARSE_YEAR_BEG, PARSE_YEAR_END
 
 url_plans = "https://ugradcalendar.uwaterloo.ca/group/ENG-BASc-and-BSE-Specific-Degree-Requirements/?ActiveDate=9/1/"
 root = "http://ugradcalendar.uwaterloo.ca/"

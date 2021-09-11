@@ -1,5 +1,5 @@
 from Database.DatabaseSender import DatabaseSender
-from ProgramParsing.ProgramParser.ENV_VARIABLES.parse_years import PARSE_YEAR_BEG, PARSE_YEAR_END, CALENDAR_YEARS, DEFAULT_YEAR
+from ProgramParsing.ProgramParser.ENV_VARIABLES.PARSE_YEAR import PARSE_YEAR_BEG, PARSE_YEAR_END, CALENDAR_YEARS, DEFAULT_YEAR
 import re
 
 

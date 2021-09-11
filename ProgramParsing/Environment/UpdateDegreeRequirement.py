@@ -6,7 +6,7 @@ import os
 import urllib3
 from bs4 import BeautifulSoup
 from requests import get
-from ProgramParsing.ProgramParser.ENV_VARIABLES.parse_years import PARSE_YEAR_BEG, PARSE_YEAR_END
+from ProgramParsing.ProgramParser.ENV_VARIABLES.PARSE_YEAR import PARSE_YEAR_BEG, PARSE_YEAR_END
 
 
 plans_2021_newer = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Academic-Plans"]

@@ -9,7 +9,7 @@ import os
 import urllib3
 from bs4 import BeautifulSoup
 from requests import get
-from ProgramParsing.ProgramParser.ENV_VARIABLES.parse_years import PARSE_YEAR_BEG, PARSE_YEAR_END
+from ProgramParsing.ProgramParser.ENV_VARIABLES.PARSE_YEAR import PARSE_YEAR_BEG, PARSE_YEAR_END
 
 # pre 2019
 url_plans1 = "https://ugradcalendar.uwaterloo.ca/group/SCI-Science-Academic-Plans/?ActiveDate=9/1/"

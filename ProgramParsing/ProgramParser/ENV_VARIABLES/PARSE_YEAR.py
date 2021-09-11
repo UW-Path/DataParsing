@@ -1,5 +1,5 @@
 """
-parse_years.py is a library built to receive information on Major Requirements
+PARSE_YEARS.py is a library built to receive information on Major Requirements
 
 Contributors:
 Brent Huang
