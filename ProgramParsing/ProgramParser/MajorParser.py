@@ -3,6 +3,7 @@ CourseParser.py is a library built to receive information on Major Requirements
 
 Contributors:
 Hao Wei Huang
+Brent Huang
 """
 
 import urllib3
@@ -11,6 +12,7 @@ from ProgramParsing.Math.MajorReq import MajorReq
 from StringToNumber import StringToNumber
 import re
 import pkg_resources
+from collections import defaultdict
 
 
 class MajorParser:
@@ -19,6 +21,9 @@ class MajorParser:
         self.data = None
         self.requirement = []
         self.additionalRequirement = ""
+
+        # for eng factulty to catch duplcates
+        self.requirement_dict = defaultdict(int)
 
     def load_url(self, url):
         response = self.http.request('GET', url)
@@ -53,13 +58,17 @@ class MajorParser:
         paragraphs = self.data.find_all(["p"]) # cant use span because will get everything else
         for p in paragraphs:
             # a bit hardcoded
-            if ("all the requirements" in str(p) or "course requirements" in str(p) or "all requirements" in str(p)) and "plan" in str(p):
+            if ("all the requirements" in str(p) or "course requirements" in str(p) or
+                "all requirements" in str(p) or "same requirements" in str(p)) and "plan" in str(p):
                 reqs = p.find_all("a")
-                print(reqs)
                 for req in reqs:
                     # span added for special case for  PMATH additional req #does not work
                     if(not self._has_numbers(req.contents[0])):
                         additionalRequirment.append(req.contents[0])
+                    elif "Table 1" in req.contents[0]:
+                        additionalRequirment.append("Table I")
+                    elif "Table 2" in req.contents[0]:
+                        additionalRequirment.append("Table II")
         return ", ".join(additionalRequirment)
 
     def _get_relatedMajor(self, program):
@@ -86,13 +95,22 @@ class MajorParser:
     def is_additional(self, string):
         pass
 
-    def load_file(self, file):
+    def load_file(self, file, year):
         """
                 Parse html file to gather a list of required courses for the major
+                Note: This function is deprecated: no longer needed as file convention has changed
 
                 :return:
         """
-        pass
+        return pkg_resources.resource_string(__name__, str(year)+"_"+file)
+
+    def convert_dict_to_list(self, majorRequirements):
+        # If you use self.requirement_dict = defaultdict(int) to keep track of duplicated courses, you can use this function to convert into
+        # the standard list of reqs
+        self.requirement = []
+        for key in self.requirement_dict:
+            duplicate = self.requirement_dict[key]
+            self.requirement.append(majorRequirements(key[0], key[1] * duplicate, key[2], key[3], key[4], key[5] * duplicate))
 
     def __str__(self):
         output = ""

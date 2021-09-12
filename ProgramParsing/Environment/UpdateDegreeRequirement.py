@@ -6,9 +6,16 @@ import os
 import urllib3
 from bs4 import BeautifulSoup
 from requests import get
+from ProgramParsing.ProgramParser.ENV_VARIABLES.PARSE_YEAR import PARSE_YEAR_BEG, PARSE_YEAR_END
 
 
-plans = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Academic-Plans"]
+plans_2021_newer = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Academic-Plans"]
+
+plans_2020_older = ["https://ugradcalendar.uwaterloo.ca/group/ENV-Environment-Enterprise-and-Development",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Knowledge-Integration",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-School-Environment-Resources-Sustainability",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-Department-of-Geography-and-Environmental-Mgmt",
+                    "https://ugradcalendar.uwaterloo.ca/group/ENV-School-of-Planning"]
 
 #for now we are only parsing the plans
 pages = ["https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Co-operative-Planning",
@@ -23,18 +30,23 @@ pages = ["https://ugradcalendar.uwaterloo.ca/page/ENV-Honours-Co-operative-Plann
 
 root = "http://ugradcalendar.uwaterloo.ca/"
 
-def fetch_degree_req(path):
+def fetch_plan(path, year):
     """
          path: str
          Script to download all html pages for degree req
          return:
     """
     link_to_ignore = ["Overview", "Accelerated Master's"]
+    # uses the correct set of plans depending on the year
+    if year >= 2021:
+        plans = plans_2021_newer
+    else:
+        plans = plans_2020_older
 
     # fetch programs
-    http = urllib3.PoolManager()
+    http = urllib3.PoolManager(cert_reqs='CERT_NONE')
     for plan in plans:
-        response = http.request('GET', plan)
+        response = http.request('GET', plan + "/?ActiveDate=9/1/" + str(year))
         data = BeautifulSoup(response.data, 'html.parser')
 
         subpages = data.find_all("a", class_="Level2Group")
@@ -51,18 +63,23 @@ def fetch_degree_req(path):
                     continue
                 if prog_text not in link_to_ignore:
                     print("Fetching {}...".format(prog_text))
-                    href = root + program['href']
-                    fileName = href.split("/")[-1]
-                    fileName = "/" + fileName + ".html"
+                    href = root + program['href'] + '/?ActiveDate=9/1/' + str(year)
+                    fileName = href.split("/")[-4]
+                    # undergrad calendar year
+                    a_year = str(year) + '-' + str(year + 1)
+                    fileName = "/" + a_year + '-' + fileName + ".html"
                     resp = get(href)
                     with open(path + fileName, 'wb') as fOut:
                         fOut.write(resp.content)
 
-def fetch_plan(path):
+def fetch_pages(path, year):
     for href in pages:
         fileName = href.split("/")[-1]
         print("Fetching {}...".format(fileName))
-        fileName = "/" + fileName + ".html"
+        # undergrad calendar year
+        a_year = str(year) + '-' + str(year + 1)
+        fileName = "/" + a_year + '-' + fileName + ".html"
+        href = href + "/?ActiveDate=9/1/" + str(year)
         resp = get(href)
         with open(path + fileName, 'wb') as fOut:
             fOut.write(resp.content)
@@ -81,5 +98,9 @@ if __name__ == '__main__':
             os.remove(os.path.join(path, f))
     else:
         os.mkdir(path)
+    for year in range(PARSE_YEAR_BEG, PARSE_YEAR_END + 1):
+        if year >= 2021:
+            fetch_plan(path, year)
+        else:
+            fetch_pages(path, year)
 
-    fetch_degree_req(path)

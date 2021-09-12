@@ -1,5 +1,6 @@
 """
 CourseParser.py is a library built to receive information on Major Requirements
+
 Contributors:
 Hao Wei Huang
 """
@@ -14,7 +15,7 @@ from Database.DatabaseReceiver import DatabaseReceiver
 from StringToNumber import StringToNumber
 
 
-class EngineeringMajorParser(MajorParser):
+class EngineeringMajorParser2021_2022(MajorParser):
     def _get_program(self):
         program = self.data.find_all("span", id="ctl00_contentMain_lblPageTitle")
 
@@ -39,6 +40,8 @@ class EngineeringMajorParser(MajorParser):
         if line.startswith("Note") or line.startswith("("):
             return []
 
+        if "WKRPT" in line or "ECE 101" in line:
+            return []
 
         rangeCourse = re.findall(r"[A-Z]+\s{0,1}[1-9][0-9][0-9]\s{0,1}-\s{0,1}[A-Z]+\s{0,1}[1-9][0-9][0-9]",
                              line)
@@ -87,7 +90,7 @@ class EngineeringMajorParser(MajorParser):
                 list.append(maj)
 
         if not list:
-            if "Elective" in line:
+            if "Elective" in line or "electives" in line:
                 return ["Elective"]
             return []
 
@@ -112,7 +115,7 @@ class EngineeringMajorParser(MajorParser):
         #TODO: Match with database credits
         #TODO: Dafault as 0.5 credits
         for course in list:
-            self.requirement.append(EngineeringMajorReq([course], 1, major, relatedMajor, additionalRequirement, 0.5))
+            self.requirement_dict[((course), 1, major, relatedMajor, additionalRequirement, 0.5)] += 1
 
     def get_table(self, data):
         tables = data.find_all("table")
@@ -142,14 +145,15 @@ class EngineeringMajorParser(MajorParser):
             list = self._course_list(req)
             if list:
                 credits = self._count_credits(list) / len(list) * number_additional
-                self.requirement.append(
-                    EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
+                self.requirement_dict[(tuple(list), number_additional, program, relatedMajor, term, credits)] += 1
 
     def load_file(self, file, year):
         """
                 Parse html file to gather a list of required courses for the major
+
                 :return:
         """
+
         html = pkg_resources.resource_string(__name__, file)
         self.data = BeautifulSoup(html, 'html.parser')
 
@@ -163,9 +167,8 @@ class EngineeringMajorParser(MajorParser):
         information = self.data.find("span", {'class': 'MainContent'})
 
         table = self.get_table(information)
-        # Environment Engineering 2019-2020 had a table for some reason
-        ENV = "ENG-Environmental-Engineering"
-        if table and ENV not in file:
+
+        if table:
             #search for courses here
             # terms = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
             term = ""
@@ -177,10 +180,6 @@ class EngineeringMajorParser(MajorParser):
                 tds = tr.find_all("td")
                 #special case for management eng
                 th = tr.find("th")
-
-                if file == "/Specs/2019-2020-ENG-Environmental-Engineering.html":
-                    a =123
-
                 if th:
                     t = th.text
                 else:
@@ -202,9 +201,10 @@ class EngineeringMajorParser(MajorParser):
                     else:
                         list = self._course_list(self.get_text(tds[1]))
 
-                    credits = self._count_credits(list)
-                    self.requirement.append(
-                        EngineeringMajorReq(list, 1, program, relatedMajor, term, credits))
+                    # ECE 101A/B/C/D or WRKT has empty list
+                    if list:
+                        credits = self._count_credits(list)
+                        self.requirement_dict[(tuple(list), 1, program, relatedMajor, term, credits)] += 1
                     i+= 1
                     continue
                 elif "Work Term" in t:
@@ -231,8 +231,7 @@ class EngineeringMajorParser(MajorParser):
                             list = self._course_list(t)
                             if list:
                                 credits = self._count_credits(list)/len(list)*number_additional
-                                self.requirement.append(
-                                    EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
+                                self.requirement_dict[(tuple(list), number_additional, program, relatedMajor, term, credits)] += 1
                             i += 1
                             continue
                         else:
@@ -257,8 +256,7 @@ class EngineeringMajorParser(MajorParser):
                             list = self._course_list(line)
                             if list:
                                 credits = self._count_credits(list) / len(list) * number_additional
-                                self.requirement.append(
-                                    EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
+                                self.requirement_dict[(tuple(list), number_additional, program, relatedMajor, term, credits)] += 1
                             continue
                     else:
                         noOfCourse = 1
@@ -294,8 +292,7 @@ class EngineeringMajorParser(MajorParser):
                             list = self._course_list(line)
                             if list:
                                 credits = self._count_credits(list) / len(list) * noOfCourse
-                                self.requirement.append(
-                                    EngineeringMajorReq(list, noOfCourse, program, relatedMajor, term, credits))
+                                self.requirement_dict[(tuple(list), noOfCourse, program, relatedMajor, term, credits)] += 1
                             continue
 
 
@@ -303,16 +300,8 @@ class EngineeringMajorParser(MajorParser):
                         list = self._course_list(self.get_text(tds[0]))
                         if list:
                             credits = self._count_credits(list) / len(list) * noOfCourse
-                            self.requirement.append(
-                                EngineeringMajorReq(list, noOfCourse, program, relatedMajor, term, credits))
+                            self.requirement_dict[(tuple(list), noOfCourse, program, relatedMajor, term, credits)] += 1
                         i += 1
-
-
-
-
-
-
-
 
         else:
             i = 0
@@ -352,9 +341,7 @@ class EngineeringMajorParser(MajorParser):
                     list = self._course_list(line)
                     if list:
                         credits = self._count_credits(list) / len(list) * number_additional
-                        self.requirement.append(
-                            EngineeringMajorReq(list, number_additional, program, relatedMajor, term, credits))
-
-
-
+                        self.requirement_dict[(tuple(list), number_additional, program, relatedMajor, term, credits)] += 1
                 i += 1
+
+        self.convert_dict_to_list(EngineeringMajorReq)

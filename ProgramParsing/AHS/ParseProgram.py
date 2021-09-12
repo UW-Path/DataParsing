@@ -1,5 +1,6 @@
 from ProgramParsing.AHS.MajorParser import AHSMajorParser
-from ProgramParsing.ProgramParser.ParseProgram import main
+from ProgramParsing.AHS.MajorParser2021_2022 import AHSMajorParser2021_2022
+from ProgramParsing.ProgramParser.ParseProgram import main, filterFiles
 import os
 
 if __name__ == "__main__":
@@ -8,7 +9,14 @@ if __name__ == "__main__":
     files = set(["/Specs/" + f for f in os.listdir(path) if f.endswith(".html")])
 
     filesToIgnore = []
-    filesToIgnore = set(["/Specs/" + f for f in filesToIgnore])
-    files = files - filesToIgnore
+    files = filterFiles(files, filesToIgnore)
 
-    main(AHSMajorParser, files, "Applied Health Science")
+    # for testing purposes
+    # files = set(["/Specs/2021-2022-HEA-Honours-Health-Studies.html"])
+
+    parsers = {
+        'MajorParser': AHSMajorParser,
+        'MajorParser2021_2022': AHSMajorParser2021_2022
+    }
+
+    main(parsers, files, "Applied Health Science")

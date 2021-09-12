@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 from StringToNumber import StringToNumber
 import re
 
-class AHSMajorParser(MajorParser):
+class AHSMajorParser2021_2022(MajorParser):
     def __increment(self, i, information):
         i += 1
         while i < len(information) and information[i].replace(" ", "") == "":
@@ -24,7 +24,7 @@ class AHSMajorParser(MajorParser):
 
         if program:
             program = program[0].contents[0].string
-            if ", " in program:
+            if ", " in program and "Mental Health" not in program:
                 program = program.split(", ")[1]
 
         return program
@@ -38,10 +38,16 @@ class AHSMajorParser(MajorParser):
     def __get_courses(self, line):
         # Get courses from line
         line = line.replace("*", "").replace("/", " or ")
+
         coursesA = set(re.findall(r"[A-Z]{2,10}(?:\s[1-9][0-9][0-9][A-Z]?)?(?:\sor\s[A-Z]{2,10}(?:\s[1-9][0-9][0-9][A-Z]?)?){0,10}", line))
         coursesB = set(re.findall(r"(?:[A-Z]{2,10}\s)?[1-9][0-9][0-9][A-Z]?(?:\sor\s[A-Z]{2,10}(?:\s[1-9][0-9][0-9][A-Z]?)?){0,10}", line))
         courses = coursesA.union(coursesB)
         courses = list(courses)
+
+        if ("One" in line and "from the following list" in line) or \
+                re.findall(r"(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|All) of", line):
+            courses = [" or ".join(courses)]
+
         return courses
 
     def __append_requirement(self, line, majorReq):
@@ -73,7 +79,6 @@ class AHSMajorParser(MajorParser):
 
                 :return:
         """
-
         html = pkg_resources.resource_string(__name__, file)
         self.data = BeautifulSoup(html, 'html.parser')
 
@@ -129,6 +134,11 @@ class AHSMajorParser(MajorParser):
                         courses = self.__get_courses(information[i])
                         all_courses = all_courses.union(courses)
 
+                        isXof = re.findall(r"(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|All) of", information[i])
+                        if isXof:
+                            if isXof[0].lower() in StringToNumber._value2member_map_:
+                                majorReq.credits = 0.5 * StringToNumber(isXof[0].lower())
+
                         i = self.__increment(i, information)
                         if i < len(information) and (information[i] == "Course Sequence" or information[i] == "Notes" or information[i] == "General"):
                             break
@@ -153,4 +163,5 @@ class AHSMajorParser(MajorParser):
                         self.__append_requirement(line, majorReq)
                     i = self.__increment(i, information)
                     continue
+
             i = self.__increment(i, information)

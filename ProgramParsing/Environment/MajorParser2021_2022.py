@@ -15,7 +15,7 @@ from Database.DatabaseReceiver import DatabaseReceiver
 from StringToNumber import StringToNumber
 
 
-class EnvironmentMajorParser(MajorParser):
+class EnvironmentMajorParser2021_2022(MajorParser):
     def _get_program(self):
         program = self.data.find_all("span", id="ctl00_contentMain_lblPageTitle")
         # didn't account for minor
@@ -33,11 +33,18 @@ class EnvironmentMajorParser(MajorParser):
 
     def _choose_x_course_list(self, i, info):
         list = []
+        count_spaces = 0
         while i < len(info):
 
             line = info[i].strip().replace(" to ", "-")
 
-            if line == "": break
+            if line.split(" ")[0].lower() == "option":
+                return i - 1, []
+
+            if line == "":
+                count_spaces += 1
+                if count_spaces == 3:
+                    break
 
             # Table II exception a bit hardcoded (info[i] == " ")
             if line.startswith("Note") or line.startswith("(") or info[i] == "        ":
@@ -72,10 +79,57 @@ class EnvironmentMajorParser(MajorParser):
             i += 1
         return i, list
 
+    def _choose_option(self, i, info, program, relatedMajor, term):
+        option_num = 0
+        number_additional = 1
+        space_count = 0
+        while i < len(info):
+            line = info[i].strip().replace(" to ", "-")
+            # gets the option number
+            if line.split(" ")[0].lower() == "option":
+                option_num += 1
+                space_count = 0
+
+            # counts the empty lines, if 5 empty lines are counted after the
+            # most recent option, the list of options is done
+            if line == "":
+                space_count += 1
+                if space_count == 5:
+                    break
+
+            if "two courses" in line.lower():
+                if option_num == 1:
+                    i, list = self._choose_x_course_list(i + 1, info)
+                    number_additional = 2
+                    credits = number_additional * 0.5
+                    if list:
+                        self.requirement.append(
+                            EnvironmentMajorReq(list, number_additional, program,
+                                                relatedMajor, term, credits))
+                else:
+                    self._choose_x_course_list(i, info)
+            else:
+                if option_num == 1:
+                    hasCredit = re.findall(r"\(([A-Z,0-9, .]*?) unit[s]?\)", line)
+                    if not hasCredit:
+                        hasCredit = 0.5
+                    else:
+                        hasCredit = float(hasCredit[0])
+
+                    list = self._course_list(line)
+                    if list:
+                        self.requirement.append(
+                            EnvironmentMajorReq(list, number_additional, program,
+                                                relatedMajor, term, hasCredit))
+                else:
+                    self._course_list(line)
+                i += 1
+
+        return i
+
 
     def _course_list(self, line):
         list = []
-
 
         if "breadth requirement" in line.lower():
             return ["Breadth Requirement"]
@@ -110,6 +164,11 @@ class EnvironmentMajorParser(MajorParser):
             for c in courses:
                 if c not in d:
                     list.append(c)
+
+        # handles a case similar to ERS 300- and 400-, where ERS 300 is being picked up
+        if list:
+            if list[0] + "-" in line:
+                list.pop(0)
 
         if not list:
             r = self._getLevelCourses(line)
@@ -178,7 +237,7 @@ class EnvironmentMajorParser(MajorParser):
 
         if not list:
             #elective must be checked first
-            if "elective" in line:
+            if "elective" in line.lower():
                 return ["Elective"]
             if "course" in line:
                 return ["Program Elective"]
@@ -237,9 +296,6 @@ class EnvironmentMajorParser(MajorParser):
 
         information = self.data.find("span", {'class': 'MainContent'})
 
-
-
-
         i = 0
         information = information.text.split("\n")
         term = ""
@@ -248,7 +304,7 @@ class EnvironmentMajorParser(MajorParser):
         while i < len(information):
             line = str(information[i]).lstrip().rstrip()
             if "Recommended Elective" in line or "Research Specialization" in line:
-                # exception for international develeopment
+                # exception for international development
                 term = ""
             if line == "Notes":
                 #end of file
@@ -269,6 +325,7 @@ class EnvironmentMajorParser(MajorParser):
                     term = "4"
             elif term != "":
                 number_additional = 1
+                list = []
                 try:
                     number_additional_string = line.split(' ')[0].lower()
                     number_additional = StringToNumber[number_additional_string].value
@@ -279,14 +336,41 @@ class EnvironmentMajorParser(MajorParser):
                     pass
 
                 isXof = re.findall(r"(one|two|three|four|five|six|seven|eight|nine) of", line.lower())
-                if isXof:
+                if "option" in line.lower():
+                    isXof = []
+                    i = self._choose_option(i, information, program, relatedMajor, term)
+                    continue
+                elif "one of the specializations" in line:
+                    isXof = []
+                elif "One course" in line and "following" in line:
+                    isXof = ['one']
+                    number_additional = 1
+                elif "Two courses" in line and "following" in line:
+                    isXof = ['two']
+                    number_additional = 2
+
+                if list:
+                    credits = number_additional * 0.5
+                    self.requirement.append(
+                        EnvironmentMajorReq(list, number_additional, program,
+                                            relatedMajor, term, credits))
+                    continue
+                elif isXof and "Note" not in line:
                     i, list = self._choose_x_course_list(i, information)
                     if list:
                         credits = self._count_credits(list) / len(list) * number_additional
                         self.requirement.append(
                             EnvironmentMajorReq(list, number_additional, program, relatedMajor, term, credits))
                         continue #electives does not have space between
-
+                elif "units to fulfil degree requirements" in line.lower():
+                    hasCredit = re.findall(r"([0-9,.]*?) unit[s]?", line)
+                    if hasCredit:
+                        credits = float(hasCredit[0])
+                        number_additional = credits / 0.5
+                        list = ['Elective']
+                        self.requirement.append(EnvironmentMajorReq(list, number_additional,
+                                                program, relatedMajor, term,
+                                                credits))
                 else:
 
                     list = self._course_list(line)
@@ -298,6 +382,11 @@ class EnvironmentMajorParser(MajorParser):
                                 credits = float(hasCredit[0])
                                 if number_additional == 1 and (len(list) > 1 or "Elective" in list or "Program Elective" in list)  :
                                     number_additional = credits/0.5 #assume for env
+                            elif "Elective" in list:
+                                elective_credits = re.findall(r"([0-9,.]*?) unit[s]?", line)
+                                if elective_credits:
+                                    credits = float(elective_credits[0])
+                                    number_additional = credits / 0.5
                             else:
                                 credits = self._count_credits(list) / len(list) * number_additional
                             self.requirement.append(
