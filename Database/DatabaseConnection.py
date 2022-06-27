@@ -14,7 +14,7 @@ import os
 
 
 class DatabaseConnection(object):
-    def __init__(self, user="postgres", password="1234", host="127.0.0.1", port="5432", database="postgres",
+    def __init__(self, user="postgres", password="1234", host="db", port="5432", database="postgres",
                  course_table="course_info", prereqs_table="prereqs", antireqs_table="antireqs",
                  requirements_table="requirements", communications_table="communications",
                  breadth_table="breadth_table"):
@@ -85,4 +85,3 @@ class DatabaseConnection(object):
         command = "SELECT " + what + " FROM " + table + " " + condition + ";"
         self.execute(command)
         return self.cursor.fetchall()
-

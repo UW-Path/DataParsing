@@ -43,14 +43,14 @@ if $courses ;
 then
   echo "===================================================="
   echo "Parsing courses..."
-  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/CourseParsing
-  eval "${py} CourseParsing/ParseScript.py"
+  export PYTHONPATH=$PWD/DataParsing
+  eval "${py} DataParsing/CourseParsing/ParseScript.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing communication tables..."
   export PYTHONPATH=$PYTHONPATH:$DATAPARSING/CommunicationParsing
-  eval "${py} CommunicationParsing/CommunicationScript.py"
+  eval "${py} DataParsing/CommunicationParsing/CommunicationScript.py"
   echo "DONE"
 fi
 
@@ -61,68 +61,68 @@ then
 
   echo "===================================================="
   echo "Parsing MATH degree requirements..."
-  eval "${py} ProgramParsing/Math/UpdateDegreeRequirement.py"
+  eval "${py} DataParsing/ProgramParsing/Math/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing MATH programs..."
-  eval "${py} ProgramParsing/Math/ParseProgram.py"
+  eval "${py} DataParsing/ProgramParsing/Math/ParseProgram.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing MATH breadth and depth..."
   export PYTHONPATH=$PYTHONPATH:$DATAPARSING/BreadthDepthParsing
-  eval "${py} BreadthDepthParsing/BreadthScript.py"
+  eval "${py} DataParsing/BreadthDepthParsing/BreadthScript.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Science degree requirements..."
-  eval "${py} ProgramParsing/Science/UpdateDegreeRequirement.py"
+  eval "${py} DataParsing/ProgramParsing/Science/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Science programs..."
-  eval "${py} ProgramParsing/Science/ParseProgram.py"
+  eval "${py} DataParsing/ProgramParsing/Science/ParseProgram.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing AHS degree requirements..."
-  eval "${py} ProgramParsing/AHS/UpdateDegreeRequirement.py"
+  eval "${py} DataParsing/ProgramParsing/AHS/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing AHS programs..."
-  eval "${py} ProgramParsing/AHS/ParseProgram.py"
+  eval "${py} DataParsing/ProgramParsing/AHS/ParseProgram.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Arts degree requirements..."
-  eval "${py} ProgramParsing/Arts/UpdateDegreeRequirement.py"
+  eval "${py} DataParsing/ProgramParsing/Arts/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Arts programs..."
-  eval "${py} ProgramParsing/Arts/ParseProgram.py"
+  eval "${py} DataParsing/ProgramParsing/Arts/ParseProgram.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Engineering degree requirements..."
-  eval "${py} ProgramParsing/Engineering/UpdateDegreeRequirement.py"
+  eval "${py} DataParsing/ProgramParsing/Engineering/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Engineering programs..."
-  eval "${py} ProgramParsing/Engineering/ParseProgram.py"
+  eval "${py} DataParsing/ProgramParsing/Engineering/ParseProgram.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Environment degree requirements..."
-  eval "${py} ProgramParsing/Environment/UpdateDegreeRequirement.py"
+  eval "${py} DataParsing/ProgramParsing/Environment/UpdateDegreeRequirement.py"
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Environment programs..."
-  eval "${py} ProgramParsing/Environment/ParseProgram.py"
+  eval "${py} DataParsing/ProgramParsing/Environment/ParseProgram.py"
   echo "DONE"
 fi
 
