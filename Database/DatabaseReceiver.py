@@ -52,6 +52,6 @@ class DatabaseReceiver(DatabaseConnection):
         """
         Return credit of a course that ends with L (labs)
         """
-        command = "SELECT credit FROM course_info WHERE course_code = '" + course + "'"+ ";"
+        command = "SELECT credit FROM course_info WHERE course_code = '" + course + "'"
         self.execute(command)
         return self.cursor.fetchone()[0]
