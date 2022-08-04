@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    container_name: uwpath_oracle_db
+    image: container-registry.oracle.com/database/enterprise:19.3.0.0
+    restart: always
+    environment:
+      ORACLE_PWD: password
+    ports:
+      - "1521:1521"
+    healthcheck:
+      test: [ "CMD", "/opt/oracle/checkDBStatus.sh"]
+      interval: 2s
+    networks:
+      - uwpath_db_network
+
+networks:
+  uwpath_db_network:
+    driver: bridge
+    name: uwpath_db_network

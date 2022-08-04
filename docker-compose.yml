@@ -1,26 +1,17 @@
-version: '2.1'
+version: '3'
 
 services:
-  db:
-    image: postgres
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=1234
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-  parsing:
+  dataparsing:
+    container_name: uwpath_dataparsing
     build: .
     command: /bin/bash PopulateDatabase.sh
     volumes:
       - .:/code
-    depends_on:
-      db:
-        condition: service_healthy
-    links:
-      - db
     environment:
       - UWPATH_ENVIRONMENT=docker
+    networks:
+      - uwpath_db_network
+
+networks:
+  uwpath_db_network:
+    external: true
