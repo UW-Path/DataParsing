@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     dbc = DatabaseSender()
 
-    dbc.execute("DROP TABLE IF EXISTS " + dbc.communications_table + ";")
+    dbc.drop_table(dbc.communications_table)
     dbc.create_communications()
 
     list1 = com.get_list1()

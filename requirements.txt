@@ -8,3 +8,4 @@ requests == 2.25.1
 setuptools == 41.2.0
 sqlparse==0.3.0
 urllib3 == 1.26.5
+oracledb == 1.0.2

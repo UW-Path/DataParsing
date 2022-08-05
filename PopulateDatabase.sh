@@ -43,88 +43,88 @@ if $courses ;
 then
   echo "===================================================="
   echo "Parsing courses..."
-  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/CourseParsing
-  eval "${py} CourseParsing/ParseScript.py"
+  export PYTHONPATH=$PWD
+  eval "${py} ./CourseParsing/ParseScript.py" || { echo 'Parsing courses failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing communication tables..."
-  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/CommunicationParsing
-  eval "${py} CommunicationParsing/CommunicationScript.py"
+  export PYTHONPATH=$PYTHONPATH:/CommunicationParsing
+  eval "${py} ./CommunicationParsing/CommunicationScript.py" || { echo 'Parsing communications failed' ; exit 1; }
   echo "DONE"
 fi
 
 if $degree ;
 then
-  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/ProgramParsing
+  export PYTHONPATH=$PYTHONPATH:/ProgramParsing
   export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 
   echo "===================================================="
   echo "Parsing MATH degree requirements..."
-  eval "${py} ProgramParsing/Math/UpdateDegreeRequirement.py"
+  eval "${py} ./ProgramParsing/Math/UpdateDegreeRequirement.py" || { echo 'Parsing MATH degree requirements failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing MATH programs..."
-  eval "${py} ProgramParsing/Math/ParseProgram.py"
+  eval "${py} ProgramParsing/Math/ParseProgram.py" || { echo 'Parsing MATH programs failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing MATH breadth and depth..."
-  export PYTHONPATH=$PYTHONPATH:$DATAPARSING/BreadthDepthParsing
-  eval "${py} BreadthDepthParsing/BreadthScript.py"
+  export PYTHONPATH=$PYTHONPATH:/BreadthDepthParsing
+  eval "${py} BreadthDepthParsing/BreadthScript.py" || { echo 'Parsing MATH programs failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Science degree requirements..."
-  eval "${py} ProgramParsing/Science/UpdateDegreeRequirement.py"
+  eval "${py} ProgramParsing/Science/UpdateDegreeRequirement.py" || { echo 'Parsing Science degree requirements failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Science programs..."
-  eval "${py} ProgramParsing/Science/ParseProgram.py"
+  eval "${py} ProgramParsing/Science/ParseProgram.py" || { echo 'Parsing Science programs failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing AHS degree requirements..."
-  eval "${py} ProgramParsing/AHS/UpdateDegreeRequirement.py"
+  eval "${py} ProgramParsing/AHS/UpdateDegreeRequirement.py" || { echo 'Parsing AHS degree requirements failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing AHS programs..."
-  eval "${py} ProgramParsing/AHS/ParseProgram.py"
+  eval "${py} ProgramParsing/AHS/ParseProgram.py" || { echo 'Parsing AHS programs failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Arts degree requirements..."
-  eval "${py} ProgramParsing/Arts/UpdateDegreeRequirement.py"
+  eval "${py} ProgramParsing/Arts/UpdateDegreeRequirement.py" || { echo 'Parsing Arts degree requirements failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Arts programs..."
-  eval "${py} ProgramParsing/Arts/ParseProgram.py"
+  eval "${py} ProgramParsing/Arts/ParseProgram.py" || { echo 'Parsing Arts programs failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Engineering degree requirements..."
-  eval "${py} ProgramParsing/Engineering/UpdateDegreeRequirement.py"
+  eval "${py} ProgramParsing/Engineering/UpdateDegreeRequirement.py" || { echo 'Parsing Engineering degree requirements failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Engineering programs..."
-  eval "${py} ProgramParsing/Engineering/ParseProgram.py"
+  eval "${py} ProgramParsing/Engineering/ParseProgram.py" || { echo 'Parsing Engineering programs failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Environment degree requirements..."
-  eval "${py} ProgramParsing/Environment/UpdateDegreeRequirement.py"
+  eval "${py} ProgramParsing/Environment/UpdateDegreeRequirement.py" || { echo 'Parsing Environment degree requirements failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
   echo "Parsing Environment programs..."
-  eval "${py} ProgramParsing/Environment/ParseProgram.py"
+  eval "${py} ProgramParsing/Environment/ParseProgram.py" || { echo 'Parsing Environment programs failed' ; exit 1; }
   echo "DONE"
 fi
 
 echo "===================================================="
-echo "COMPLETED"
+echo "COMPLETED SUCCESSFULLY"

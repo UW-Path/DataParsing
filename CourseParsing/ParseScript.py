@@ -8,7 +8,7 @@ from ProgramParsing.ProgramParser.ENV_VARIABLES.PARSE_YEAR import CALENDAR_YEARS
 def get_course_codes():
     dbc = DatabaseReceiver()
     course_code_query = dbc.select(what="course_codes", table="requirements")
-    course_codes = set([])
+    course_codes = []
     for cc in course_code_query:
         codes = cc[0].split(", ")
         for c in codes:
@@ -20,7 +20,7 @@ def get_course_codes():
 
 
 if __name__ == "__main__":
-    course_codes = {'PACS', 'MATBUS', 'HLTH', 'ME', 'ARBUS', 'MSCI', 'ACTSC', 'CHE', 'CHEM', 'STAT',
+    course_codes = ['PACS', 'MATBUS', 'HLTH', 'ME', 'ARBUS', 'MSCI', 'ACTSC', 'CHE', 'CHEM', 'STAT',
                     'CS', 'CO', 'GENE', 'EMLS', 'FINE', 'AMATH', 'BIOL', 'PMATH', 'LS', 'AFM', 'ENGL', 'KIN',
                     'SE', 'SPCOM', 'PSYCH', 'SYDE', 'MATH', 'INTEG', 'MTE', 'ECON', 'ECE', 'PHYS',
                     'MUSIC', 'HRM', 'ASL', 'ANTH', 'AHS', 'APPLS', 'ARABIC', 'AE', 'ARCH', 'ARTS', 'AVIA',
@@ -31,15 +31,15 @@ if __name__ == "__main__":
                     'MGMT', 'MNS', 'MTHEL', 'ME', 'MTE', 'MEDVL', 'MENN', 'MOHAWK', 'NE', 'OPTOM', 'PHARM',
                     'PHIL', 'PLAN', 'PSCI', 'PORT', 'PD', 'PDARCH', 'PDPHRM', 'REC', 'RS', 'RUSS', 'REES',
                     'SCI', 'SCBUS', 'SMF', 'SDS', 'SVENT', 'SOCWK', 'SWREN', 'STV', 'SOC', 'SPAN', 'SI',
-                    'THPERF', 'UNIV', 'VCULT'}
+                    'THPERF', 'UNIV', 'VCULT']
 
     dbc = DatabaseSender()
 
-    dbc.execute("DROP TABLE IF EXISTS " + dbc.antireqs_table + ";")
-    dbc.execute("DROP TABLE IF EXISTS " + dbc.prereqs_table + ";")
-    dbc.execute("DROP TABLE IF EXISTS " + dbc.communications_table + ";")
-    dbc.execute("DROP TABLE IF EXISTS " + dbc.breadth_table + ";")
-    dbc.execute("DROP TABLE IF EXISTS " + dbc.course_table + ";")
+    dbc.drop_table(dbc.antireqs_table)
+    dbc.drop_table(dbc.prereqs_table)
+    dbc.drop_table(dbc.communications_table)
+    dbc.drop_table(dbc.breadth_table)
+    dbc.drop_table(dbc.course_table)
 
     dbc.create_courses()
     dbc.create_prereqs()

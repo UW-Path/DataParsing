@@ -54,7 +54,7 @@ def get_calendar_year(file):
 def main(majorParsers, files, faculty="Math", DropTable=False):
     dbc = DatabaseSender()
     if DropTable:
-        dbc.execute("DROP TABLE IF EXISTS " + dbc.requirements_table + ";")
+        dbc.drop_table(dbc.requirements_table)
         dbc.create_requirements()
 
     total = 0

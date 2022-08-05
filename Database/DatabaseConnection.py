@@ -7,31 +7,38 @@ Calder Lund
 Hao Wei Huang
 """
 
-import psycopg2
 import logging
 import sys
 import os
+import oracledb
 
 
 class DatabaseConnection(object):
-    def __init__(self, user="postgres", password="1234", host="127.0.0.1", port="5432", database="postgres",
+    def __init__(self, user="SYSTEM", password="password", dsn = "db:1521/ORCLCDB",
                  course_table="course_info", prereqs_table="prereqs", antireqs_table="antireqs",
                  requirements_table="requirements", communications_table="communications",
                  breadth_table="breadth_table"):
-        if os.getenv("UWPATH_ENVIRONMENT") is not None and os.getenv("UWPATH_ENVIRONMENT") == "docker":
-            host = "db"
         if os.getenv("DB_PASS") is not None:
             password = os.getenv("DB_PASS")
         if os.getenv("DB_USER") is not None:
             user = os.getenv("DB_USER")
-        if os.getenv("DB_NAME") is not None:
-            database = os.getenv("DB_NAME")
-        if os.getenv("DB_HOST") is not None:
-            host = os.getenv("DB_HOST")
-        if os.getenv("DB_PORT") is not None:
-            port = os.getenv("DB_PORT")
+        if os.getenv("ORACLE_DSN") is not None:
+            dsn = os.getenv("ORACLE_DSN")
 
-        self.connection = psycopg2.connect(user=user, password=password, host=host, port=port, database=database)
+        env = os.getenv("UWPATH_ENVIRONMENT")
+        
+        try:
+            if env is not None and env == "int":
+                wallet_location = os.getenv("TNS_ADMIN");
+                print("Connecting to cloud db")
+                self.connection = oracledb.connect(user = user, password = password, dsn = dsn, config_dir = wallet_location, wallet_location=wallet_location, wallet_password = password)
+            else:
+                self.connection = oracledb.connect(user = user, password = password, dsn = dsn)
+            print("Successfully connected to db")
+        except Exception as err:
+            print("Whoops!")
+            print(err);
+            sys.exit(1);
         self.cursor = self.connection.cursor()
         self.course_table = course_table
         self.prereqs_table = prereqs_table
@@ -64,7 +71,7 @@ class DatabaseConnection(object):
         except Exception as e:
             print(command)
             self.root.error(e)
-            return False
+            sys.exit(1)
 
     def commit(self):
         if self.connection:
@@ -82,7 +89,19 @@ class DatabaseConnection(object):
         :param condition: string
         :return: list
         """
-        command = "SELECT " + what + " FROM " + table + " " + condition + ";"
+        command = "SELECT " + what + " FROM " + table + " " + condition
         self.execute(command)
         return self.cursor.fetchall()
-
+    
+    def drop_table(self, table) :
+        query = """
+        declare
+            c int;
+        begin
+            select count(*) into c from user_tables where table_name = upper('{table}');
+            if c = 1 then
+                execute immediate 'drop table {table}';
+            end if;
+        end;
+        """
+        self.execute(query.format(table = table))
