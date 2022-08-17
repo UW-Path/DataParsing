@@ -14,21 +14,16 @@ import oracledb
 
 
 class DatabaseConnection(object):
-    def __init__(self, user="SYSTEM", password="password", dsn = "db:1521/ORCLCDB",
-                 course_table="course_info", prereqs_table="prereqs", antireqs_table="antireqs",
+    def __init__(self, course_table="course_info", prereqs_table="prereqs", antireqs_table="antireqs",
                  requirements_table="requirements", communications_table="communications",
                  breadth_table="breadth_table"):
-        if os.getenv("DB_PASS") is not None:
-            password = os.getenv("DB_PASS")
-        if os.getenv("DB_USER") is not None:
-            user = os.getenv("DB_USER")
-        if os.getenv("ORACLE_DSN") is not None:
-            dsn = os.getenv("ORACLE_DSN")
-
+        password = os.getenv("DB_PASS")
+        user = os.getenv("DB_USER")
+        dsn = os.getenv("ORACLE_DSN")
         env = os.getenv("UWPATH_ENVIRONMENT")
         
         try:
-            if env is not None and env == "int":
+            if env is not None:
                 wallet_location = os.getenv("TNS_ADMIN");
                 print("Connecting to cloud db")
                 self.connection = oracledb.connect(user = user, password = password, dsn = dsn, config_dir = wallet_location, wallet_location=wallet_location, wallet_password = password)

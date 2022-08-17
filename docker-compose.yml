@@ -6,9 +6,15 @@ services:
     build: .
     command: /bin/bash PopulateDatabase.sh
     volumes:
-      - .:/code
+      - ./Wallet_uwpathparallel:/code/Wallet_uwpathparallel
     environment:
-      - UWPATH_ENVIRONMENT=docker
+      - ORACLE_DSN=${UW_PATH_ORACLE_DSN:-db:1521/ORCLCDB}
+      - DB_USER=${UW_PATH_DB_USER:-SYSTEM}
+      - DB_PASS=${UW_PATH_DB_PASSWORD:-password}
+      - DB_HOST=${UW_PATH_DB_HOST-uwpath_oracle_db}
+      - DB_PORT=${UW_PATH_DB_PORT-1521}
+      - UWPATH_ENVIRONMENT
+      - TNS_ADMIN
     networks:
       - uwpath_db_network
 
