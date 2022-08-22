@@ -2,9 +2,9 @@ version: '3'
 
 services:
   dataparsing:
+    image: uwpath_frontend
     container_name: uwpath_dataparsing
     build: .
-    command: /bin/bash PopulateDatabase.sh
     volumes:
       - ./Wallet_uwpathparallel:/code/Wallet_uwpathparallel
     environment:
