@@ -30,3 +30,4 @@ jobs:
       run: |
         docker system prune --volumes -af
         docker logout
+        sudo chown -R $USER:$USER /home/github/actions-runner/_work/{REPOSITORY_NAME_HERE}
