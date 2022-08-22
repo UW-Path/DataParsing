@@ -29,5 +29,4 @@ jobs:
       if: always()
       run: |
         docker system prune --volumes -af
-        docker logout 
-    
+        docker logout
