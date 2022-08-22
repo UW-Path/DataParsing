@@ -6,15 +6,6 @@ on:
       - pipeline-setup
       
 jobs:
-  cleanup:
-    runs-on: self-hosted
-    container:
-      image: ubuntu:latest
-    steps:
-      - name: Cleaning up the $GITHUB_WORKSPACE as root from a Docker image
-        # Volume auto mounted by gh actions pointing to the current working-directory
-        run: find /_w/${{ github.event.repository.name }}/${{ github.event.repository.name }}/. -name . -o -prune -exec rm -rf -- {} + || true
-
   deploy:
     name: deploy
     runs-on: self-hosted
