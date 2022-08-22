@@ -2,7 +2,7 @@ version: '3'
 
 services:
   dataparsing:
-    image: uwpath_frontend
+    image: uwpath_dataparsing
     container_name: uwpath_dataparsing
     build: .
     volumes:
