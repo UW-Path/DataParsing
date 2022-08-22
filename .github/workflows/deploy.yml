@@ -23,8 +23,8 @@ jobs:
           docker image ls
     - name: Push to Registry
       run: |
-          docker tag $(docker images uwpath_frontend --format "{{.ID}}") uwpathdocker/uwpath_frontend:int
-          docker push uwpathdocker/uwpath_frontend:int
+          docker tag $(docker images uwpath_dataparsing --format "{{.ID}}") uwpathdocker/uwpath_dataparsing:int
+          docker push uwpathdocker/uwpath_dataparsing:int
     - name: Clean Env
       if: always()
       run: |
