@@ -92,7 +92,7 @@ then
 
   echo "===================================================="
   echo "Parsing AHS programs..."
-  eval "${py} ProgramParsing/AHS/ParseProgram.py" || { echo 'Parsing AHS programs failed ' ; exit 1; }
+  eval "${py} ProgramParsing/AHS/ParseProgram.py" || { echo 'Parsing AHS programs failed' ; exit 1; }
   echo "DONE"
 
   echo "===================================================="
