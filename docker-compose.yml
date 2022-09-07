@@ -2,19 +2,15 @@ version: '3'
 
 services:
   dataparsing:
+    image: uwpath_dataparsing
     container_name: uwpath_dataparsing
     build: .
-    command: /bin/bash PopulateDatabase.sh
-    volumes:
-      - ./Wallet_uwpathparallel:/code/Wallet_uwpathparallel
     environment:
-      - ORACLE_DSN=${UW_PATH_ORACLE_DSN:-db:1521/ORCLCDB}
-      - DB_USER=${UW_PATH_DB_USER:-SYSTEM}
-      - DB_PASS=${UW_PATH_DB_PASSWORD:-password}
-      - DB_HOST=${UW_PATH_DB_HOST-uwpath_oracle_db}
-      - DB_PORT=${UW_PATH_DB_PORT-1521}
-      - UWPATH_ENVIRONMENT
-      - TNS_ADMIN
+      - ORACLE_DSN=db:1521/ORCLCDB
+      - DB_USER=SYSTEM
+      - DB_PASS=password
+      - DB_HOST=uwpath_oracle_db
+      - DB_PORT=1521
     networks:
       - uwpath_db_network
 
