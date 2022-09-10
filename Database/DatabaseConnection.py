@@ -14,6 +14,7 @@ import oracledb
 
 
 class DatabaseConnection(object):
+    connection = None
     def __init__(self, course_table="course_info", prereqs_table="prereqs", antireqs_table="antireqs",
                  requirements_table="requirements", communications_table="communications",
                  breadth_table="breadth_table"):
@@ -23,13 +24,14 @@ class DatabaseConnection(object):
         env = os.getenv("UWPATH_ENVIRONMENT")
         
         try:
-            if env is not None:
-                wallet_location = os.getenv("TNS_ADMIN");
-                print("Connecting to cloud db")
-                self.connection = oracledb.connect(user = user, password = password, dsn = dsn, config_dir = wallet_location, wallet_location=wallet_location, wallet_password = password)
-            else:
-                self.connection = oracledb.connect(user = user, password = password, dsn = dsn)
-            print("Successfully connected to db")
+            if DatabaseConnection.connection is None or DatabaseConnection.ping():
+                if env is not None:
+                    wallet_location = os.getenv("TNS_ADMIN");
+                    print("Connecting to cloud db")
+                    DatabaseConnection.connection = oracledb.connect(user = user, password = password, dsn = dsn, config_dir = wallet_location, wallet_location=wallet_location, wallet_password = password)
+                else:
+                    DatabaseConnection.connection = oracledb.connect(user = user, password = password, dsn = dsn)
+                print("Successfully connected to db")
         except Exception as err:
             print("Whoops!")
             print(err);
