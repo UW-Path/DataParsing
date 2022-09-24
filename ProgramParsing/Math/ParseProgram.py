@@ -13,7 +13,8 @@ if __name__ == "__main__":
     files.add("TableII.html")
 
     filesToIgnore = ["ENG-Software-Engineering.html",
-                     "MATH-Mathematical-Optimization1.html", "MATH-Math-or-Chartered-Professional-Accountancy-co.html"]
+                     "MATH-Mathematical-Optimization1.html", "MATH-Math-or-Chartered-Professional-Accountancy-co.html",
+                     "MATH-Applied-Mathematics-Minor1.html"]
 
     # adds year in front of files in filesToIgnore
     files = filterFiles(files, filesToIgnore)
