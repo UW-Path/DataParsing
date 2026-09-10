@@ -9,7 +9,9 @@ import uuid
 from pathlib import Path
 
 from uwpath_data.artifacts import RawSnapshotWriter, publish_catalog
+from uwpath_data.comparison import compare_catalogs
 from uwpath_data.sources.kuali import KualiAdapter, KualiSnapshotAdapter
+from uwpath_data.verification import VerificationError, verify_catalog_directory
 
 ACADEMIC_YEAR_RE = re.compile(r"^(\d{4})-(\d{4})$")
 
@@ -93,6 +95,21 @@ def build_parser() -> argparse.ArgumentParser:
     )
     add_snapshot_arguments(rebuild)
     rebuild.add_argument("--raw", type=Path, required=True, help="Path to the raw snapshot root")
+
+    verify = subparsers.add_parser(
+        "verify-catalog", help="Verify a published catalog and its manifest"
+    )
+    verify.add_argument("catalog", type=Path, help="Catalog year directory")
+
+    compare = subparsers.add_parser(
+        "compare-catalogs", help="Compare a candidate catalog with a baseline"
+    )
+    compare.add_argument("baseline", type=Path)
+    compare.add_argument("candidate", type=Path)
+    compare.add_argument("--max-course-drop-percent", type=float, default=10)
+    compare.add_argument("--max-program-drop-percent", type=float, default=10)
+    compare.add_argument("--max-manual-rule-increase", type=int)
+    compare.add_argument("--require-planner-ready", action="store_true")
     return parser
 
 
@@ -103,6 +120,26 @@ def main(argv: list[str] | None = None) -> None:
         for year in adapter.available_years():
             print(year)
         return
+
+    try:
+        if args.command == "verify-catalog":
+            print(json.dumps(verify_catalog_directory(args.catalog), indent=2, sort_keys=True))
+            return
+        if args.command == "compare-catalogs":
+            report = compare_catalogs(
+                args.baseline,
+                args.candidate,
+                max_course_drop_percent=args.max_course_drop_percent,
+                max_program_drop_percent=args.max_program_drop_percent,
+                max_manual_rule_increase=args.max_manual_rule_increase,
+                require_planner_ready=args.require_planner_ready,
+            )
+            print(json.dumps(report, indent=2, sort_keys=True))
+            if not report["gates"]["passed"]:
+                raise SystemExit(2)
+            return
+    except VerificationError as error:
+        raise SystemExit(str(error)) from error
 
     target = prepare_target(args.output, args.academic_year, args.force)
     if args.command == "rebuild-kuali":
