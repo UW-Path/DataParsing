@@ -111,6 +111,21 @@ def test_verify_catalog_validates_optional_build_metadata(tmp_path: Path) -> Non
         verify_catalog_directory(root)
 
 
+def test_verify_catalog_accepts_legacy_build_metadata(tmp_path: Path) -> None:
+    catalog = _catalog("2022-2023", ("CS 100",))
+    build = {
+        "scope": "legacy_subject_slice",
+        "subject_selectors": ["CS"],
+        "fetched_subjects": ["CS"],
+        "missing_subjects": [],
+        "empty_subjects": [],
+        "raw_snapshot": True,
+    }
+    publish_catalog(catalog, tmp_path, build=build)
+
+    assert verify_catalog_directory(tmp_path / "2022-2023")["build"] == build
+
+
 def test_compare_catalogs_fails_on_large_count_drop(tmp_path: Path) -> None:
     publish_catalog(_catalog("2025-2026", ("CS 135", "MATH 135")), tmp_path / "baseline")
     publish_catalog(_catalog("2026-2027", ("CS 135",)), tmp_path / "candidate")

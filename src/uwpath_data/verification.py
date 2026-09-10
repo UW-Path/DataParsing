@@ -136,19 +136,55 @@ def verify_catalog_directory(root: Path) -> dict[str, Any]:
     if build is not None:
         if not isinstance(build, dict):
             raise VerificationError("manifest build must be an object")
-        if build.get("scope") not in {"full_catalog", "program_slice"}:
+        scope = build.get("scope")
+        if scope not in {
+            "full_catalog",
+            "program_slice",
+            "legacy_course_catalog",
+            "legacy_subject_slice",
+        }:
             raise VerificationError("manifest build scope is invalid")
-        selectors = build.get("program_selectors")
-        if not isinstance(selectors, list) or not all(
-            isinstance(selector, str) and selector for selector in selectors
-        ):
-            raise VerificationError("manifest build program_selectors are invalid")
-        if build["scope"] == "full_catalog" and selectors:
-            raise VerificationError("full-catalog manifest must not have program selectors")
-        if build["scope"] == "program_slice" and not selectors:
-            raise VerificationError("program-slice manifest must have program selectors")
         if not isinstance(build.get("raw_snapshot"), bool):
             raise VerificationError("manifest build raw_snapshot must be boolean")
+        if scope in {"full_catalog", "program_slice"}:
+            selectors = build.get("program_selectors")
+            if not isinstance(selectors, list) or not all(
+                isinstance(selector, str) and selector for selector in selectors
+            ):
+                raise VerificationError("manifest build program_selectors are invalid")
+            if scope == "full_catalog" and selectors:
+                raise VerificationError("full-catalog manifest must not have program selectors")
+            if scope == "program_slice" and not selectors:
+                raise VerificationError("program-slice manifest must have program selectors")
+        else:
+            selectors = build.get("subject_selectors")
+            fetched = build.get("fetched_subjects")
+            missing = build.get("missing_subjects")
+            empty = build.get("empty_subjects", [])
+            for field_name, values in (
+                ("subject_selectors", selectors),
+                ("fetched_subjects", fetched),
+                ("missing_subjects", missing),
+                ("empty_subjects", empty),
+            ):
+                if not isinstance(values, list) or not all(
+                    isinstance(value, str) and value for value in values
+                ):
+                    raise VerificationError(f"manifest build {field_name} are invalid")
+            if scope == "legacy_course_catalog" and selectors:
+                raise VerificationError(
+                    "full legacy course manifest must not have subject selectors"
+                )
+            if scope == "legacy_subject_slice" and not selectors:
+                raise VerificationError("legacy subject-slice manifest must have subject selectors")
+            if not fetched:
+                raise VerificationError("legacy manifest must include fetched subjects")
+            if set(fetched) & set(missing):
+                raise VerificationError("legacy fetched and missing subjects must not overlap")
+            if not set(empty) <= set(fetched):
+                raise VerificationError("legacy empty subjects must be fetched subjects")
+            if scope == "legacy_subject_slice" and set(selectors) != set(fetched):
+                raise VerificationError("legacy subject selectors must match fetched subjects")
 
     result = {
         "valid": True,

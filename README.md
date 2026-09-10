@@ -45,6 +45,24 @@ and confirms that its recorded scope and raw-snapshot policy match before
 skipping it. Each new release is also verified in its staging directory before
 the atomic swap into `dist/catalogs/`.
 
+Static Waterloo course pages cover the pre-Kuali years. Start with a subject
+slice, retain its raw HTML, and prove the offline replay before attempting the
+full legacy course catalog:
+
+```sh
+uv run uwpath-data snapshot-legacy-courses 2022-2023 \
+  --subject CS \
+  --output dist/legacy-canary
+uv run uwpath-data rebuild-legacy-courses 2022-2023 \
+  --raw dist/legacy-canary/2022-2023/raw \
+  --subject CS \
+  --output dist/legacy-rebuild
+```
+
+Legacy requirement text is deliberately emitted as `manual` unless its
+meaning is unambiguous. These course-only artifacts have no program records;
+they are inputs to the historical backfill, not planner-ready releases.
+
 The normalized contract is `schema/catalog-v1.schema.json`. Unsupported requirement expressions
 are preserved as `manual` rules rather than silently interpreted. A manifest is publishable only
 when course codes are unique and every active-catalog reference resolves inside the artifact.
