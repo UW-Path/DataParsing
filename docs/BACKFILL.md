@@ -38,6 +38,13 @@ responses so parser changes can be tested without repeatedly querying Waterloo.
 
 4. Rebuild from `raw/` and verify that `courses.json` and `programs.json` hashes match the network
    run. A timestamp-only change in `catalog.json` is expected.
+
+   ```sh
+   uv run uwpath-data verify-catalog dist/catalogs/2026-2027
+   uv run uwpath-data compare-catalogs \
+     dist/catalogs/2025-2026 \
+     dist/catalogs/2026-2027
+   ```
 5. Repeat newest-to-oldest for the three earlier Kuali years. Compare course/program counts and
    rule coverage between adjacent years; investigate large deltas before publishing.
 6. Implement the legacy HTML adapter one year at a time, starting with 2022-2023. Preserve each
