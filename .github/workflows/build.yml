@@ -1,14 +1,27 @@
-name: build
-on: pull_request
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [dev]
 
 jobs:
-  build:
-    name: build
-    runs-on: [self-hosted, parallel]
+  validate:
+    name: lint and test
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Docker Build
-        run: docker compose build
-      - name: Clean Env
-        if: always()
-        run: docker system prune --volumes -af
+      # This repository only permits local actions, so bootstrap without
+      # marketplace actions. GITHUB_REF is the pull-request merge ref or branch.
+      - name: Checkout
+        run: |
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --no-tags --depth=1 origin "$GITHUB_REF"
+          git checkout --detach FETCH_HEAD
+      - name: Install uv
+        run: |
+          python3 -m pip install --user --break-system-packages "uv==0.10.7"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - run: uv sync --dev --locked
+      - run: uv run ruff check src tests
+      - run: uv run pytest

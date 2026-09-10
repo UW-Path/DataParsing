@@ -1,0 +1,18 @@
+"$schema" = "https://conductor.build/schemas/settings.repo.schema.json"
+
+[scripts]
+setup = "uv sync --dev"
+run_mode = "concurrent"
+
+[scripts.run.test]
+command = "uv run pytest"
+default = true
+icon = "test-tube"
+
+[scripts.run.lint]
+command = "uv run ruff check src tests"
+icon = "scan-search"
+
+[scripts.run.catalogs]
+command = "uv run uwpath-data list-kuali-years"
+icon = "calendar-search"
