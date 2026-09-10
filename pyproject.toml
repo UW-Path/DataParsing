@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "uwpath-data"
+version = "0.1.0"
+description = "Versioned academic calendar ingestion for UWPath"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "beautifulsoup4>=4.12,<5",
+  "jsonschema>=4.23,<5",
+]
+
+[project.scripts]
+uwpath-data = "uwpath_data.cli:main"
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3,<10",
+  "ruff>=0.11,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/uwpath_data"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"schema/catalog-v1.schema.json" = "uwpath_data/schema/catalog-v1.schema.json"
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
