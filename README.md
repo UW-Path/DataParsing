@@ -30,6 +30,21 @@ Output is written to `dist/catalogs/<academic-year>/`:
 - `courses.json` and `programs.json` are convenient projections.
 - `manifest.json` records content hashes and data-quality results.
 
+After the canary succeeds, backfill several Kuali years in one resumable run:
+
+```sh
+uv run uwpath-data backfill-kuali \
+  --all-available \
+  --full-catalog \
+  --output dist/catalogs \
+  --resume
+```
+
+Existing releases are never trusted silently: `--resume` verifies each one
+and confirms that its recorded scope and raw-snapshot policy match before
+skipping it. Each new release is also verified in its staging directory before
+the atomic swap into `dist/catalogs/`.
+
 The normalized contract is `schema/catalog-v1.schema.json`. Unsupported requirement expressions
 are preserved as `manual` rules rather than silently interpreted. A manifest is publishable only
 when course codes are unique and every active-catalog reference resolves inside the artifact.

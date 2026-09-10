@@ -45,8 +45,19 @@ responses so parser changes can be tested without repeatedly querying Waterloo.
      dist/catalogs/2025-2026 \
      dist/catalogs/2026-2027
    ```
-5. Repeat newest-to-oldest for the three earlier Kuali years. Compare course/program counts and
-   rule coverage between adjacent years; investigate large deltas before publishing.
+5. Repeat newest-to-oldest for the three earlier Kuali years. The resumable runner performs this
+   sequence without overwriting an existing release:
+
+   ```sh
+   uv run uwpath-data backfill-kuali \
+     --all-available \
+     --full-catalog \
+     --output dist/catalogs \
+     --resume
+   ```
+
+   Compare course/program counts and rule coverage between adjacent years; investigate large
+   deltas before activating any release.
 6. Implement the legacy HTML adapter one year at a time, starting with 2022-2023. Preserve each
    original file and map unsupported expressions to `manual` rules. Do not call the old destructive
    database loader as part of this workflow.
