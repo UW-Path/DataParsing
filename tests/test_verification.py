@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -86,6 +87,27 @@ def test_verify_catalog_checks_schema_projections_counts_and_hashes(tmp_path: Pa
     courses_path = root / "courses.json"
     courses_path.write_text(courses_path.read_text() + "\n")
     with pytest.raises(VerificationError, match="manifest byte count does not match"):
+        verify_catalog_directory(root)
+
+
+def test_verify_catalog_validates_optional_build_metadata(tmp_path: Path) -> None:
+    catalog = _catalog("2026-2027", ("CS 135",))
+    build = {
+        "scope": "program_slice",
+        "program_selectors": ["BCS"],
+        "raw_snapshot": True,
+    }
+    publish_catalog(catalog, tmp_path, build=build)
+    root = tmp_path / "2026-2027"
+
+    assert verify_catalog_directory(root)["build"] == build
+
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["build"]["program_selectors"] = []
+    manifest_path.write_text(json.dumps(manifest))
+
+    with pytest.raises(VerificationError, match="must have program selectors"):
         verify_catalog_directory(root)
 
 

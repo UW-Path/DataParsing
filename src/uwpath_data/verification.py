@@ -132,7 +132,25 @@ def verify_catalog_directory(root: Path) -> dict[str, Any]:
         if metadata.get("sha256") != hashlib.sha256(payload).hexdigest():
             raise VerificationError(f"manifest hash does not match {filename}")
 
-    return {
+    build = manifest.get("build")
+    if build is not None:
+        if not isinstance(build, dict):
+            raise VerificationError("manifest build must be an object")
+        if build.get("scope") not in {"full_catalog", "program_slice"}:
+            raise VerificationError("manifest build scope is invalid")
+        selectors = build.get("program_selectors")
+        if not isinstance(selectors, list) or not all(
+            isinstance(selector, str) and selector for selector in selectors
+        ):
+            raise VerificationError("manifest build program_selectors are invalid")
+        if build["scope"] == "full_catalog" and selectors:
+            raise VerificationError("full-catalog manifest must not have program selectors")
+        if build["scope"] == "program_slice" and not selectors:
+            raise VerificationError("program-slice manifest must have program selectors")
+        if not isinstance(build.get("raw_snapshot"), bool):
+            raise VerificationError("manifest build raw_snapshot must be boolean")
+
+    result = {
         "valid": True,
         "academic_year": catalog["calendar"]["academic_year"],
         "course_count": len(courses),
@@ -140,3 +158,6 @@ def verify_catalog_directory(root: Path) -> dict[str, Any]:
         "publishable": catalog["quality"]["publishable"],
         "planner_ready": catalog["quality"]["planner_ready"],
     }
+    if build is not None:
+        result["build"] = build
+    return result

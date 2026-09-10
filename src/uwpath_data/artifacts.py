@@ -47,7 +47,12 @@ def validate_catalog(value: dict[str, Any]) -> None:
     Draft202012Validator(schema, format_checker=FormatChecker()).validate(value)
 
 
-def publish_catalog(catalog: Catalog, output_root: Path) -> dict[str, Any]:
+def publish_catalog(
+    catalog: Catalog,
+    output_root: Path,
+    *,
+    build: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     target = output_root / catalog.calendar.academic_year
     catalog_data = catalog.to_dict()
     validate_catalog(catalog_data)
@@ -78,5 +83,7 @@ def publish_catalog(catalog: Catalog, output_root: Path) -> dict[str, Any]:
         "quality": catalog_data["quality"],
         "files": files,
     }
+    if build is not None:
+        manifest["build"] = build
     write_json(target / "manifest.json", manifest)
     return manifest

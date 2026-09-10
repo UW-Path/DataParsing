@@ -179,8 +179,9 @@ def test_archived_catalog_replay_preserves_source_urls(tmp_path: Path) -> None:
 def test_full_catalog_fetches_all_programs_and_active_courses() -> None:
     responses = _responses()
     adapter = KualiAdapter(JsonHttpClient(KUALI_API, transport=responses.__getitem__))
+    progress: list[str] = []
 
-    catalog = adapter.build_catalog("2026-2027", None, workers=2)
+    catalog = adapter.build_catalog("2026-2027", None, workers=2, progress=progress.append)
 
     assert [course.course_code for course in catalog.courses] == [
         "CS 135",
@@ -189,6 +190,26 @@ def test_full_catalog_fetches_all_programs_and_active_courses() -> None:
     ]
     assert [program.code for program in catalog.programs] == ["BCS", "HIST"]
     assert catalog.quality.dangling_course_references == ()
+    assert progress == [
+        "selected 2 programs from 3 active courses",
+        "fetched 2/2 program details",
+        "fetched 3/3 course details",
+    ]
+
+
+def test_program_order_is_stable_when_titles_match() -> None:
+    responses = _responses()
+    program_index_url = f"{KUALI_API}/programs/catalog-2026"
+    program_bcs_url = f"{KUALI_API}/program/catalog-2026/bcs"
+    program_history_url = f"{KUALI_API}/program/catalog-2026/history"
+    responses[program_index_url] = list(reversed(responses[program_index_url]))
+    responses[program_bcs_url]["title"] = "Shared title"
+    responses[program_history_url]["title"] = "Shared title"
+    adapter = KualiAdapter(JsonHttpClient(KUALI_API, transport=responses.__getitem__))
+
+    catalog = adapter.build_catalog("2026-2027", None, workers=1)
+
+    assert [program.code for program in catalog.programs] == ["BCS", "HIST"]
 
 
 def test_program_selector_rejects_ambiguous_matches() -> None:

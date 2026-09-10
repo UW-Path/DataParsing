@@ -4,7 +4,7 @@ import hashlib
 import json
 import re
 from collections import defaultdict
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
@@ -154,6 +154,7 @@ class KualiAdapter:
         workers: int = 8,
         max_courses: int = 5000,
         raw_sink: Any | None = None,
+        progress: Callable[[str], None] | None = None,
     ) -> Catalog:
         catalog_summary = self.resolve_catalog(academic_year)
         catalog_id = _identifier(catalog_summary.get("_id"), "catalog id")
@@ -168,6 +169,10 @@ class KualiAdapter:
             else self.select_programs(program_summaries, selectors)
         )
         course_record_index = self._course_record_index(course_summaries)
+        if progress:
+            progress(
+                f"selected {len(selected)} programs from {len(course_record_index)} active courses"
+            )
 
         if raw_sink:
             raw_sink("catalog-index.json", self.list_undergraduate_catalogs())
@@ -175,7 +180,7 @@ class KualiAdapter:
             raw_sink("course-index.json", course_summaries)
             raw_sink("program-index.json", program_summaries)
 
-        program_details = self._fetch_programs(catalog_id, selected, workers)
+        program_details = self._fetch_programs(catalog_id, selected, workers, progress=progress)
         for detail in program_details:
             if raw_sink:
                 raw_sink(f"programs/{detail['pid']}.json", detail)
@@ -201,7 +206,7 @@ class KualiAdapter:
                     f"Course dependency closure exceeded max_courses={max_courses}; "
                     "raise the limit after reviewing the source"
                 )
-            fetched = self._fetch_courses(catalog_id, frontier, workers)
+            fetched = self._fetch_courses(catalog_id, frontier, workers, progress=progress)
             next_frontier: dict[str, str] = {}
             for source_record_id, detail in fetched.items():
                 course_details[source_record_id] = detail
@@ -242,7 +247,12 @@ class KualiAdapter:
         programs = tuple(
             sorted(
                 (self._normalize_program(calendar, detail) for detail in program_details),
-                key=lambda program: program.title,
+                key=lambda program: (
+                    program.title,
+                    program.code,
+                    program.id,
+                    program.source_record_id,
+                ),
             )
         )
         quality = self._quality(courses, programs, set(course_record_index))
@@ -287,6 +297,7 @@ class KualiAdapter:
         catalog_id: str,
         summaries: list[dict[str, Any]],
         workers: int,
+        progress: Callable[[str], None] | None = None,
     ) -> list[dict[str, Any]]:
         fetched: list[dict[str, Any]] = []
         with ThreadPoolExecutor(max_workers=max(1, workers)) as executor:
@@ -294,7 +305,8 @@ class KualiAdapter:
             for summary in summaries:
                 program_id = _identifier(summary.get("pid"), "program pid")
                 futures[executor.submit(self.fetch_program, catalog_id, program_id)] = program_id
-            for future in as_completed(futures):
+            total = len(futures)
+            for completed, future in enumerate(as_completed(futures), start=1):
                 program_id = futures[future]
                 detail = future.result()
                 if _text(detail.get("pid")) != program_id:
@@ -302,10 +314,16 @@ class KualiAdapter:
                         f"Kuali program detail does not match requested pid {program_id}"
                     )
                 fetched.append(detail)
+                if progress and (completed % 50 == 0 or completed == total):
+                    progress(f"fetched {completed}/{total} program details")
         return fetched
 
     def _fetch_courses(
-        self, catalog_id: str, records: dict[str, str], workers: int
+        self,
+        catalog_id: str,
+        records: dict[str, str],
+        workers: int,
+        progress: Callable[[str], None] | None = None,
     ) -> dict[str, dict[str, Any]]:
         fetched: dict[str, dict[str, Any]] = {}
         with ThreadPoolExecutor(max_workers=max(1, workers)) as executor:
@@ -313,7 +331,8 @@ class KualiAdapter:
                 executor.submit(self.fetch_course, catalog_id, source_record_id): source_record_id
                 for source_record_id in sorted(records)
             }
-            for future in as_completed(futures):
+            total = len(futures)
+            for completed, future in enumerate(as_completed(futures), start=1):
                 source_record_id = futures[future]
                 detail = future.result()
                 if not detail:
@@ -326,6 +345,8 @@ class KualiAdapter:
                         f"Kuali course detail does not match requested id {source_record_id}"
                     )
                 fetched[source_record_id] = detail
+                if progress and (completed % 100 == 0 or completed == total):
+                    progress(f"fetched {completed}/{total} course details")
         return fetched
 
     @staticmethod
