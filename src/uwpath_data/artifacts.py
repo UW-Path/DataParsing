@@ -37,6 +37,26 @@ class RawSnapshotWriter:
         write_json(target, value)
 
 
+class RawTextSnapshotWriter:
+    def __init__(self, root: Path) -> None:
+        self.root = root.resolve()
+
+    def __call__(self, relative_path: str, value: str) -> None:
+        target = (self.root / relative_path).resolve()
+        if not target.is_relative_to(self.root):
+            raise ValueError(f"Raw snapshot path escapes its root: {relative_path}")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.NamedTemporaryFile(
+            dir=target.parent,
+            mode="w",
+            encoding="utf-8",
+            delete=False,
+        ) as temporary:
+            temporary.write(value)
+            temporary_path = Path(temporary.name)
+        os.replace(temporary_path, target)
+
+
 def validate_catalog(value: dict[str, Any]) -> None:
     packaged_schema = resources.files("uwpath_data").joinpath("schema/catalog-v1.schema.json")
     if packaged_schema.is_file():

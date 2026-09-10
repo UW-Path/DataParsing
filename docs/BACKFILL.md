@@ -58,9 +58,23 @@ responses so parser changes can be tested without repeatedly querying Waterloo.
 
    Compare course/program counts and rule coverage between adjacent years; investigate large
    deltas before activating any release.
-6. Implement the legacy HTML adapter one year at a time, starting with 2022-2023. Preserve each
-   original file and map unsupported expressions to `manual` rules. Do not call the old destructive
-   database loader as part of this workflow.
+6. Backfill static legacy course pages one year at a time, starting with a 2022-2023 subject
+   canary. Preserve every source page and map unsupported expressions to `manual` rules:
+
+   ```sh
+   uv run uwpath-data snapshot-legacy-courses 2022-2023 \
+     --subject CS \
+     --output dist/legacy-canary
+   uv run uwpath-data rebuild-legacy-courses 2022-2023 \
+     --raw dist/legacy-canary/2022-2023/raw \
+     --subject CS \
+     --output dist/legacy-rebuild
+   ```
+
+   After the replay hashes match, use `--full-catalog` in a fresh output root. The resulting
+   artifact intentionally contains courses only. Do not activate it for planner traffic until a
+   separate program-requirements adapter supplies and validates its program records. Do not call
+   the old destructive database loader as part of this workflow.
 7. Add backend import tables keyed by academic year and artifact hash. Load into a staging version,
    validate counts and references, then atomically mark that version active. Keep existing API
    response shapes while this migration is underway.

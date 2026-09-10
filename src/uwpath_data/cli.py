@@ -11,9 +11,14 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
-from uwpath_data.artifacts import RawSnapshotWriter, publish_catalog
+from uwpath_data.artifacts import RawSnapshotWriter, RawTextSnapshotWriter, publish_catalog
 from uwpath_data.comparison import compare_catalogs
 from uwpath_data.sources.kuali import KualiAdapter, KualiSnapshotAdapter
+from uwpath_data.sources.legacy_html import (
+    LegacyBuildResult,
+    LegacyHtmlAdapter,
+    LegacyHtmlSnapshotAdapter,
+)
 from uwpath_data.verification import VerificationError, verify_catalog_directory
 
 ACADEMIC_YEAR_RE = re.compile(r"^(\d{4})-(\d{4})$")
@@ -97,6 +102,31 @@ def add_backfill_arguments(parser: argparse.ArgumentParser) -> None:
     )
 
 
+def add_legacy_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "academic_year", type=academic_year, help="Academic year in YYYY-YYYY format"
+    )
+    scope = parser.add_mutually_exclusive_group(required=True)
+    scope.add_argument(
+        "--subject",
+        action="append",
+        help="Course subject such as CS or MATH; repeat for multiple subjects",
+    )
+    scope.add_argument(
+        "--full-catalog",
+        action="store_true",
+        help="Fetch every subject known to the legacy UWPath parser",
+    )
+    parser.add_argument("--output", type=Path, default=Path("dist/catalogs"))
+    parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--max-courses", type=int, default=5000)
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Replace an existing snapshot for this academic year",
+    )
+
+
 def prepare_target(output: Path, year: str, force: bool) -> Path:
     target = output / year
     if target.is_symlink() or (target.exists() and not target.is_dir()):
@@ -166,6 +196,59 @@ def build_release(
         verification = verify_catalog_directory(staging_target)
         if not verification["publishable"]:
             raise VerificationError(f"Catalog {academic_year} failed the publishable release gate")
+        replace_snapshot(staging_target, target)
+        return manifest, verification
+    finally:
+        shutil.rmtree(staging_root, ignore_errors=True)
+
+
+def legacy_build_metadata(
+    args: argparse.Namespace,
+    result: LegacyBuildResult,
+    *,
+    retain_raw: bool,
+) -> dict[str, Any]:
+    return {
+        "scope": "legacy_course_catalog" if args.full_catalog else "legacy_subject_slice",
+        "subject_selectors": [] if args.full_catalog else list(result.requested_subjects),
+        "fetched_subjects": list(result.fetched_subjects),
+        "missing_subjects": list(result.missing_subjects),
+        "empty_subjects": list(result.empty_subjects),
+        "raw_snapshot": retain_raw,
+    }
+
+
+def build_legacy_release(
+    adapter: LegacyHtmlAdapter,
+    args: argparse.Namespace,
+    *,
+    retain_raw: bool,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    target = prepare_target(args.output, args.academic_year, args.force)
+    args.output.mkdir(parents=True, exist_ok=True)
+    staging_root = Path(tempfile.mkdtemp(prefix=f".{args.academic_year}.partial-", dir=args.output))
+    try:
+        staging_target = staging_root / args.academic_year
+        raw_sink = RawTextSnapshotWriter(staging_target / "raw") if retain_raw else None
+        subjects = None if args.full_catalog else args.subject
+        result = adapter.build_catalog(
+            args.academic_year,
+            subjects,
+            workers=args.workers,
+            max_courses=args.max_courses,
+            raw_sink=raw_sink,
+            progress=progress_reporter(args.academic_year),
+        )
+        manifest = publish_catalog(
+            result.catalog,
+            staging_root,
+            build=legacy_build_metadata(args, result, retain_raw=retain_raw),
+        )
+        verification = verify_catalog_directory(staging_target)
+        if not verification["publishable"]:
+            raise VerificationError(
+                f"Catalog {args.academic_year} failed the publishable release gate"
+            )
         replace_snapshot(staging_target, target)
         return manifest, verification
     finally:
@@ -254,6 +337,26 @@ def build_parser() -> argparse.ArgumentParser:
     add_snapshot_arguments(rebuild)
     rebuild.add_argument("--raw", type=Path, required=True, help="Path to the raw snapshot root")
 
+    legacy_snapshot = subparsers.add_parser(
+        "snapshot-legacy-courses",
+        help="Build a course catalog from Waterloo's static legacy HTML",
+    )
+    add_legacy_arguments(legacy_snapshot)
+    legacy_snapshot.add_argument(
+        "--without-raw",
+        action="store_true",
+        help="Do not retain raw HTML pages (not recommended for published data)",
+    )
+
+    legacy_rebuild = subparsers.add_parser(
+        "rebuild-legacy-courses",
+        help="Rebuild a legacy course catalog from retained raw HTML",
+    )
+    add_legacy_arguments(legacy_rebuild)
+    legacy_rebuild.add_argument(
+        "--raw", type=Path, required=True, help="Path to the raw legacy snapshot root"
+    )
+
     verify = subparsers.add_parser(
         "verify-catalog", help="Verify a published catalog and its manifest"
     )
@@ -273,6 +376,27 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> None:
     args = build_parser().parse_args(argv)
+
+    if args.command in {"snapshot-legacy-courses", "rebuild-legacy-courses"}:
+        if args.command == "rebuild-legacy-courses":
+            target = args.output / args.academic_year
+            raw_root = args.raw.resolve()
+            if raw_root == target.resolve() or raw_root.is_relative_to(target.resolve()):
+                raise SystemExit("The rebuild output would replace its input raw snapshot")
+            legacy_adapter = LegacyHtmlSnapshotAdapter(args.raw)
+        else:
+            legacy_adapter = LegacyHtmlAdapter()
+        try:
+            manifest, _ = build_legacy_release(
+                legacy_adapter,
+                args,
+                retain_raw=(args.command == "snapshot-legacy-courses" and not args.without_raw),
+            )
+        except (ValueError, VerificationError) as error:
+            raise SystemExit(str(error)) from error
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return
+
     adapter = KualiAdapter()
     if args.command == "list-kuali-years":
         for year in adapter.available_years():
